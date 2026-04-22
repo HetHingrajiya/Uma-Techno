@@ -21,13 +21,7 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="space-y-8"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-electric text-sm font-semibold tracking-wide">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-electric opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-electric"></span>
-            </span>
-            Innovation Driven Digital Agency
-          </div>
+
 
           <h1 className="text-5xl lg:text-7xl font-bold font-outfit leading-tight">
             Elevate Your <br />

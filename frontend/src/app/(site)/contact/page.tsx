@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
+import { apiFetch } from "@/lib/api";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -19,12 +20,19 @@ export default function ContactPage() {
     e.preventDefault();
     setLoading(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await apiFetch('/contacts', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+      });
       setSuccess(true);
       setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-    }, 2000);
+    } catch (error) {
+      console.error("Failed to send message:", error);
+      alert("Failed to send message. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
