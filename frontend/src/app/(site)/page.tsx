@@ -87,28 +87,61 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <Link 
-              key={index} 
-              href={service.link}
-              className="group glass-card p-10 rounded-[2.5rem] relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-electric/5 blur-3xl -mr-16 -mt-16 group-hover:bg-electric/20 transition-all" />
-              <div className="w-16 h-16 bg-gradient-to-br from-electric to-accent rounded-2xl flex items-center justify-center mb-8 text-white shadow-xl group-hover:scale-110 transition-transform">
-                <service.icon size={32} />
+        <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-8 min-h-[800px]">
+          {/* Main Large Card */}
+          <Link 
+            href={services[0].link}
+            className="group glass-card p-12 rounded-[3rem] md:col-span-2 md:row-span-2 flex flex-col justify-between relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-64 h-64 bg-electric/5 blur-[100px] -mr-32 -mt-32 group-hover:bg-electric/20 transition-all" />
+            <div className="space-y-8 relative z-10">
+              <div className="w-20 h-20 bg-gradient-to-br from-electric to-gold-light rounded-3xl flex items-center justify-center text-white shadow-2xl group-hover:scale-110 transition-transform">
+                <Globe size={40} />
               </div>
-              <h4 className="text-2xl font-bold font-outfit mb-4 text-white group-hover:text-electric transition-colors">
-                {service.title}
+              <h4 className="text-5xl font-black font-outfit leading-tight text-white uppercase tracking-tighter">
+                Next-Gen <br /> <span className="text-electric">Web Systems</span>
               </h4>
-              <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
-                {service.description}
+              <p className="text-xl text-gray-400 leading-relaxed max-w-md">
+                We build massive scale digital ecosystems that handle millions of users with zero friction.
               </p>
-              <div className="mt-8 flex items-center gap-2 text-sm font-bold text-electric opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
-                Learn More <ArrowRight size={16} />
-              </div>
-            </Link>
-          ))}
+            </div>
+            <div className="mt-8 flex items-center gap-4 text-sm font-black tracking-widest text-electric uppercase group-hover:gap-6 transition-all">
+              EXPLORE ENGINEERING <ArrowRight size={20} />
+            </div>
+          </Link>
+
+          {/* Medium App Card */}
+          <Link 
+            href={services[1].link}
+            className="group glass-card p-10 rounded-[3rem] md:col-span-2 flex flex-col justify-center relative overflow-hidden"
+          >
+            <div className="flex items-center gap-8">
+               <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center text-electric group-hover:bg-electric group-hover:text-navy transition-all">
+                  <Smartphone size={32} />
+               </div>
+               <div>
+                  <h4 className="text-2xl font-bold font-outfit text-white">Bespoke Mobile Apps</h4>
+                  <p className="text-gray-500">iOS & Android Excellence</p>
+               </div>
+            </div>
+          </Link>
+
+          {/* Small Cards */}
+          <Link 
+            href={services[2].link}
+            className="group glass-card p-10 rounded-[3rem] flex flex-col justify-between relative overflow-hidden"
+          >
+            <Palette size={32} className="text-gray-600 group-hover:text-electric transition-colors" />
+            <h4 className="text-xl font-bold font-outfit text-white uppercase tracking-wider">UI/UX <br /> Mastery</h4>
+          </Link>
+
+          <Link 
+            href={services[3].link}
+            className="group glass-card p-10 rounded-[3rem] flex flex-col justify-between relative overflow-hidden bg-electric/5"
+          >
+            <BarChart size={32} className="text-electric" />
+            <h4 className="text-xl font-bold font-outfit text-white uppercase tracking-wider">Growth <br /> Strategy</h4>
+          </Link>
         </div>
       </section>
 
