@@ -23,27 +23,8 @@ export default function Hero() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            {/* Vertical Accent Text */}
-            <div className="absolute -left-12 top-0 h-full hidden xl:flex flex-col justify-between py-4 text-[10px] font-bold tracking-[0.5em] text-gray-700 uppercase vertical-text">
-               <span>EST 2018</span>
-               <div className="w-[1px] h-32 bg-gray-800 mx-auto" />
-               <span>SCROLL TO EXPLORE</span>
-            </div>
-
             <div className="space-y-12">
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-                className="inline-block"
-              >
-                <div className="flex items-center gap-4 text-xs font-bold tracking-[0.3em] text-electric uppercase">
-                   <div className="w-12 h-[1px] bg-electric/50" />
-                   Premium Digital Artisans
-                </div>
-              </motion.div>
-
-              <h1 className="text-7xl md:text-9xl xl:text-[11rem] font-bold font-outfit leading-[0.85] tracking-tighter uppercase">
+              <h1 className="text-5xl md:text-7xl xl:text-8xl font-bold font-outfit leading-[0.9] tracking-tighter uppercase">
                 <span className="block overflow-hidden">
                    <motion.span 
                      initial={{ y: "100%" }} 
@@ -51,10 +32,10 @@ export default function Hero() {
                      transition={{ duration: 0.8, delay: 0.3 }}
                      className="block"
                    >
-                     Redefine
+                     Build
                    </motion.span>
                 </span>
-                <span className="block text-gradient neo-glow py-4">Digital</span>
+                <span className="block text-gradient neo-glow py-2">Faster.</span>
                 <span className="block overflow-hidden">
                    <motion.span 
                      initial={{ y: "100%" }} 
@@ -62,23 +43,22 @@ export default function Hero() {
                      transition={{ duration: 0.8, delay: 0.5 }}
                      className="block"
                    >
-                     Limits
+                     Grow Smarter.
                    </motion.span>
                 </span>
               </h1>
 
-              <div className="max-w-xl space-y-8">
-                <p className="text-xl text-gray-400 leading-relaxed font-medium">
-                   We craft bespoke software and high-performance digital experiences for 
-                   visionaries who demand nothing less than perfection.
+              <div className="max-w-lg space-y-6">
+                <p className="text-lg text-gray-400 leading-relaxed font-medium">
+                   We create websites, apps, and business systems that help companies scale with Uma Techno.
                 </p>
                 
                 <div className="flex flex-wrap gap-8 items-center pt-4">
                   <Link
                     href="/contact"
-                    className="group relative px-12 py-6 bg-electric text-navy rounded-full font-black text-lg transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] btn-premium"
+                    className="group relative px-12 py-6 bg-electric text-navy rounded-full font-black text-lg transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(14,165,233,0.4)] btn-premium"
                   >
-                    DEPLOY PROJECT
+                    GET FREE QUOTE
                   </Link>
                   <Link
                     href="/portfolio"
@@ -87,7 +67,7 @@ export default function Hero() {
                     <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-electric transition-all">
                        <ArrowRight size={20} className="-rotate-45 group-hover:rotate-0 transition-transform" />
                     </div>
-                    VIEW CASE STUDIES
+                    VIEW PORTFOLIO
                   </Link>
                 </div>
               </div>
@@ -102,36 +82,31 @@ export default function Hero() {
             className="relative perspective-2000 hidden lg:block"
           >
             <div className="animate-float-complex">
-              <div className="glass-card rounded-[4rem] p-2 aspect-[4/5] relative overflow-hidden group">
-                 <div className="absolute inset-0 bg-gradient-to-tr from-electric/10 to-transparent pointer-events-none" />
-                 <div className="w-full h-full bg-navy/80 rounded-[3.8rem] flex flex-col p-12 justify-between">
+              <div className="glass-card rounded-[3rem] p-2 aspect-square relative overflow-hidden group">
+                 <img 
+                   src="/images/portfolio-showcase.png" 
+                   alt="Portfolio Showcase" 
+                   className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                 />
+                 <div className="absolute inset-0 bg-gradient-to-tr from-navy via-transparent to-transparent pointer-events-none" />
+                 <div className="relative z-10 w-full h-full bg-navy/20 backdrop-blur-sm rounded-[2.8rem] flex flex-col p-8 justify-between border border-white/5">
                     <div className="flex justify-between items-start">
-                       <div className="text-6xl font-black text-white/5 font-outfit select-none uppercase">01</div>
-                       <div className="w-16 h-16 rounded-3xl bg-electric/10 border border-electric/20 flex items-center justify-center">
-                          <Logo className="w-10 h-10" />
+                       <div className="text-4xl font-black text-white/5 font-outfit select-none uppercase">01</div>
+                       <div className="w-12 h-12 rounded-2xl bg-electric/10 border border-electric/20 flex items-center justify-center">
+                          <Logo className="w-8 h-8" />
                        </div>
                     </div>
                     
-                    <div className="space-y-6">
-                       <div className="h-[2px] w-full bg-gradient-to-r from-electric/50 to-transparent" />
-                       <h3 className="text-4xl font-bold font-outfit">Core Innovation</h3>
-                       <p className="text-gray-500 font-medium">Building the infrastructure for the next generation of digital dominance.</p>
+                    <div className="space-y-4">
+                       <div className="h-[1px] w-full bg-gradient-to-r from-electric/50 to-transparent" />
+                       <h3 className="text-2xl font-bold font-outfit">Core Innovation</h3>
+                       <p className="text-sm text-gray-400 font-medium">Building the infrastructure for the next generation of digital dominance.</p>
                        <div className="flex gap-2">
                           {[1,2,3,4].map(i => <div key={i} className="w-2 h-2 rounded-full bg-electric/30" />)}
                        </div>
                     </div>
                  </div>
               </div>
-
-              {/* Floating Stat Card */}
-              <motion.div 
-                animate={{ x: [0, 20, 0], y: [0, -20, 0] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-10 -right-10 glass-card p-8 rounded-3xl border-white/10 shadow-2xl z-20 backdrop-blur-3xl"
-              >
-                 <div className="text-4xl font-black text-electric mb-1 tracking-tighter">99.9%</div>
-                 <div className="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">Uptime Reliability</div>
-              </motion.div>
             </div>
           </motion.div>
         </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Target, Eye, Heart, Users, Award, Shield } from "lucide-react";
 import Link from "next/link";
+import Logo from "@/components/ui/Logo";
 
 const values = [
   { name: "Innovation", icon: Target, description: "We push boundaries and explore new technologies." },
@@ -19,7 +20,7 @@ export default function AboutPage() {
           <h2 className="text-electric font-bold tracking-widest text-sm uppercase">About Uma Techno</h2>
           <h1 className="text-5xl lg:text-7xl font-bold font-outfit leading-tight">
             Crafting Digital <br />
-            <span className="text-gradient">Masterpieces</span> Since 2015
+            <span className="text-gradient">Masterpieces</span> Since 2026
           </h1>
           <p className="text-xl text-gray-400 leading-relaxed">
             Uma Techno is a premier digital agency dedicated to helping businesses navigate 
@@ -37,13 +38,14 @@ export default function AboutPage() {
              </div>
           </div>
         </div>
-        <div className="relative">
-           <div className="aspect-square glass-card rounded-[3rem] overflow-hidden rotate-3 relative z-10 p-4">
+        <div className="relative group">
+           <div className="aspect-square glass-card rounded-[3rem] overflow-hidden rotate-3 relative z-10 border border-white/5">
               <img 
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" 
-                alt="Our Team"
-                className="w-full h-full object-cover rounded-[2rem]"
+                src="/images/about.png" 
+                alt="Digital Masterpiece" 
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy to-transparent opacity-40" />
            </div>
            <div className="absolute inset-0 bg-electric/20 rounded-[3rem] -rotate-3 z-0 blur-3xl scale-90" />
         </div>

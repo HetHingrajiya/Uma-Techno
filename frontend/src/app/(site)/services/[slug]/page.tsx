@@ -8,6 +8,7 @@ const serviceData: Record<string, any> = {
     title: "Website Development",
     description: "Build a high-performance website that converts visitors into customers.",
     heroTitle: "Premium Web Development Services",
+    image: "/images/portfolio-showcase.png",
     content: "We specialize in building modern, fast, and scalable websites using the latest technologies. Our team ensures that your website is not just a digital business card, but a powerful tool for growth.",
     benefits: ["SEO Optimized", "Mobile Responsive", "High Speed Performance", "Secure & Scalable"],
     faqs: [
@@ -19,6 +20,7 @@ const serviceData: Record<string, any> = {
     title: "Mobile App Development",
     description: "Scalable mobile applications for iOS and Android.",
     heroTitle: "Cutting-Edge Mobile Solutions",
+    image: "/images/templates.png",
     content: "We create native and cross-platform mobile apps that provide a seamless user experience. From concept to App Store, we handle everything.",
     benefits: ["Native Performance", "User-Centric UI", "Offline Capabilities", "Regular Updates"],
     faqs: [
@@ -29,6 +31,7 @@ const serviceData: Record<string, any> = {
     title: "SEO Services",
     description: "Dominate the search engine rankings with our expert SEO strategies.",
     heroTitle: "Strategic SEO for Business Growth",
+    image: "/images/seo-visual.png",
     content: "Our SEO services are designed to improve your online visibility, drive organic traffic, and increase conversions through data-driven strategies.",
     benefits: ["Keyword Ranking", "Technical SEO Audits", "Content Strategy", "Link Building"],
     faqs: [
@@ -74,11 +77,16 @@ export default async function ServiceDetail({ params }: { params: any }) {
                </Link>
             </div>
           </div>
-          <div className="hidden lg:block relative">
-             <div className="w-full aspect-video bg-navy-light rounded-3xl border border-white/10 overflow-hidden shadow-2xl relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-electric/20 to-transparent" />
+          <div className="hidden lg:block relative group">
+             <div className="w-full aspect-video glass-card rounded-3xl border border-white/10 overflow-hidden shadow-2xl relative">
+                <img 
+                  src={service.image} 
+                  alt={service.title} 
+                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-transparent opacity-60" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                   <div className="text-6xl opacity-20 font-bold font-outfit uppercase tracking-widest">{service.title}</div>
+                   <div className="text-4xl opacity-10 font-bold font-outfit uppercase tracking-[1em] translate-y-20">{service.title}</div>
                 </div>
              </div>
           </div>

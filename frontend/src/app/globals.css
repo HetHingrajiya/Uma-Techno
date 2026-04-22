@@ -1,12 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy: #050811;
-  --color-navy-light: #0d1221;
-  --color-electric: #d4af37; /* Gold */
-  --color-accent: #f9e29c; /* Light Gold */
-  --color-gold-light: #f9e29c;
-  --color-gold-dark: #b8860b;
+  --color-navy: #020617; /* Slate 950 */
+  --color-navy-light: #0f172a; /* Slate 900 */
+  --color-electric: #0ea5e9; /* Sky 500 (Primary Cyan) */
+  --color-accent: #22d3ee; /* Cyan 400 (Secondary) */
+  --color-blue-glow: rgba(14, 165, 233, 0.15);
   --color-glass: rgba(255, 255, 255, 0.03);
   
   --font-sans: "Inter", "Outfit", sans-serif;
@@ -50,15 +49,15 @@
 
   .glass-card:hover {
     background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(212, 175, 55, 0.3);
+    border-color: rgba(14, 165, 233, 0.3);
     transform: translateY(-8px) scale(1.02);
     box-shadow: 
-      0 30px 60px -12px rgba(212, 175, 55, 0.15),
+      0 30px 60px -12px rgba(14, 165, 233, 0.15),
       inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #f9e29c 0%, #d4af37 30%, #b8860b 70%, #d4af37 100%);
+    background: linear-gradient(135deg, #0ea5e9 0%, #22d3ee 50%, #0ea5e9 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 300% auto;
@@ -71,12 +70,12 @@
 
   .bg-matrix {
     background-image: 
-      radial-gradient(circle at 0% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 100% 100%, rgba(184, 134, 11, 0.03) 0%, transparent 50%);
+      radial-gradient(circle at 0% 0%, rgba(14, 165, 233, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 100% 100%, rgba(34, 211, 238, 0.03) 0%, transparent 50%);
   }
 
   .neo-glow {
-    text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    text-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
   }
 
   .bento-grid {
@@ -90,14 +89,14 @@
     position: relative;
     overflow: hidden;
     transition: all 0.5s ease;
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(14, 165, 233, 0.2);
   }
 
   .btn-premium::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(120deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+    background: linear-gradient(120deg, transparent, rgba(14, 165, 233, 0.1), transparent);
     transform: translateX(-100%);
     transition: 0.6s;
   }

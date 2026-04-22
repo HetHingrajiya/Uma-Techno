@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/admin/',
     },
-    sitemap: 'https://umatechno.com/sitemap.xml',
+    sitemap: 'https://uma-techno.vercel.app/sitemap.xml',
   };
 }

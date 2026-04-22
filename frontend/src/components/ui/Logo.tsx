@@ -5,31 +5,27 @@ export default function Logo({ className = "w-10 h-10" }: { className?: string }
     <div className={`relative flex items-center justify-center ${className}`}>
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#f9e29c" />
-            <stop offset="50%" stopColor="#d4af37" />
-            <stop offset="100%" stopColor="#b8860b" />
+          <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#0ea5e9" />
+            <stop offset="100%" stopColor="#22d3ee" />
           </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
         </defs>
-        <path
-          d="M20 20C20 20 20 80 50 80C80 80 80 20 80 20"
-          stroke="url(#goldGradient)"
-          strokeWidth="12"
-          strokeLinecap="round"
-          fill="none"
+        
+        {/* Abstract "U" for Uma - Pixelated/Modern style */}
+        <path 
+          d="M30 20 V60 C30 70 40 80 50 80 C60 80 70 70 70 60 V20 H60 V60 C60 65 55 70 50 70 C45 70 40 65 40 60 V20 H30Z" 
+          fill="url(#logoGradient)"
+          filter="url(#glow)"
         />
-        <path
-          d="M40 40C40 40 40 70 50 70C60 70 60 40 60 40"
-          stroke="url(#goldGradient)"
-          strokeWidth="6"
-          strokeLinecap="round"
-          fill="none"
-          opacity="0.5"
-        />
-        {/* Pixel effect on the right arm */}
-        <rect x="75" y="10" width="8" height="8" fill="url(#goldGradient)" />
-        <rect x="65" y="5" width="6" height="6" fill="url(#goldGradient)" opacity="0.8" />
-        <rect x="85" y="20" width="5" height="5" fill="url(#goldGradient)" opacity="0.6" />
+        
+        {/* Tech Accents - Horizontal Bars */}
+        <rect x="25" y="25" width="10" height="4" fill="#0ea5e9" opacity="0.8" />
+        <rect x="65" y="35" width="10" height="4" fill="#22d3ee" opacity="0.8" />
+        <rect x="25" y="45" width="6" height="4" fill="#0ea5e9" opacity="0.6" />
       </svg>
     </div>
   );
