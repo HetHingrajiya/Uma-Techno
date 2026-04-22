@@ -9,8 +9,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const stats = [
-  { label: "Projects Delivered", value: "250+", icon: Rocket },
-  { label: "Happy Clients", value: "120+", icon: Users },
+  { label: "Projects Delivered", value: "25+", icon: Rocket },
+  { label: "Happy Clients", value: "12+", icon: Users },
   { label: "Fast Support", value: "24/7", icon: Star },
   { label: "SEO Ready Solutions", value: "100%", icon: Shield },
 ];
@@ -37,11 +37,11 @@ const process = [
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-32 pb-32">
+    <div className="flex flex-col gap-16 lg:gap-32 pb-20 lg:pb-32">
       <Hero />
 
       {/* Trusted By Section */}
-      <section className="max-w-7xl mx-auto px-6 w-full -mt-10">
+      <section className="max-w-7xl mx-auto px-6 w-full -mt-8 lg:-mt-16">
         <div className="text-center space-y-8">
           <p className="text-gray-500 font-medium tracking-widest text-xs uppercase">Trusted By Industry Leaders</p>
           <div className="flex flex-wrap justify-center items-center gap-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
@@ -64,7 +64,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-8 min-h-[800px]">
+        <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 lg:gap-8 min-h-auto lg:min-h-[800px]">
           {/* Main Large Card */}
            <Link 
             href={services[0].link}
@@ -124,9 +124,9 @@ export default function Home() {
 
       {/* Why Choose Us Section */}
       <section className="max-w-7xl mx-auto px-6 w-full">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <div className="relative group">
-            <div className="aspect-video glass-card rounded-[3rem] overflow-hidden border border-white/5">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="relative group order-2 lg:order-1">
+            <div className="aspect-video glass-card rounded-[2.5rem] overflow-hidden border border-white/5">
                <img 
                  src="/images/templates.png" 
                  alt="Website Templates" 
@@ -137,22 +137,22 @@ export default function Home() {
             <motion.div 
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 6, repeat: Infinity }}
-              className="absolute -top-8 -right-8 glass-card p-6 rounded-2xl border-white/10 shadow-2xl backdrop-blur-xl"
+              className="absolute -top-6 -right-6 lg:-top-8 lg:-right-8 glass-card p-4 lg:p-6 rounded-xl lg:rounded-2xl border-white/10 shadow-2xl backdrop-blur-xl"
             >
-               <div className="text-electric font-black text-xl tracking-tighter">Business First</div>
+               <div className="text-electric font-black text-lg lg:text-xl tracking-tighter">Business First</div>
                <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1">Our Core Mindset</div>
             </motion.div>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6 lg:space-y-8 order-1 lg:order-2">
             <div className="space-y-4">
               <h2 className="text-3xl lg:text-4xl font-bold font-outfit">Your Partner in <br /><span className="text-gradient">Digital Growth</span></h2>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-gray-400 leading-relaxed text-sm lg:text-base">
                 We don&apos;t just build websites; we build business engines designed for real client acquisition and long-term scaling.
               </p>
             </div>
 
-            <div className="space-y-6">
+            <div className="grid sm:grid-cols-2 gap-4 lg:gap-6">
               {[
                 { title: "Business-first mindset", desc: "Every line of code is written to solve your specific business goals." },
                 { title: "Premium UI/UX", desc: "Elite design standards that command authority and build trust." },
@@ -160,13 +160,13 @@ export default function Home() {
                 { title: "Fast delivery", desc: "Agile methodologies that get you to market at light speed." },
                 { title: "Long-term support", desc: "A dedicated team that grows with your business." }
               ].map((benefit, i) => (
-                <div key={i} className="flex gap-4 group">
-                  <div className="w-6 h-6 rounded-full bg-electric/20 flex items-center justify-center text-electric group-hover:bg-electric group-hover:text-white transition-all mt-1">
-                    <CheckCircle size={14} />
+                <div key={i} className="flex gap-3 lg:gap-4 group">
+                  <div className="w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-electric/20 flex items-center justify-center text-electric group-hover:bg-electric group-hover:text-white transition-all mt-1">
+                    <CheckCircle size={12} />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-white">{benefit.title}</h4>
-                    <p className="text-gray-500 text-sm">{benefit.desc}</p>
+                    <h4 className="text-base lg:text-lg font-bold text-white">{benefit.title}</h4>
+                    <p className="text-gray-500 text-xs lg:text-sm">{benefit.desc}</p>
                   </div>
                 </div>
               ))}

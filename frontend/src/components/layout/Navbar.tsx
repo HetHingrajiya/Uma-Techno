@@ -38,6 +38,17 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
   return (
     <nav
       className={cn(
@@ -105,38 +116,78 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Nav */}
+      {/* Mobile Nav Overlay */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-navy-light mt-4 rounded-2xl overflow-hidden border border-white/10"
-          >
-            <div className="flex flex-col p-4 gap-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={cn(
-                    "text-lg font-medium",
-                    pathname === link.href ? "text-electric" : "text-gray-300"
-                  )}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ))}
-              <Link
-                href="/contact"
-                className="bg-electric text-white text-center py-3 rounded-xl font-bold"
-                onClick={() => setIsOpen(false)}
-              >
-                Get a Quote
-              </Link>
-            </div>
-          </motion.div>
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-navy/60 backdrop-blur-xl z-[-1] md:hidden"
+              onClick={() => setIsOpen(false)}
+            />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 bottom-0 w-[80%] max-w-sm bg-navy-light border-l border-white/10 z-50 md:hidden flex flex-col"
+            >
+              <div className="p-8 flex flex-col h-full">
+                <div className="flex justify-between items-center mb-12">
+                  <Logo className="w-8 h-8" />
+                  <button onClick={() => setIsOpen(false)} className="text-white">
+                    <X size={32} />
+                  </button>
+                </div>
+
+                <div className="flex flex-col gap-6 overflow-y-auto flex-1">
+                  {navLinks.map((link) => (
+                    <div key={link.name} className="space-y-4">
+                      <Link
+                        href={link.href}
+                        className={cn(
+                          "text-2xl font-bold font-outfit",
+                          pathname === link.href ? "text-electric" : "text-white"
+                        )}
+                        onClick={() => !link.submenu && setIsOpen(false)}
+                      >
+                        {link.name}
+                      </Link>
+                      {link.submenu && (
+                        <div className="pl-4 flex flex-col gap-3 border-l border-white/5">
+                          {link.submenu.map((sub) => (
+                            <Link
+                              key={sub.name}
+                              href={sub.href}
+                              className="text-gray-400 text-sm hover:text-electric transition-colors"
+                              onClick={() => setIsOpen(false)}
+                            >
+                              {sub.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="pt-8 border-t border-white/5 space-y-6">
+                  <Link
+                    href="/contact"
+                    className="block w-full bg-electric text-white text-center py-4 rounded-2xl font-bold text-lg"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Get a Quote
+                  </Link>
+                  <div className="text-center text-[10px] text-gray-500 uppercase tracking-widest">
+                    © 2026 Uma Techno. All rights reserved.
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>
