@@ -12,7 +12,6 @@ import {
 
 const stats = [
   { name: "Total Leads", value: "128", change: "+12%", trendingUp: true, icon: MessageSquare },
-  { name: "New Blogs", value: "24", change: "+4%", trendingUp: true, icon: FileText },
   { name: "Active Projects", value: "12", change: "-2%", trendingUp: false, icon: TrendingUp },
   { name: "Site Visits", value: "12.4k", change: "+18%", trendingUp: true, icon: Users },
 ];
@@ -79,7 +78,6 @@ export default function AdminDashboard() {
           <div className="space-y-6">
             {[
               { text: "Admin logged in", time: "5 mins ago", icon: Users },
-              { text: "New blog post published", time: "1 hour ago", icon: FileText },
               { text: "Lead status updated to 'Replied'", time: "3 hours ago", icon: MessageSquare },
               { text: "Portfolio project 'E-commerce' updated", time: "5 hours ago", icon: TrendingUp },
             ].map((activity, i) => (

@@ -6,7 +6,6 @@ import dotenv from 'dotenv';
 
 import contactRoutes from './routes/contactRoutes';
 import authRoutes from './routes/authRoutes';
-import blogRoutes from './routes/blogRoutes';
 
 dotenv.config();
 
@@ -26,10 +25,18 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
+// Root Route
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: "Welcome to Uma Techno API",
+    version: "1.0.0",
+    status: "Running"
+  });
+});
+
 // Routes
 app.use('/api/v1/contacts', contactRoutes);
 app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/blogs', blogRoutes);
 
 // Error Handling
 // app.use(errorHandler);

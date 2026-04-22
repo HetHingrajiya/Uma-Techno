@@ -55,11 +55,20 @@ export default function Hero() {
             </Link>
           </div>
 
-          <div className="flex items-center gap-6 pt-4">
-            {["95%+ Success Rate", "100+ Projects", "24/7 Support"].map((stat) => (
-              <div key={stat} className="flex items-center gap-2 text-sm text-gray-400">
-                <CheckCircle size={16} className="text-accent" />
-                {stat}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 border-t border-white/5">
+            {[
+              { name: "INNOVATE", icon: "💡" },
+              { name: "BUILD", icon: "⚙️" },
+              { name: "GROW", icon: "📈" },
+              { name: "SUCCEED", icon: "🎯" },
+            ].map((pillar) => (
+              <div key={pillar.name} className="flex flex-col items-center gap-2 group cursor-default">
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-2xl group-hover:bg-electric/10 group-hover:scale-110 transition-all border border-white/5 group-hover:border-electric/20">
+                  {pillar.icon}
+                </div>
+                <div className="text-[10px] font-bold tracking-[0.2em] text-gray-500 group-hover:text-electric transition-colors">
+                  {pillar.name}
+                </div>
               </div>
             ))}
           </div>

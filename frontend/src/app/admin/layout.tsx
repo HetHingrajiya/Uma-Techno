@@ -18,7 +18,6 @@ import { cn } from "@/lib/utils";
 const sidebarLinks = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { name: "Leads", href: "/admin/leads", icon: MessageSquare },
-  { name: "Blogs", href: "/admin/blogs", icon: FileText },
   { name: "Services", href: "/admin/services", icon: Layers },
   { name: "Projects", href: "/admin/projects", icon: Briefcase },
   { name: "Settings", href: "/admin/settings", icon: Settings },

@@ -7,6 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -52,30 +53,7 @@ model Project {
   updatedAt       DateTime @updatedAt
 }
 
-model Blog {
-  id              String   @id @default(cuid())
-  title           String
-  slug            String   @unique
-  content         String   @db.Text
-  excerpt         String
-  image           String?
-  author          String
-  categoryId      String
-  category        Category @relation(fields: [categoryId], references: [id])
-  tags            String[]
-  metaTitle       String?
-  metaDescription String?
-  published       Boolean  @default(false)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-}
 
-model Category {
-  id    String @id @default(cuid())
-  name  String @unique
-  slug  String @unique
-  blogs Blog[]
-}
 
 model Contact {
   id        String   @id @default(cuid())

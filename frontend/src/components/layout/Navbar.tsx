@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Logo from "../ui/Logo";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -21,8 +22,6 @@ const navLinks = [
     ]
   },
   { name: "Portfolio", href: "/portfolio" },
-  { name: "Pricing", href: "/pricing" },
-  { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -47,13 +46,16 @@ export default function Navbar() {
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-gradient-to-br from-electric to-accent rounded-lg flex items-center justify-center font-bold text-white text-xl">
-            U
+        <Link href="/" className="flex items-center gap-3">
+          <Logo className="w-10 h-10" />
+          <div className="flex flex-col leading-none">
+            <span className="text-2xl font-bold tracking-tighter text-white uppercase">
+              Uma<span className="text-electric">Techno</span>
+            </span>
+            <span className="text-[10px] text-gray-500 font-bold tracking-[0.2em] uppercase mt-1">
+              Smart Solutions. Real Impact.
+            </span>
           </div>
-          <span className="text-2xl font-bold tracking-tight text-white">
-            Uma<span className="text-electric">Techno</span>
-          </span>
         </Link>
 
         {/* Desktop Nav */}
