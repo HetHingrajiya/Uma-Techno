@@ -119,75 +119,72 @@ export default function Navbar() {
       {/* Mobile Nav Overlay */}
       <AnimatePresence>
         {isOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-navy/60 backdrop-blur-xl z-[-1] md:hidden"
-              onClick={() => setIsOpen(false)}
-            />
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[80%] max-w-sm bg-navy-light border-l border-white/10 z-50 md:hidden flex flex-col"
-            >
-              <div className="p-8 flex flex-col h-full">
-                <div className="flex justify-between items-center mb-12">
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", damping: 30, stiffness: 300 }}
+            className="fixed inset-0 bg-navy z-[100] md:hidden flex flex-col"
+          >
+            <div className="p-6 flex flex-col h-full">
+              <div className="flex justify-between items-center mb-16">
+                <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
                   <Logo className="w-8 h-8" />
-                  <button onClick={() => setIsOpen(false)} className="text-white">
-                    <X size={32} />
-                  </button>
-                </div>
+                  <span className="text-xl font-bold tracking-tighter text-white uppercase">Uma<span className="text-electric">Techno</span></span>
+                </Link>
+                <button 
+                  onClick={() => setIsOpen(false)} 
+                  className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white border border-white/10"
+                >
+                  <X size={24} />
+                </button>
+              </div>
 
-                <div className="flex flex-col gap-6 overflow-y-auto flex-1">
-                  {navLinks.map((link) => (
-                    <div key={link.name} className="space-y-4">
-                      <Link
-                        href={link.href}
-                        className={cn(
-                          "text-2xl font-bold font-outfit",
-                          pathname === link.href ? "text-electric" : "text-white"
-                        )}
-                        onClick={() => !link.submenu && setIsOpen(false)}
-                      >
-                        {link.name}
-                      </Link>
-                      {link.submenu && (
-                        <div className="pl-4 flex flex-col gap-3 border-l border-white/5">
-                          {link.submenu.map((sub) => (
-                            <Link
-                              key={sub.name}
-                              href={sub.href}
-                              className="text-gray-400 text-sm hover:text-electric transition-colors"
-                              onClick={() => setIsOpen(false)}
-                            >
-                              {sub.name}
-                            </Link>
-                          ))}
-                        </div>
+              <div className="flex flex-col gap-8 overflow-y-auto flex-1">
+                {navLinks.map((link) => (
+                  <div key={link.name} className="space-y-4">
+                    <Link
+                      href={link.href}
+                      className={cn(
+                        "text-4xl font-bold font-outfit transition-colors",
+                        pathname === link.href ? "text-electric" : "text-white"
                       )}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="pt-8 border-t border-white/5 space-y-6">
-                  <Link
-                    href="/contact"
-                    className="block w-full bg-electric text-white text-center py-4 rounded-2xl font-bold text-lg"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Get a Quote
-                  </Link>
-                  <div className="text-center text-[10px] text-gray-500 uppercase tracking-widest">
-                    © 2026 Uma Techno. All rights reserved.
+                      onClick={() => !link.submenu && setIsOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                    {link.submenu && (
+                      <div className="pl-4 flex flex-col gap-4 border-l border-electric/20">
+                        {link.submenu.map((sub) => (
+                          <Link
+                            key={sub.name}
+                            href={sub.href}
+                            className="text-gray-400 text-lg hover:text-electric transition-colors"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            {sub.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
+                ))}
+              </div>
+
+              <div className="pt-8 border-t border-white/5 space-y-6">
+                <Link
+                  href="/contact"
+                  className="block w-full bg-electric text-white text-center py-5 rounded-2xl font-bold text-xl shadow-[0_0_30px_rgba(59,130,246,0.3)]"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Get a Quote
+                </Link>
+                <div className="text-center text-[10px] text-gray-500 uppercase tracking-widest font-bold">
+                  © 2026 UMA TECHNO. SOLUTIONS FOR THE FUTURE.
                 </div>
               </div>
-            </motion.div>
-          </>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </nav>

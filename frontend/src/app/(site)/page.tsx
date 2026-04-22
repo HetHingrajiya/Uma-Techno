@@ -92,13 +92,13 @@ export default function Home() {
             href={services[1].link}
             className="group glass-card p-8 rounded-[2rem] md:col-span-2 flex flex-col justify-center relative overflow-hidden"
           >
-            <div className="flex items-center gap-6">
+            <div className="space-y-4 relative z-10">
                <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center text-electric group-hover:bg-electric group-hover:text-navy transition-all">
-                  <Smartphone size={28} />
+                  <Smartphone className="w-7 h-7" />
                </div>
                <div>
-                  <h4 className="text-xl font-bold font-outfit text-white">Bespoke Mobile Apps</h4>
-                  <p className="text-sm text-gray-500">iOS & Android Excellence</p>
+                  <h4 className="text-2xl font-bold font-outfit text-white">Bespoke Mobile Apps</h4>
+                  <p className="text-gray-500">iOS & Android Excellence</p>
                </div>
             </div>
           </Link>
@@ -108,16 +108,20 @@ export default function Home() {
             href={services[2].link}
             className="group glass-card p-8 rounded-[2rem] flex flex-col justify-between relative overflow-hidden"
           >
-            <Palette size={28} className="text-gray-600 group-hover:text-electric transition-colors" />
-            <h4 className="text-lg font-bold font-outfit text-white uppercase tracking-wider">UI/UX <br /> Mastery</h4>
+            <div className="space-y-4 relative z-10">
+              <Palette className="w-7 h-7 text-gray-600 group-hover:text-electric transition-colors" />
+              <h4 className="text-xl font-bold font-outfit text-white uppercase tracking-wider">UI/UX <br /> Mastery</h4>
+            </div>
           </Link>
 
           <Link 
             href={services[3].link}
             className="group glass-card p-8 rounded-[2rem] flex flex-col justify-between relative overflow-hidden bg-electric/5"
           >
-            <BarChart size={28} className="text-electric" />
-            <h4 className="text-lg font-bold font-outfit text-white uppercase tracking-wider">Growth <br /> Strategy</h4>
+            <div className="space-y-4 relative z-10">
+              <BarChart className="w-7 h-7 text-electric" />
+              <h4 className="text-xl font-bold font-outfit text-white uppercase tracking-wider">Growth <br /> Strategy</h4>
+            </div>
           </Link>
         </div>
       </section>
