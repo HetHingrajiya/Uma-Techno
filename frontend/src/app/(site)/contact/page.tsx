@@ -61,7 +61,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm text-gray-400">Phone</p>
-                  <p className="text-lg font-bold">+91 98765 43210</p>
+                  <p className="text-lg font-bold">+91 92743 50728</p>
                 </div>
               </div>
 
@@ -71,7 +71,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm text-gray-400">Email</p>
-                  <p className="text-lg font-bold">info@umatechno.com</p>
+                  <p className="text-lg font-bold">uma.techno585@gmail.com</p>
                 </div>
               </div>
 
@@ -81,7 +81,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm text-gray-400">Address</p>
-                  <p className="text-lg font-bold">123 Tech Square, Rajkot, Gujarat, India</p>
+                  <p className="text-lg font-bold">Rajkot, Gujarat, India</p>
                 </div>
               </div>
             </div>

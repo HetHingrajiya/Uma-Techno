@@ -82,15 +82,15 @@ export default function Footer() {
           <ul className="space-y-4">
             <li className="flex gap-3 text-gray-400">
               <MapPin className="text-electric shrink-0" size={20} />
-              <span>123 Tech Square, Rajkot, Gujarat, India</span>
+              <span>Rajkot, Gujarat, India</span>
             </li>
             <li className="flex gap-3 text-gray-400">
               <Phone className="text-electric shrink-0" size={20} />
-              <span>+91 98765 43210</span>
+              <span>+91 92743 50728</span>
             </li>
             <li className="flex gap-3 text-gray-400">
               <Mail className="text-electric shrink-0" size={20} />
-              <span>info@umatechno.com</span>
+              <span>uma.techno585@gmail.com</span>
             </li>
           </ul>
         </div>
