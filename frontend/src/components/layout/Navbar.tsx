@@ -17,8 +17,9 @@ const navLinks = [
     submenu: [
       { name: "Web Development", href: "/services/web-development" },
       { name: "App Development", href: "/services/app-development" },
-      { name: "SEO Services", href: "/services/seo" },
       { name: "UI/UX Design", href: "/services/ui-ux" },
+      { name: "SEO Optimization", href: "/services/seo" },
+      { name: "Digital Branding", href: "/services/branding" },
     ]
   },
   { name: "Portfolio", href: "/portfolio" },

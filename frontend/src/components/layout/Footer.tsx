@@ -52,10 +52,15 @@ export default function Footer() {
         <div>
           <h4 className="text-white font-bold mb-6 text-lg">Quick Links</h4>
           <ul className="space-y-4">
-            {["About Us", "Our Services", "Portfolio"].map((item) => (
-              <li key={item}>
-                <Link href="#" className="text-gray-400 hover:text-electric transition-colors">
-                  {item}
+            {[
+              { name: "About Us", href: "/about" },
+              { name: "Our Services", href: "/services" },
+              { name: "Portfolio", href: "/portfolio" },
+              { name: "Contact Us", href: "/contact" }
+            ].map((item) => (
+              <li key={item.name}>
+                <Link href={item.href} className="text-gray-400 hover:text-electric transition-colors">
+                  {item.name}
                 </Link>
               </li>
             ))}
@@ -66,10 +71,16 @@ export default function Footer() {
         <div>
           <h4 className="text-white font-bold mb-6 text-lg">Services</h4>
           <ul className="space-y-4">
-            {["Web Development", "App Development", "UI/UX Design", "SEO Optimization", "Digital Branding"].map((item) => (
-              <li key={item}>
-                <Link href="#" className="text-gray-400 hover:text-electric transition-colors">
-                  {item}
+            {[
+              { name: "Web Development", href: "/services/web-development" },
+              { name: "App Development", href: "/services/app-development" },
+              { name: "UI/UX Design", href: "/services/ui-ux" },
+              { name: "SEO Optimization", href: "/services/seo" },
+              { name: "Digital Branding", href: "/services/branding" }
+            ].map((item) => (
+              <li key={item.name}>
+                <Link href={item.href} className="text-gray-400 hover:text-electric transition-colors">
+                  {item.name}
                 </Link>
               </li>
             ))}

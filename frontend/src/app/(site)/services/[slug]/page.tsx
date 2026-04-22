@@ -27,6 +27,17 @@ const serviceData: Record<string, any> = {
       { q: "Which platforms do you support?", a: "We support both iOS and Android using React Native and Flutter." }
     ]
   },
+  "ui-ux": {
+    title: "UI/UX Design",
+    description: "User-centric designs that drive engagement and loyalty.",
+    heroTitle: "World-Class Digital Design",
+    image: "/images/portfolio-showcase.png",
+    content: "Our design process focuses on understanding your users and creating intuitive, beautiful interfaces that achieve your business goals. We believe great design is invisible—it just works.",
+    benefits: ["Intuitive Navigation", "Modern Aesthetics", "Prototype-First approach", "Accessibility Focused"],
+    faqs: [
+      { q: "What design tools do you use?", a: "We primarily use Figma, Adobe XD, and Framer for high-fidelity prototyping." }
+    ]
+  },
   "seo": {
     title: "SEO Services",
     description: "Dominate the search engine rankings with our expert SEO strategies.",
@@ -36,6 +47,50 @@ const serviceData: Record<string, any> = {
     benefits: ["Keyword Ranking", "Technical SEO Audits", "Content Strategy", "Link Building"],
     faqs: [
       { q: "When will I see results?", a: "SEO is a long-term strategy; typically results appear in 3-6 months." }
+    ]
+  },
+  "ecommerce": {
+    title: "Ecommerce Solutions",
+    description: "Powerful online stores built for conversion and scale.",
+    heroTitle: "High-Converting Ecommerce Platforms",
+    image: "/images/templates.png",
+    content: "We build robust ecommerce platforms that provide a seamless shopping experience. From payment integration to inventory management, we cover all your online retail needs.",
+    benefits: ["Payment Gateway Integration", "Inventory Management", "Marketing Tools", "Secure Checkout"],
+    faqs: [
+      { q: "Can you migrate my existing store?", a: "Yes, we have experience migrating from Shopify, Magento, and WooCommerce." }
+    ]
+  },
+  "custom-software": {
+    title: "Custom Software",
+    description: "Tailored software solutions to solve your unique business challenges.",
+    heroTitle: "Enterprise-Grade Custom Software",
+    image: "/images/process-visual.png",
+    content: "Sometimes off-the-shelf software doesn't cut it. We build custom ERPs, CRMs, and business automation tools designed specifically for your workflows.",
+    benefits: ["Business Automation", "Legacy Integration", "Data Analytics", "Scalable Architecture"],
+    faqs: [
+      { q: "Can you maintain our existing software?", a: "Yes, we offer maintenance and modernization services for legacy systems." }
+    ]
+  },
+  "branding": {
+    title: "Brand Strategy",
+    description: "Build a memorable brand that commands authority in your market.",
+    heroTitle: "Strategic Brand Identity",
+    image: "/images/client-1.png",
+    content: "Your brand is more than just a logo. We help you define your voice, values, and visual identity to connect deeply with your audience.",
+    benefits: ["Logo & Identity Design", "Brand Guidelines", "Visual Language", "Market Positioning"],
+    faqs: [
+      { q: "What is included in a branding package?", a: "Typically includes logo, color palette, typography, and brand voice guidelines." }
+    ]
+  },
+  "maintenance": {
+    title: "Maintenance & Support",
+    description: "Ongoing support to keep your digital assets secure and up-to-date.",
+    heroTitle: "Reliable Support & Maintenance",
+    image: "/images/seo-visual.png",
+    content: "The web moves fast. We ensure your systems are always running the latest patches, perform regular backups, and provide priority support for any issues.",
+    benefits: ["24/7 Monitoring", "Regular Backups", "Security Patches", "Performance Tuning"],
+    faqs: [
+      { q: "Do you offer different support levels?", a: "Yes, we have various SLA options to fit your business needs." }
     ]
   }
 };
@@ -145,21 +200,7 @@ export default async function ServiceDetail({ params }: { params: any }) {
               </Link>
            </div>
 
-           <div className="glass-card p-8 rounded-3xl border-white/5">
-              <h3 className="text-xl font-bold font-outfit mb-6">Our Services</h3>
-              <ul className="space-y-4">
-                {Object.keys(serviceData).map((key) => (
-                  <li key={key}>
-                    <Link 
-                      href={`/services/${key}`}
-                      className={`block py-3 px-4 rounded-xl transition-all ${slug === key ? "bg-electric text-white" : "hover:bg-white/5 text-gray-400"}`}
-                    >
-                      {serviceData[key].title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-           </div>
+
         </aside>
       </section>
     </div>
