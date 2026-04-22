@@ -10,8 +10,8 @@ export default function Hero() {
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-10">
       {/* Background Animated Elements */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-electric/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-accent/10 rounded-full blur-[120px] animate-pulse delay-700" />
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-electric/10 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-gold-dark/5 rounded-full blur-[120px] animate-pulse delay-700" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
@@ -91,8 +91,8 @@ export default function Hero() {
                 </div>
                 <div className="flex-grow flex items-center justify-center">
                    <div className="text-center space-y-4">
-                      <div className="w-24 h-24 bg-gradient-to-tr from-electric to-accent rounded-2xl mx-auto blur-2xl opacity-20 animate-pulse" />
-                      <div className="text-4xl font-bold text-white/20 font-outfit select-none">UMA TECHNO</div>
+                      <div className="w-24 h-24 bg-gradient-to-tr from-electric to-gold-light rounded-2xl mx-auto blur-2xl opacity-20 animate-pulse" />
+                      <div className="text-4xl font-bold text-white/20 font-outfit select-none uppercase tracking-widest">UMA TECHNO</div>
                    </div>
                 </div>
              </div>
