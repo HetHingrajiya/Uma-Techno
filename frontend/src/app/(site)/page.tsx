@@ -234,6 +234,66 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Portfolio Section */}
+      <section className="max-w-7xl mx-auto px-6 w-full">
+        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric/10 border border-electric/20 text-electric text-xs font-bold uppercase tracking-wider">
+              Selected Work
+            </div>
+            <h2 className="text-3xl lg:text-5xl font-bold font-outfit tracking-tight">Our <span className="text-gradient">Portfolio</span></h2>
+            <p className="text-gray-400 max-w-xl">
+              Showcasing our best work in branding, development, and strategic digital solutions.
+            </p>
+          </div>
+          <Link 
+            href="/portfolio" 
+            className="group flex items-center gap-3 text-white font-bold tracking-widest text-sm hover:text-electric transition-colors"
+          >
+            VIEW ALL PROJECTS <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+          </Link>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            { title: "Tech Brand Identity", category: "Branding", desc: "Complete branding package for a Silicon Valley startup.", image: "/images/project-1.png" },
+            { title: "Premium E-commerce", category: "Development", desc: "High-performance store for a luxury fashion brand.", image: "/images/project-2.png" },
+            { title: "Enterprise CRM", category: "Software", desc: "Custom internal tools for business automation.", image: "/images/project-3.png" }
+          ].map((project, i) => (
+            <div key={i} className="group glass-card rounded-[2.5rem] overflow-hidden flex flex-col h-full border border-white/5 hover:border-electric/30 transition-all duration-500">
+               {/* Project Image Container */}
+               <div className="relative aspect-[4/3] overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-100"
+                  />
+                  <div className="absolute top-6 left-6">
+                    <span className="px-4 py-2 bg-electric text-navy text-[10px] font-black uppercase tracking-widest rounded-full shadow-xl">
+                      {project.category}
+                    </span>
+                  </div>
+               </div>
+               
+               {/* Content */}
+               <div className="p-8 lg:p-10 space-y-4 flex-1 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <h4 className="text-2xl font-bold font-outfit text-white group-hover:text-electric transition-colors">{project.title}</h4>
+                    <p className="text-gray-400 text-sm leading-relaxed">{project.desc}</p>
+                  </div>
+                  
+                  <Link 
+                    href={`/portfolio/${project.title.toLowerCase().replace(/ /g, '-')}`}
+                    className="flex items-center gap-2 text-electric font-bold text-sm tracking-widest uppercase mt-6 group/link"
+                  >
+                    View Project <ArrowRight size={16} className="group-hover/link:translate-x-2 transition-transform" />
+                  </Link>
+               </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section className="max-w-7xl mx-auto px-6 w-full text-center">
         <h2 className="text-3xl lg:text-4xl font-bold font-outfit mb-12">What Our <span className="text-gradient">Clients Say</span></h2>

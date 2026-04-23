@@ -131,7 +131,14 @@ export default function Navbar() {
               <div className="flex justify-between items-center mb-16">
                 <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
                   <Logo className="w-8 h-8" />
-                  <span className="text-xl font-bold tracking-tighter uppercase"><span className="text-electric">Uma</span><span className="text-white">Techno</span></span>
+                  <div className="flex flex-col leading-none">
+                    <span className="text-xl font-bold tracking-tighter uppercase">
+                      <span className="text-electric">Uma</span><span className="text-white">Techno</span>
+                    </span>
+                    <span className="text-[7px] text-gray-500 font-bold tracking-[0.2em] uppercase mt-0.5">
+                      Engineering Excellence.
+                    </span>
+                  </div>
                 </Link>
                 <button 
                   onClick={() => setIsOpen(false)} 
