@@ -8,14 +8,14 @@ import Logo from "./Logo";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-matrix">
+    <section className="relative min-h-[600px] lg:min-h-[800px] 2xl:min-h-screen flex items-center overflow-hidden pt-20 bg-matrix">
       {/* Background Animated Elements */}
       <div className="absolute inset-0 z-0 opacity-30">
         <div className="absolute top-[10%] left-[10%] w-[60%] h-[60%] bg-electric/10 rounded-full blur-[160px] animate-pulse" />
         <div className="absolute bottom-[10%] right-[10%] w-[60%] h-[60%] bg-accent/5 rounded-full blur-[160px] animate-pulse delay-700" />
       </div>
 
-      <div className="max-w-[1800px] mx-auto px-6 w-full relative z-10">
+      <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
         <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -24,7 +24,7 @@ export default function Hero() {
             className="relative"
           >
             <div className="space-y-12">
-              <h1 className="text-5xl md:text-7xl xl:text-8xl font-bold font-outfit leading-[0.9] tracking-tighter uppercase">
+              <h1 className="text-5xl md:text-7xl xl:text-8xl 2xl:text-9xl font-bold font-outfit leading-[0.9] tracking-tighter uppercase">
                 <span className="block overflow-hidden">
                    <motion.span 
                      initial={{ y: "100%" }} 
@@ -49,7 +49,7 @@ export default function Hero() {
               </h1>
 
               <div className="max-w-lg space-y-6">
-                <p className="text-lg text-gray-400 leading-relaxed font-medium">
+                <p className="text-lg 2xl:text-xl text-gray-400 leading-relaxed font-medium">
                    We engineer high-performance websites, mobile apps, and custom software that transform businesses into industry leaders.
                 </p>
                 

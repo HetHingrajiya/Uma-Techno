@@ -54,17 +54,17 @@ export default function Home() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric/10 border border-electric/20 text-electric text-xs font-bold uppercase tracking-wider">
             Premium Solutions
           </div>
-          <h2 className="text-3xl lg:text-5xl font-bold font-outfit tracking-tight">Business Engines Built <br /> <span className="text-gradient">For Growth</span></h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <h2 className="text-3xl lg:text-5xl 2xl:text-6xl font-bold font-outfit tracking-tight">Business Engines Built <br /> <span className="text-gradient">For Growth</span></h2>
+          <p className="text-gray-400 max-w-2xl mx-auto 2xl:text-lg">
             We don&apos;t just build websites. We engineer high-performance digital systems that capture leads, automate operations, and scale revenue.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 lg:gap-8 min-h-auto lg:min-h-[800px]">
+        <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 lg:gap-8">
           {/* Main Large Card */}
            <Link 
             href={services[0].link}
-            className="group glass-card p-10 rounded-[2.5rem] md:col-span-2 md:row-span-2 flex flex-col justify-between relative overflow-hidden"
+            className="group glass-card p-10 rounded-[2.5rem] md:col-span-2 md:row-span-2 flex flex-col justify-between relative overflow-hidden min-h-[500px] lg:min-h-[600px]"
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-electric/5 blur-[100px] -mr-32 -mt-32 group-hover:bg-electric/20 transition-all" />
             <div className="space-y-6 relative z-10">
@@ -144,10 +144,10 @@ export default function Home() {
             </motion.div>
           </div>
 
-          <div className="space-y-6 lg:space-y-8 order-1 lg:order-2">
-            <div className="space-y-4">
-              <h2 className="text-3xl lg:text-4xl font-bold font-outfit">Your Partner in <br /><span className="text-gradient">Business Dominance</span></h2>
-              <p className="text-gray-400 leading-relaxed text-sm lg:text-base">
+          <div className="space-y-6 lg:space-y-10 order-1 lg:order-2">
+            <div className="space-y-4 lg:space-y-6">
+              <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-bold font-outfit">Your Partner in <br /><span className="text-gradient">Business Dominance</span></h2>
+              <p className="text-gray-400 leading-relaxed text-sm lg:text-base 2xl:text-lg">
                 We bridge the gap between complex technology and business growth. Our solutions are engineered to be assets, not just expenses.
               </p>
             </div>

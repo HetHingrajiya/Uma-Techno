@@ -24,12 +24,12 @@ export default function Footer() {
         <div className="space-y-6">
           <Link href="/" className="flex items-center gap-3">
             <Logo className="w-8 h-8" />
-            <span className="text-xl font-bold tracking-tighter text-electric uppercase">
-              Uma<span className="text-white">Techno</span>
+            <span className="text-xl font-bold tracking-tighter uppercase">
+              <span className="text-electric">Uma</span><span className="text-white">Techno</span>
             </span>
           </Link>
-          <p className="text-gray-400 leading-relaxed italic">
-            "Engineering Excellence."
+          <p className="text-[10px] text-gray-500 font-bold tracking-[0.2em] uppercase mt-2">
+            Engineering Excellence.
           </p>
           <p className="text-gray-500 text-sm leading-relaxed">
             A premium digital agency dedicated to engineering high-performance websites, 
