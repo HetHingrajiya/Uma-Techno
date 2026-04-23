@@ -58,8 +58,16 @@ export default function Navbar() {
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link href="/" className="flex items-center">
-          <Logo className="h-10 lg:h-12" />
+        <Link href="/" className="flex items-center gap-3">
+          <Logo className="w-10 h-10" />
+          <div className="flex flex-col leading-none">
+            <span className="text-2xl font-bold tracking-tighter text-electric uppercase">
+              Uma<span className="text-white">Techno</span>
+            </span>
+            <span className="text-[10px] text-gray-500 font-bold tracking-[0.2em] uppercase mt-1">
+              Engineering Excellence.
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
@@ -121,8 +129,9 @@ export default function Navbar() {
           >
             <div className="p-6 flex flex-col h-full">
               <div className="flex justify-between items-center mb-16">
-                <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center">
-                  <Logo className="h-10" />
+                <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
+                  <Logo className="w-8 h-8" />
+                  <span className="text-xl font-bold tracking-tighter text-electric uppercase">Uma<span className="text-white">Techno</span></span>
                 </Link>
                 <button 
                   onClick={() => setIsOpen(false)} 
