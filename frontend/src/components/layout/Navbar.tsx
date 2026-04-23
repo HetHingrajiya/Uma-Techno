@@ -65,7 +65,7 @@ export default function Navbar() {
               Uma<span className="text-electric">Techno</span>
             </span>
             <span className="text-[10px] text-gray-500 font-bold tracking-[0.2em] uppercase mt-1">
-              Smart Solutions. Real Impact.
+              Engineering Excellence.
             </span>
           </div>
         </Link>
@@ -100,10 +100,10 @@ export default function Navbar() {
               )}
             </div>
           ))}
-          <Link
-            href="/contact"
-            className="bg-electric hover:bg-electric/90 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(59,130,246,0.4)]"
-          >
+            <Link
+              href="/contact"
+              className="bg-electric hover:bg-accent text-navy px-6 py-2 rounded-full text-sm font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+            >
             Get a Quote
           </Link>
         </div>
@@ -175,7 +175,7 @@ export default function Navbar() {
               <div className="pt-8 border-t border-white/5 space-y-6">
                 <Link
                   href="/contact"
-                  className="block w-full bg-electric text-white text-center py-5 rounded-2xl font-bold text-xl shadow-[0_0_30px_rgba(59,130,246,0.3)]"
+                  className="block w-full bg-electric text-navy text-center py-5 rounded-2xl font-bold text-xl shadow-[0_0_30px_rgba(212,175,55,0.3)]"
                   onClick={() => setIsOpen(false)}
                 >
                   Get a Quote

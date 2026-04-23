@@ -29,18 +29,18 @@ export default function Footer() {
             </span>
           </Link>
           <p className="text-gray-400 leading-relaxed italic">
-            "Smart Solutions. Real Impact."
+            "Engineering Excellence."
           </p>
           <p className="text-gray-500 text-sm leading-relaxed">
-            Leading the digital transformation with innovative software solutions, 
-            premium designs, and strategic digital marketing.
+            A premium digital agency dedicated to engineering high-performance websites, 
+            mobile applications, and custom business software that drive real growth.
           </p>
           <div className="flex gap-4">
             {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
               <a
                 key={i}
                 href="#"
-                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-electric hover:text-white transition-all"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-electric hover:text-navy transition-all shadow-sm hover:shadow-electric/20"
               >
                 <Icon size={18} />
               </a>

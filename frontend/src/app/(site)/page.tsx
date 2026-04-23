@@ -7,32 +7,30 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import TechStack from "@/components/ui/TechStack";
+import FounderStory from "@/components/ui/FounderStory";
 
 const stats = [
-  { label: "Projects Delivered", value: "25+", icon: Rocket },
-  { label: "Happy Clients", value: "12+", icon: Users },
-  { label: "Fast Support", value: "24/7", icon: Star },
-  { label: "SEO Ready Solutions", value: "100%", icon: Shield },
+  { label: "Successful Projects", value: "50+", icon: Rocket },
+  { label: "Business Growth", value: "3x", icon: Zap },
+  { label: "Client Retention", value: "95%", icon: Users },
+  { label: "Support Response", value: "< 2hr", icon: Shield },
 ];
 
 const services = [
-  { title: "Website Development", description: "High-performance, scalable websites built with the latest technologies.", icon: Globe, link: "/services/web-development" },
-  { title: "Ecommerce Development", description: "Powerful online stores that convert visitors into loyal customers.", icon: Rocket, link: "/services/ecommerce" },
-  { title: "Mobile Apps", description: "Premium iOS and Android apps with a focus on seamless UX.", icon: Smartphone, link: "/services/app-development" },
-  { title: "Custom Software", description: "Tailored solutions to solve complex business challenges.", icon: Code, link: "/services/custom-software" },
-  { title: "UI/UX Design", description: "Modern, intuitive designs that prioritize user brand identity.", icon: Palette, link: "/services/ui-ux" },
-  { title: "SEO Services", description: "Strategic SEO to improve visibility and drive organic traffic.", icon: BarChart, link: "/services/seo" },
-  { title: "Branding", description: "Building strong, memorable brands through strategic design.", icon: Megaphone, link: "/services/branding" },
-  { title: "Maintenance", description: "Ongoing support and updates to keep your systems running smoothly.", icon: Shield, link: "/services/maintenance" }
+  { title: "Web Engineering", description: "Scalable, secure, and conversion-optimized web platforms for growing businesses.", icon: Globe, link: "/services/web-development" },
+  { title: "E-commerce Growth", description: "End-to-end online stores with advanced payment integrations and marketing focus.", icon: Rocket, link: "/services/ecommerce" },
+  { title: "Mobile Innovation", description: "Native-quality iOS and Android applications that deliver exceptional user experiences.", icon: Smartphone, link: "/services/app-development" },
+  { title: "Enterprise Solutions", description: "Custom CRM and internal tools designed to automate your business operations.", icon: Code, link: "/services/custom-software" },
+  { title: "Strategy & SEO", description: "Technical SEO and digital strategy to dominate search results and drive leads.", icon: BarChart, link: "/services/seo" },
 ];
 
 const process = [
-  { title: "Discovery", desc: "Understanding your vision, goals, and target audience in depth." },
-  { title: "Planning", desc: "Creating a detailed roadmap and wireframes for your project." },
-  { title: "Design", desc: "Crafting a premium UI/UX that aligns with your brand." },
-  { title: "Development", desc: "Building your solution with precision and the latest tech." },
-  { title: "Launch", desc: "Quality assurance followed by a smooth deployment." },
-  { title: "Support", desc: "Long-term partnership to ensure your continued growth." },
+  { title: "Discovery & Strategy", desc: "We deep-dive into your business model to align our solution with your revenue goals." },
+  { title: "Prototyping", desc: "Creating high-fidelity wireframes and interactive prototypes for your review." },
+  { title: "Iterative Development", desc: "Building in agile sprints with regular updates and feedback cycles." },
+  { title: "Quality Assurance", desc: "Rigorous testing across devices to ensure a flawless, bug-free launch." },
+  { title: "Launch & Support", desc: "Deployment to production followed by 24/7 monitoring and long-term scaling." },
 ];
 
 export default function Home() {
@@ -43,9 +41,9 @@ export default function Home() {
       {/* Trusted By Section */}
       <section className="max-w-7xl mx-auto px-6 w-full -mt-8 lg:-mt-16">
         <div className="text-center space-y-8">
-          <p className="text-gray-500 font-medium tracking-widest text-xs uppercase">Trusted By Industry Leaders</p>
-          <div className="flex flex-wrap justify-center items-center gap-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-             {["TechCorp", "Innovate", "GlobalSoft", "Visionary", "Nexus"].map(brand => (
+          <p className="text-gray-500 font-medium tracking-widest text-xs uppercase">Partnering with Growth-Focused Brands</p>
+          <div className="flex flex-wrap justify-center items-center gap-12 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
+             {["Retailers", "Real Estate", "Startups", "Enterprises", "Agency Partners"].map(brand => (
                <span key={brand} className="text-2xl font-bold font-outfit text-white/50">{brand}</span>
              ))}
           </div>
@@ -56,11 +54,11 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-6 w-full">
         <div className="text-center space-y-4 mb-20">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric/10 border border-electric/20 text-electric text-xs font-bold uppercase tracking-wider">
-            Our Expertise
+            Premium Solutions
           </div>
-          <h2 className="text-3xl lg:text-5xl font-bold font-outfit tracking-tight">Digital Solutions That <br /> <span className="text-gradient">Drive Results</span></h2>
+          <h2 className="text-3xl lg:text-5xl font-bold font-outfit tracking-tight">Business Engines Built <br /> <span className="text-gradient">For Growth</span></h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            We combine strategy, design, and technology to build products that people love and businesses grow with.
+            We don&apos;t just build websites. We engineer high-performance digital systems that capture leads, automate operations, and scale revenue.
           </p>
         </div>
 
@@ -76,14 +74,14 @@ export default function Home() {
                 <Globe size={32} />
               </div>
               <h4 className="text-3xl font-black font-outfit leading-tight text-white uppercase tracking-tighter">
-                Next-Gen <br /> <span className="text-electric">Web Systems</span>
+                Premium <br /> <span className="text-electric">Web Engineering</span>
               </h4>
               <p className="text-gray-400 leading-relaxed max-w-sm">
-                We build massive scale digital ecosystems that handle millions of users with zero friction.
+                Custom web architectures built for speed, SEO dominance, and high conversion rates.
               </p>
             </div>
             <div className="mt-8 flex items-center gap-4 text-sm font-black tracking-widest text-electric uppercase group-hover:gap-6 transition-all">
-              EXPLORE ENGINEERING <ArrowRight size={20} />
+              VIEW SOLUTIONS <ArrowRight size={20} />
             </div>
           </Link>
 
@@ -150,19 +148,19 @@ export default function Home() {
 
           <div className="space-y-6 lg:space-y-8 order-1 lg:order-2">
             <div className="space-y-4">
-              <h2 className="text-3xl lg:text-4xl font-bold font-outfit">Your Partner in <br /><span className="text-gradient">Digital Growth</span></h2>
+              <h2 className="text-3xl lg:text-4xl font-bold font-outfit">Your Partner in <br /><span className="text-gradient">Business Dominance</span></h2>
               <p className="text-gray-400 leading-relaxed text-sm lg:text-base">
-                We don&apos;t just build websites; we build business engines designed for real client acquisition and long-term scaling.
+                We bridge the gap between complex technology and business growth. Our solutions are engineered to be assets, not just expenses.
               </p>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-4 lg:gap-6">
               {[
-                { title: "Business-first mindset", desc: "Every line of code is written to solve your specific business goals." },
-                { title: "Premium UI/UX", desc: "Elite design standards that command authority and build trust." },
-                { title: "SEO-ready code", desc: "Built-in search engine optimization for maximum organic reach." },
-                { title: "Fast delivery", desc: "Agile methodologies that get you to market at light speed." },
-                { title: "Long-term support", desc: "A dedicated team that grows with your business." }
+                { title: "Revenue-first approach", desc: "Every line of code is designed to maximize your return on investment." },
+                { title: "Elite UI/UX Mastery", desc: "Premium design standards that command authority and convert visitors." },
+                { title: "Technical SEO Core", desc: "Built-in search engine optimization for sustainable organic growth." },
+                { title: "Agile Rapid Delivery", desc: "Efficient workflows that get your product to market faster than competitors." },
+                { title: "Dedicated Support", desc: "A proactive technical team that evolves with your scaling business." }
               ].map((benefit, i) => (
                 <div key={i} className="flex gap-3 lg:gap-4 group">
                   <div className="w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-electric/20 flex items-center justify-center text-electric group-hover:bg-electric group-hover:text-white transition-all mt-1">
@@ -193,6 +191,9 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <TechStack />
+      <FounderStory />
 
       {/* Process Section */}
       <section className="max-w-7xl mx-auto px-6 w-full">
@@ -241,11 +242,11 @@ export default function Home() {
       {/* Testimonials */}
       <section className="max-w-7xl mx-auto px-6 w-full text-center">
         <h2 className="text-3xl lg:text-4xl font-bold font-outfit mb-12">What Our <span className="text-gradient">Clients Say</span></h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
            {[
-             { name: "Rajesh Mehta", role: "CEO, TechCorp Solutions", image: "/images/client-1.png", quote: "Uma Techno transformed our business with a stunning website that increased our conversion rate by 40%. Highly professional team!" },
-             { name: "Priya Sharma", role: "Founder, Innovate Art", image: "/images/client-2.png", quote: "The level of detail and UI/UX expertise they brought to our mobile app was world-class. A true digital partner." },
-             { name: "John Doe", role: "Product Head, Nexus Global", image: "/images/client-3.png", quote: "Scale and speed are what we needed, and Uma Techno delivered exactly that. Our platform now handles millions of users with ease." }
+             { name: "Suresh Patel", role: "Real Estate Developer", image: "/images/client-1.png", quote: "Uma Techno completely revamped our online presence. Our lead generation has doubled since we launched the new platform." },
+             { name: "Anjali Vyas", role: "E-commerce Brand Owner", image: "/images/client-2.png", quote: "The mobile app they built for us is world-class. Their attention to detail and UX expertise is unmatched in Rajkot." },
+             { name: "Amit Shah", role: "Startup Founder", image: "/images/client-3.png", quote: "Fast, reliable, and technically superior. They didn't just build a site; they built a tool that handles our growth effortlessly." }
            ].map((testimonial, i) => (
              <div key={i} className="glass-card p-8 rounded-[2rem] text-left space-y-4 relative group overflow-hidden">
                 <div className="flex gap-1 text-accent">
@@ -255,8 +256,8 @@ export default function Home() {
                   "{testimonial.quote}"
                 </p>
                 <div className="flex items-center gap-4 border-t border-white/5 pt-4 relative z-10">
-                   <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-electric/30">
-                      <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
+                   <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-electric/30 bg-navy-light flex items-center justify-center">
+                      <Users size={20} className="text-electric" />
                    </div>
                    <div>
                       <p className="font-bold text-white text-sm">{testimonial.name}</p>
@@ -276,23 +277,23 @@ export default function Home() {
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/20 blur-[120px] -ml-48 -mb-48" />
           
           <h2 className="text-3xl lg:text-5xl font-bold font-outfit max-w-3xl mx-auto leading-tight">
-            Ready to Build <span className="text-gradient">Something Great</span>?
+            Ready to Accelerate Your <span className="text-gradient">Business Growth</span>?
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto leading-relaxed">
-            Don&apos;t settle for basic. Partner with Uma Techno and get a solution that truly represents your brand and scales with your ambition.
+            Stop settling for mediocre digital presence. Partner with Uma Techno to build a premium solution that commands authority and delivers results.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
             <Link
               href="/contact"
               className="px-8 py-4 bg-white text-navy hover:bg-gray-200 rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl btn-premium"
             >
-              Start Free Consultation
+              Get Free Consultation
             </Link>
             <Link
               href="/portfolio"
               className="px-8 py-4 bg-white/5 border border-white/10 text-white hover:bg-white/10 rounded-xl font-bold text-base transition-all"
             >
-              Explore Portfolio
+              View Our Work
             </Link>
           </div>
         </div>

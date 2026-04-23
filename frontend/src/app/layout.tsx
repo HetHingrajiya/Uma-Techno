@@ -16,21 +16,29 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://uma-techno.vercel.app"),
+  metadataBase: new URL("https://umatechno.in"),
   title: {
-    default: "Uma Techno | Premium IT Solutions & Software Development",
+    default: "Uma Techno | Premium Web Development & Digital Marketing Agency Rajkot",
     template: "%s | Uma Techno"
   },
-  description: "Uma Techno is a leading IT company specializing in Web Development, Mobile Apps, UI/UX Design, and SEO Services. Transform your business with our digital solutions.",
-  keywords: ["IT Company Rajkot", "Web Development India", "Mobile App Development", "UI/UX Design", "SEO Services", "Uma Techno"],
+  description: "Uma Techno is a premium IT agency in Rajkot, Gujarat. We specialize in high-performance Web Development, Mobile Apps, and SEO strategies designed to grow businesses.",
+  keywords: [
+    "IT Company Rajkot", 
+    "Web Development Gujarat", 
+    "Mobile App Development Rajkot", 
+    "SEO Agency India", 
+    "Ecommerce Development India", 
+    "Software Development Company", 
+    "Uma Techno"
+  ],
   authors: [{ name: "Uma Techno" }],
   creator: "Uma Techno",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://uma-techno.vercel.app",
-    title: "Uma Techno | Premium IT Solutions",
-    description: "Transform your business with our cutting-edge digital solutions.",
+    url: "https://umatechno.in",
+    title: "Uma Techno | Premium IT Solutions in Rajkot",
+    description: "Build premium websites and software that grow your business with Uma Techno.",
     siteName: "Uma Techno",
   },
   twitter: {
