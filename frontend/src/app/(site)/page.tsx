@@ -72,10 +72,10 @@ export default function Home() {
                 <Globe size={32} />
               </div>
               <h4 className="text-3xl font-black font-outfit leading-tight text-white uppercase tracking-tighter">
-                Premium <br /> <span className="text-electric">Web Engineering</span>
+                Premium Web <br /> <span className="text-electric">Development</span>
               </h4>
               <p className="text-gray-400 leading-relaxed max-w-sm">
-                Custom web architectures built for speed, SEO dominance, and high conversion rates.
+                High-performance web architectures engineered for speed, security, and maximum conversion.
               </p>
             </div>
             <div className="mt-8 flex items-center gap-4 text-sm font-black tracking-widest text-electric uppercase group-hover:gap-6 transition-all">
@@ -93,8 +93,8 @@ export default function Home() {
                   <Smartphone className="w-7 h-7" />
                </div>
                <div>
-                  <h4 className="text-2xl font-bold font-outfit text-white">Bespoke Mobile Apps</h4>
-                  <p className="text-gray-500">iOS & Android Excellence</p>
+                  <h4 className="text-2xl font-bold font-outfit text-white">Mobile App Innovation</h4>
+                  <p className="text-gray-500">iOS & Android Apps</p>
                </div>
             </div>
           </Link>
@@ -106,7 +106,7 @@ export default function Home() {
           >
             <div className="space-y-4 relative z-10">
               <Palette className="w-7 h-7 text-gray-600 group-hover:text-electric transition-colors" />
-              <h4 className="text-xl font-bold font-outfit text-white uppercase tracking-wider">UI/UX <br /> Mastery</h4>
+              <h4 className="text-xl font-bold font-outfit text-white uppercase tracking-wider">Strategic <br /> UI/UX Design</h4>
             </div>
           </Link>
 
@@ -116,7 +116,7 @@ export default function Home() {
           >
             <div className="space-y-4 relative z-10">
               <BarChart className="w-7 h-7 text-electric" />
-              <h4 className="text-xl font-bold font-outfit text-white uppercase tracking-wider">Growth <br /> Strategy</h4>
+              <h4 className="text-xl font-bold font-outfit text-white uppercase tracking-wider">SEO & <br /> Digital Growth</h4>
             </div>
           </Link>
         </div>
