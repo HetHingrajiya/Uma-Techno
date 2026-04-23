@@ -57,32 +57,32 @@ export default function Navbar() {
         scrolled ? "bg-navy/80 backdrop-blur-lg border-b border-white/10 py-3" : "bg-transparent"
       )}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
-          <Logo className="w-10 h-10 lg:w-14 lg:h-14" />
+      <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-4">
+          <Logo className="w-12 h-12 lg:w-16 lg:h-16 transition-all" />
           <div className="flex flex-col leading-none">
-            <span className="text-2xl font-bold tracking-tighter uppercase">
+            <span className="text-2xl lg:text-3xl font-bold tracking-tighter uppercase">
               <span className="text-electric">Uma</span><span className="text-white">Techno</span>
             </span>
-            <span className="text-[9px] text-gray-500 font-bold tracking-[0.3em] uppercase mt-1">
+            <span className="text-[10px] lg:text-[11px] text-gray-500 font-bold tracking-[0.3em] uppercase mt-1">
               Engineering Excellence.
             </span>
           </div>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10 lg:gap-14">
           {navLinks.map((link) => (
             <div key={link.name} className="relative group">
               <Link
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-electric flex items-center gap-1",
+                  "text-base font-bold transition-all hover:text-electric flex items-center gap-1 tracking-wide",
                   pathname === link.href ? "text-electric" : "text-gray-300"
                 )}
               >
                 {link.name}
-                {link.submenu && <ChevronDown size={14} />}
+                {link.submenu && <ChevronDown size={14} className="group-hover:rotate-180 transition-transform" />}
               </Link>
               
               {link.submenu && (

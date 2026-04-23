@@ -24,7 +24,7 @@ export default function Hero() {
             className="relative"
           >
             <div className="space-y-12">
-              <h1 className="text-5xl md:text-7xl xl:text-8xl 2xl:text-9xl font-bold font-outfit leading-[0.9] tracking-tighter uppercase">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold font-outfit leading-[0.95] tracking-tighter uppercase">
                 <span className="block overflow-hidden">
                    <motion.span 
                      initial={{ y: "100%" }} 
