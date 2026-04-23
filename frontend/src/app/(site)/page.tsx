@@ -256,9 +256,9 @@ export default function Home() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
-            { title: "Tech Brand Identity", category: "Branding", desc: "Complete branding package for a Silicon Valley startup.", image: "/images/project-1.png" },
-            { title: "Premium E-commerce", category: "Development", desc: "High-performance store for a luxury fashion brand.", image: "/images/project-2.png" },
-            { title: "Enterprise CRM", category: "Software", desc: "Custom internal tools for business automation.", image: "/images/project-3.png" }
+            { title: "Tech Brand Identity", category: "Branding", desc: "Complete branding package for a Silicon Valley startup.", image: "/images/project-1.png?v=1.1" },
+            { title: "Premium E-commerce", category: "Development", desc: "High-performance store for a luxury fashion brand.", image: "/images/project-2.png?v=1.1" },
+            { title: "Enterprise CRM", category: "Software", desc: "Custom internal tools for business automation.", image: "/images/project-3.png?v=1.1" }
           ].map((project, i) => (
             <div key={i} className="group glass-card rounded-[2.5rem] overflow-hidden flex flex-col h-full border border-white/5 hover:border-electric/30 transition-all duration-500">
                {/* Project Image Container */}
