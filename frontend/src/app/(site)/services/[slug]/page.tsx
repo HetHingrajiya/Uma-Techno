@@ -6,42 +6,42 @@ const serviceData: Record<string, any> = {
   "web-development": {
     title: "Premium Website Development in Rajkot",
     tagline: "Build high-performance web systems that dominate your industry.",
-    description: "We are the leading web development agency in Rajkot, Gujarat, specializing in Next.js, React, and scalable architectures. Our websites are built for speed, SEO, and maximum business impact.",
+    description: "We are the leading web development agency in Rajkot, Gujarat, specializing in Next.js, React, and scalable architectures.",
     icon: Globe,
     features: ["Custom Next.js Engineering", "SEO-Dominant Architecture", "High-Conversion UI/UX", "Secure Cloud Integration", "Performance Optimization"],
     seoFocus: "Rajkot, Gujarat, India"
   },
-  "ecommerce": {
-    title: "E-commerce Development Experts India",
-    tagline: "Scalable online stores engineered for high-volume sales.",
-    description: "Launch a powerful e-commerce platform that converts visitors into loyal customers. We specialize in custom storefronts, payment gateways, and inventory management systems.",
-    icon: Rocket,
-    features: ["Custom Checkout Flows", "Secure Payment Gateways", "Inventory Management", "Marketing Automation", "Mobile-First Design"],
-    seoFocus: "India, Gujarat"
-  },
   "app-development": {
     title: "Mobile App Development Rajkot",
     tagline: "Native-quality iOS and Android apps with exceptional UX.",
-    description: "Bring your vision to life with a mobile application that people love to use. We build high-performance apps using React Native and Flutter for maximum reach.",
+    description: "Bring your vision to life with a mobile application that people love to use. We build high-performance apps using React Native and Flutter.",
     icon: Smartphone,
     features: ["iOS & Android App Dev", "Cross-Platform Efficiency", "Push Notification Systems", "Offline Functionality", "App Store Optimization"],
     seoFocus: "Rajkot, Gujarat"
   },
-  "custom-software": {
-    title: "Custom Software Solutions Gujarat",
-    tagline: "Automate your business operations with bespoke tools.",
-    description: "Solve complex business challenges with tailored software solutions. From CRM systems to internal ERPs, we build the tools you need to scale efficiently.",
+  "ui-ux": {
+    title: "Premium UI/UX Design Rajkot",
+    tagline: "Human-centric designs that drive engagement and conversion.",
+    description: "Our design process focuses on user psychology and brand aesthetics to create interfaces that are beautiful and functional.",
     icon: Code,
-    features: ["Bespoke CRM/ERP Systems", "Business Process Automation", "API Integrations", "Database Architecture", "Cloud Infrastructure"],
-    seoFocus: "Gujarat, India"
+    features: ["User Research & Strategy", "Wireframing & Prototyping", "Visual Identity Design", "Interactive Mockups", "Usability Testing"],
+    seoFocus: "Rajkot, Gujarat"
   },
   "seo": {
     title: "SEO & Digital Strategy Company Rajkot",
     tagline: "Rank higher, drive leads, and dominate search results.",
-    description: "Our technical SEO strategies are designed to deliver long-term organic growth. We focus on local SEO for Rajkot and national SEO for broader reach.",
+    description: "Our technical SEO strategies are designed to deliver long-term organic growth and national reach.",
     icon: BarChart,
     features: ["Technical SEO Audits", "Keyword Dominance", "Content Strategy", "Local SEO Optimization", "Analytics & Reporting"],
     seoFocus: "Rajkot, India"
+  },
+  "branding": {
+    title: "Digital Branding & Identity Gujarat",
+    tagline: "Building iconic brands for the digital age.",
+    description: "We help businesses establish a powerful visual presence that resonates with their audience across all digital touchpoints.",
+    icon: Rocket,
+    features: ["Brand Strategy", "Logo & Visual Design", "Brand Guidelines", "Social Media Identity", "Marketing Collateral"],
+    seoFocus: "Gujarat, India"
   }
 };
 
