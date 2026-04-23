@@ -10,11 +10,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/portfolio',
     '/contact',
     '/services/web-development',
-    '/services/ecommerce',
     '/services/app-development',
-    '/services/custom-software',
     '/services/ui-ux',
     '/services/seo',
+    '/services/branding',
   ];
 
   return routes.map((route) => ({
