@@ -7,8 +7,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import TechStack from "@/components/ui/TechStack";
-import FounderStory from "@/components/ui/FounderStory";
 
 const stats = [
   { label: "Successful Projects", value: "50+", icon: Rocket },
@@ -191,9 +189,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      <TechStack />
-      <FounderStory />
 
       {/* Process Section */}
       <section className="max-w-7xl mx-auto px-6 w-full">
