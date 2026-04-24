@@ -87,10 +87,10 @@ export default function WidgetControlPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center bg-navy-light p-6 rounded-2xl border border-white/5">
+      <div className="flex justify-between items-center bg-[var(--color-navy-light)] p-6 rounded-2xl border border-[var(--color-border)]">
         <div>
           <h2 className="text-xl font-bold flex items-center gap-2"><Layout size={20} className="text-electric" /> Widget Control Panel</h2>
-          <p className="text-gray-400 text-sm mt-1">Enable, disable, and reorder homepage sections.</p>
+          <p className="text-[var(--color-text-main)] opacity-70 text-sm mt-1">Enable, disable, and reorder homepage sections.</p>
         </div>
         <button 
           onClick={handleSave}
@@ -102,28 +102,28 @@ export default function WidgetControlPage() {
         </button>
       </div>
 
-      <div className="bg-navy-light p-6 rounded-2xl border border-white/5">
+      <div className="bg-[var(--color-navy-light)] p-6 rounded-2xl border border-[var(--color-border)]">
         <div className="space-y-3">
           {widgets.map((widget, index) => (
             <div 
               key={widget.id} 
               className={`flex items-center justify-between p-4 rounded-xl border transition-all ${
                 widget.enabled 
-                  ? 'bg-white/5 border-white/10' 
-                  : 'bg-white/5 border-red-500/20 opacity-60'
+                  ? 'bg-[var(--color-navy)] border-[var(--color-border)]' 
+                  : 'bg-[var(--color-navy)] border-red-500/20 opacity-60'
               }`}
             >
               <div className="flex items-center gap-4">
-                <div className="flex flex-col gap-1 text-gray-500">
-                  <button onClick={() => moveUp(index)} disabled={index === 0} className="hover:text-white disabled:opacity-30">▲</button>
-                  <button onClick={() => moveDown(index)} disabled={index === widgets.length - 1} className="hover:text-white disabled:opacity-30">▼</button>
+                <div className="flex flex-col gap-1 text-[var(--color-text-main)] opacity-50">
+                  <button onClick={() => moveUp(index)} disabled={index === 0} className="hover:opacity-100 disabled:opacity-30">▲</button>
+                  <button onClick={() => moveDown(index)} disabled={index === widgets.length - 1} className="hover:opacity-100 disabled:opacity-30">▼</button>
                 </div>
-                <div className="p-2 bg-black/30 rounded-lg">
-                  <Layout size={20} className={widget.enabled ? "text-electric" : "text-gray-500"} />
+                <div className="p-2 bg-[var(--color-navy-light)] rounded-lg border border-[var(--color-border)]">
+                  <Layout size={20} className={widget.enabled ? "text-electric" : "opacity-50"} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg">{widget.title}</h3>
-                  <p className="text-xs text-gray-400 font-mono">{widget.name}</p>
+                  <h3 className="font-semibold text-lg text-[var(--color-text-main)]">{widget.title}</h3>
+                  <p className="text-xs opacity-60 font-mono text-[var(--color-text-main)]">{widget.name}</p>
                 </div>
               </div>
               
@@ -133,7 +133,7 @@ export default function WidgetControlPage() {
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                     widget.enabled 
                       ? 'bg-electric/20 text-electric hover:bg-electric/30' 
-                      : 'bg-white/10 text-gray-400 hover:bg-white/20'
+                      : 'bg-[var(--color-navy-light)] border border-[var(--color-border)] text-[var(--color-text-main)] opacity-70 hover:opacity-100'
                   }`}
                 >
                   {widget.enabled ? <Eye size={16} /> : <EyeOff size={16} />}
