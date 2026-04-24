@@ -17,20 +17,28 @@ export default function WidgetControlPage() {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/widgets`);
       if (res.ok) {
         const data = await res.json();
-        // If DB is empty, let's inject some defaults for the UI
+        // Fallback if DB is empty
         if (data.length === 0) {
           setWidgets([
-            { id: '1', name: 'hero', title: 'Hero Section', enabled: true, order: 0 },
-            { id: '2', name: 'stats', title: 'Stats Counter', enabled: true, order: 1 },
-            { id: '3', name: 'services', title: 'Services Grid', enabled: true, order: 2 },
-            { id: '4', name: 'testimonials', title: 'Testimonials', enabled: true, order: 3 },
+            { id: '1', name: 'hero', enabled: true, order: 1 },
+            { id: '2', name: 'features', enabled: true, order: 2 },
+            { id: '3', name: 'about', enabled: true, order: 3 },
+            { id: '4', name: 'services', enabled: true, order: 4 },
+            { id: '5', name: 'portfolio', enabled: true, order: 5 },
+            { id: '6', name: 'stats', enabled: true, order: 6 },
+            { id: '7', name: 'testimonials', enabled: true, order: 7 },
+            { id: '8', name: 'contact', enabled: true, order: 8 },
           ]);
         } else {
           setWidgets(data);
         }
+      } else {
+        console.error("Failed to fetch widgets", await res.text());
+        alert("Warning: Could not connect to the database to load widgets. Please ensure your backend is correctly connected to Neon Database on Vercel.");
       }
     } catch (err) {
       console.error(err);
+      alert("Network Error: Could not reach the API backend. Please ensure NEXT_PUBLIC_API_URL is set correctly in Vercel.");
     } finally {
       setLoading(false);
     }
