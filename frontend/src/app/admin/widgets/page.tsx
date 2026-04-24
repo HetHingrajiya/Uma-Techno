@@ -1,0 +1,149 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { Loader2, Save, Layout, GripVertical, Eye, EyeOff } from "lucide-react";
+
+export default function WidgetControlPage() {
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [widgets, setWidgets] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetchWidgets();
+  }, []);
+
+  const fetchWidgets = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/widgets`);
+      if (res.ok) {
+        const data = await res.json();
+        // If DB is empty, let's inject some defaults for the UI
+        if (data.length === 0) {
+          setWidgets([
+            { id: '1', name: 'hero', title: 'Hero Section', enabled: true, order: 0 },
+            { id: '2', name: 'stats', title: 'Stats Counter', enabled: true, order: 1 },
+            { id: '3', name: 'services', title: 'Services Grid', enabled: true, order: 2 },
+            { id: '4', name: 'testimonials', title: 'Testimonials', enabled: true, order: 3 },
+          ]);
+        } else {
+          setWidgets(data);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleToggle = (id: string) => {
+    setWidgets(widgets.map(w => w.id === id ? { ...w, enabled: !w.enabled } : w));
+  };
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      // Typically we'd save order and status to backend
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/widgets/reorder`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ widgets }),
+      });
+      if (res.ok) {
+        // Success toast could go here
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const moveUp = (index: number) => {
+    if (index === 0) return;
+    const newWidgets = [...widgets];
+    const temp = newWidgets[index];
+    newWidgets[index] = newWidgets[index - 1];
+    newWidgets[index - 1] = temp;
+    // Update order values
+    newWidgets.forEach((w, i) => w.order = i);
+    setWidgets(newWidgets);
+  };
+
+  const moveDown = (index: number) => {
+    if (index === widgets.length - 1) return;
+    const newWidgets = [...widgets];
+    const temp = newWidgets[index];
+    newWidgets[index] = newWidgets[index + 1];
+    newWidgets[index + 1] = temp;
+    // Update order values
+    newWidgets.forEach((w, i) => w.order = i);
+    setWidgets(newWidgets);
+  };
+
+  if (loading) {
+    return <div className="flex justify-center p-10"><Loader2 className="animate-spin text-electric" /></div>;
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="flex justify-between items-center bg-navy-light p-6 rounded-2xl border border-white/5">
+        <div>
+          <h2 className="text-xl font-bold flex items-center gap-2"><Layout size={20} className="text-electric" /> Widget Control Panel</h2>
+          <p className="text-gray-400 text-sm mt-1">Enable, disable, and reorder homepage sections.</p>
+        </div>
+        <button 
+          onClick={handleSave}
+          disabled={saving}
+          className="bg-electric hover:bg-electric/90 text-white px-6 py-2 rounded-xl font-medium flex items-center gap-2 transition-all"
+        >
+          {saving ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
+          Save Layout
+        </button>
+      </div>
+
+      <div className="bg-navy-light p-6 rounded-2xl border border-white/5">
+        <div className="space-y-3">
+          {widgets.map((widget, index) => (
+            <div 
+              key={widget.id} 
+              className={`flex items-center justify-between p-4 rounded-xl border transition-all ${
+                widget.enabled 
+                  ? 'bg-white/5 border-white/10' 
+                  : 'bg-white/5 border-red-500/20 opacity-60'
+              }`}
+            >
+              <div className="flex items-center gap-4">
+                <div className="flex flex-col gap-1 text-gray-500">
+                  <button onClick={() => moveUp(index)} disabled={index === 0} className="hover:text-white disabled:opacity-30">▲</button>
+                  <button onClick={() => moveDown(index)} disabled={index === widgets.length - 1} className="hover:text-white disabled:opacity-30">▼</button>
+                </div>
+                <div className="p-2 bg-black/30 rounded-lg">
+                  <Layout size={20} className={widget.enabled ? "text-electric" : "text-gray-500"} />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg">{widget.title}</h3>
+                  <p className="text-xs text-gray-400 font-mono">{widget.name}</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={() => handleToggle(widget.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                    widget.enabled 
+                      ? 'bg-electric/20 text-electric hover:bg-electric/30' 
+                      : 'bg-white/10 text-gray-400 hover:bg-white/20'
+                  }`}
+                >
+                  {widget.enabled ? <Eye size={16} /> : <EyeOff size={16} />}
+                  {widget.enabled ? 'Visible' : 'Hidden'}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -21,14 +21,14 @@ interface ThemeSettings {
 }
 
 const defaultTheme: ThemeSettings = {
-  primaryColor: "#06B6D4",
-  secondaryColor: "#D4AF37",
-  accentColor: "#FFD700",
-  backgroundColor: "#050505",
-  cardColor: "#0a0a0a",
-  textColor: "#ffffff",
-  headingColor: "#ffffff",
-  borderColor: "#333333",
+  primaryColor: "#3B82F6",
+  secondaryColor: "#60A5FA",
+  accentColor: "#10B981",
+  backgroundColor: "#F8FAFC",
+  cardColor: "#FFFFFF",
+  textColor: "#0F172A",
+  headingColor: "#1E293B",
+  borderColor: "#E2E8F0",
   fontFamily: "Inter, Outfit, sans-serif",
   headingSize: "base",
   bodyTextSize: "base",

@@ -105,14 +105,14 @@ model Media {
 
 model ThemeSetting {
   id              String   @id @default(cuid())
-  primaryColor    String   @default("#06B6D4")
-  secondaryColor  String   @default("#D4AF37")
-  accentColor     String   @default("#FFD700")
-  backgroundColor String   @default("#050505")
-  cardColor       String   @default("#0a0a0a")
-  textColor       String   @default("#ffffff")
-  headingColor    String   @default("#ffffff")
-  borderColor     String   @default("#333333")
+  primaryColor    String   @default("#3B82F6")
+  secondaryColor  String   @default("#60A5FA")
+  accentColor     String   @default("#10B981")
+  backgroundColor String   @default("#F8FAFC")
+  cardColor       String   @default("#FFFFFF")
+  textColor       String   @default("#0F172A")
+  headingColor    String   @default("#1E293B")
+  borderColor     String   @default("#E2E8F0")
   fontFamily      String   @default("Inter, Outfit, sans-serif")
   headingSize     String   @default("base")
   bodyTextSize    String   @default("base")
@@ -120,7 +120,7 @@ model ThemeSetting {
   containerWidth  String   @default("1280px")
   sectionSpacing  String   @default("4rem")
   buttonShape     String   @default("rounded-xl")
-  themeMode       String   @default("dark") // light, dark, auto
+  themeMode       String   @default("light") // light, dark, auto
   updatedAt       DateTime @updatedAt
 }
 

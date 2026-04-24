@@ -18,9 +18,9 @@ import { cn } from "@/lib/utils";
 const sidebarLinks = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { name: "Leads", href: "/admin/leads", icon: MessageSquare },
-  { name: "Services", href: "/admin/services", icon: Layers },
-  { name: "Projects", href: "/admin/projects", icon: Briefcase },
-  { name: "Settings", href: "/admin/settings", icon: Settings },
+  { name: "CMS", href: "/admin/cms", icon: FileText },
+  { name: "Widgets", href: "/admin/widgets", icon: Layers },
+  { name: "Theme Settings", href: "/admin/theme", icon: Settings },
 ];
 
 export default function AdminLayout({
