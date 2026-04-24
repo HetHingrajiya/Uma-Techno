@@ -66,10 +66,10 @@ export default function ThemeSettingsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center bg-navy-light p-6 rounded-2xl border border-white/5">
+      <div className="flex justify-between items-center bg-[var(--color-navy-light)] p-6 rounded-2xl border border-[var(--color-border)]">
         <div>
           <h2 className="text-xl font-bold flex items-center gap-2"><Palette size={20} className="text-electric" /> Color Palette</h2>
-          <p className="text-gray-400 text-sm mt-1">Customize the global colors of your website.</p>
+          <p className="text-[var(--color-text-main)] opacity-70 text-sm mt-1">Customize the global colors of your website.</p>
         </div>
         <button 
           onClick={handleSave}
@@ -83,8 +83,8 @@ export default function ThemeSettingsPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {Object.entries(theme).filter(([k]) => k.includes('Color')).map(([key, value]) => (
-          <div key={key} className="bg-navy-light p-5 rounded-2xl border border-white/5 space-y-3">
-            <label className="text-sm font-medium text-gray-300 capitalize">
+          <div key={key} className="bg-[var(--color-navy-light)] p-5 rounded-2xl border border-[var(--color-border)] space-y-3">
+            <label className="text-sm font-medium text-[var(--color-text-main)] capitalize">
               {key.replace(/([A-Z])/g, ' $1').trim()}
             </label>
             <div className="flex items-center gap-4">
@@ -98,36 +98,36 @@ export default function ThemeSettingsPage() {
                 type="text" 
                 value={value}
                 onChange={(e) => setTheme({...theme, [key]: e.target.value})}
-                className="flex-1 bg-navy border border-white/10 rounded-lg px-3 py-2 text-sm focus:border-electric outline-none"
+                className="flex-1 bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-3 py-2 text-sm focus:border-electric outline-none"
               />
             </div>
           </div>
         ))}
       </div>
 
-      <div className="bg-navy-light p-6 rounded-2xl border border-white/5 space-y-6">
+      <div className="bg-[var(--color-navy-light)] p-6 rounded-2xl border border-[var(--color-border)] space-y-6">
         <div>
-          <h2 className="text-xl font-bold flex items-center gap-2"><Type size={20} className="text-electric" /> Typography & Layout</h2>
-          <p className="text-gray-400 text-sm mt-1">Configure fonts and global layout settings.</p>
+          <h2 className="text-xl font-bold flex items-center gap-2 text-[var(--color-text-main)]"><Type size={20} className="text-electric" /> Typography & Layout</h2>
+          <p className="text-[var(--color-text-main)] opacity-70 text-sm mt-1">Configure fonts and global layout settings.</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-300">Font Family</label>
+            <label className="text-sm font-medium text-[var(--color-text-main)]">Font Family</label>
             <input 
               type="text" 
               value={theme.fontFamily}
               onChange={(e) => setTheme({...theme, fontFamily: e.target.value})}
-              className="w-full bg-navy border border-white/10 rounded-lg px-4 py-3 focus:border-electric outline-none"
+              className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-4 py-3 focus:border-electric outline-none"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-300">Border Radius</label>
+            <label className="text-sm font-medium text-[var(--color-text-main)]">Border Radius</label>
             <input 
               type="text" 
               value={theme.borderRadius}
               onChange={(e) => setTheme({...theme, borderRadius: e.target.value})}
-              className="w-full bg-navy border border-white/10 rounded-lg px-4 py-3 focus:border-electric outline-none"
+              className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-4 py-3 focus:border-electric outline-none"
               placeholder="e.g. 0.5rem, 8px, 1rem"
             />
           </div>
