@@ -1,26 +1,43 @@
 "use client";
 
-import React from "react";
 import { MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 export default function WhatsAppButton() {
-  const phoneNumber = "919274350728";
-  const message = "Hello Uma Techno! I'm interested in starting a project with you.";
+  const [isVisible, setIsVisible] = useState(false);
 
-  const handleClick = () => {
-    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, "_blank");
-  };
+  useEffect(() => {
+    // Show after scrolling 100px
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  if (!isVisible) return null;
 
   return (
-    <button
-      onClick={handleClick}
-      className="fixed bottom-8 left-8 z-50 group flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white px-6 py-4 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.3)] transition-all hover:scale-105 active:scale-95"
-      aria-label="Contact on WhatsApp"
+    <motion.a
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0, opacity: 0 }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      href="https://wa.me/911234567890?text=Hi%20Uma%20Techno,%20I'm%20interested%20in%20your%20services."
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl flex items-center justify-center hover:shadow-[#25D366]/50 transition-shadow"
+      aria-label="Chat on WhatsApp"
     >
-      <MessageCircle size={24} fill="currentColor" />
-      <span className="font-bold tracking-wide">WhatsApp</span>
-      <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping" />
-      <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full" />
-    </button>
+      <MessageCircle size={32} />
+      <span className="absolute -top-2 -right-2 w-4 h-4 bg-red-500 border-2 border-white rounded-full animate-pulse"></span>
+    </motion.a>
   );
 }

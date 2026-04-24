@@ -8,6 +8,9 @@ import contactRoutes from './routes/contactRoutes';
 import authRoutes from './routes/authRoutes';
 import themeRoutes from './routes/themeRoutes';
 import widgetRoutes from './routes/widgetRoutes';
+import serviceRoutes from './routes/serviceRoutes';
+import projectRoutes from './routes/projectRoutes';
+import seoRoutes from './routes/seoRoutes';
 
 dotenv.config();
 
@@ -41,6 +44,9 @@ app.use('/api/v1/contacts', contactRoutes);
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/theme', themeRoutes);
 app.use('/api/v1/widgets', widgetRoutes);
+app.use('/api/v1/services', serviceRoutes);
+app.use('/api/v1/projects', projectRoutes);
+app.use('/api/v1/seo', seoRoutes);
 
 // Error Handling
 // app.use(errorHandler);

@@ -16,14 +16,6 @@ const stats = [
   { label: "Support Response", value: "< 2hr", icon: Shield },
 ];
 
-const services = [
-  { title: "Web Engineering", description: "Scalable, secure, and conversion-optimized web platforms for growing businesses.", icon: Globe, link: "/services/web-development" },
-  { title: "E-commerce Growth", description: "End-to-end online stores with advanced payment integrations and marketing focus.", icon: Rocket, link: "/services/ecommerce" },
-  { title: "Mobile Innovation", description: "Native-quality iOS and Android applications that deliver exceptional user experiences.", icon: Smartphone, link: "/services/app-development" },
-  { title: "Enterprise Solutions", description: "Custom CRM and internal tools designed to automate your business operations.", icon: Code, link: "/services/custom-software" },
-  { title: "Strategy & SEO", description: "Technical SEO and digital strategy to dominate search results and drive leads.", icon: BarChart, link: "/services/seo" },
-];
-
 const processSteps = [
   { title: "Discovery & Strategy", desc: "We deep-dive into your business model to align our solution with your revenue goals." },
   { title: "Prototyping", desc: "Creating high-fidelity wireframes and interactive prototypes for your review." },
@@ -34,59 +26,95 @@ const processSteps = [
 
 export default function Home() {
   const [widgets, setWidgets] = useState<any[]>([]);
+  const [services, setServices] = useState<any[]>([]);
+  const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchWidgets = async () => {
+    const fetchData = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/widgets`);
-        if (res.ok) {
-          const data = await res.json();
-          // Fallback if DB is empty
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+        
+        const [wRes, sRes, pRes] = await Promise.all([
+          fetch(`${baseUrl}/api/v1/widgets`),
+          fetch(`${baseUrl}/api/v1/services`),
+          fetch(`${baseUrl}/api/v1/projects`),
+        ]);
+
+        if (wRes.ok) {
+          const data = await wRes.json();
           if (data.length === 0) {
             setWidgets([
-              { name: 'hero', enabled: true, order: 0 },
-              { name: 'trusted', enabled: true, order: 1 },
-              { name: 'services', enabled: true, order: 2 },
-              { name: 'why-choose-us', enabled: true, order: 3 },
-              { name: 'stats', enabled: true, order: 4 },
-              { name: 'process', enabled: true, order: 5 },
-              { name: 'portfolio', enabled: true, order: 6 },
-              { name: 'testimonials', enabled: true, order: 7 },
-              { name: 'cta', enabled: true, order: 8 },
+              { name: 'hero', enabled: true }, { name: 'trusted', enabled: true },
+              { name: 'services', enabled: true }, { name: 'why-choose-us', enabled: true },
+              { name: 'stats', enabled: true }, { name: 'process', enabled: true },
+              { name: 'portfolio', enabled: true }, { name: 'testimonials', enabled: true },
+              { name: 'cta', enabled: true }
             ]);
           } else {
             setWidgets(data);
           }
         }
+
+        if (sRes.ok) {
+          const data = await sRes.json();
+          setServices(data.length > 0 ? data : [
+            { title: "Web Engineering", description: "Scalable, secure, and conversion-optimized web platforms for growing businesses.", icon: "Globe", slug: "web-development" },
+            { title: "E-commerce Growth", description: "End-to-end online stores with advanced payment integrations and marketing focus.", icon: "Rocket", slug: "ecommerce" },
+            { title: "Mobile Innovation", description: "Native-quality iOS and Android applications that deliver exceptional user experiences.", icon: "Smartphone", slug: "app-development" },
+            { title: "Enterprise Solutions", description: "Custom CRM and internal tools designed to automate your business operations.", icon: "Code", slug: "custom-software" },
+            { title: "Strategy & SEO", description: "Technical SEO and digital strategy to dominate search results and drive leads.", icon: "BarChart", slug: "seo" },
+          ]);
+        }
+
+        if (pRes.ok) {
+          const data = await pRes.json();
+          setProjects(data.length > 0 ? data : [
+            { title: "Tech Brand Identity", category: "Branding", description: "Complete branding package for a Silicon Valley startup.", featuredImage: "/images/project-1.png" },
+            { title: "Premium E-commerce", category: "Development", description: "High-performance store for a luxury fashion brand.", featuredImage: "/images/project-2.png" },
+            { title: "Enterprise CRM", category: "Software", description: "Custom internal tools for business automation.", featuredImage: "/images/project-3.png" }
+          ]);
+        }
+
       } catch (err) {
         console.error(err);
       } finally {
         setLoading(false);
       }
     };
-    fetchWidgets();
+    fetchData();
   }, []);
 
   const isEnabled = (name: string) => {
     const w = widgets.find(w => w.name === name);
-    return w ? w.enabled : true; // Default to true if not found in db yet
+    return w ? w.enabled : true;
   };
 
-  if (loading) return null; // Or a skeleton loader
+  const getIcon = (iconName: string) => {
+    switch(iconName) {
+      case 'Globe': return <Globe size={32} />;
+      case 'Rocket': return <Rocket size={32} />;
+      case 'Smartphone': return <Smartphone size={32} />;
+      case 'Code': return <Code size={32} />;
+      case 'BarChart': return <BarChart size={32} />;
+      default: return <Zap size={32} />;
+    }
+  };
+
+  if (loading) return null;
 
   return (
-    <div className="flex flex-col gap-16 lg:gap-32 pb-20 lg:pb-32">
+    <div className="flex flex-col gap-16 lg:gap-32 pb-20 lg:pb-32 bg-[var(--color-navy)]">
       {isEnabled('hero') && <Hero />}
 
       {/* Trusted By Section */}
       {isEnabled('trusted') && (
         <section className="max-w-7xl mx-auto px-6 w-full -mt-8 lg:-mt-16">
           <div className="text-center space-y-8">
-            <p className="text-gray-500 font-medium tracking-widest text-xs uppercase">Partnering with Growth-Focused Brands</p>
-            <div className="flex flex-wrap justify-center items-center gap-12 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
+            <p className="text-[var(--color-text-main)] opacity-50 font-medium tracking-widest text-xs uppercase">Partnering with Growth-Focused Brands</p>
+            <div className="flex flex-wrap justify-center items-center gap-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
                {["Retailers", "Real Estate", "Startups", "Enterprises", "Agency Partners"].map(brand => (
-                 <span key={brand} className="text-2xl font-bold font-outfit text-white/50">{brand}</span>
+                 <span key={brand} className="text-2xl font-bold font-outfit text-[var(--color-text-main)]">{brand}</span>
                ))}
             </div>
           </div>
@@ -97,74 +125,59 @@ export default function Home() {
       {isEnabled('services') && (
         <section className="max-w-7xl mx-auto px-6 w-full">
           <div className="text-center space-y-4 mb-20">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric/10 border border-electric/20 text-electric text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
               Premium Solutions
             </div>
-            <h2 className="text-3xl lg:text-5xl 2xl:text-6xl font-bold font-outfit tracking-tight">Business Engines Built <br /> <span className="text-gradient">For Growth</span></h2>
-            <p className="text-gray-400 max-w-2xl mx-auto 2xl:text-lg">
+            <h2 className="text-3xl lg:text-5xl 2xl:text-6xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Business Engines Built <br /> <span className="text-gradient">For Growth</span></h2>
+            <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto 2xl:text-lg">
               We don&apos;t just build websites. We engineer high-performance digital systems that capture leads, automate operations, and scale revenue.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 lg:gap-8">
-            {/* Main Large Card */}
-             <Link 
-              href={services[0].link}
-              className="group glass-card p-10 rounded-[2.5rem] md:col-span-2 md:row-span-2 flex flex-col justify-between relative overflow-hidden min-h-[500px] lg:min-h-[600px]"
-            >
-              <div className="absolute top-0 right-0 w-64 h-64 bg-electric/5 blur-[100px] -mr-32 -mt-32 group-hover:bg-electric/20 transition-all" />
-              <div className="space-y-6 relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-electric to-gold-light rounded-2xl flex items-center justify-center text-white shadow-2xl group-hover:scale-110 transition-transform">
-                  <Globe size={32} />
-                </div>
-                <h4 className="text-3xl font-black font-outfit leading-tight text-white uppercase tracking-tighter">
-                  Premium Web <br /> <span className="text-electric">Development</span>
-                </h4>
-                <p className="text-gray-400 leading-relaxed max-w-sm">
-                  High-performance web architectures engineered for speed, security, and maximum conversion.
-                </p>
-              </div>
-              <div className="mt-8 flex items-center gap-4 text-sm font-black tracking-widest text-electric uppercase group-hover:gap-6 transition-all">
-                VIEW SOLUTIONS <ArrowRight size={20} />
-              </div>
-            </Link>
-
-            {/* Medium App Card */}
-            <Link 
-              href={services[1].link}
-              className="group glass-card p-8 rounded-[2rem] md:col-span-2 flex flex-col justify-center relative overflow-hidden"
-            >
-              <div className="space-y-4 relative z-10">
-                 <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center text-electric group-hover:bg-electric group-hover:text-navy transition-all">
-                    <Smartphone className="w-7 h-7" />
-                 </div>
-                 <div>
-                    <h4 className="text-2xl font-bold font-outfit text-white">Mobile App Innovation</h4>
-                    <p className="text-gray-500">iOS & Android Apps</p>
-                 </div>
-              </div>
-            </Link>
-
-            {/* Small Cards */}
-            <Link 
-              href={services[2].link}
-              className="group glass-card p-8 rounded-[2rem] flex flex-col justify-between relative overflow-hidden"
-            >
-              <div className="space-y-4 relative z-10">
-                <Palette className="w-7 h-7 text-gray-600 group-hover:text-electric transition-colors" />
-                <h4 className="text-xl font-bold font-outfit text-white uppercase tracking-wider">Strategic <br /> UI/UX Design</h4>
-              </div>
-            </Link>
-
-            <Link 
-              href={services[3].link}
-              className="group glass-card p-8 rounded-[2rem] flex flex-col justify-between relative overflow-hidden bg-electric/5"
-            >
-              <div className="space-y-4 relative z-10">
-                <BarChart className="w-7 h-7 text-electric" />
-                <h4 className="text-xl font-bold font-outfit text-white uppercase tracking-wider">SEO & <br /> Digital Growth</h4>
-              </div>
-            </Link>
+            {services.map((service, index) => {
+              if (index === 0) {
+                return (
+                  <Link 
+                    key={service.slug}
+                    href={`/services/${service.slug}`}
+                    className="group bg-[var(--color-card)] border border-[var(--color-border)] p-10 rounded-[2.5rem] md:col-span-2 md:row-span-2 flex flex-col justify-between relative overflow-hidden min-h-[500px] lg:min-h-[600px] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500"
+                  >
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-electric)]/10 blur-[100px] -mr-32 -mt-32 group-hover:bg-[var(--color-electric)]/20 transition-all" />
+                    <div className="space-y-6 relative z-10">
+                      <div className="w-16 h-16 bg-[var(--color-electric)] rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                        {getIcon(service.icon || 'Globe')}
+                      </div>
+                      <h4 className="text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] uppercase tracking-tighter">
+                        {service.title}
+                      </h4>
+                      <p className="text-[var(--color-text-main)] opacity-70 leading-relaxed max-w-sm">
+                        {service.description}
+                      </p>
+                    </div>
+                    <div className="mt-8 flex items-center gap-4 text-sm font-black tracking-widest text-[var(--color-electric)] uppercase group-hover:gap-6 transition-all">
+                      VIEW SOLUTIONS <ArrowRight size={20} />
+                    </div>
+                  </Link>
+                );
+              }
+              return (
+                <Link 
+                  key={service.slug}
+                  href={`/services/${service.slug}`}
+                  className={`group bg-[var(--color-card)] border border-[var(--color-border)] p-8 rounded-[2rem] ${index === 1 ? 'md:col-span-2' : ''} flex flex-col justify-center relative overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500`}
+                >
+                  <div className="space-y-4 relative z-10">
+                     <div className="w-14 h-14 bg-[var(--color-electric)]/10 rounded-2xl flex items-center justify-center text-[var(--color-electric)] group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all">
+                        {getIcon(service.icon || 'Code')}
+                     </div>
+                     <div>
+                        <h4 className="text-xl font-bold font-outfit text-[var(--color-text-main)] uppercase">{service.title}</h4>
+                     </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </section>
       )}
@@ -174,47 +187,45 @@ export default function Home() {
         <section className="max-w-7xl mx-auto px-6 w-full">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="relative group order-2 lg:order-1">
-              <div className="aspect-video glass-card rounded-[2.5rem] overflow-hidden border border-white/5">
+              <div className="aspect-video bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2.5rem] overflow-hidden shadow-xl">
                  <img 
                    src="/images/templates.png" 
                    alt="Website Templates" 
-                   className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000"
+                   className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                  />
-                 <div className="absolute inset-0 bg-gradient-to-t from-navy to-transparent opacity-60" />
               </div>
               <motion.div 
                 animate={{ y: [0, -15, 0] }}
                 transition={{ duration: 6, repeat: Infinity }}
-                className="absolute -top-6 -right-6 lg:-top-8 lg:-right-8 glass-card p-4 lg:p-6 rounded-xl lg:rounded-2xl border-white/10 shadow-2xl backdrop-blur-xl"
+                className="absolute -top-6 -right-6 lg:-top-8 lg:-right-8 bg-[var(--color-card)] border border-[var(--color-border)] p-4 lg:p-6 rounded-xl lg:rounded-2xl shadow-2xl backdrop-blur-xl"
               >
-                 <div className="text-electric font-black text-lg lg:text-xl tracking-tighter">Business First</div>
-                 <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1">Our Core Mindset</div>
+                 <div className="text-[var(--color-electric)] font-black text-lg lg:text-xl tracking-tighter">Business First</div>
+                 <div className="text-[10px] text-[var(--color-text-main)] opacity-60 font-bold uppercase tracking-widest mt-1">Our Core Mindset</div>
               </motion.div>
             </div>
 
             <div className="space-y-6 lg:space-y-10 order-1 lg:order-2">
               <div className="space-y-4 lg:space-y-6">
-                <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-bold font-outfit">Your Partner in <br /><span className="text-gradient">Business Dominance</span></h2>
-                <p className="text-gray-400 leading-relaxed text-sm lg:text-base 2xl:text-lg">
+                <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-bold font-outfit text-[var(--color-text-main)]">Your Partner in <br /><span className="text-gradient">Business Dominance</span></h2>
+                <p className="text-[var(--color-text-main)] opacity-70 leading-relaxed text-sm lg:text-base 2xl:text-lg">
                   We bridge the gap between complex technology and business growth. Our solutions are engineered to be assets, not just expenses.
                 </p>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4 lg:gap-6">
                 {[
-                  { title: "Revenue-first approach", desc: "Every line of code is designed to maximize your return on investment." },
-                  { title: "Elite UI/UX Mastery", desc: "Premium design standards that command authority and convert visitors." },
-                  { title: "Technical SEO Core", desc: "Built-in search engine optimization for sustainable organic growth." },
-                  { title: "Agile Rapid Delivery", desc: "Efficient workflows that get your product to market faster than competitors." },
-                  { title: "Dedicated Support", desc: "A proactive technical team that evolves with your scaling business." }
+                  { title: "Revenue-first approach", desc: "Code designed to maximize return on investment." },
+                  { title: "Elite UI/UX Mastery", desc: "Premium design standards that command authority." },
+                  { title: "Technical SEO Core", desc: "Built-in optimization for organic growth." },
+                  { title: "Agile Rapid Delivery", desc: "Efficient workflows to market faster." },
                 ].map((benefit, i) => (
                   <div key={i} className="flex gap-3 lg:gap-4 group">
-                    <div className="w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-electric/20 flex items-center justify-center text-electric group-hover:bg-electric group-hover:text-white transition-all mt-1">
+                    <div className="w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-[var(--color-electric)]/20 flex items-center justify-center text-[var(--color-electric)] group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all mt-1 shrink-0">
                       <CheckCircle size={12} />
                     </div>
                     <div>
-                      <h4 className="text-base lg:text-lg font-bold text-white">{benefit.title}</h4>
-                      <p className="text-gray-500 text-xs lg:text-sm">{benefit.desc}</p>
+                      <h4 className="text-base font-bold text-[var(--color-text-main)]">{benefit.title}</h4>
+                      <p className="text-[var(--color-text-main)] opacity-60 text-xs mt-1">{benefit.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -226,15 +237,15 @@ export default function Home() {
 
       {/* Stats Section */}
       {isEnabled('stats') && (
-        <section className="w-full bg-navy-light/30 py-12 border-y border-white/5">
+        <section className="w-full bg-[var(--color-card)] py-12 border-y border-[var(--color-border)] shadow-sm">
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
               <div key={i} className="text-center space-y-2">
-                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mx-auto text-accent mb-2">
+                <div className="w-10 h-10 bg-[var(--color-electric)]/10 rounded-full flex items-center justify-center mx-auto text-[var(--color-electric)] mb-2">
                   <stat.icon size={20} />
                 </div>
-                <div className="text-3xl lg:text-4xl font-bold font-outfit text-white">{stat.value}</div>
-                <div className="text-sm text-gray-500 font-medium uppercase tracking-wider">{stat.label}</div>
+                <div className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">{stat.value}</div>
+                <div className="text-sm text-[var(--color-text-main)] opacity-60 font-medium uppercase tracking-wider">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -246,42 +257,39 @@ export default function Home() {
         <section className="max-w-7xl mx-auto px-6 w-full">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
-              <h2 className="text-3xl lg:text-4xl font-bold font-outfit">How We Turn Ideas Into <span className="text-gradient">Reality</span></h2>
-              <p className="text-gray-400 leading-relaxed">
+              <h2 className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">How We Turn Ideas Into <span className="text-gradient">Reality</span></h2>
+              <p className="text-[var(--color-text-main)] opacity-70 leading-relaxed">
                 Our proven development methodology ensures your project is delivered on time, within budget, and to the highest quality standards.
               </p>
               <div className="space-y-4">
                 {processSteps.map((item, i) => (
                   <div key={i} className="flex gap-4 group">
-                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-electric font-bold text-lg group-hover:bg-electric group-hover:text-white transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-[var(--color-card)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-electric)] font-bold text-lg group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all shadow-sm">
                       {i + 1}
                     </div>
                     <div>
-                      <h4 className="text-lg font-bold text-white mb-1">{item.title}</h4>
-                      <p className="text-sm text-gray-500">{item.desc}</p>
+                      <h4 className="text-lg font-bold text-[var(--color-text-main)] mb-1">{item.title}</h4>
+                      <p className="text-sm text-[var(--color-text-main)] opacity-60">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
             <div className="relative group">
-               <div className="aspect-square glass-card rounded-[3rem] p-1 overflow-hidden relative group border border-white/5">
+               <div className="aspect-square bg-[var(--color-card)] rounded-[3rem] p-1 overflow-hidden relative group border border-[var(--color-border)] shadow-xl">
                   <img 
                     src="/images/process-visual.png" 
-                    alt="Process Visualization" 
-                    className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000"
+                    alt="Process" 
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-transparent opacity-60" />
-                  <div className="relative z-10 w-full h-full bg-navy/20 backdrop-blur-sm flex items-center justify-center p-12">
-                     <div className="text-center space-y-4">
-                        <Zap size={48} className="text-electric mx-auto animate-float" />
-                        <div className="text-3xl font-bold font-outfit">Rapid Execution</div>
-                        <p className="text-gray-400">Turning complex ideas into scalable reality.</p>
+                  <div className="relative z-10 w-full h-full bg-[var(--color-card)]/30 backdrop-blur-md flex items-center justify-center p-12">
+                     <div className="text-center space-y-4 bg-[var(--color-card)]/80 p-8 rounded-3xl border border-[var(--color-border)] shadow-2xl backdrop-blur-xl">
+                        <Zap size={48} className="text-[var(--color-electric)] mx-auto animate-float" />
+                        <div className="text-3xl font-bold font-outfit text-[var(--color-text-main)]">Rapid Execution</div>
+                        <p className="text-[var(--color-text-main)] opacity-70">Turning complex ideas into scalable reality.</p>
                      </div>
                   </div>
                </div>
-               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-accent/20 blur-3xl rounded-full" />
-               <div className="absolute -top-6 -left-6 w-32 h-32 bg-electric/20 blur-3xl rounded-full" />
             </div>
           </div>
         </section>
@@ -292,53 +300,47 @@ export default function Home() {
         <section className="max-w-7xl mx-auto px-6 w-full">
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric/10 border border-electric/20 text-electric text-xs font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
                 Selected Work
               </div>
-              <h2 className="text-3xl lg:text-5xl font-bold font-outfit tracking-tight">Our <span className="text-gradient">Portfolio</span></h2>
-              <p className="text-gray-400 max-w-xl">
+              <h2 className="text-3xl lg:text-5xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Our <span className="text-gradient">Portfolio</span></h2>
+              <p className="text-[var(--color-text-main)] opacity-70 max-w-xl">
                 Showcasing our best work in branding, development, and strategic digital solutions.
               </p>
             </div>
             <Link 
               href="/portfolio" 
-              className="group flex items-center gap-3 text-white font-bold tracking-widest text-sm hover:text-electric transition-colors"
+              className="group flex items-center gap-3 text-[var(--color-text-main)] font-bold tracking-widest text-sm hover:text-[var(--color-electric)] transition-colors"
             >
               VIEW ALL PROJECTS <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { title: "Tech Brand Identity", category: "Branding", desc: "Complete branding package for a Silicon Valley startup.", image: "/images/project-1.png?v=1.1" },
-              { title: "Premium E-commerce", category: "Development", desc: "High-performance store for a luxury fashion brand.", image: "/images/project-2.png?v=1.1" },
-              { title: "Enterprise CRM", category: "Software", desc: "Custom internal tools for business automation.", image: "/images/project-3.png?v=1.1" }
-            ].map((project, i) => (
-              <div key={i} className="group glass-card rounded-[2.5rem] overflow-hidden flex flex-col h-full border border-white/5 hover:border-electric/30 transition-all duration-500">
-                 {/* Project Image Container */}
-                 <div className="relative aspect-[4/3] overflow-hidden">
+            {projects.slice(0, 3).map((project, i) => (
+              <div key={i} className="group bg-[var(--color-card)] rounded-[2.5rem] overflow-hidden flex flex-col h-full border border-[var(--color-border)] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
+                 <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
                     <img 
-                      src={project.image} 
+                      src={project.featuredImage || '/images/project-1.png'} 
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-100"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute top-6 left-6">
-                      <span className="px-4 py-2 bg-electric text-navy text-[10px] font-black uppercase tracking-widest rounded-full shadow-xl">
+                      <span className="px-4 py-2 bg-[var(--color-card)] text-[var(--color-electric)] border border-[var(--color-border)] text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
                         {project.category}
                       </span>
                     </div>
                  </div>
                  
-                 {/* Content */}
                  <div className="p-8 lg:p-10 space-y-4 flex-1 flex flex-col justify-between">
                     <div className="space-y-3">
-                      <h4 className="text-2xl font-bold font-outfit text-white group-hover:text-electric transition-colors">{project.title}</h4>
-                      <p className="text-gray-400 text-sm leading-relaxed">{project.desc}</p>
+                      <h4 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">{project.title}</h4>
+                      <p className="text-[var(--color-text-main)] opacity-60 text-sm leading-relaxed">{project.description}</p>
                     </div>
                     
                     <Link 
-                      href={`/portfolio/${project.title.toLowerCase().replace(/ /g, '-')}`}
-                      className="flex items-center gap-2 text-electric font-bold text-sm tracking-widest uppercase mt-6 group/link"
+                      href={`/portfolio/${project.slug || project.title.toLowerCase().replace(/ /g, '-')}`}
+                      className="flex items-center gap-2 text-[var(--color-electric)] font-bold text-sm tracking-widest uppercase mt-6 group/link"
                     >
                       View Project <ArrowRight size={16} className="group-hover/link:translate-x-2 transition-transform" />
                     </Link>
@@ -349,62 +351,29 @@ export default function Home() {
         </section>
       )}
 
-      {/* Testimonials */}
-      {isEnabled('testimonials') && (
-        <section className="max-w-7xl mx-auto px-6 w-full text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold font-outfit mb-12">What Our <span className="text-gradient">Clients Say</span></h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-             {[
-               { name: "Suresh Patel", role: "Real Estate Developer", image: "/images/client-1.png", quote: "Uma Techno completely revamped our online presence. Our lead generation has doubled since we launched the new platform." },
-               { name: "Anjali Vyas", role: "E-commerce Brand Owner", image: "/images/client-2.png", quote: "The mobile app they built for us is world-class. Their attention to detail and UX expertise is unmatched in Rajkot." },
-               { name: "Amit Shah", role: "Startup Founder", image: "/images/client-3.png", quote: "Fast, reliable, and technically superior. They didn't just build a site; they built a tool that handles our growth effortlessly." }
-             ].map((testimonial, i) => (
-               <div key={i} className="glass-card p-8 rounded-[2rem] text-left space-y-4 relative group overflow-hidden">
-                  <div className="flex gap-1 text-accent">
-                     {[1, 2, 3, 4, 5].map(s => <Star key={s} size={14} fill="currentColor" />)}
-                  </div>
-                  <p className="text-gray-300 italic leading-relaxed relative z-10 text-sm">
-                    "{testimonial.quote}"
-                  </p>
-                  <div className="flex items-center gap-4 border-t border-white/5 pt-4 relative z-10">
-                     <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-electric/30 bg-navy-light flex items-center justify-center">
-                        <Users size={20} className="text-electric" />
-                     </div>
-                     <div>
-                        <p className="font-bold text-white text-sm">{testimonial.name}</p>
-                        <p className="text-[11px] text-gray-500 uppercase tracking-wider">{testimonial.role}</p>
-                     </div>
-                  </div>
-                  <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-electric/5 rounded-full blur-3xl group-hover:bg-electric/10 transition-all" />
-               </div>
-             ))}
-          </div>
-        </section>
-      )}
-
       {/* CTA Section */}
       {isEnabled('cta') && (
         <section className="max-w-7xl mx-auto px-6 w-full pb-20">
-          <div className="bg-gradient-to-br from-electric/20 to-accent/10 border border-white/10 rounded-[3rem] p-10 lg:p-16 text-center space-y-6 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-electric/20 blur-[120px] -mr-48 -mt-48" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/20 blur-[120px] -ml-48 -mb-48" />
+          <div className="bg-[var(--color-card)] border border-[var(--color-border)] rounded-[3rem] p-10 lg:p-16 text-center space-y-6 relative overflow-hidden shadow-2xl">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-electric)]/10 blur-[120px] -mr-48 -mt-48" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--color-accent)]/10 blur-[120px] -ml-48 -mb-48" />
             
-            <h2 className="text-3xl lg:text-5xl font-bold font-outfit max-w-3xl mx-auto leading-tight">
+            <h2 className="text-3xl lg:text-5xl font-bold font-outfit max-w-3xl mx-auto leading-tight text-[var(--color-text-main)]">
               Ready to Accelerate Your <span className="text-gradient">Business Growth</span>?
             </h2>
-            <p className="text-gray-400 max-w-xl mx-auto leading-relaxed">
+            <p className="text-[var(--color-text-main)] opacity-70 max-w-xl mx-auto leading-relaxed">
               Stop settling for mediocre digital presence. Partner with Uma Techno to build a premium solution that commands authority and delivers results.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4 relative z-10">
               <Link
                 href="/contact"
-                className="px-8 py-4 bg-white text-navy hover:bg-gray-200 rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl btn-premium"
+                className="px-8 py-4 bg-[var(--color-electric)] text-white hover:bg-[var(--color-electric)]/90 rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl btn-premium"
               >
                 Get Free Consultation
               </Link>
               <Link
                 href="/portfolio"
-                className="px-8 py-4 bg-white/5 border border-white/10 text-white hover:bg-white/10 rounded-xl font-bold text-base transition-all"
+                className="px-8 py-4 bg-[var(--color-navy-light)] border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-[var(--color-border)] rounded-xl font-bold text-base transition-all"
               >
                 View Our Work
               </Link>

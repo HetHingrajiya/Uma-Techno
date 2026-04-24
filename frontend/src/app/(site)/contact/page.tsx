@@ -1,203 +1,202 @@
 "use client";
 
 import React, { useState } from "react";
+import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
-import { apiFetch } from "@/lib/api";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    subject: "",
+    service: "Web Development",
     message: ""
   });
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setStatus("loading");
     
     try {
-      await apiFetch('/contacts', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/contacts`, {
         method: 'POST',
-        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
       });
-      setSuccess(true);
-      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-    } catch (error) {
-      console.error("Failed to send message:", error);
-      alert("Failed to send message. Please try again later.");
-    } finally {
-      setLoading(false);
+      
+      if (res.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", phone: "", service: "Web Development", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      setStatus("error");
     }
   };
 
   return (
-    <div className="py-20 space-y-20">
-      <section className="max-w-7xl mx-auto px-6 text-center space-y-6">
-        <h1 className="text-5xl lg:text-7xl font-bold font-outfit">
-          Get In <span className="text-gradient">Touch</span>
-        </h1>
-        <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-          Have a project in mind or just want to say hi? We&apos;d love to hear from you. 
-          Fill out the form below and our team will get back to you shortly.
-        </p>
-      </section>
+    <div className="pt-32 pb-20 lg:pt-40 lg:pb-32 bg-[var(--color-navy)] min-h-screen">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center space-y-6 mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
+            Let's Talk
+          </div>
+          <h1 className="text-4xl lg:text-6xl font-bold font-outfit text-[var(--color-text-main)]">
+            Ready to <span className="text-gradient">Transform</span> Your Business?
+          </h1>
+          <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto text-lg">
+            Whether you need a complete enterprise solution or a premium marketing website, our engineers are ready to build it.
+          </p>
+        </div>
 
-      <section className="max-w-7xl mx-auto px-6 grid lg:grid-cols-3 gap-12">
-        {/* Contact Info */}
-        <div className="space-y-8">
-          <div className="glass-card p-8 rounded-3xl border-white/5 space-y-6">
-            <h3 className="text-2xl font-bold font-outfit">Contact Information</h3>
-            <p className="text-gray-400">Feel free to reach out through any of these channels.</p>
-            
-            <div className="space-y-6 pt-4">
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-electric/10 rounded-xl flex items-center justify-center text-electric shrink-0">
-                  <Phone size={24} />
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-8 items-start">
+          <div className="lg:col-span-2 space-y-8">
+            <div className="bg-[var(--color-card)] border border-[var(--color-border)] p-8 rounded-3xl shadow-lg space-y-8">
+              <h3 className="text-2xl font-bold font-outfit text-[var(--color-text-main)]">Contact Information</h3>
+              
+              <div className="space-y-6">
+                <div className="flex gap-4 items-start group">
+                  <div className="w-12 h-12 bg-[var(--color-electric)]/10 rounded-xl flex items-center justify-center text-[var(--color-electric)] group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all shrink-0">
+                    <Mail size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-[var(--color-text-main)] mb-1">Email Us</h4>
+                    <p className="text-[var(--color-text-main)] opacity-70 text-sm">hello@umatechno.in</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm text-gray-400">Phone</p>
-                  <p className="text-lg font-bold">+91 92743 50728</p>
-                </div>
-              </div>
 
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-electric/10 rounded-xl flex items-center justify-center text-electric shrink-0">
-                  <Mail size={24} />
+                <div className="flex gap-4 items-start group">
+                  <div className="w-12 h-12 bg-[var(--color-electric)]/10 rounded-xl flex items-center justify-center text-[var(--color-electric)] group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all shrink-0">
+                    <Phone size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-[var(--color-text-main)] mb-1">Call Us</h4>
+                    <p className="text-[var(--color-text-main)] opacity-70 text-sm">+91 (123) 456-7890</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm text-gray-400">Email</p>
-                  <p className="text-lg font-bold">uma.techno585@gmail.com</p>
-                </div>
-              </div>
 
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-electric/10 rounded-xl flex items-center justify-center text-electric shrink-0">
-                  <MapPin size={24} />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-400">Address</p>
-                  <p className="text-lg font-bold">Rajkot, Gujarat, India</p>
+                <div className="flex gap-4 items-start group">
+                  <div className="w-12 h-12 bg-[var(--color-electric)]/10 rounded-xl flex items-center justify-center text-[var(--color-electric)] group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all shrink-0">
+                    <MapPin size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-[var(--color-text-main)] mb-1">Headquarters</h4>
+                    <p className="text-[var(--color-text-main)] opacity-70 text-sm">Rajkot, Gujarat, India</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="glass-card p-8 rounded-3xl border-white/5 bg-electric/5">
-             <h4 className="font-bold mb-4">Follow Us</h4>
-             <div className="flex gap-4">
-                {["FB", "TW", "IG", "LI"].map(social => (
-                  <div key={social} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-xs font-bold hover:bg-electric transition-all cursor-pointer">
-                    {social}
-                  </div>
-                ))}
-             </div>
-          </div>
-        </div>
-
-        {/* Contact Form */}
-        <div className="lg:col-span-2">
-          <div className="glass-card p-10 rounded-[3rem] border-white/5">
-            {success ? (
-              <div className="py-20 text-center space-y-6">
-                <div className="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                   <Send size={40} />
+          <div className="lg:col-span-3 bg-[var(--color-card)] border border-[var(--color-border)] p-8 lg:p-12 rounded-3xl shadow-xl">
+            {status === "success" ? (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="flex flex-col items-center justify-center text-center py-12 space-y-6"
+              >
+                <div className="w-24 h-24 bg-green-500/10 rounded-full flex items-center justify-center text-green-500 mb-4">
+                  <CheckCircle2 size={48} />
                 </div>
-                <h2 className="text-3xl font-bold font-outfit text-white">Message Sent!</h2>
-                <p className="text-gray-400">Thank you for reaching out. We will get back to you within 24 hours.</p>
+                <h3 className="text-3xl font-bold font-outfit text-[var(--color-text-main)]">Message Received!</h3>
+                <p className="text-[var(--color-text-main)] opacity-70 max-w-sm">
+                  Thank you for reaching out. One of our lead engineers will contact you within 24 hours.
+                </p>
                 <button 
-                  onClick={() => setSuccess(false)}
-                  className="text-electric font-bold hover:underline"
+                  onClick={() => setStatus("idle")}
+                  className="mt-8 text-[var(--color-electric)] font-bold tracking-widest text-sm uppercase hover:underline"
                 >
-                  Send another message
+                  Send Another Message
                 </button>
-              </div>
+              </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+                <h3 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] mb-6">Send us a message</h3>
+                
+                <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-400 ml-1">Your Name</label>
-                    <input
+                    <label className="text-sm font-bold text-[var(--color-text-main)]">Full Name</label>
+                    <input 
                       required
-                      type="text"
+                      type="text" 
                       value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      onChange={e => setFormData({...formData, name: e.target.value})}
+                      className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
                       placeholder="John Doe"
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white outline-none focus:border-electric transition-all"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-400 ml-1">Email Address</label>
-                    <input
+                    <label className="text-sm font-bold text-[var(--color-text-main)]">Email Address</label>
+                    <input 
                       required
-                      type="email"
+                      type="email" 
                       value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      placeholder="john@example.com"
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white outline-none focus:border-electric transition-all"
+                      onChange={e => setFormData({...formData, email: e.target.value})}
+                      className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
+                      placeholder="john@company.com"
                     />
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-400 ml-1">Phone Number</label>
-                    <input
-                      type="tel"
+                    <label className="text-sm font-bold text-[var(--color-text-main)]">Phone (Optional)</label>
+                    <input 
+                      type="tel" 
                       value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      placeholder="+91 98765 43210"
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white outline-none focus:border-electric transition-all"
+                      onChange={e => setFormData({...formData, phone: e.target.value})}
+                      className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
+                      placeholder="+1 (555) 000-0000"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-400 ml-1">Subject</label>
-                    <select
-                      value={formData.subject}
-                      onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white outline-none focus:border-electric transition-all appearance-none"
+                    <label className="text-sm font-bold text-[var(--color-text-main)]">Service Needed</label>
+                    <select 
+                      value={formData.service}
+                      onChange={e => setFormData({...formData, service: e.target.value})}
+                      className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors appearance-none"
                     >
-                      <option value="" className="bg-navy">Select a Service</option>
-                      <option value="web" className="bg-navy">Web Development</option>
-                      <option value="app" className="bg-navy">App Development</option>
-                      <option value="seo" className="bg-navy">SEO Services</option>
-                      <option value="other" className="bg-navy">Other Inquiry</option>
+                      <option>Web Development</option>
+                      <option>E-commerce Solution</option>
+                      <option>Mobile App</option>
+                      <option>Custom Software</option>
+                      <option>SEO & Marketing</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-400 ml-1">Your Message</label>
-                  <textarea
+                  <label className="text-sm font-bold text-[var(--color-text-main)]">Message Details</label>
+                  <textarea 
                     required
-                    rows={6}
+                    rows={5}
                     value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    placeholder="Tell us about your project..."
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white outline-none focus:border-electric transition-all resize-none"
+                    onChange={e => setFormData({...formData, message: e.target.value})}
+                    className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors resize-none"
+                    placeholder="Tell us about your project goals..."
                   ></textarea>
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full py-5 bg-electric hover:bg-electric/90 text-white rounded-2xl font-bold text-lg transition-all shadow-xl shadow-electric/20 flex items-center justify-center gap-3 active:scale-[0.99]"
+                {status === "error" && (
+                  <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-500 rounded-xl text-sm font-medium">
+                    Something went wrong. Please try again later.
+                  </div>
+                )}
+
+                <button 
+                  disabled={status === "loading"}
+                  type="submit" 
+                  className="w-full bg-[var(--color-electric)] hover:bg-[var(--color-electric)]/90 text-white rounded-xl py-4 font-bold tracking-widest uppercase flex items-center justify-center gap-2 transition-all hover:-translate-y-1 shadow-lg disabled:opacity-70 disabled:hover:translate-y-0"
                 >
-                  {loading ? (
-                    <Loader2 className="animate-spin" size={24} />
-                  ) : (
-                    <>Send Message <Send size={20} /></>
-                  )}
+                  {status === "loading" ? "Sending..." : "Send Request"} <Send size={20} />
                 </button>
               </form>
             )}
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
