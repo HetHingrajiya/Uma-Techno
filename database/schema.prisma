@@ -38,22 +38,20 @@ model Service {
 }
 
 model Project {
-  id              String   @id @default(cuid())
-  title           String
-  slug            String   @unique
-  description     String
-  content         String   @db.Text
-  image           String?
-  category        String
-  client          String?
-  technologies    String[]
-  link            String?
-  published       Boolean  @default(true)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id           String   @id @default(cuid())
+  title        String
+  slug         String   @unique
+  description  String
+  content      String   @db.Text
+  image        String?
+  category     String
+  client       String?
+  technologies String[]
+  link         String?
+  published    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
-
-
 
 model Contact {
   id        String   @id @default(cuid())
@@ -79,15 +77,15 @@ model Testimonial {
 }
 
 model SEOPage {
-  id              String   @id @default(cuid())
-  pagePath        String   @unique // e.g., "/", "/about", "/services/web-dev"
-  title           String
-  description     String
-  keywords        String[]
-  ogImage         String?
-  canonicalUrl    String?
-  schemaMarkup    Json?
-  updatedAt       DateTime @updatedAt
+  id           String   @id @default(cuid())
+  pagePath     String   @unique // e.g., "/", "/about", "/services/web-dev"
+  title        String
+  description  String
+  keywords     String[]
+  ogImage      String?
+  canonicalUrl String?
+  schemaMarkup Json?
+  updatedAt    DateTime @updatedAt
 }
 
 model Setting {
@@ -103,4 +101,78 @@ model Media {
   mimetype  String
   size      Int
   createdAt DateTime @default(now())
+}
+
+model ThemeSetting {
+  id              String   @id @default(cuid())
+  primaryColor    String   @default("#06B6D4")
+  secondaryColor  String   @default("#D4AF37")
+  accentColor     String   @default("#FFD700")
+  backgroundColor String   @default("#050505")
+  cardColor       String   @default("#0a0a0a")
+  textColor       String   @default("#ffffff")
+  headingColor    String   @default("#ffffff")
+  borderColor     String   @default("#333333")
+  fontFamily      String   @default("Inter, Outfit, sans-serif")
+  headingSize     String   @default("base")
+  bodyTextSize    String   @default("base")
+  borderRadius    String   @default("0.75rem")
+  containerWidth  String   @default("1280px")
+  sectionSpacing  String   @default("4rem")
+  buttonShape     String   @default("rounded-xl")
+  themeMode       String   @default("dark") // light, dark, auto
+  updatedAt       DateTime @updatedAt
+}
+
+model Widget {
+  id              String   @id @default(cuid())
+  name            String   @unique // e.g., "hero", "stats", "services"
+  title           String?
+  content         String?  @db.Text
+  backgroundColor String?
+  enabled         Boolean  @default(true)
+  order           Int      @default(0)
+  updatedAt       DateTime @updatedAt
+}
+
+model Page {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  content         String   @db.Text
+  metaTitle       String?
+  metaDescription String?
+  published       Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Blog {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  content         String   @db.Text
+  metaTitle       String?
+  metaDescription String?
+  featuredImage   String?
+  published       Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Role {
+  id          String       @id @default(cuid())
+  name        String       @unique // Super Admin, Admin, Editor, SEO Manager
+  permissions Permission[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Permission {
+  id        String   @id @default(cuid())
+  action    String // create, read, update, delete
+  subject   String // Page, Blog, Widget, ThemeSetting, User
+  roles     Role[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

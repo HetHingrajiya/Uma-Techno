@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 
 import contactRoutes from './routes/contactRoutes';
 import authRoutes from './routes/authRoutes';
+import themeRoutes from './routes/themeRoutes';
+import widgetRoutes from './routes/widgetRoutes';
 
 dotenv.config();
 
@@ -37,6 +39,8 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/v1/contacts', contactRoutes);
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/theme', themeRoutes);
+app.use('/api/v1/widgets', widgetRoutes);
 
 // Error Handling
 // app.use(errorHandler);
