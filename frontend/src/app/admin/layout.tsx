@@ -49,15 +49,15 @@ export default function AdminLayout({
   if (!isLoggedIn) return null;
 
   return (
-    <div className="flex min-h-screen bg-navy text-white">
+    <div className="flex min-h-screen bg-[var(--color-navy)] text-[var(--color-text-main)] transition-colors duration-300">
       {/* Sidebar */}
-      <aside className="w-64 bg-navy-light border-r border-white/5 flex flex-col fixed inset-y-0 left-0 z-40">
+      <aside className="w-64 bg-[var(--color-navy-light)] border-r border-[var(--color-border)] flex flex-col fixed inset-y-0 left-0 z-40">
         <div className="p-6">
           <Link href="/admin/dashboard" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-electric to-accent rounded-lg flex items-center justify-center font-bold text-white">
+            <div className="w-8 h-8 bg-electric text-white rounded-lg flex items-center justify-center font-bold">
               U
             </div>
-            <span className="text-xl font-bold tracking-tight text-white">
+            <span className="text-xl font-bold tracking-tight text-[var(--color-text-main)]">
               Uma<span className="text-electric">Admin</span>
             </span>
           </Link>
