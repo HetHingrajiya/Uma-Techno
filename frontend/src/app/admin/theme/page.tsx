@@ -50,11 +50,14 @@ export default function ThemeSettingsPage() {
         body: JSON.stringify(theme),
       });
       if (res.ok) {
-        // Refresh the page to apply changes in ThemeProvider if needed, or it might update automatically via context if we set it up, but refreshing is safe
         window.location.reload();
+      } else {
+        const errData = await res.json().catch(() => null);
+        alert(`Failed to save theme: ${errData?.error || 'Database connection error. Please ensure PostgreSQL is running.'}`);
       }
     } catch (err) {
       console.error(err);
+      alert('Network error: Could not reach the API backend. Please ensure the backend server and database are running.');
     } finally {
       setSaving(false);
     }
@@ -71,7 +74,7 @@ export default function ThemeSettingsPage() {
           <h2 className="text-xl font-bold flex items-center gap-2"><Palette size={20} className="text-electric" /> Color Palette</h2>
           <p className="text-[var(--color-text-main)] opacity-70 text-sm mt-1">Customize the global colors of your website.</p>
         </div>
-        <button 
+        <button
           onClick={handleSave}
           disabled={saving}
           className="bg-electric hover:bg-electric/90 text-white px-6 py-2 rounded-xl font-medium flex items-center gap-2 transition-all"
@@ -88,16 +91,16 @@ export default function ThemeSettingsPage() {
               {key.replace(/([A-Z])/g, ' $1').trim()}
             </label>
             <div className="flex items-center gap-4">
-              <input 
-                type="color" 
-                value={value} 
-                onChange={(e) => setTheme({...theme, [key]: e.target.value})}
+              <input
+                type="color"
+                value={value}
+                onChange={(e) => setTheme({ ...theme, [key]: e.target.value })}
                 className="w-12 h-12 rounded cursor-pointer bg-transparent border-0 p-0"
               />
-              <input 
-                type="text" 
+              <input
+                type="text"
                 value={value}
-                onChange={(e) => setTheme({...theme, [key]: e.target.value})}
+                onChange={(e) => setTheme({ ...theme, [key]: e.target.value })}
                 className="flex-1 bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-3 py-2 text-sm focus:border-electric outline-none"
               />
             </div>
@@ -110,23 +113,23 @@ export default function ThemeSettingsPage() {
           <h2 className="text-xl font-bold flex items-center gap-2 text-[var(--color-text-main)]"><Type size={20} className="text-electric" /> Typography & Layout</h2>
           <p className="text-[var(--color-text-main)] opacity-70 text-sm mt-1">Configure fonts and global layout settings.</p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <label className="text-sm font-medium text-[var(--color-text-main)]">Font Family</label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               value={theme.fontFamily}
-              onChange={(e) => setTheme({...theme, fontFamily: e.target.value})}
+              onChange={(e) => setTheme({ ...theme, fontFamily: e.target.value })}
               className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-4 py-3 focus:border-electric outline-none"
             />
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-[var(--color-text-main)]">Border Radius</label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               value={theme.borderRadius}
-              onChange={(e) => setTheme({...theme, borderRadius: e.target.value})}
+              onChange={(e) => setTheme({ ...theme, borderRadius: e.target.value })}
               className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-4 py-3 focus:border-electric outline-none"
               placeholder="e.g. 0.5rem, 8px, 1rem"
             />
