@@ -24,7 +24,7 @@ const services = [
   { title: "Strategy & SEO", description: "Technical SEO and digital strategy to dominate search results and drive leads.", icon: BarChart, link: "/services/seo" },
 ];
 
-const process = [
+const processSteps = [
   { title: "Discovery & Strategy", desc: "We deep-dive into your business model to align our solution with your revenue goals." },
   { title: "Prototyping", desc: "Creating high-fidelity wireframes and interactive prototypes for your review." },
   { title: "Iterative Development", desc: "Building in agile sprints with regular updates and feedback cycles." },
@@ -251,7 +251,7 @@ export default function Home() {
                 Our proven development methodology ensures your project is delivered on time, within budget, and to the highest quality standards.
               </p>
               <div className="space-y-4">
-                {process.map((item, i) => (
+                {processSteps.map((item, i) => (
                   <div key={i} className="flex gap-4 group">
                     <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-electric font-bold text-lg group-hover:bg-electric group-hover:text-white transition-all">
                       {i + 1}
