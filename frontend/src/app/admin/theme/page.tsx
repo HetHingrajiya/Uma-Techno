@@ -8,13 +8,13 @@ export default function ThemeSettingsPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [theme, setTheme] = useState({
-    primaryColor: "#3B82F6",
-    secondaryColor: "#60A5FA",
-    accentColor: "#10B981",
-    backgroundColor: "#F8FAFC",
-    cardColor: "#FFFFFF",
+    primaryColor: "#06B6D4",
+    secondaryColor: "#0EA5E9",
+    accentColor: "#3B82F6",
+    backgroundColor: "#FFFFFF",
+    cardColor: "#F8FAFC",
     textColor: "#0F172A",
-    headingColor: "#1E293B",
+    headingColor: "#0F172A",
     borderColor: "#E2E8F0",
     fontFamily: "Inter, Outfit, sans-serif",
     borderRadius: "0.75rem",
@@ -33,9 +33,11 @@ export default function ThemeSettingsPage() {
         if (data.primaryColor) {
           setTheme(data);
         }
+      } else {
+        console.warn("Failed to fetch theme from DB, using default theme.");
       }
     } catch (err) {
-      console.error(err);
+      console.warn("API fetch failed, using default theme.");
     } finally {
       setLoading(false);
     }
@@ -52,12 +54,10 @@ export default function ThemeSettingsPage() {
       if (res.ok) {
         window.location.reload();
       } else {
-        const errData = await res.json().catch(() => null);
-        alert(`Failed to save theme: ${errData?.error || 'Database connection error. Please ensure PostgreSQL is running.'}`);
+        console.warn("Failed to save theme to DB. Ensure PostgreSQL is running.");
       }
     } catch (err) {
-      console.error(err);
-      alert('Network error: Could not reach the API backend. Please ensure the backend server and database are running.');
+      console.warn("Network error: Could not reach the API backend to save theme.");
     } finally {
       setSaving(false);
     }

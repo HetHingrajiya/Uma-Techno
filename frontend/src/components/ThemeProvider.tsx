@@ -21,13 +21,13 @@ interface ThemeSettings {
 }
 
 const defaultTheme: ThemeSettings = {
-  primaryColor: "#3B82F6",
-  secondaryColor: "#60A5FA",
-  accentColor: "#10B981",
-  backgroundColor: "#F8FAFC",
-  cardColor: "#FFFFFF",
+  primaryColor: "#06B6D4",
+  secondaryColor: "#0EA5E9",
+  accentColor: "#3B82F6",
+  backgroundColor: "#FFFFFF",
+  cardColor: "#F8FAFC",
   textColor: "#0F172A",
-  headingColor: "#1E293B",
+  headingColor: "#0F172A",
   borderColor: "#E2E8F0",
   fontFamily: "Inter, Outfit, sans-serif",
   headingSize: "base",
@@ -67,7 +67,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         :root {
           --color-electric: ${theme.primaryColor};
           --color-accent: ${theme.accentColor};
-          --color-navy: ${theme.backgroundColor};
+          --color-navy: ${theme.headingColor};
           --color-navy-light: ${theme.cardColor};
           --color-text-main: ${theme.textColor};
           --color-border: ${theme.borderColor};
@@ -75,12 +75,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           --font-sans: ${theme.fontFamily};
           --radius: ${theme.borderRadius};
           
-          --color-blue-glow: ${theme.primaryColor}26; /* 15% opacity */
-          --color-glass: rgba(255, 255, 255, 0.02);
+          --background: ${theme.backgroundColor};
+          --foreground: ${theme.textColor};
+          
+          --color-blue-glow: ${theme.primaryColor}26;
+          --color-glass: rgba(255, 255, 255, 0.85);
         }
         body {
-          background-color: var(--color-navy);
-          color: var(--color-text-main);
+          background-color: var(--background);
+          color: var(--foreground);
           font-family: var(--font-sans);
         }
       `}} />
