@@ -35,7 +35,6 @@ export default function SEOLandingPage({ params }: { params: { slug: string } })
    const serviceName = params.slug.replace(/-rajkot|-gujarat/g, '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 
    return (
-   return (
       <div className="flex flex-col gap-16 lg:gap-32 pb-20 lg:pb-32 bg-[var(--background)] min-h-screen pt-32">
          <section className="max-w-7xl mx-auto px-6 w-full text-center space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
