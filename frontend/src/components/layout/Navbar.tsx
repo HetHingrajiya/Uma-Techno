@@ -62,9 +62,9 @@ export default function Navbar() {
           <Logo className="w-12 h-12 lg:w-16 lg:h-16 transition-all" />
           <div className="flex flex-col leading-none">
             <span className="text-2xl lg:text-3xl font-bold tracking-tighter uppercase">
-              <span className="text-electric">Uma</span><span className="text-white">Techno</span>
+              <span className="text-[var(--color-electric)]">Uma</span><span className="text-[var(--color-text-main)]">Techno</span>
             </span>
-            <span className="text-[10px] lg:text-[11px] text-gray-500 font-bold tracking-[0.3em] uppercase mt-1">
+            <span className="text-[10px] lg:text-[11px] text-[var(--color-text-main)] opacity-50 font-bold tracking-[0.3em] uppercase mt-1">
               Engineering Excellence.
             </span>
           </div>
@@ -77,8 +77,8 @@ export default function Navbar() {
               <Link
                 href={link.href}
                 className={cn(
-                  "text-base font-bold transition-all hover:text-electric flex items-center gap-1 tracking-wide",
-                  pathname === link.href ? "text-electric" : "text-gray-300"
+                  "text-base font-bold transition-all hover:text-[var(--color-electric)] flex items-center gap-1 tracking-wide",
+                  pathname === link.href ? "text-[var(--color-electric)]" : "text-[var(--color-text-main)] opacity-70 hover:opacity-100"
                 )}
               >
                 {link.name}
@@ -102,7 +102,7 @@ export default function Navbar() {
           ))}
             <Link
               href="/contact"
-              className="bg-electric hover:bg-accent text-navy px-6 py-2 rounded-full text-sm font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+              className="bg-[var(--color-electric)] hover:brightness-110 text-white px-6 py-2 rounded-full text-sm font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_var(--color-electric)]"
             >
             Get a Quote
           </Link>
@@ -110,7 +110,7 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-white"
+          className="md:hidden text-[var(--color-text-main)]"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}

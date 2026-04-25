@@ -178,14 +178,17 @@ export default function Home() {
                 <Link
                   key={service.slug}
                   href={`/services/${service.slug}`}
-                  className={`group bg-[var(--color-card)] border border-[var(--color-border)] p-8 rounded-[2rem] ${index === 1 ? 'md:col-span-2' : ''} flex flex-col justify-center relative overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500`}
+                  className={`group bg-[var(--color-navy-light)] border border-[var(--color-border)] p-8 rounded-[2rem] ${index === 1 ? 'md:col-span-2' : ''} flex flex-col justify-center relative overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500`}
                 >
+                  {/* Blurred Background Glow */}
+                  <div className="absolute bottom-0 right-0 w-48 h-48 bg-[var(--color-electric)]/10 blur-[60px] -mr-16 -mb-16 group-hover:bg-[var(--color-electric)]/20 transition-all duration-500" />
+                  
                   <div className="space-y-4 relative z-10">
-                    <div className="w-14 h-14 bg-[var(--color-electric)]/10 rounded-2xl flex items-center justify-center text-[var(--color-electric)] group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all">
+                    <div className="w-14 h-14 bg-[var(--color-electric)]/10 rounded-2xl flex items-center justify-center text-[var(--color-electric)] group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all shadow-sm">
                       {getIcon(service.icon || 'Code')}
                     </div>
                     <div>
-                      <h4 className="text-xl font-bold font-outfit text-[var(--color-text-main)] uppercase">{service.title}</h4>
+                      <h4 className="text-xl font-bold font-outfit text-[var(--color-text-main)] uppercase tracking-tight">{service.title}</h4>
                     </div>
                   </div>
                 </Link>

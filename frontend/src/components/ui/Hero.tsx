@@ -24,11 +24,7 @@ export default function Hero() {
             className="relative"
           >
             <div className="space-y-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--color-navy-light)] border border-[var(--color-border)] text-sm font-bold text-[var(--color-text-main)] shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-[var(--color-electric)] animate-pulse" />
-                Premium IT Agency in Rajkot
-              </div>
-              
+
               <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black font-outfit leading-[1.05] tracking-tight text-[var(--color-text-main)]">
                 <span className="block">Design that</span>
                 <span className="block text-gradient">Wins Clients.</span>
