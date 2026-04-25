@@ -398,7 +398,7 @@ export default function Home() {
       {/* CTA Section */}
       {isEnabled('cta') && (
         <section className="max-w-7xl mx-auto px-6 w-full pb-20">
-          <div className="bg-[var(--color-navy)] border border-[var(--color-border)] rounded-[3rem] p-10 lg:p-16 text-center space-y-6 relative overflow-hidden shadow-2xl">
+          <div className="bg-gradient-to-br from-slate-900 via-[#0F172A] to-slate-900 border border-[var(--color-border)] rounded-[3rem] p-10 lg:p-16 text-center space-y-6 relative overflow-hidden shadow-2xl">
             <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-electric)]/10 blur-[120px] -mr-48 -mt-48" />
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--color-accent)]/10 blur-[120px] -ml-48 -mb-48" />
 

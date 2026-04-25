@@ -50,22 +50,6 @@ export default function Hero() {
                     View Our Work
                   </Link>
                 </div>
-                
-                <div className="flex items-center gap-4 pt-4 border-t border-[var(--color-border)]">
-                  <div className="flex -space-x-3">
-                    {[1,2,3,4].map(i => (
-                      <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-[var(--color-navy-light)] overflow-hidden">
-                        <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="Client" className="w-full h-full object-cover" />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex flex-col">
-                    <div className="flex text-[#F59E0B]">
-                      {[1,2,3,4,5].map(i => <Star key={i} size={14} fill="currentColor" />)}
-                    </div>
-                    <span className="text-xs font-bold text-[var(--color-text-main)] opacity-80 mt-1">Trusted by 50+ Brands</span>
-                  </div>
-                </div>
               </div>
             </div>
           </motion.div>
