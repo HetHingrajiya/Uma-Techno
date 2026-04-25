@@ -42,6 +42,24 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const fetchTheme = async () => {
       try {
+        // First check if there is a preview theme in localStorage
+        const previewData = localStorage.getItem('preview-theme');
+        if (previewData) {
+          const p = JSON.parse(previewData);
+          setTheme(prev => ({ 
+            ...prev, 
+            primaryColor: p.primaryColor,
+            secondaryColor: p.secondaryColor || p.primaryColor,
+            accentColor: p.accentColor || p.primaryColor,
+            backgroundColor: p.backgroundColor,
+            cardColor: p.cardColor,
+            textColor: p.textColor,
+            borderColor: p.borderColor,
+            headingColor: p.textColor
+          }));
+          return;
+        }
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme`);
         if (res.ok) {
           const data = await res.json();
@@ -58,7 +76,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     
     // Listen for theme changes from other tabs/admin
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'theme-updated') {
+      if (e.key === 'theme-updated' || e.key === 'preview-theme') {
         fetchTheme();
       }
     };

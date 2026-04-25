@@ -154,13 +154,17 @@ export default function ThemeSettingsPage() {
         setActivePalette(palette);
         setOriginalPalette(palette);
         setPreviewPalette(null);
+        localStorage.removeItem('preview-theme');
         applyThemeLocally(palette);
         alert(`Theme "${palette.name}" has been applied successfully!`);
         fetchPalettes();
+      } else {
+        const errData = await res.json().catch(() => ({}));
+        alert(`Failed to apply theme: ${errData.error || 'Unknown error'}`);
       }
     } catch (err) {
       console.error(err);
-      alert("Failed to apply theme. Please try again.");
+      alert("Failed to apply theme. Please check your internet connection.");
     } finally {
       setSaving(false);
     }
@@ -168,11 +172,13 @@ export default function ThemeSettingsPage() {
 
   const handlePreview = (palette: PaletteType) => {
     setPreviewPalette(palette);
+    localStorage.setItem('preview-theme', JSON.stringify(palette));
     applyThemeLocally(palette);
   };
 
   const handleDiscard = () => {
     if (originalPalette) {
+      localStorage.removeItem('preview-theme');
       applyThemeLocally(originalPalette);
       setPreviewPalette(null);
     }
@@ -201,10 +207,13 @@ export default function ThemeSettingsPage() {
         alert("Custom palette created and saved successfully!");
         setShowCustomBuilder(false);
         fetchPalettes();
+      } else {
+        const errData = await res.json().catch(() => ({}));
+        alert(`Failed to save palette: ${errData.error || 'Server error'}`);
       }
     } catch (err) {
       console.error(err);
-      alert("Failed to create custom palette.");
+      alert("Network error: Failed to save palette.");
     } finally {
       setSaving(false);
     }
