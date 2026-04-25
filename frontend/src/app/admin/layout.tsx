@@ -51,7 +51,7 @@ export default function AdminLayout({
   if (!isLoggedIn) return null;
 
   return (
-    <div className="flex min-h-screen bg-[var(--color-navy)] text-[var(--color-text-main)] transition-colors duration-300">
+    <div className="flex min-h-screen bg-[var(--background)] text-[var(--color-text-main)] transition-colors duration-300">
       {/* Sidebar */}
       <aside className="w-64 bg-[var(--color-navy-light)] border-r border-[var(--color-border)] flex flex-col fixed inset-y-0 left-0 z-40">
         <div className="p-6">

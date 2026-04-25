@@ -117,8 +117,8 @@ export default function WidgetControlPage() {
             <div
               key={widget.id}
               className={`flex items-center justify-between p-4 rounded-xl border transition-all ${widget.enabled
-                  ? 'bg-[var(--color-navy)] border-[var(--color-border)]'
-                  : 'bg-[var(--color-navy)] border-red-500/20 opacity-60'
+                  ? 'bg-[var(--color-card)] border-[var(--color-border)]'
+                  : 'bg-[var(--color-card)] border-red-500/20 opacity-60'
                 }`}
             >
               <div className="flex items-center gap-4">
