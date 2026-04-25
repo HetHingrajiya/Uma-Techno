@@ -117,12 +117,16 @@ model ThemeSetting {
   fontFamily      String   @default("Inter, Outfit, sans-serif")
   headingSize     String   @default("base")
   bodyTextSize    String   @default("base")
-  borderRadius    String   @default("0.75rem")
-  containerWidth  String   @default("1280px")
-  sectionSpacing  String   @default("4rem")
-  buttonShape     String   @default("rounded-xl")
-  themeMode       String   @default("light") // light, dark, auto
-  updatedAt       DateTime @updatedAt
+  borderRadius        String   @default("0.75rem")
+  containerWidth      String   @default("1280px")
+  sectionSpacing      String   @default("4rem")
+  buttonShape         String   @default("rounded-xl")
+  blueGlowColor       String   @default("rgba(6, 182, 212, 0.15)")
+  glassBackgroundColor String  @default("rgba(255, 255, 255, 0.85)")
+  scrollbarThumbColor String   @default("#06B6D4")
+  scrollbarTrackColor String   @default("#f8fafc")
+  themeMode           String   @default("light") // light, dark, auto
+  updatedAt           DateTime @updatedAt
 }
 
 model Widget {

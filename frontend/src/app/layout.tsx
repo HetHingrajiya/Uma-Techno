@@ -81,7 +81,7 @@ export default function RootLayout({
     },
     "sameAs": [
       "https://www.linkedin.com/company/uma-techno",
-      "https://www.instagram.com/umatechno"
+      "https://www.instagram.com/uma.techno/"
     ]
   };
 

@@ -18,6 +18,10 @@ export default function ThemeSettingsPage() {
     borderColor: "#E2E8F0",
     fontFamily: "Inter, Outfit, sans-serif",
     borderRadius: "0.75rem",
+    blueGlowColor: "rgba(6, 182, 212, 0.15)",
+    glassBackgroundColor: "rgba(255, 255, 255, 0.85)",
+    scrollbarThumbColor: "#06B6D4",
+    scrollbarTrackColor: "#f8fafc",
   });
   const router = useRouter();
 
@@ -133,6 +137,60 @@ export default function ThemeSettingsPage() {
               className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-4 py-3 focus:border-electric outline-none"
               placeholder="e.g. 0.5rem, 8px, 1rem"
             />
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-[var(--color-navy-light)] p-6 rounded-2xl border border-[var(--color-border)] space-y-6">
+        <div>
+          <h2 className="text-xl font-bold flex items-center gap-2 text-[var(--color-text-main)]"><LayoutTemplate size={20} className="text-electric" /> Advanced Styling</h2>
+          <p className="text-[var(--color-text-main)] opacity-70 text-sm mt-1">Configure advanced UI elements like glass effects, glows, and scrollbars.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-[var(--color-text-main)]">Blue Glow Color (RGBA)</label>
+            <input
+              type="text"
+              value={theme.blueGlowColor}
+              onChange={(e) => setTheme({ ...theme, blueGlowColor: e.target.value })}
+              className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-4 py-3 focus:border-electric outline-none"
+              placeholder="rgba(6, 182, 212, 0.15)"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-[var(--color-text-main)]">Glass Background (RGBA)</label>
+            <input
+              type="text"
+              value={theme.glassBackgroundColor}
+              onChange={(e) => setTheme({ ...theme, glassBackgroundColor: e.target.value })}
+              className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-4 py-3 focus:border-electric outline-none"
+              placeholder="rgba(255, 255, 255, 0.85)"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-[var(--color-text-main)]">Scrollbar Thumb (Hex/RGBA)</label>
+            <div className="flex items-center gap-2">
+               <input type="color" value={theme.scrollbarThumbColor?.startsWith('#') ? theme.scrollbarThumbColor : '#06B6D4'} onChange={(e) => setTheme({ ...theme, scrollbarThumbColor: e.target.value })} className="w-10 h-10 rounded cursor-pointer bg-transparent border-0 p-0 shrink-0" />
+               <input
+                 type="text"
+                 value={theme.scrollbarThumbColor}
+                 onChange={(e) => setTheme({ ...theme, scrollbarThumbColor: e.target.value })}
+                 className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-4 py-3 focus:border-electric outline-none"
+               />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-[var(--color-text-main)]">Scrollbar Track (Hex/RGBA)</label>
+            <div className="flex items-center gap-2">
+               <input type="color" value={theme.scrollbarTrackColor?.startsWith('#') ? theme.scrollbarTrackColor : '#f8fafc'} onChange={(e) => setTheme({ ...theme, scrollbarTrackColor: e.target.value })} className="w-10 h-10 rounded cursor-pointer bg-transparent border-0 p-0 shrink-0" />
+               <input
+                 type="text"
+                 value={theme.scrollbarTrackColor}
+                 onChange={(e) => setTheme({ ...theme, scrollbarTrackColor: e.target.value })}
+                 className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-4 py-3 focus:border-electric outline-none"
+               />
+            </div>
           </div>
         </div>
       </div>

@@ -36,10 +36,17 @@ export default function Footer() {
             mobile applications, and custom business software that drive real growth.
           </p>
           <div className="flex gap-4">
-            {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
+            {[
+              { Icon: Facebook, href: "#" },
+              { Icon: Twitter, href: "#" },
+              { Icon: Instagram, href: "https://www.instagram.com/uma.techno/" },
+              { Icon: Linkedin, href: "https://www.linkedin.com/company/uma-techno" }
+            ].map(({ Icon, href }, i) => (
               <a
                 key={i}
-                href="#"
+                href={href}
+                target={href !== "#" ? "_blank" : undefined}
+                rel={href !== "#" ? "noopener noreferrer" : undefined}
                 className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-electric hover:text-navy transition-all shadow-sm hover:shadow-electric/20"
               >
                 <Icon size={18} />

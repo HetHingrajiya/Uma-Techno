@@ -11,7 +11,8 @@ import {
   LogOut, 
   MessageSquare,
   Briefcase,
-  Layers
+  Layers,
+  RefreshCw
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -31,6 +32,7 @@ export default function AdminLayout({
   const router = useRouter();
   const pathname = usePathname();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [clearingCache, setClearingCache] = useState(false);
 
   useEffect(() => {
     // Basic auth check
@@ -81,7 +83,25 @@ export default function AdminLayout({
           ))}
         </nav>
 
-        <div className="p-4 border-t border-white/5">
+        <div className="p-4 border-t border-[var(--color-border)] space-y-2">
+          <button
+            onClick={async () => {
+              setClearingCache(true);
+              try {
+                await fetch('/api/clear-cache', { method: 'POST' });
+                alert('Cache cleared successfully!');
+              } catch (e) {
+                alert('Failed to clear cache');
+              }
+              setClearingCache(false);
+            }}
+            disabled={clearingCache}
+            className="flex items-center gap-3 px-4 py-3 w-full rounded-xl text-gray-400 hover:bg-electric/10 hover:text-electric transition-all disabled:opacity-50"
+          >
+            <RefreshCw size={20} className={clearingCache ? "animate-spin" : ""} />
+            <span className="font-medium">{clearingCache ? 'Clearing...' : 'Clear Cache'}</span>
+          </button>
+          
           <button
             onClick={() => {
               localStorage.removeItem("admin_token");

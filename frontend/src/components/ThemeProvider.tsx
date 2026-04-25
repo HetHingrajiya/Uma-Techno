@@ -18,6 +18,10 @@ interface ThemeSettings {
   containerWidth: string;
   sectionSpacing: string;
   buttonShape: string;
+  blueGlowColor: string;
+  glassBackgroundColor: string;
+  scrollbarThumbColor: string;
+  scrollbarTrackColor: string;
 }
 
 const defaultTheme: ThemeSettings = {
@@ -36,6 +40,10 @@ const defaultTheme: ThemeSettings = {
   containerWidth: "1280px",
   sectionSpacing: "4rem",
   buttonShape: "rounded-xl",
+  blueGlowColor: "rgba(6, 182, 212, 0.15)",
+  glassBackgroundColor: "rgba(255, 255, 255, 0.85)",
+  scrollbarThumbColor: "#06B6D4",
+  scrollbarTrackColor: "#f8fafc",
 };
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
@@ -78,8 +86,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           --background: ${theme.backgroundColor};
           --foreground: ${theme.textColor};
           
-          --color-blue-glow: ${theme.primaryColor}26;
-          --color-glass: rgba(255, 255, 255, 0.85);
+          --color-blue-glow: ${theme.blueGlowColor || 'rgba(6, 182, 212, 0.15)'};
+          --color-glass: ${theme.glassBackgroundColor || 'rgba(255, 255, 255, 0.85)'};
+          --scrollbar-thumb-color: ${theme.scrollbarThumbColor || '#06B6D4'};
+          --scrollbar-track-color: ${theme.scrollbarTrackColor || '#f8fafc'};
         }
         body {
           background-color: var(--background);
