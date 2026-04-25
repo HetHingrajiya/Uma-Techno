@@ -14,6 +14,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/services/ui-ux',
     '/services/seo',
     '/services/branding',
+    '/blog',
+    '/web-development-rajkot',
+    '/app-development-rajkot',
+    '/seo-agency-rajkot',
+    '/website-design-rajkot',
   ];
 
   return routes.map((route) => ({

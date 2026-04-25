@@ -15,14 +15,13 @@ export default function WidgetControlPage() {
   const fetchWidgets = async () => {
     const fallbackWidgets = [
       { id: '1', name: 'hero', title: 'Hero Section', enabled: true, order: 1 },
-      { id: '2', name: 'trusted', title: 'Trusted By', enabled: true, order: 2 },
-      { id: '3', name: 'services', title: 'Services', enabled: true, order: 3 },
+      { id: '2', name: 'stats', title: 'Trust & Stats Bar', enabled: true, order: 2 },
+      { id: '3', name: 'services', title: 'Our Services', enabled: true, order: 3 },
       { id: '4', name: 'why-choose-us', title: 'Why Choose Us', enabled: true, order: 4 },
-      { id: '5', name: 'stats', title: 'Statistics', enabled: true, order: 5 },
-      { id: '6', name: 'process', title: 'Process', enabled: true, order: 6 },
-      { id: '7', name: 'portfolio', title: 'Portfolio', enabled: true, order: 7 },
-      { id: '8', name: 'testimonials', title: 'Testimonials', enabled: true, order: 8 },
-      { id: '9', name: 'cta', title: 'Call to Action', enabled: true, order: 9 },
+      { id: '5', name: 'portfolio', title: 'Selected Portfolio', enabled: true, order: 5 },
+      { id: '6', name: 'testimonials', title: 'Client Testimonials', enabled: true, order: 6 },
+      { id: '7', name: 'process', title: 'Our Process', enabled: true, order: 7 },
+      { id: '8', name: 'cta', title: 'Bottom Call to Action', enabled: true, order: 8 },
     ];
 
     try {

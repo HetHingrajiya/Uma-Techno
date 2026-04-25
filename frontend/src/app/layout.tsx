@@ -19,8 +19,11 @@ export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://umatechno.in"),
+  verification: {
+    google: "y-google-verification-code-here", // Replace with actual code
+  },
   title: {
-    default: "Uma Techno | Premium Web Development & Digital Marketing Agency Rajkot",
+    default: "Uma Techno | Website Development Company in Rajkot",
     template: "%s | Uma Techno"
   },
   description: "Uma Techno is a premium IT agency in Rajkot, Gujarat. We specialize in high-performance Web Development, Mobile Apps, and SEO strategies designed to grow businesses.",
@@ -59,6 +62,7 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "@/components/ThemeProvider";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 export default function RootLayout({
   children,
@@ -71,13 +75,33 @@ export default function RootLayout({
     "name": "Uma Techno",
     "image": "https://umatechno.in/icon.png",
     "url": "https://umatechno.in",
-    "telephone": "+91 94291 03535",
+    "telephone": "+91 92743 50728",
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Mavdi Main Road",
       "addressLocality": "Rajkot",
       "addressRegion": "Gujarat",
+      "postalCode": "360004",
       "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 22.2746,
+      "longitude": 70.7836
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "09:00",
+      "closes": "19:00"
     },
     "sameAs": [
       "https://www.linkedin.com/company/uma-techno",
@@ -89,6 +113,22 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`} // Replace with actual ID
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XXXXXXXXXX', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
         />
@@ -96,6 +136,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${outfit.variable} font-sans min-h-screen flex flex-col`} suppressHydrationWarning>
         <ThemeProvider>
           {children}
+          <WhatsAppButton />
         </ThemeProvider>
       </body>
     </html>

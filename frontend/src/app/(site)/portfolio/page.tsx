@@ -22,10 +22,48 @@ export default function PortfolioPage() {
             setProjects(data);
           } else {
             setProjects([
-              { title: "Tech Brand Identity", category: "Branding", description: "Complete branding package for a Silicon Valley startup.", featuredImage: "/images/project-1.png", slug: "tech-brand" },
-              { title: "Premium E-commerce", category: "Development", description: "High-performance store for a luxury fashion brand.", featuredImage: "/images/project-2.png", slug: "premium-ecommerce" },
-              { title: "Enterprise CRM", category: "Software", description: "Custom internal tools for business automation.", featuredImage: "/images/project-3.png", slug: "enterprise-crm" },
-              { title: "Fintech App", category: "Mobile", description: "Secure mobile banking application with real-time trading.", featuredImage: "/images/templates.png", slug: "fintech-app" }
+              { 
+                title: "Premium Jewelry E-commerce", 
+                category: "E-commerce", 
+                description: "Luxury digital presence for a high-end jewelry showroom.", 
+                featuredImage: "/images/project-1.png", 
+                slug: "jewelry-ecommerce" 
+              },
+              { 
+                title: "Healthcare Booking System", 
+                category: "Web App", 
+                description: "Automated real-time slot management for multi-location clinics.", 
+                featuredImage: "/images/project-2.png", 
+                slug: "booking-platform" 
+              },
+              { 
+                title: "Corporate Fintech Dashboard", 
+                category: "Software", 
+                description: "Secure data visualization for enterprise financial tracking.", 
+                featuredImage: "/images/project-3.png", 
+                slug: "fintech-dashboard" 
+              },
+              { 
+                title: "Global Real Estate Portal", 
+                category: "Web App", 
+                description: "Interactive property listing platform with map-based search.", 
+                featuredImage: "/images/templates.png", 
+                slug: "real-estate-portal" 
+              },
+              { 
+                title: "Educational LMS Platform", 
+                category: "Web App", 
+                description: "Video-based learning management system with course progress tracking.", 
+                featuredImage: "/images/project-1.png", 
+                slug: "educational-lms" 
+              },
+              { 
+                title: "Industrial CRM System", 
+                category: "Software", 
+                description: "Custom internal tool for managing manufacturing workflows.", 
+                featuredImage: "/images/project-2.png", 
+                slug: "industrial-crm" 
+              }
             ]);
           }
         }
@@ -45,7 +83,7 @@ export default function PortfolioPage() {
     : projects.filter(p => p.category === activeCategory);
 
   return (
-    <div className="pt-32 pb-20 lg:pt-40 lg:pb-32 bg-[var(--color-navy)] min-h-screen">
+    <div className="pt-32 pb-20 lg:pt-40 lg:pb-32 bg-[var(--background)] min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center space-y-6 mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
@@ -85,7 +123,7 @@ export default function PortfolioPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 key={project.slug || i}
-                className="group bg-[var(--color-card)] rounded-[3rem] overflow-hidden flex flex-col border border-[var(--color-border)] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
+                className="card-premium group overflow-hidden flex flex-col bg-white"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
                   <img

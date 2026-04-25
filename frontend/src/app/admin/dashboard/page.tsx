@@ -7,7 +7,8 @@ import {
   FileText, 
   TrendingUp,
   ArrowUpRight,
-  ArrowDownRight
+  ArrowDownRight,
+  RotateCcw
 } from "lucide-react";
 
 const stats = [
@@ -16,9 +17,16 @@ const stats = [
   { name: "Site Visits", value: "12.4k", change: "+18%", trendingUp: true, icon: Users },
 ];
 
-export default function AdminDashboard() {
-  return (
     <div className="space-y-8">
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-bold font-outfit text-[var(--color-text-main)]">Dashboard Overview</h1>
+        <button 
+          className="flex items-center gap-2 px-4 py-2 bg-[var(--color-electric)]/10 text-[var(--color-electric)] rounded-xl font-bold text-sm hover:bg-[var(--color-electric)] hover:text-white transition-all shadow-sm"
+          onClick={() => alert("System Cache Cleared Successfully!")}
+        >
+          <RotateCcw size={16} /> Clear Cache
+        </button>
+      </div>
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat) => (

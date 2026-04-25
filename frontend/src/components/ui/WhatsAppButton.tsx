@@ -1,43 +1,22 @@
 "use client";
 
-import { MessageCircle } from "lucide-react";
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import React from 'react';
+import { MessageCircle } from 'lucide-react';
 
 export default function WhatsAppButton() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    // Show after scrolling 100px
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  if (!isVisible) return null;
-
   return (
-    <motion.a
-      initial={{ scale: 0, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      exit={{ scale: 0, opacity: 0 }}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
-      href="https://wa.me/911234567890?text=Hi%20Uma%20Techno,%20I'm%20interested%20in%20your%20services."
+    <a
+      href="https://wa.me/919274350728?text=Hi%20Uma%20Techno,%20I'm%20interested%20in%20your%20services." // Replace with actual number
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl flex items-center justify-center hover:shadow-[#25D366]/50 transition-shadow"
+      className="fixed bottom-6 right-6 z-[999] bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center animate-bounce-slight"
       aria-label="Chat on WhatsApp"
     >
-      <MessageCircle size={32} />
-      <span className="absolute -top-2 -right-2 w-4 h-4 bg-red-500 border-2 border-white rounded-full animate-pulse"></span>
-    </motion.a>
+      <MessageCircle size={28} />
+      <span className="absolute -top-2 -right-2 flex h-4 w-4">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+        <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
+      </span>
+    </a>
   );
 }

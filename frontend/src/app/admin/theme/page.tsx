@@ -1,199 +1,384 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Loader2, Save, Palette, Type, LayoutTemplate } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { 
+  Palette, 
+  Save, 
+  Plus, 
+  Trash2, 
+  Check, 
+  RotateCcw, 
+  Search, 
+  Filter, 
+  Eye, 
+  Layout,
+  MousePointer2,
+  Heart,
+  Copy,
+  Edit3,
+  Loader2
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
+// Prebuilt Palette Packs
+const PALETTE_PACKS = [
+  {
+    category: "Professional",
+    palettes: [
+      { name: "Cyan Professional", primary: "#06B6D4", secondary: "#0891B2", accent: "#22D3EE", background: "#F8FAFC", text: "#0F172A", card: "#FFFFFF", border: "#E2E8F0" },
+      { name: "Navy Corporate", primary: "#0F172A", secondary: "#1E293B", accent: "#38B2AC", background: "#F1F5F9", text: "#0F172A", card: "#FFFFFF", border: "#CBD5E1" },
+      { name: "Sky Digital", primary: "#0EA5E9", secondary: "#0284C7", accent: "#7DD3FC", background: "#F8FAFC", text: "#0F172A", card: "#FFFFFF", border: "#E0F2FE" }
+    ]
+  },
+  {
+    category: "Premium",
+    palettes: [
+      { name: "Midnight Gold", primary: "#D4AF37", secondary: "#B8860B", accent: "#FFD700", background: "#0F172A", text: "#F8FAFC", card: "#1E293B", border: "#334155" },
+      { name: "Onyx Premium", primary: "#111827", secondary: "#1F2937", accent: "#D4AF37", background: "#F9FAFB", text: "#111827", card: "#FFFFFF", border: "#E5E7EB" }
+    ]
+  },
+  {
+    category: "Startup",
+    palettes: [
+      { name: "Electric Purple", primary: "#8B5CF6", secondary: "#7C3AED", accent: "#C084FC", background: "#FDF4FF", text: "#2E1065", card: "#FFFFFF", border: "#F5D0FE" },
+      { name: "Modern Teal", primary: "#14B8A6", secondary: "#0D9488", accent: "#5EEAD4", background: "#F0FDFA", text: "#134E4A", card: "#FFFFFF", border: "#CCFBF1" }
+    ]
+  },
+  {
+    category: "Nature",
+    palettes: [
+      { name: "Mint Growth", primary: "#10B981", secondary: "#059669", accent: "#6EE7B7", background: "#F0FDF4", text: "#064E3B", card: "#FFFFFF", border: "#DCFCE7" },
+      { name: "Forest Deep", primary: "#065F46", secondary: "#064E3B", accent: "#A7F3D0", background: "#F9FAFB", text: "#064E3B", card: "#FFFFFF", border: "#E5E7EB" }
+    ]
+  }
+];
 
 export default function ThemeSettingsPage() {
+  const [activePalette, setActivePalette] = useState<any>(PALETTE_PACKS[0].palettes[0]);
+  const [savedPalettes, setSavedPalettes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [theme, setTheme] = useState({
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showCustomBuilder, setShowCustomBuilder] = useState(false);
+  const [customPalette, setCustomPalette] = useState({
+    name: "New Custom Palette",
     primaryColor: "#06B6D4",
-    secondaryColor: "#0EA5E9",
-    accentColor: "#3B82F6",
-    backgroundColor: "#FFFFFF",
-    cardColor: "#F8FAFC",
+    secondaryColor: "#3B82F6",
+    accentColor: "#10B981",
+    backgroundColor: "#F8FAFC",
     textColor: "#0F172A",
-    headingColor: "#0F172A",
-    borderColor: "#E2E8F0",
-    fontFamily: "Inter, Outfit, sans-serif",
-    borderRadius: "0.75rem",
-    blueGlowColor: "rgba(6, 182, 212, 0.15)",
-    glassBackgroundColor: "rgba(255, 255, 255, 0.85)",
-    scrollbarThumbColor: "#06B6D4",
-    scrollbarTrackColor: "#f8fafc",
+    cardColor: "#FFFFFF",
+    borderColor: "#E2E8F0"
   });
-  const router = useRouter();
 
   useEffect(() => {
-    fetchTheme();
+    fetchPalettes();
   }, []);
 
-  const fetchTheme = async () => {
+  const fetchPalettes = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`);
       if (res.ok) {
         const data = await res.json();
-        if (data.primaryColor) {
-          setTheme(data);
-        }
-      } else {
-        console.warn("Failed to fetch theme from DB, using default theme.");
+        setSavedPalettes(data);
+        const active = data.find((p: any) => p.isActive);
+        if (active) setActivePalette(active);
       }
     } catch (err) {
-      console.warn("API fetch failed, using default theme.");
+      console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSave = async () => {
+  const handleApply = async (palette: any) => {
     setSaving(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(theme),
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes/${palette.id}/activate`, {
+        method: "PUT"
       });
       if (res.ok) {
-        window.location.reload();
-      } else {
-        console.warn("Failed to save theme to DB. Ensure PostgreSQL is running.");
+        setActivePalette(palette);
+        // Refresh CSS variables locally for instant feel
+        applyThemeLocally(palette);
       }
     } catch (err) {
-      console.warn("Network error: Could not reach the API backend to save theme.");
+      console.error(err);
     } finally {
       setSaving(false);
     }
   };
 
-  if (loading) {
-    return <div className="flex justify-center p-10"><Loader2 className="animate-spin text-electric" /></div>;
-  }
+  const applyThemeLocally = (p: any) => {
+    const root = document.documentElement;
+    root.style.setProperty('--color-electric', p.primaryColor || p.primary);
+    root.style.setProperty('--color-blue-glow', p.primaryColor || p.primary);
+    root.style.setProperty('--color-text-main', p.textColor || p.text);
+    root.style.setProperty('--background', p.backgroundColor || p.background);
+    root.style.setProperty('--color-card', p.cardColor || p.card);
+    root.style.setProperty('--color-border', p.borderColor || p.border);
+  };
+
+  const handleCreateCustom = async () => {
+    setSaving(true);
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(customPalette)
+      });
+      if (res.ok) {
+        setShowCustomBuilder(false);
+        fetchPalettes();
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const filteredPalettes = PALETTE_PACKS.flatMap(pack => 
+    pack.palettes.map(p => ({ ...p, category: pack.category, id: `prebuilt-${p.name}` }))
+  ).concat(savedPalettes.map(p => ({ ...p, isCustom: true })))
+  .filter(p => {
+    const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = activeCategory === "All" || p.category === activeCategory;
+    return matchesSearch && matchesCategory;
+  });
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center bg-[var(--color-navy-light)] p-6 rounded-2xl border border-[var(--color-border)]">
-        <div>
-          <h2 className="text-xl font-bold flex items-center gap-2"><Palette size={20} className="text-electric" /> Color Palette</h2>
-          <p className="text-[var(--color-text-main)] opacity-70 text-sm mt-1">Customize the global colors of your website.</p>
+    <div className="space-y-8 pb-20">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-[var(--color-navy-light)] p-8 rounded-3xl border border-[var(--color-border)] shadow-sm">
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold font-outfit text-[var(--color-text-main)] flex items-center gap-3">
+            <Palette className="text-electric" size={32} /> Theme Settings
+          </h1>
+          <p className="text-[var(--color-text-main)] opacity-60 max-w-xl">
+            Choose a professional color palette or build your own custom brand identity. Changes apply instantly across the whole website.
+          </p>
         </div>
-        <button
-          onClick={handleSave}
-          disabled={saving}
-          className="bg-electric hover:bg-electric/90 text-white px-6 py-2 rounded-xl font-medium flex items-center gap-2 transition-all"
+        <button 
+          onClick={() => setShowCustomBuilder(true)}
+          className="bg-electric hover:bg-electric/90 text-white px-8 py-3 rounded-2xl font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-electric/30"
         >
-          {saving ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
-          Save Changes
+          <Plus size={20} /> Create Custom
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {Object.entries(theme).filter(([k]) => k.includes('Color')).map(([key, value]) => (
-          <div key={key} className="bg-[var(--color-navy-light)] p-5 rounded-2xl border border-[var(--color-border)] space-y-3">
-            <label className="text-sm font-medium text-[var(--color-text-main)] capitalize">
-              {key.replace(/([A-Z])/g, ' $1').trim()}
-            </label>
-            <div className="flex items-center gap-4">
-              <input
-                type="color"
-                value={value}
-                onChange={(e) => setTheme({ ...theme, [key]: e.target.value })}
-                className="w-12 h-12 rounded cursor-pointer bg-transparent border-0 p-0"
-              />
-              <input
-                type="text"
-                value={value}
-                onChange={(e) => setTheme({ ...theme, [key]: e.target.value })}
-                className="flex-1 bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-3 py-2 text-sm focus:border-electric outline-none"
-              />
+      {/* Control Bar */}
+      <div className="flex flex-col md:flex-row gap-4 items-center">
+        <div className="relative flex-1 w-full">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-text-main)] opacity-30" size={18} />
+          <input 
+            type="text"
+            placeholder="Search palettes..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl pl-12 pr-6 py-4 focus:outline-none focus:border-electric transition-colors text-[var(--color-text-main)]"
+          />
+        </div>
+        <div className="flex gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
+          {["All", "Professional", "Premium", "Startup", "Nature"].map(cat => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-6 py-4 rounded-2xl font-bold text-sm whitespace-nowrap transition-all ${
+                activeCategory === cat 
+                ? "bg-electric text-white shadow-lg" 
+                : "bg-[var(--color-navy-light)] text-[var(--color-text-main)] opacity-60 hover:opacity-100 border border-[var(--color-border)]"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
+        {filteredPalettes.map((palette, i) => (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.05 }}
+            key={palette.id || palette.name}
+            className={`group card-premium overflow-hidden border-2 transition-all cursor-pointer relative bg-white ${
+              activePalette?.name === palette.name 
+              ? "border-electric ring-4 ring-electric/10" 
+              : "border-[var(--color-border)] hover:border-electric/30"
+            }`}
+          >
+            {/* Palette Preview */}
+            <div className="h-40 flex flex-col">
+              <div className="flex-1 flex">
+                <div style={{ backgroundColor: palette.primary || palette.primaryColor }} className="flex-[2] h-full" />
+                <div style={{ backgroundColor: palette.secondary || palette.secondaryColor }} className="flex-1 h-full" />
+                <div style={{ backgroundColor: palette.accent || palette.accentColor }} className="flex-1 h-full" />
+              </div>
+              <div className="h-12 flex">
+                <div style={{ backgroundColor: palette.background || palette.backgroundColor }} className="flex-1 h-full border-t border-[var(--color-border)]" />
+                <div style={{ backgroundColor: palette.card || palette.cardColor }} className="flex-1 h-full border-t border-l border-[var(--color-border)]" />
+              </div>
             </div>
-          </div>
+
+            {/* Info */}
+            <div className="p-6 space-y-4">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="font-bold text-lg text-[var(--color-text-main)]">{palette.name}</h3>
+                  <span className="text-[10px] uppercase font-black tracking-widest text-[var(--color-text-main)] opacity-40">{palette.category}</span>
+                </div>
+                <div className="flex gap-2">
+                   <button className="text-[var(--color-text-main)] opacity-30 hover:opacity-100 transition-opacity">
+                      <Heart size={16} />
+                   </button>
+                   <button className="text-[var(--color-text-main)] opacity-30 hover:opacity-100 transition-opacity">
+                      <Copy size={16} />
+                   </button>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <button 
+                  onClick={() => handleApply(palette)}
+                  disabled={saving}
+                  className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 ${
+                    activePalette?.name === palette.name
+                    ? "bg-green-500 text-white"
+                    : "bg-electric text-white hover:brightness-110"
+                  }`}
+                >
+                  {saving && activePalette?.name === palette.name ? <Loader2 size={16} className="animate-spin" /> : activePalette?.name === palette.name ? <Check size={16} /> : <MousePointer2 size={16} />}
+                  {activePalette?.name === palette.name ? "Active" : "Apply Theme"}
+                </button>
+                <button className="w-12 bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-xl flex items-center justify-center text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:border-electric transition-all">
+                  <Eye size={18} />
+                </button>
+              </div>
+            </div>
+          </motion.div>
         ))}
       </div>
 
-      <div className="bg-[var(--color-navy-light)] p-6 rounded-2xl border border-[var(--color-border)] space-y-6">
-        <div>
-          <h2 className="text-xl font-bold flex items-center gap-2 text-[var(--color-text-main)]"><Type size={20} className="text-electric" /> Typography & Layout</h2>
-          <p className="text-[var(--color-text-main)] opacity-70 text-sm mt-1">Configure fonts and global layout settings.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-[var(--color-text-main)]">Font Family</label>
-            <input
-              type="text"
-              value={theme.fontFamily}
-              onChange={(e) => setTheme({ ...theme, fontFamily: e.target.value })}
-              className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-4 py-3 focus:border-electric outline-none"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-[var(--color-text-main)]">Border Radius</label>
-            <input
-              type="text"
-              value={theme.borderRadius}
-              onChange={(e) => setTheme({ ...theme, borderRadius: e.target.value })}
-              className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-4 py-3 focus:border-electric outline-none"
-              placeholder="e.g. 0.5rem, 8px, 1rem"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-[var(--color-navy-light)] p-6 rounded-2xl border border-[var(--color-border)] space-y-6">
-        <div>
-          <h2 className="text-xl font-bold flex items-center gap-2 text-[var(--color-text-main)]"><LayoutTemplate size={20} className="text-electric" /> Advanced Styling</h2>
-          <p className="text-[var(--color-text-main)] opacity-70 text-sm mt-1">Configure advanced UI elements like glass effects, glows, and scrollbars.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-[var(--color-text-main)]">Blue Glow Color (RGBA)</label>
-            <input
-              type="text"
-              value={theme.blueGlowColor}
-              onChange={(e) => setTheme({ ...theme, blueGlowColor: e.target.value })}
-              className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-4 py-3 focus:border-electric outline-none"
-              placeholder="rgba(6, 182, 212, 0.15)"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-[var(--color-text-main)]">Glass Background (RGBA)</label>
-            <input
-              type="text"
-              value={theme.glassBackgroundColor}
-              onChange={(e) => setTheme({ ...theme, glassBackgroundColor: e.target.value })}
-              className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-4 py-3 focus:border-electric outline-none"
-              placeholder="rgba(255, 255, 255, 0.85)"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-[var(--color-text-main)]">Scrollbar Thumb (Hex/RGBA)</label>
-            <div className="flex items-center gap-2">
-               <input type="color" value={theme.scrollbarThumbColor?.startsWith('#') ? theme.scrollbarThumbColor : '#06B6D4'} onChange={(e) => setTheme({ ...theme, scrollbarThumbColor: e.target.value })} className="w-10 h-10 rounded cursor-pointer bg-transparent border-0 p-0 shrink-0" />
-               <input
-                 type="text"
-                 value={theme.scrollbarThumbColor}
-                 onChange={(e) => setTheme({ ...theme, scrollbarThumbColor: e.target.value })}
-                 className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-4 py-3 focus:border-electric outline-none"
-               />
+      {/* Live Preview Bar */}
+      <AnimatePresence>
+        {activePalette && (
+          <motion.div 
+            initial={{ y: 100 }}
+            animate={{ y: 0 }}
+            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[60] w-full max-w-4xl px-6"
+          >
+            <div className="bg-slate-900/90 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-4 shadow-2xl flex items-center justify-between">
+              <div className="flex items-center gap-6 pl-4">
+                <div className="flex -space-x-3">
+                  {[activePalette.primaryColor || activePalette.primary, activePalette.secondaryColor || activePalette.secondary, activePalette.backgroundColor || activePalette.background].map((c, i) => (
+                    <div key={i} style={{ backgroundColor: c }} className="w-10 h-10 rounded-full border-4 border-slate-900 shadow-lg" />
+                  ))}
+                </div>
+                <div>
+                  <p className="text-white font-bold">Currently Previewing</p>
+                  <p className="text-white/50 text-xs uppercase tracking-widest">{activePalette.name}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 pr-2">
+                <button className="px-6 py-3 text-white/70 hover:text-white font-bold text-sm">Discard</button>
+                <button className="bg-white text-slate-900 px-8 py-3 rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-xl">
+                  Save Permanently
+                </button>
+              </div>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Custom Builder Modal */}
+      <AnimatePresence>
+        {showCustomBuilder && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowCustomBuilder(false)}
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
+            />
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative w-full max-w-2xl bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-[var(--color-border)]"
+            >
+              <div className="p-8 lg:p-12 space-y-8">
+                <div className="flex justify-between items-center">
+                  <h2 className="text-3xl font-bold font-outfit text-slate-900">Custom Palette Builder</h2>
+                  <button onClick={() => setShowCustomBuilder(false)} className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors">
+                    <X size={20} />
+                  </button>
+                </div>
+
+                <div className="space-y-6">
+                   <div className="space-y-2">
+                      <label className="text-sm font-bold text-slate-500 uppercase tracking-widest">Palette Name</label>
+                      <input 
+                        type="text" 
+                        value={customPalette.name}
+                        onChange={(e) => setCustomPalette({...customPalette, name: e.target.value})}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-slate-900"
+                      />
+                   </div>
+
+                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                      {[
+                        { label: "Primary", key: "primaryColor" },
+                        { label: "Secondary", key: "secondaryColor" },
+                        { label: "Accent", key: "accentColor" },
+                        { label: "Background", key: "backgroundColor" },
+                        { label: "Text", key: "textColor" },
+                        { label: "Card", key: "cardColor" },
+                        { label: "Border", key: "borderColor" }
+                      ].map(item => (
+                        <div key={item.key} className="space-y-2">
+                           <label className="text-[10px] font-black text-slate-400 uppercase tracking-tighter">{item.label}</label>
+                           <div className="relative">
+                              <input 
+                                type="color" 
+                                value={(customPalette as any)[item.key]}
+                                onChange={(e) => setCustomPalette({...customPalette, [item.key]: e.target.value})}
+                                className="w-full h-12 rounded-xl cursor-pointer border-none"
+                              />
+                              <div className="absolute inset-0 pointer-events-none rounded-xl border border-slate-200 ring-1 ring-inset ring-white/10" />
+                           </div>
+                        </div>
+                      ))}
+                   </div>
+                </div>
+
+                <div className="pt-8 flex gap-4">
+                  <button 
+                    onClick={() => setShowCustomBuilder(false)}
+                    className="flex-1 py-4 text-slate-500 font-bold hover:text-slate-900 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    onClick={handleCreateCustom}
+                    disabled={saving}
+                    className="flex-[2] bg-electric hover:bg-electric/90 text-white py-4 rounded-2xl font-black uppercase tracking-widest shadow-xl hover:shadow-electric/30 transition-all flex items-center justify-center gap-2"
+                  >
+                    {saving ? <Loader2 size={20} className="animate-spin" /> : <Save size={20} />} Save Palette
+                  </button>
+                </div>
+              </div>
+            </motion.div>
           </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-[var(--color-text-main)]">Scrollbar Track (Hex/RGBA)</label>
-            <div className="flex items-center gap-2">
-               <input type="color" value={theme.scrollbarTrackColor?.startsWith('#') ? theme.scrollbarTrackColor : '#f8fafc'} onChange={(e) => setTheme({ ...theme, scrollbarTrackColor: e.target.value })} className="w-10 h-10 rounded cursor-pointer bg-transparent border-0 p-0 shrink-0" />
-               <input
-                 type="text"
-                 value={theme.scrollbarTrackColor}
-                 onChange={(e) => setTheme({ ...theme, scrollbarTrackColor: e.target.value })}
-                 className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-lg px-4 py-3 focus:border-electric outline-none"
-               />
-            </div>
-          </div>
-        </div>
-      </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
+
+const X = (props: any) => (
+  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+);

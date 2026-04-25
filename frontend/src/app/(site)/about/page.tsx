@@ -14,7 +14,7 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div className="py-20 space-y-32">
+    <div className="py-20 space-y-32 bg-[var(--background)]">
       <section className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         <div className="space-y-8">
           <h2 className="text-electric font-bold tracking-widest text-sm uppercase">About Uma Techno</h2>
@@ -45,7 +45,7 @@ export default function AboutPage() {
                 alt="Digital Masterpiece" 
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy to-transparent opacity-40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-40" />
            </div>
            <div className="absolute inset-0 bg-electric/20 rounded-[3rem] -rotate-3 z-0 blur-3xl scale-90" />
         </div>
@@ -103,7 +103,7 @@ export default function AboutPage() {
                <Link href="/contact" className="px-8 py-4 bg-[var(--color-electric)] text-white rounded-xl font-bold transition-all hover:brightness-110 shadow-[0_0_20px_var(--color-electric)]">
                  Contact Us
                </Link>
-               <Link href="/careers" className="px-8 py-4 bg-transparent text-[var(--color-text-main)] rounded-xl font-bold border border-[var(--color-border)] hover:bg-[var(--color-navy-light)] transition-all">
+               <Link href="/careers" className="px-8 py-4 bg-transparent text-[var(--color-text-main)] rounded-xl font-bold border border-[var(--color-border)] hover:bg-slate-50 transition-all">
                  Join Our Team
                </Link>
             </div>

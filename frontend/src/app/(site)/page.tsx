@@ -10,10 +10,10 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 const stats = [
-  { label: "Successful Projects", value: "50+", icon: Rocket },
-  { label: "Business Growth", value: "3x", icon: Zap },
-  { label: "Client Retention", value: "95%", icon: Users },
-  { label: "Support Response", value: "< 2hr", icon: Shield },
+  { label: "Successful Projects", value: "120+", icon: Rocket },
+  { label: "Growth Delivered", value: "3x", icon: Zap },
+  { label: "Client Satisfaction", value: "100%", icon: Users },
+  { label: "Support Coverage", value: "24/7", icon: Shield },
 ];
 
 const processSteps = [
@@ -49,9 +49,39 @@ export default function Home() {
       ];
 
       const fallbackProjects = [
-        { title: "Tech Brand Identity", category: "Branding", description: "Complete branding package for a Silicon Valley startup.", featuredImage: "/images/project-1.png", slug: "tech-brand" },
-        { title: "Premium E-commerce", category: "Development", description: "High-performance store for a luxury fashion brand.", featuredImage: "/images/project-2.png", slug: "premium-ecommerce" },
-        { title: "Enterprise CRM", category: "Software", description: "Custom internal tools for business automation.", featuredImage: "/images/project-3.png", slug: "enterprise-crm" }
+        { 
+          title: "Premium Jewelry E-commerce", 
+          category: "E-commerce", 
+          industry: "Fashion & Jewelry",
+          challenge: "Needed a luxury digital presence that matched their physical showroom quality.",
+          solution: "Built a custom Next.js storefront with high-fidelity visuals and 3D product previews.",
+          result: "+450% Conversion Increase",
+          tech: ["Next.js", "Three.js", "Prisma"],
+          featuredImage: "/images/project-1.png", 
+          slug: "jewelry-ecommerce" 
+        },
+        { 
+          title: "Healthcare Booking System", 
+          category: "Web App", 
+          industry: "Medical",
+          challenge: "Manual appointment scheduling was causing 40% lead leakage.",
+          solution: "Automated booking system with real-time slot management and SMS notifications.",
+          result: "Zero Manual Overhead",
+          tech: ["React", "Node.js", "PostgreSQL"],
+          featuredImage: "/images/project-2.png", 
+          slug: "booking-platform" 
+        },
+        { 
+          title: "Corporate Fintech Dashboard", 
+          category: "Software", 
+          industry: "Finance",
+          challenge: "Legacy systems were slow and insecure for handling sensitive transaction data.",
+          solution: "End-to-end encrypted dashboard with real-time data visualization.",
+          result: "99.9% System Uptime",
+          tech: ["TypeScript", "D3.js", "Azure"],
+          featuredImage: "/images/project-3.png", 
+          slug: "fintech-dashboard" 
+        }
       ];
 
       if (process.env.NODE_ENV === 'development') {
@@ -120,16 +150,27 @@ export default function Home() {
     <div className="flex flex-col gap-16 lg:gap-32 pb-20 lg:pb-32 bg-white">
       {isEnabled('hero') && <Hero />}
 
-      {/* Trusted By Section */}
-      {isEnabled('trusted') && (
-        <section className="max-w-7xl mx-auto px-6 w-full -mt-8 lg:-mt-16">
-          <div className="text-center space-y-8">
-            <p className="text-[var(--color-text-main)] opacity-50 font-medium tracking-widest text-xs uppercase">Partnering with Growth-Focused Brands</p>
-            <div className="flex flex-wrap justify-center items-center gap-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-              {["Retailers", "Real Estate", "Startups", "Enterprises", "Agency Partners"].map(brand => (
-                <span key={brand} className="text-2xl font-bold font-outfit text-[var(--color-text-main)]">{brand}</span>
-              ))}
-            </div>
+      {/* Trust & Stats Section */}
+      {isEnabled('stats') && (
+        <section className="max-w-7xl mx-auto px-6 w-full -mt-8 lg:-mt-16 relative z-20">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
+            {stats.map((stat, i) => (
+              <div key={i} className="card-premium p-6 lg:p-8 text-center flex flex-col items-center gap-4 bg-white/80 backdrop-blur-xl">
+                <div className="w-12 h-12 rounded-2xl bg-[var(--color-electric)]/10 text-[var(--color-electric)] flex items-center justify-center">
+                  <stat.icon size={24} />
+                </div>
+                <div>
+                  <div className="text-3xl lg:text-4xl font-black font-outfit text-[var(--color-text-main)] tracking-tight">{stat.value}</div>
+                  <div className="text-xs lg:text-sm font-bold text-[var(--color-text-main)] opacity-50 uppercase tracking-widest mt-1">{stat.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16 mt-16 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
+            {["Retailers", "Real Estate", "Startups", "Enterprises", "Medical Centres"].map(brand => (
+              <span key={brand} className="text-xl lg:text-2xl font-bold font-outfit text-[var(--color-text-main)]">{brand}</span>
+            ))}
           </div>
         </section>
       )}
@@ -251,17 +292,98 @@ export default function Home() {
         </section>
       )}
 
-      {/* Stats Section */}
-      {isEnabled('stats') && (
-        <section className="w-full bg-[var(--color-navy-light)] py-12 border-y border-[var(--color-border)] shadow-sm">
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, i) => (
-              <div key={i} className="text-center space-y-2">
-                <div className="w-10 h-10 bg-[var(--color-electric)]/10 rounded-full flex items-center justify-center mx-auto text-[var(--color-electric)] mb-2">
-                  <stat.icon size={20} />
+      {/* Portfolio Section */}
+      {isEnabled('portfolio') && (
+        <section className="max-w-7xl mx-auto px-6 w-full">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
+                Selected Work
+              </div>
+              <h2 className="text-3xl lg:text-5xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Our <span className="text-gradient">Portfolio</span></h2>
+              <p className="text-[var(--color-text-main)] opacity-70 max-w-xl">
+                Showcasing our best work in branding, development, and strategic digital solutions.
+              </p>
+            </div>
+            <Link
+              href="/portfolio"
+              className="group flex items-center gap-3 text-[var(--color-text-main)] font-bold tracking-widest text-sm hover:text-[var(--color-electric)] transition-colors"
+            >
+              VIEW ALL PROJECTS <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.slice(0, 3).map((project, i) => (
+              <div key={i} className="card-premium group overflow-hidden flex flex-col h-full bg-white">
+                <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
+                  <img
+                    src={project.featuredImage || '/images/project-1.png'}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute top-6 left-6 flex flex-col gap-2">
+                    <span className="px-4 py-2 bg-white/90 backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-border)] text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
+                      {project.category}
+                    </span>
+                    {project.industry && (
+                      <span className="px-4 py-2 bg-slate-900/90 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
+                        {project.industry}
+                      </span>
+                    )}
+                  </div>
                 </div>
-                <div className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">{stat.value}</div>
-                <div className="text-sm text-[var(--color-text-main)] opacity-60 font-medium uppercase tracking-wider">{stat.label}</div>
+
+                <div className="p-8 lg:p-10 space-y-6 flex-1 flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <h4 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors line-clamp-2">{project.title}</h4>
+                    <p className="text-[var(--color-text-main)] opacity-60 text-sm leading-relaxed line-clamp-3">
+                      {project.challenge || project.description}
+                    </p>
+                    
+                    {project.result && (
+                      <div className="pt-4 border-t border-[var(--color-border)]">
+                        <div className="text-[10px] uppercase font-bold text-[var(--color-electric)] tracking-tighter mb-1">Result</div>
+                        <div className="text-lg font-black text-[var(--color-text-main)]">{project.result}</div>
+                      </div>
+                    )}
+                  </div>
+
+                  <Link
+                    href={`/portfolio/${project.slug || project.title.toLowerCase().replace(/ /g, '-')}`}
+                    className="flex items-center gap-2 text-[var(--color-electric)] font-bold text-sm tracking-widest uppercase mt-6 group/link"
+                  >
+                    View Case Study <ArrowRight size={16} className="group-hover/link:translate-x-2 transition-transform" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Testimonials Section */}
+      {isEnabled('testimonials') && (
+        <section className="max-w-7xl mx-auto px-6 w-full">
+          <div className="text-center space-y-4 mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">What Our Clients <span className="text-gradient">Say</span></h2>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="bg-white border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all">
+                <div className="flex gap-1 text-[#F59E0B] mb-6">
+                  {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" />)}
+                </div>
+                <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic">"Uma Techno delivered exactly what we needed. Their attention to detail and premium design aesthetic helped us increase our conversions by over 300% within the first month."</p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] overflow-hidden">
+                    <img src={`https://i.pravatar.cc/100?img=${i + 20}`} alt="Client" className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-[var(--color-text-main)]">John Doe {i}</h4>
+                    <p className="text-xs text-[var(--color-text-main)] opacity-50">CEO, Tech Innovators</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -292,7 +414,7 @@ export default function Home() {
               </div>
             </div>
             <div className="relative group">
-              <div className="aspect-square bg-[var(--color-card)] rounded-[3rem] overflow-hidden relative group shadow-xl">
+              <div className="aspect-square bg-[var(--color-card)] rounded-[var(--radius)] overflow-hidden relative group shadow-xl">
                 <img
                   src="/images/process-visual.png"
                   alt="Process"
@@ -307,90 +429,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      )}
-
-      {/* Portfolio Section */}
-      {isEnabled('portfolio') && (
-        <section className="max-w-7xl mx-auto px-6 w-full">
-          <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
-                Selected Work
-              </div>
-              <h2 className="text-3xl lg:text-5xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Our <span className="text-gradient">Portfolio</span></h2>
-              <p className="text-[var(--color-text-main)] opacity-70 max-w-xl">
-                Showcasing our best work in branding, development, and strategic digital solutions.
-              </p>
-            </div>
-            <Link
-              href="/portfolio"
-              className="group flex items-center gap-3 text-[var(--color-text-main)] font-bold tracking-widest text-sm hover:text-[var(--color-electric)] transition-colors"
-            >
-              VIEW ALL PROJECTS <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
-            </Link>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.slice(0, 3).map((project, i) => (
-              <div key={i} className="group bg-[var(--color-card)] rounded-[2.5rem] overflow-hidden flex flex-col h-full border border-[var(--color-border)] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
-                <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
-                  <img
-                    src={project.featuredImage || '/images/project-1.png'}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute top-6 left-6">
-                    <span className="px-4 py-2 bg-[var(--color-card)] text-[var(--color-electric)] border border-[var(--color-border)] text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
-                      {project.category}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-8 lg:p-10 space-y-4 flex-1 flex flex-col justify-between">
-                  <div className="space-y-3">
-                    <h4 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">{project.title}</h4>
-                    <p className="text-[var(--color-text-main)] opacity-60 text-sm leading-relaxed">{project.description}</p>
-                  </div>
-
-                  <Link
-                    href={`/portfolio/${project.slug || project.title.toLowerCase().replace(/ /g, '-')}`}
-                    className="flex items-center gap-2 text-[var(--color-electric)] font-bold text-sm tracking-widest uppercase mt-6 group/link"
-                  >
-                    View Project <ArrowRight size={16} className="group-hover/link:translate-x-2 transition-transform" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Testimonials Section */}
-      {isEnabled('testimonials') && (
-        <section className="max-w-7xl mx-auto px-6 w-full">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">What Our Clients <span className="text-gradient">Say</span></h2>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-white border border-[var(--color-border)] p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all">
-                <div className="flex gap-1 text-[#F59E0B] mb-6">
-                  {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" />)}
-                </div>
-                <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic">"Uma Techno delivered exactly what we needed. Their attention to detail and premium design aesthetic helped us increase our conversions by over 300% within the first month."</p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] overflow-hidden">
-                    <img src={`https://i.pravatar.cc/100?img=${i + 20}`} alt="Client" className="w-full h-full object-cover" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-[var(--color-text-main)]">John Doe {i}</h4>
-                    <p className="text-xs text-[var(--color-text-main)] opacity-50">CEO, Tech Innovators</p>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </section>
       )}

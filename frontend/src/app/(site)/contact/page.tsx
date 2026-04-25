@@ -37,7 +37,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="pt-32 pb-20 lg:pt-40 lg:pb-32 bg-[var(--color-navy)] min-h-screen">
+    <div className="pt-32 pb-20 lg:pt-40 lg:pb-32 bg-[var(--background)] min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center space-y-6 mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
@@ -63,7 +63,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="font-bold text-[var(--color-text-main)] mb-1">Email Us</h4>
-                    <p className="text-[var(--color-text-main)] opacity-70 text-sm">hello@umatechno.in</p>
+                    <p className="text-[var(--color-text-main)] opacity-70 text-sm">uma.techno585@gmail.com</p>
                   </div>
                 </div>
 
@@ -73,7 +73,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="font-bold text-[var(--color-text-main)] mb-1">Call Us</h4>
-                    <p className="text-[var(--color-text-main)] opacity-70 text-sm">+91 (123) 456-7890</p>
+                    <p className="text-[var(--color-text-main)] opacity-70 text-sm">+91 92743 50728</p>
                   </div>
                 </div>
 
@@ -123,7 +123,7 @@ export default function ContactPage() {
                       type="text"
                       value={formData.name}
                       onChange={e => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
+                      className="w-full bg-slate-50 border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
                       placeholder="John Doe"
                     />
                   </div>
@@ -134,7 +134,7 @@ export default function ContactPage() {
                       type="email"
                       value={formData.email}
                       onChange={e => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
+                      className="w-full bg-slate-50 border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
                       placeholder="john@company.com"
                     />
                   </div>
@@ -147,8 +147,8 @@ export default function ContactPage() {
                       type="tel"
                       value={formData.phone}
                       onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
-                      placeholder="+1 (555) 000-0000"
+                      className="w-full bg-slate-50 border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
+                      placeholder="+91 90000 00000"
                     />
                   </div>
                   <div className="space-y-2">
@@ -156,7 +156,7 @@ export default function ContactPage() {
                     <select
                       value={formData.service}
                       onChange={e => setFormData({ ...formData, service: e.target.value })}
-                      className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors appearance-none"
+                      className="w-full bg-slate-50 border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors appearance-none"
                     >
                       <option>Web Development</option>
                       <option>E-commerce Solution</option>
@@ -174,7 +174,7 @@ export default function ContactPage() {
                     rows={5}
                     value={formData.message}
                     onChange={e => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors resize-none"
+                    className="w-full bg-slate-50 border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors resize-none"
                     placeholder="Tell us about your project goals..."
                   ></textarea>
                 </div>

@@ -23,6 +23,7 @@ const navLinks = [
     ]
   },
   { name: "Portfolio", href: "/portfolio" },
+  { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -125,7 +126,7 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed inset-0 bg-navy z-[100] md:hidden flex flex-col"
+            className="fixed inset-0 bg-white z-[100] md:hidden flex flex-col"
           >
             <div className="p-6 flex flex-col h-full">
               <div className="flex justify-between items-center mb-16">
@@ -133,7 +134,7 @@ export default function Navbar() {
                   <Logo className="w-8 h-8" />
                   <div className="flex flex-col leading-none">
                     <span className="text-xl font-bold tracking-tighter uppercase">
-                      <span className="text-electric">Uma</span><span className="text-white">Techno</span>
+                      <span className="text-electric">Uma</span><span className="text-[var(--color-text-main)]">Techno</span>
                     </span>
                     <span className="text-[7px] text-gray-500 font-bold tracking-[0.2em] uppercase mt-0.5">
                       Engineering Excellence.
@@ -142,7 +143,7 @@ export default function Navbar() {
                 </Link>
                 <button 
                   onClick={() => setIsOpen(false)} 
-                  className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white border border-white/10"
+                  className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-[var(--color-text-main)] border border-[var(--color-border)]"
                 >
                   <X size={24} />
                 </button>
@@ -155,7 +156,7 @@ export default function Navbar() {
                       href={link.href}
                       className={cn(
                         "text-4xl font-bold font-outfit transition-colors",
-                        pathname === link.href ? "text-electric" : "text-white"
+                        pathname === link.href ? "text-[var(--color-electric)]" : "text-[var(--color-text-main)]"
                       )}
                       onClick={() => !link.submenu && setIsOpen(false)}
                     >
@@ -167,7 +168,7 @@ export default function Navbar() {
                           <Link
                             key={sub.name}
                             href={sub.href}
-                            className="text-gray-400 text-lg hover:text-electric transition-colors"
+                            className="text-[var(--color-text-main)] opacity-60 text-lg hover:text-[var(--color-electric)] transition-colors"
                             onClick={() => setIsOpen(false)}
                           >
                             {sub.name}

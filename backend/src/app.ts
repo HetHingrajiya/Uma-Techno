@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
+import { rateLimiter } from './middleware/rateLimiter';
 // import { errorHandler } from './middleware/errorHandler';
 
 import contactRoutes from './routes/contactRoutes';
@@ -24,6 +25,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(rateLimiter);
 
 // Health Check
 app.get('/health', (req, res) => {
