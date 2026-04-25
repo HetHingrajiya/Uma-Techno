@@ -14,7 +14,7 @@ export default function WidgetControlPage() {
 
   const fetchWidgets = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/widgets`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/widgets`);
       if (res.ok) {
         const data = await res.json();
         // Fallback if DB is empty
@@ -52,7 +52,7 @@ export default function WidgetControlPage() {
     setSaving(true);
     try {
       // Typically we'd save order and status to backend
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/widgets/reorder`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/widgets/reorder`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ widgets }),
@@ -100,7 +100,7 @@ export default function WidgetControlPage() {
           <h2 className="text-xl font-bold flex items-center gap-2"><Layout size={20} className="text-electric" /> Widget Control Panel</h2>
           <p className="text-[var(--color-text-main)] opacity-70 text-sm mt-1">Enable, disable, and reorder homepage sections.</p>
         </div>
-        <button 
+        <button
           onClick={handleSave}
           disabled={saving}
           className="bg-electric hover:bg-electric/90 text-white px-6 py-2 rounded-xl font-medium flex items-center gap-2 transition-all"
@@ -113,13 +113,12 @@ export default function WidgetControlPage() {
       <div className="bg-[var(--color-navy-light)] p-6 rounded-2xl border border-[var(--color-border)]">
         <div className="space-y-3">
           {widgets.map((widget, index) => (
-            <div 
-              key={widget.id} 
-              className={`flex items-center justify-between p-4 rounded-xl border transition-all ${
-                widget.enabled 
-                  ? 'bg-[var(--color-navy)] border-[var(--color-border)]' 
+            <div
+              key={widget.id}
+              className={`flex items-center justify-between p-4 rounded-xl border transition-all ${widget.enabled
+                  ? 'bg-[var(--color-navy)] border-[var(--color-border)]'
                   : 'bg-[var(--color-navy)] border-red-500/20 opacity-60'
-              }`}
+                }`}
             >
               <div className="flex items-center gap-4">
                 <div className="flex flex-col gap-1 text-[var(--color-text-main)] opacity-50">
@@ -134,15 +133,14 @@ export default function WidgetControlPage() {
                   <p className="text-xs opacity-60 font-mono text-[var(--color-text-main)]">{widget.name}</p>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-4">
-                <button 
+                <button
                   onClick={() => handleToggle(widget.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                    widget.enabled 
-                      ? 'bg-electric/20 text-electric hover:bg-electric/30' 
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${widget.enabled
+                      ? 'bg-electric/20 text-electric hover:bg-electric/30'
                       : 'bg-[var(--color-navy-light)] border border-[var(--color-border)] text-[var(--color-text-main)] opacity-70 hover:opacity-100'
-                  }`}
+                    }`}
                 >
                   {widget.enabled ? <Eye size={16} /> : <EyeOff size={16} />}
                   {widget.enabled ? 'Visible' : 'Hidden'}

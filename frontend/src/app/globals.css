@@ -1,65 +1,65 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy: var(--color-navy, #F8FAFC);
-  --color-navy-light: var(--color-navy-light, #FFFFFF);
-  --color-electric: var(--color-electric, #3B82F6);
-  --color-accent: var(--color-accent, #10B981);
+  --color-navy: var(--color-navy, #0F172A);
+  --color-navy-light: var(--color-navy-light, #F8FAFC);
+  --color-electric: var(--color-electric, #06B6D4);
+  --color-accent: var(--color-accent, #3B82F6);
   --color-text-main: var(--color-text-main, #0F172A);
   --color-border: var(--color-border, #E2E8F0);
-  --color-blue-glow: rgba(59, 130, 246, 0.15);
-  --color-glass: rgba(255, 255, 255, 0.7);
+  --color-blue-glow: rgba(6, 182, 212, 0.15);
+  --color-glass: rgba(255, 255, 255, 0.85);
   
   --font-sans: var(--font-sans, "Inter", "Outfit", sans-serif);
 }
 
 @layer base {
   :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 188.7 94.5% 42.7%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 188.7 94.5% 42.7%;
     --radius: 0.75rem;
   }
 }
 
 @layer utilities {
   .glass-card {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(24px) saturate(180%);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(15, 23, 42, 0.05);
     box-shadow: 
-      0 10px 40px -10px rgba(0, 0, 0, 0.05),
-      inset 0 1px 1px 0 rgba(255, 255, 255, 0.5);
+      0 10px 40px -10px rgba(15, 23, 42, 0.05),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 1);
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .glass-card:hover {
-    background: rgba(255, 255, 255, 0.9);
-    border-color: rgba(59, 130, 246, 0.2);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(6, 182, 212, 0.2);
     transform: translateY(-8px) scale(1.01);
     box-shadow: 
-      0 30px 60px -12px rgba(59, 130, 246, 0.1),
+      0 30px 60px -12px rgba(6, 182, 212, 0.1),
       inset 0 1px 1px 0 rgba(255, 255, 255, 1);
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 50%, #10B981 100%);
+    background: linear-gradient(135deg, #0F172A 0%, #06B6D4 50%, #3B82F6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 300% auto;
@@ -72,12 +72,12 @@
 
   .bg-matrix {
     background-image: 
-      radial-gradient(circle at 0% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 100% 100%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+      radial-gradient(circle at 0% 0%, rgba(6, 182, 212, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 100% 100%, rgba(15, 23, 42, 0.03) 0%, transparent 50%);
   }
 
   .neo-glow {
-    text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    text-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
   }
 
   .section-container {
@@ -88,14 +88,14 @@
     position: relative;
     overflow: hidden;
     transition: all 0.5s ease;
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(6, 182, 212, 0.2);
   }
 
   .btn-premium::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(120deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+    background: linear-gradient(120deg, transparent, rgba(6, 182, 212, 0.1), transparent);
     transform: translateX(-100%);
     transition: 0.6s;
   }
@@ -118,11 +118,13 @@
 body {
   overflow-x: hidden;
   margin: 0;
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #3b82f6 #f8fafc;
+  scrollbar-color: #06B6D4 #f8fafc;
 }
 
 *::-webkit-scrollbar {
@@ -134,6 +136,6 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #3b82f6;
+  background-color: #06B6D4;
   border-radius: 20px;
 }

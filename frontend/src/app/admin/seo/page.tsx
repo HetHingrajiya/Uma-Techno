@@ -10,7 +10,7 @@ export default function SEODashboard() {
   useEffect(() => {
     const fetchSEO = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/seo`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/seo`);
         if (res.ok) {
           const data = await res.json();
           setSeoPages(data);
@@ -40,9 +40,9 @@ export default function SEODashboard() {
         <div className="p-4 border-b border-[var(--color-border)] flex gap-4 bg-[var(--color-navy)]">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
-            <input 
-              type="text" 
-              placeholder="Search by path..." 
+            <input
+              type="text"
+              placeholder="Search by path..."
               className="w-full bg-transparent border border-[var(--color-border)] rounded-lg pl-10 pr-4 py-2 text-sm text-[var(--color-text-main)] focus:outline-none focus:border-electric"
             />
           </div>

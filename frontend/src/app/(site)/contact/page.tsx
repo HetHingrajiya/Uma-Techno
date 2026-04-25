@@ -17,14 +17,14 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
-    
+
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/contacts`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/contacts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-      
+
       if (res.ok) {
         setStatus("success");
         setFormData({ name: "", email: "", phone: "", service: "Web Development", message: "" });
@@ -55,7 +55,7 @@ export default function ContactPage() {
           <div className="lg:col-span-2 space-y-8">
             <div className="bg-[var(--color-card)] border border-[var(--color-border)] p-8 rounded-3xl shadow-lg space-y-8">
               <h3 className="text-2xl font-bold font-outfit text-[var(--color-text-main)]">Contact Information</h3>
-              
+
               <div className="space-y-6">
                 <div className="flex gap-4 items-start group">
                   <div className="w-12 h-12 bg-[var(--color-electric)]/10 rounded-xl flex items-center justify-center text-[var(--color-electric)] group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all shrink-0">
@@ -92,7 +92,7 @@ export default function ContactPage() {
 
           <div className="lg:col-span-3 bg-[var(--color-card)] border border-[var(--color-border)] p-8 lg:p-12 rounded-3xl shadow-xl">
             {status === "success" ? (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="flex flex-col items-center justify-center text-center py-12 space-y-6"
@@ -104,7 +104,7 @@ export default function ContactPage() {
                 <p className="text-[var(--color-text-main)] opacity-70 max-w-sm">
                   Thank you for reaching out. One of our lead engineers will contact you within 24 hours.
                 </p>
-                <button 
+                <button
                   onClick={() => setStatus("idle")}
                   className="mt-8 text-[var(--color-electric)] font-bold tracking-widest text-sm uppercase hover:underline"
                 >
@@ -114,26 +114,26 @@ export default function ContactPage() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <h3 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] mb-6">Send us a message</h3>
-                
+
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-[var(--color-text-main)]">Full Name</label>
-                    <input 
+                    <input
                       required
-                      type="text" 
+                      type="text"
                       value={formData.name}
-                      onChange={e => setFormData({...formData, name: e.target.value})}
+                      onChange={e => setFormData({ ...formData, name: e.target.value })}
                       className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
                       placeholder="John Doe"
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-[var(--color-text-main)]">Email Address</label>
-                    <input 
+                    <input
                       required
-                      type="email" 
+                      type="email"
                       value={formData.email}
-                      onChange={e => setFormData({...formData, email: e.target.value})}
+                      onChange={e => setFormData({ ...formData, email: e.target.value })}
                       className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
                       placeholder="john@company.com"
                     />
@@ -143,19 +143,19 @@ export default function ContactPage() {
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-[var(--color-text-main)]">Phone (Optional)</label>
-                    <input 
-                      type="tel" 
+                    <input
+                      type="tel"
                       value={formData.phone}
-                      onChange={e => setFormData({...formData, phone: e.target.value})}
+                      onChange={e => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
                       placeholder="+1 (555) 000-0000"
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-[var(--color-text-main)]">Service Needed</label>
-                    <select 
+                    <select
                       value={formData.service}
-                      onChange={e => setFormData({...formData, service: e.target.value})}
+                      onChange={e => setFormData({ ...formData, service: e.target.value })}
                       className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors appearance-none"
                     >
                       <option>Web Development</option>
@@ -169,11 +169,11 @@ export default function ContactPage() {
 
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-[var(--color-text-main)]">Message Details</label>
-                  <textarea 
+                  <textarea
                     required
                     rows={5}
                     value={formData.message}
-                    onChange={e => setFormData({...formData, message: e.target.value})}
+                    onChange={e => setFormData({ ...formData, message: e.target.value })}
                     className="w-full bg-[var(--color-navy)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors resize-none"
                     placeholder="Tell us about your project goals..."
                   ></textarea>
@@ -185,9 +185,9 @@ export default function ContactPage() {
                   </div>
                 )}
 
-                <button 
+                <button
                   disabled={status === "loading"}
-                  type="submit" 
+                  type="submit"
                   className="w-full bg-[var(--color-electric)] hover:bg-[var(--color-electric)]/90 text-white rounded-xl py-4 font-bold tracking-widest uppercase flex items-center justify-center gap-2 transition-all hover:-translate-y-1 shadow-lg disabled:opacity-70 disabled:hover:translate-y-0"
                 >
                   {status === "loading" ? "Sending..." : "Send Request"} <Send size={20} />

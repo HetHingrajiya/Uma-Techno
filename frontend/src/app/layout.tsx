@@ -63,8 +63,34 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Uma Techno",
+    "image": "https://umatechno.in/icon.png",
+    "url": "https://umatechno.in",
+    "telephone": "+91 94291 03535",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Rajkot",
+      "addressRegion": "Gujarat",
+      "addressCountry": "IN"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/uma-techno",
+      "https://www.instagram.com/umatechno"
+    ]
+  };
+
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
+        />
+      </head>
       <body className={`${inter.variable} ${outfit.variable} font-sans min-h-screen flex flex-col`} suppressHydrationWarning>
         <ThemeProvider>
           <Navbar />

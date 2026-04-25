@@ -11,7 +11,7 @@ export default function PortfolioManager() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/projects`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/projects`);
         if (res.ok) {
           const data = await res.json();
           setProjects(data);
@@ -41,7 +41,7 @@ export default function PortfolioManager() {
             <Plus size={16} /> Add New Project
           </button>
         </div>
-        
+
         <div className="p-0">
           {loading ? (
             <div className="p-8 text-center text-[var(--color-text-main)] opacity-50">Loading projects...</div>

@@ -45,7 +45,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     // Fetch theme from API
     const fetchTheme = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/theme`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme`);
         if (res.ok) {
           const data = await res.json();
           if (data && data.primaryColor) {

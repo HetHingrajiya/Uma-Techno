@@ -27,7 +27,7 @@ export default function ThemeSettingsPage() {
 
   const fetchTheme = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/theme`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme`);
       if (res.ok) {
         const data = await res.json();
         if (data.primaryColor) {
@@ -44,7 +44,7 @@ export default function ThemeSettingsPage() {
   const handleSave = async () => {
     setSaving(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/theme`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(theme),

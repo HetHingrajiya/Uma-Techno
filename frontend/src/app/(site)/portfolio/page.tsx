@@ -13,9 +13,9 @@ export default function PortfolioPage() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app';
         const res = await fetch(`${baseUrl}/api/v1/projects`);
-        
+
         if (res.ok) {
           const data = await res.json();
           if (data.length > 0) {
@@ -40,8 +40,8 @@ export default function PortfolioPage() {
 
   const categories = ["All", ...Array.from(new Set(projects.map(p => p.category)))];
 
-  const filteredProjects = activeCategory === "All" 
-    ? projects 
+  const filteredProjects = activeCategory === "All"
+    ? projects
     : projects.filter(p => p.category === activeCategory);
 
   return (
@@ -64,11 +64,10 @@ export default function PortfolioPage() {
             <button
               key={i}
               onClick={() => setActiveCategory(cat as string)}
-              className={`px-6 py-2 rounded-full font-bold text-sm transition-all border ${
-                activeCategory === cat 
-                  ? "bg-[var(--color-electric)] border-[var(--color-electric)] text-white shadow-lg shadow-blue-500/25" 
+              className={`px-6 py-2 rounded-full font-bold text-sm transition-all border ${activeCategory === cat
+                  ? "bg-[var(--color-electric)] border-[var(--color-electric)] text-white shadow-lg shadow-blue-500/25"
                   : "bg-[var(--color-card)] border-[var(--color-border)] text-[var(--color-text-main)] hover:border-[var(--color-electric)]"
-              }`}
+                }`}
             >
               {cat as string}
             </button>
@@ -80,45 +79,45 @@ export default function PortfolioPage() {
         ) : (
           <motion.div layout className="grid md:grid-cols-2 gap-8 lg:gap-12">
             {filteredProjects.map((project, i) => (
-              <motion.div 
+              <motion.div
                 layout
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                key={project.slug || i} 
+                key={project.slug || i}
                 className="group bg-[var(--color-card)] rounded-[3rem] overflow-hidden flex flex-col border border-[var(--color-border)] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
               >
-                 <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
-                    <img 
-                      src={project.featuredImage || '/images/project-1.png'} 
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute top-8 left-8">
-                      <span className="px-4 py-2 bg-[var(--color-card)]/90 backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-border)] text-xs font-black uppercase tracking-widest rounded-full shadow-xl">
-                        {project.category}
-                      </span>
-                    </div>
-                 </div>
-                 
-                 <div className="p-8 lg:p-12 space-y-4 flex-1 flex flex-col justify-between">
-                    <div className="space-y-4">
-                      <h4 className="text-3xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">{project.title}</h4>
-                      <p className="text-[var(--color-text-main)] opacity-70 text-base leading-relaxed">{project.description}</p>
-                    </div>
-                    
-                    <Link 
-                      href={`/portfolio/${project.slug || project.title.toLowerCase().replace(/ /g, '-')}`}
-                      className="flex items-center gap-2 text-[var(--color-electric)] font-bold text-sm tracking-widest uppercase mt-8 group/link"
-                    >
-                      View Case Study <ArrowRight size={20} className="group-hover/link:translate-x-2 transition-transform" />
-                    </Link>
-                 </div>
+                <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
+                  <img
+                    src={project.featuredImage || '/images/project-1.png'}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute top-8 left-8">
+                    <span className="px-4 py-2 bg-[var(--color-card)]/90 backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-border)] text-xs font-black uppercase tracking-widest rounded-full shadow-xl">
+                      {project.category}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-8 lg:p-12 space-y-4 flex-1 flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <h4 className="text-3xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">{project.title}</h4>
+                    <p className="text-[var(--color-text-main)] opacity-70 text-base leading-relaxed">{project.description}</p>
+                  </div>
+
+                  <Link
+                    href={`/portfolio/${project.slug || project.title.toLowerCase().replace(/ /g, '-')}`}
+                    className="flex items-center gap-2 text-[var(--color-electric)] font-bold text-sm tracking-widest uppercase mt-8 group/link"
+                  >
+                    View Case Study <ArrowRight size={20} className="group-hover/link:translate-x-2 transition-transform" />
+                  </Link>
+                </div>
               </motion.div>
             ))}
           </motion.div>
         )}
-        
+
         {!loading && filteredProjects.length === 0 && (
           <div className="text-center text-[var(--color-text-main)] opacity-50 py-20">
             No projects found in this category.

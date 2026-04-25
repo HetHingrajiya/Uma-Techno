@@ -11,7 +11,7 @@ export default function ServicesManager() {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/services`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/services`);
         if (res.ok) {
           const data = await res.json();
           setServices(data);
@@ -41,7 +41,7 @@ export default function ServicesManager() {
             <Plus size={16} /> Add New Service
           </button>
         </div>
-        
+
         <div className="p-0">
           {loading ? (
             <div className="p-8 text-center text-[var(--color-text-main)] opacity-50">Loading services...</div>

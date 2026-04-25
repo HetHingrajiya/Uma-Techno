@@ -10,7 +10,7 @@ export default function LeadsDashboard() {
   useEffect(() => {
     const fetchLeads = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/contacts`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/contacts`);
         if (res.ok) {
           const data = await res.json();
           setLeads(data);
@@ -28,7 +28,7 @@ export default function LeadsDashboard() {
     const headers = ["Name", "Email", "Phone", "Service", "Message", "Date"];
     const csvContent = [
       headers.join(","),
-      ...leads.map(l => 
+      ...leads.map(l =>
         `"${l.name}","${l.email}","${l.phone || ''}","${l.service || ''}","${l.message.replace(/"/g, '""')}","${new Date(l.createdAt).toLocaleDateString()}"`
       )
     ].join("\n");
@@ -47,7 +47,7 @@ export default function LeadsDashboard() {
           <h2 className="text-xl font-bold flex items-center gap-2"><Mail size={20} className="text-electric" /> Lead Generation</h2>
           <p className="text-[var(--color-text-main)] opacity-70 text-sm mt-1">Manage and export your incoming client inquiries.</p>
         </div>
-        <button 
+        <button
           onClick={handleExport}
           disabled={leads.length === 0}
           className="flex items-center gap-2 bg-electric text-white px-4 py-2 rounded-lg font-bold text-sm hover:bg-electric/90 transition-colors disabled:opacity-50"
@@ -60,9 +60,9 @@ export default function LeadsDashboard() {
         <div className="p-4 border-b border-[var(--color-border)] flex gap-4 bg-[var(--color-navy)]">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
-            <input 
-              type="text" 
-              placeholder="Search by name, email, or service..." 
+            <input
+              type="text"
+              placeholder="Search by name, email, or service..."
               className="w-full bg-transparent border border-[var(--color-border)] rounded-lg pl-10 pr-4 py-2 text-sm text-[var(--color-text-main)] focus:outline-none focus:border-electric"
             />
           </div>
@@ -94,8 +94,8 @@ export default function LeadsDashboard() {
                   <tr key={lead.id} className="border-b border-[var(--color-border)] hover:bg-[var(--color-navy)]/50 transition-colors">
                     <td className="p-4">
                       <div className="font-bold text-[var(--color-text-main)]">{lead.name}</div>
-                      <div className="text-sm text-[var(--color-text-main)] opacity-70 flex items-center gap-1 mt-1"><Mail size={12}/> {lead.email}</div>
-                      {lead.phone && <div className="text-sm text-[var(--color-text-main)] opacity-70 flex items-center gap-1 mt-1"><Phone size={12}/> {lead.phone}</div>}
+                      <div className="text-sm text-[var(--color-text-main)] opacity-70 flex items-center gap-1 mt-1"><Mail size={12} /> {lead.email}</div>
+                      {lead.phone && <div className="text-sm text-[var(--color-text-main)] opacity-70 flex items-center gap-1 mt-1"><Phone size={12} /> {lead.phone}</div>}
                     </td>
                     <td className="p-4">
                       <span className="px-3 py-1 bg-electric/10 text-electric rounded-full text-xs font-bold">
