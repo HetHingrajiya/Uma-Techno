@@ -27,7 +27,7 @@ export const submitContact = async (req: Request, res: Response) => {
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return res.status(400).json({ success: false, errors: error.errors });
+      return res.status(400).json({ success: false, errors: error.issues });
     }
     console.error("Contact submission error:", error);
     return res.status(500).json({ success: false, message: "Internal server error" });

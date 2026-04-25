@@ -49,7 +49,7 @@ export const createService = async (req: Request, res: Response) => {
     const service = await prisma.service.create({ data });
     res.status(201).json({ success: true, data: service });
   } catch (error) {
-    if (error instanceof z.ZodError) return res.status(400).json({ success: false, errors: error.errors });
+    if (error instanceof z.ZodError) return res.status(400).json({ success: false, errors: error.issues });
     res.status(500).json({ success: false, message: 'Failed to create service' });
   }
 };
@@ -64,7 +64,7 @@ export const updateService = async (req: Request, res: Response) => {
     });
     res.status(200).json({ success: true, data: service });
   } catch (error) {
-    if (error instanceof z.ZodError) return res.status(400).json({ success: false, errors: error.errors });
+    if (error instanceof z.ZodError) return res.status(400).json({ success: false, errors: error.issues });
     res.status(500).json({ success: false, message: 'Failed to update service' });
   }
 };
