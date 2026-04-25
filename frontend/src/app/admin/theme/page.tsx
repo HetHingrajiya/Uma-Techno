@@ -65,6 +65,18 @@ const PALETTE_PACKS = [
       { name: "Mint Growth", primaryColor: "#10B981", secondaryColor: "#059669", accentColor: "#6EE7B7", backgroundColor: "#F0FDF4", textColor: "#064E3B", cardColor: "#FFFFFF", borderColor: "#DCFCE7" },
       { name: "Forest Deep", primaryColor: "#065F46", secondaryColor: "#064E3B", accentColor: "#A7F3D0", backgroundColor: "#F9FAFB", textColor: "#064E3B", cardColor: "#FFFFFF", borderColor: "#E5E7EB" }
     ]
+  },
+  {
+    category: "Premium",
+    palettes: [
+      { name: "Sunset Energy", primaryColor: "#F59E0B", secondaryColor: "#D97706", accentColor: "#FCD34D", backgroundColor: "#FFFBEB", textColor: "#78350F", cardColor: "#FFFFFF", borderColor: "#FEF3C7" }
+    ]
+  },
+  {
+    category: "Elegant",
+    palettes: [
+      { name: "Rose Elegant", primaryColor: "#E11D48", secondaryColor: "#BE123C", accentColor: "#FDA4AF", backgroundColor: "#FFF1F2", textColor: "#4C0519", cardColor: "#FFFFFF", borderColor: "#FFE4E6" }
+    ]
   }
 ];
 
@@ -111,12 +123,33 @@ export default function ThemeSettingsPage() {
   const handleApply = async (palette: PaletteType) => {
     setSaving(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes/${palette.id}/activate`, {
+      // If it's a prebuilt palette without a real ID, find the real one in savedPalettes
+      let realId = palette.id;
+      if (realId.startsWith('prebuilt-')) {
+        const found = savedPalettes.find(p => p.name === palette.name);
+        if (found) realId = found.id;
+        else {
+           // If not found in DB, create it first
+           const createRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`, {
+             method: "POST",
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify(palette)
+           });
+           if (createRes.ok) {
+             const newP = await createRes.json();
+             realId = newP.id;
+           }
+        }
+      }
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes/${realId}/activate`, {
         method: "PUT"
       });
       if (res.ok) {
         setActivePalette(palette);
         applyThemeLocally(palette);
+        // Refresh to get real IDs
+        fetchPalettes();
       }
     } catch (err) {
       console.error(err);
@@ -158,6 +191,10 @@ export default function ThemeSettingsPage() {
   const filteredPalettes = PALETTE_PACKS.flatMap(pack => 
     pack.palettes.map(p => ({ ...p, category: pack.category, id: `prebuilt-${p.name}` } as PaletteType))
   ).concat(savedPalettes.map(p => ({ ...p, isCustom: true })))
+  // Deduplicate by name, prioritizing saved ones
+  .filter((p, index, self) => 
+    index === self.findIndex((t) => t.name === p.name)
+  )
   .filter(p => {
     const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = activeCategory === "All" || p.category === activeCategory;
@@ -197,7 +234,7 @@ export default function ThemeSettingsPage() {
           />
         </div>
         <div className="flex gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
-          {["All", "Professional", "Premium", "Startup", "Nature"].map(cat => (
+          {["All", "Professional", "Premium", "Startup", "Nature", "Elegant"].map(cat => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
