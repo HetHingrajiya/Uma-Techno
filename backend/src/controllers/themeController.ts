@@ -124,10 +124,15 @@ export const setActivePalette = async (req: Request, res: Response) => {
 export const createPalette = async (req: Request, res: Response) => {
   try {
     const data = req.body;
-    const palette = await prisma.themePalette.create({ data });
+    // Ensure id is not passed if it's a new palette from custom builder
+    const { id, ...paletteData } = data;
+    const palette = await prisma.themePalette.create({ 
+      data: paletteData 
+    });
     res.json(palette);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to create palette' });
+  } catch (error: any) {
+    console.error('Palette creation error:', error);
+    res.status(500).json({ error: error.message || 'Failed to create palette' });
   }
 };
 
