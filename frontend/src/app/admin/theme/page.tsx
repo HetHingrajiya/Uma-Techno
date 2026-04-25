@@ -16,46 +16,61 @@ import {
   Heart,
   Copy,
   Edit3,
-  Loader2
+  Loader2,
+  X
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+
+interface PaletteType {
+  id: string;
+  name: string;
+  category: string;
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+  backgroundColor: string;
+  textColor: string;
+  cardColor: string;
+  borderColor: string;
+  isCustom?: boolean;
+}
 
 // Prebuilt Palette Packs
 const PALETTE_PACKS = [
   {
     category: "Professional",
     palettes: [
-      { name: "Cyan Professional", primary: "#06B6D4", secondary: "#0891B2", accent: "#22D3EE", background: "#F8FAFC", text: "#0F172A", card: "#FFFFFF", border: "#E2E8F0" },
-      { name: "Navy Corporate", primary: "#0F172A", secondary: "#1E293B", accent: "#38B2AC", background: "#F1F5F9", text: "#0F172A", card: "#FFFFFF", border: "#CBD5E1" },
-      { name: "Sky Digital", primary: "#0EA5E9", secondary: "#0284C7", accent: "#7DD3FC", background: "#F8FAFC", text: "#0F172A", card: "#FFFFFF", border: "#E0F2FE" }
+      { name: "Cyan Professional", primaryColor: "#06B6D4", secondaryColor: "#0891B2", accentColor: "#22D3EE", backgroundColor: "#F8FAFC", textColor: "#0F172A", cardColor: "#FFFFFF", borderColor: "#E2E8F0" },
+      { name: "Navy Corporate", primaryColor: "#0F172A", secondaryColor: "#1E293B", accentColor: "#38B2AC", backgroundColor: "#F1F5F9", textColor: "#0F172A", cardColor: "#FFFFFF", borderColor: "#CBD5E1" },
+      { name: "Sky Digital", primaryColor: "#0EA5E9", secondaryColor: "#0284C7", accentColor: "#7DD3FC", backgroundColor: "#F8FAFC", textColor: "#0F172A", cardColor: "#FFFFFF", borderColor: "#E0F2FE" }
     ]
   },
   {
     category: "Premium",
     palettes: [
-      { name: "Midnight Gold", primary: "#D4AF37", secondary: "#B8860B", accent: "#FFD700", background: "#0F172A", text: "#F8FAFC", card: "#1E293B", border: "#334155" },
-      { name: "Onyx Premium", primary: "#111827", secondary: "#1F2937", accent: "#D4AF37", background: "#F9FAFB", text: "#111827", card: "#FFFFFF", border: "#E5E7EB" }
+      { name: "Midnight Gold", primaryColor: "#D4AF37", secondaryColor: "#B8860B", accentColor: "#FFD700", backgroundColor: "#0F172A", textColor: "#F8FAFC", cardColor: "#1E293B", borderColor: "#334155" },
+      { name: "Onyx Premium", primaryColor: "#111827", secondaryColor: "#1F2937", accentColor: "#D4AF37", backgroundColor: "#F9FAFB", text: "#111827", card: "#FFFFFF", border: "#E5E7EB" }
     ]
   },
   {
     category: "Startup",
     palettes: [
-      { name: "Electric Purple", primary: "#8B5CF6", secondary: "#7C3AED", accent: "#C084FC", background: "#FDF4FF", text: "#2E1065", card: "#FFFFFF", border: "#F5D0FE" },
-      { name: "Modern Teal", primary: "#14B8A6", secondary: "#0D9488", accent: "#5EEAD4", background: "#F0FDFA", text: "#134E4A", card: "#FFFFFF", border: "#CCFBF1" }
+      { name: "Electric Purple", primaryColor: "#8B5CF6", secondaryColor: "#7C3AED", accentColor: "#C084FC", backgroundColor: "#FDF4FF", textColor: "#2E1065", cardColor: "#FFFFFF", borderColor: "#F5D0FE" },
+      { name: "Modern Teal", primaryColor: "#14B8A6", secondaryColor: "#0D9488", accentColor: "#5EEAD4", backgroundColor: "#F0FDFA", textColor: "#134E4A", cardColor: "#FFFFFF", borderColor: "#CCFBF1" }
     ]
   },
   {
     category: "Nature",
     palettes: [
-      { name: "Mint Growth", primary: "#10B981", secondary: "#059669", accent: "#6EE7B7", background: "#F0FDF4", text: "#064E3B", card: "#FFFFFF", border: "#DCFCE7" },
-      { name: "Forest Deep", primary: "#065F46", secondary: "#064E3B", accent: "#A7F3D0", background: "#F9FAFB", text: "#064E3B", card: "#FFFFFF", border: "#E5E7EB" }
+      { name: "Mint Growth", primaryColor: "#10B981", secondaryColor: "#059669", accentColor: "#6EE7B7", backgroundColor: "#F0FDF4", textColor: "#064E3B", cardColor: "#FFFFFF", borderColor: "#DCFCE7" },
+      { name: "Forest Deep", primaryColor: "#065F46", secondaryColor: "#064E3B", accentColor: "#A7F3D0", backgroundColor: "#F9FAFB", textColor: "#064E3B", cardColor: "#FFFFFF", borderColor: "#E5E7EB" }
     ]
   }
 ];
 
 export default function ThemeSettingsPage() {
-  const [activePalette, setActivePalette] = useState<any>(PALETTE_PACKS[0].palettes[0]);
-  const [savedPalettes, setSavedPalettes] = useState<any[]>([]);
+  const [activePalette, setActivePalette] = useState<PaletteType | null>(null);
+  const [savedPalettes, setSavedPalettes] = useState<PaletteType[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [activeCategory, setActiveCategory] = useState("All");
@@ -84,6 +99,7 @@ export default function ThemeSettingsPage() {
         setSavedPalettes(data);
         const active = data.find((p: any) => p.isActive);
         if (active) setActivePalette(active);
+        else if (data.length > 0) setActivePalette(data[0]);
       }
     } catch (err) {
       console.error(err);
@@ -92,7 +108,7 @@ export default function ThemeSettingsPage() {
     }
   };
 
-  const handleApply = async (palette: any) => {
+  const handleApply = async (palette: PaletteType) => {
     setSaving(true);
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes/${palette.id}/activate`, {
@@ -100,7 +116,6 @@ export default function ThemeSettingsPage() {
       });
       if (res.ok) {
         setActivePalette(palette);
-        // Refresh CSS variables locally for instant feel
         applyThemeLocally(palette);
       }
     } catch (err) {
@@ -110,14 +125,15 @@ export default function ThemeSettingsPage() {
     }
   };
 
-  const applyThemeLocally = (p: any) => {
+  const applyThemeLocally = (p: PaletteType) => {
     const root = document.documentElement;
-    root.style.setProperty('--color-electric', p.primaryColor || p.primary);
-    root.style.setProperty('--color-blue-glow', p.primaryColor || p.primary);
-    root.style.setProperty('--color-text-main', p.textColor || p.text);
-    root.style.setProperty('--background', p.backgroundColor || p.background);
-    root.style.setProperty('--color-card', p.cardColor || p.card);
-    root.style.setProperty('--color-border', p.borderColor || p.border);
+    root.style.setProperty('--color-electric', p.primaryColor);
+    root.style.setProperty('--color-blue-glow', p.primaryColor);
+    root.style.setProperty('--color-text-main', p.textColor);
+    root.style.setProperty('--background', p.backgroundColor);
+    root.style.setProperty('--color-card', p.cardColor);
+    root.style.setProperty('--color-border', p.borderColor);
+    localStorage.setItem('theme-updated', Date.now().toString());
   };
 
   const handleCreateCustom = async () => {
@@ -140,7 +156,7 @@ export default function ThemeSettingsPage() {
   };
 
   const filteredPalettes = PALETTE_PACKS.flatMap(pack => 
-    pack.palettes.map(p => ({ ...p, category: pack.category, id: `prebuilt-${p.name}` }))
+    pack.palettes.map(p => ({ ...p, category: pack.category, id: `prebuilt-${p.name}` } as PaletteType))
   ).concat(savedPalettes.map(p => ({ ...p, isCustom: true })))
   .filter(p => {
     const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
@@ -213,13 +229,13 @@ export default function ThemeSettingsPage() {
             {/* Palette Preview */}
             <div className="h-40 flex flex-col">
               <div className="flex-1 flex">
-                <div style={{ backgroundColor: palette.primary || palette.primaryColor }} className="flex-[2] h-full" />
-                <div style={{ backgroundColor: palette.secondary || palette.secondaryColor }} className="flex-1 h-full" />
-                <div style={{ backgroundColor: palette.accent || palette.accentColor }} className="flex-1 h-full" />
+                <div style={{ backgroundColor: palette.primaryColor }} className="flex-[2] h-full" />
+                <div style={{ backgroundColor: palette.secondaryColor }} className="flex-1 h-full" />
+                <div style={{ backgroundColor: palette.accentColor }} className="flex-1 h-full" />
               </div>
               <div className="h-12 flex">
-                <div style={{ backgroundColor: palette.background || palette.backgroundColor }} className="flex-1 h-full border-t border-[var(--color-border)]" />
-                <div style={{ backgroundColor: palette.card || palette.cardColor }} className="flex-1 h-full border-t border-l border-[var(--color-border)]" />
+                <div style={{ backgroundColor: palette.backgroundColor }} className="flex-1 h-full border-t border-[var(--color-border)]" />
+                <div style={{ backgroundColor: palette.cardColor }} className="flex-1 h-full border-t border-l border-[var(--color-border)]" />
               </div>
             </div>
 
@@ -273,7 +289,7 @@ export default function ThemeSettingsPage() {
             <div className="bg-slate-900/90 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-4 shadow-2xl flex items-center justify-between">
               <div className="flex items-center gap-6 pl-4">
                 <div className="flex -space-x-3">
-                  {[activePalette.primaryColor || activePalette.primary, activePalette.secondaryColor || activePalette.secondary, activePalette.backgroundColor || activePalette.background].map((c, i) => (
+                  {[activePalette.primaryColor, activePalette.secondaryColor, activePalette.backgroundColor].map((c, i) => (
                     <div key={i} style={{ backgroundColor: c }} className="w-10 h-10 rounded-full border-4 border-slate-900 shadow-lg" />
                   ))}
                 </div>
@@ -378,7 +394,3 @@ export default function ThemeSettingsPage() {
     </div>
   );
 }
-
-const X = (props: any) => (
-  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-);
