@@ -292,14 +292,14 @@ export default function Home() {
               </div>
             </div>
             <div className="relative group">
-              <div className="aspect-square bg-[var(--color-card)] rounded-[3rem] p-1 overflow-hidden relative group border border-[var(--color-border)] shadow-xl">
+              <div className="aspect-square bg-[var(--color-card)] rounded-[3rem] overflow-hidden relative group shadow-xl">
                 <img
                   src="/images/process-visual.png"
                   alt="Process"
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                 />
                 <div className="relative z-10 w-full h-full bg-[var(--color-card)]/30 backdrop-blur-md flex items-center justify-center p-12">
-                  <div className="text-center space-y-4 bg-[var(--color-card)]/80 p-8 rounded-3xl border border-[var(--color-border)] shadow-2xl backdrop-blur-xl">
+                  <div className="text-center space-y-4 bg-[var(--color-card)]/80 p-8 rounded-3xl shadow-2xl backdrop-blur-xl">
                     <Zap size={48} className="text-[var(--color-electric)] mx-auto animate-float" />
                     <div className="text-3xl font-bold font-outfit text-[var(--color-text-main)]">Rapid Execution</div>
                     <p className="text-[var(--color-text-main)] opacity-70">Turning complex ideas into scalable reality.</p>

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "clean": "rimraf .next out node_modules/.cache"
+    "clean": "rimraf .next out node_modules/.cache",
+    "clear-cache": "rimraf .next/cache"
   },
   "dependencies": {
     "clsx": "^2.1.1",

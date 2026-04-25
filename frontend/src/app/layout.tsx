@@ -15,6 +15,8 @@ const outfit = Outfit({
   subsets: ["latin"],
 });
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://umatechno.in"),
   title: {

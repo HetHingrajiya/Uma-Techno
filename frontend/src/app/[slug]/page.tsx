@@ -35,14 +35,15 @@ export default function SEOLandingPage({ params }: { params: { slug: string } })
    const serviceName = params.slug.replace(/-rajkot|-gujarat/g, '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 
    return (
-      <div className="flex flex-col gap-16 lg:gap-32 pb-20 lg:pb-32 bg-[var(--color-navy)] min-h-screen pt-32">
+   return (
+      <div className="flex flex-col gap-16 lg:gap-32 pb-20 lg:pb-32 bg-[var(--background)] min-h-screen pt-32">
          <section className="max-w-7xl mx-auto px-6 w-full text-center space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
                Premium IT Solutions
             </div>
             <h1 className="text-4xl lg:text-6xl 2xl:text-7xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">
                Best <span className="text-gradient">{serviceName}</span> <br />
-               {isCitySpecific ? 'in Rajkot, Gujarat' : 'for Growing Brands'}
+               for Growing Brands
             </h1>
             <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto 2xl:text-lg">
                We deliver high-end, scalable, and performance-driven {serviceName.toLowerCase()} solutions designed to dominate your market and maximize ROI.
@@ -63,7 +64,7 @@ export default function SEOLandingPage({ params }: { params: { slug: string } })
                   <div className="space-y-6">
                      <h2 className="text-3xl font-bold font-outfit text-[var(--color-text-main)]">Why Choose Uma Techno?</h2>
                      <p className="text-[var(--color-text-main)] opacity-70 leading-relaxed">
-                        As a leading agency{isCitySpecific ? ' in Rajkot' : ''}, we don't just write code. We engineer complete business systems optimized for speed, security, and search engines.
+                        As a leading agency, we don't just write code. We engineer complete business systems optimized for speed, security, and search engines.
                      </p>
                      <ul className="space-y-4 pt-4">
                         {[
