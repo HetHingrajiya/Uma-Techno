@@ -87,13 +87,14 @@ export default function Navbar() {
               </Link>
               
               {link.submenu && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-navy-light border border-white/10 rounded-xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 shadow-2xl">
+                <div className="absolute top-full left-0 mt-2 w-56 bg-[var(--color-card)] border border-[var(--color-border)] rounded-2xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 shadow-2xl z-[60]">
                   {link.submenu.map((sub) => (
                     <Link
                       key={sub.name}
                       href={sub.href}
-                      className="block px-4 py-3 text-sm text-gray-300 hover:bg-electric/10 hover:text-white transition-colors"
+                      className="block px-6 py-4 text-sm font-bold text-[var(--color-text-main)] opacity-70 hover:opacity-100 hover:bg-[var(--color-electric)]/10 hover:text-[var(--color-electric)] transition-all flex items-center gap-2"
                     >
+                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-electric)] opacity-0 group-hover:opacity-100 transition-opacity" />
                       {sub.name}
                     </Link>
                   ))}

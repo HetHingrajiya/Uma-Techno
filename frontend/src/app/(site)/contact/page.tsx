@@ -14,25 +14,39 @@ export default function ContactPage() {
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
+  const [errorMsg, setErrorMsg] = useState("");
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
+    setErrorMsg("");
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/contacts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...formData,
+          subject: formData.service // Map service to subject for backend
+        })
       });
+
+      const result = await res.json().catch(() => ({}));
 
       if (res.ok) {
         setStatus("success");
         setFormData({ name: "", email: "", phone: "", service: "Web Development", message: "" });
       } else {
         setStatus("error");
+        if (result.errors) {
+          const messages = result.errors.map((err: any) => err.message).join(", ");
+          setErrorMsg(messages);
+        } else {
+          setErrorMsg(result.message || "Something went wrong. Please try again later.");
+        }
       }
     } catch (err) {
       setStatus("error");
+      setErrorMsg("Failed to connect to the server. Please check your internet.");
     }
   };
 
@@ -181,7 +195,7 @@ export default function ContactPage() {
 
                 {status === "error" && (
                   <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-500 rounded-xl text-sm font-medium">
-                    Something went wrong. Please try again later.
+                    {errorMsg}
                   </div>
                 )}
 
