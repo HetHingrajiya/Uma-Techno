@@ -82,6 +82,8 @@ const PALETTE_PACKS = [
 
 export default function ThemeSettingsPage() {
   const [activePalette, setActivePalette] = useState<PaletteType | null>(null);
+  const [originalPalette, setOriginalPalette] = useState<PaletteType | null>(null);
+  const [previewPalette, setPreviewPalette] = useState<PaletteType | null>(null);
   const [savedPalettes, setSavedPalettes] = useState<PaletteType[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -110,8 +112,13 @@ export default function ThemeSettingsPage() {
         const data = await res.json();
         setSavedPalettes(data);
         const active = data.find((p: any) => p.isActive);
-        if (active) setActivePalette(active);
-        else if (data.length > 0) setActivePalette(data[0]);
+        if (active) {
+          setActivePalette(active);
+          setOriginalPalette(active);
+        } else if (data.length > 0) {
+          setActivePalette(data[0]);
+          setOriginalPalette(data[0]);
+        }
       }
     } catch (err) {
       console.error(err);
@@ -123,13 +130,11 @@ export default function ThemeSettingsPage() {
   const handleApply = async (palette: PaletteType) => {
     setSaving(true);
     try {
-      // If it's a prebuilt palette without a real ID, find the real one in savedPalettes
       let realId = palette.id;
       if (realId.startsWith('prebuilt-')) {
         const found = savedPalettes.find(p => p.name === palette.name);
         if (found) realId = found.id;
         else {
-           // If not found in DB, create it first
            const createRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`, {
              method: "POST",
              headers: { "Content-Type": "application/json" },
@@ -147,14 +152,29 @@ export default function ThemeSettingsPage() {
       });
       if (res.ok) {
         setActivePalette(palette);
+        setOriginalPalette(palette);
+        setPreviewPalette(null);
         applyThemeLocally(palette);
-        // Refresh to get real IDs
+        alert(`Theme "${palette.name}" has been applied successfully!`);
         fetchPalettes();
       }
     } catch (err) {
       console.error(err);
+      alert("Failed to apply theme. Please try again.");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handlePreview = (palette: PaletteType) => {
+    setPreviewPalette(palette);
+    applyThemeLocally(palette);
+  };
+
+  const handleDiscard = () => {
+    if (originalPalette) {
+      applyThemeLocally(originalPalette);
+      setPreviewPalette(null);
     }
   };
 
@@ -178,11 +198,13 @@ export default function ThemeSettingsPage() {
         body: JSON.stringify(customPalette)
       });
       if (res.ok) {
+        alert("Custom palette created and saved successfully!");
         setShowCustomBuilder(false);
         fetchPalettes();
       }
     } catch (err) {
       console.error(err);
+      alert("Failed to create custom palette.");
     } finally {
       setSaving(false);
     }
@@ -191,7 +213,6 @@ export default function ThemeSettingsPage() {
   const filteredPalettes = PALETTE_PACKS.flatMap(pack => 
     pack.palettes.map(p => ({ ...p, category: pack.category, id: `prebuilt-${p.name}` } as PaletteType))
   ).concat(savedPalettes.map(p => ({ ...p, isCustom: true })))
-  // Deduplicate by name, prioritizing saved ones
   .filter((p, index, self) => 
     index === self.findIndex((t) => t.name === p.name)
   )
@@ -258,7 +279,7 @@ export default function ThemeSettingsPage() {
             transition={{ delay: i * 0.05 }}
             key={palette.id || palette.name}
             className={`group card-premium overflow-hidden border-2 transition-all cursor-pointer relative bg-white ${
-              activePalette?.name === palette.name 
+              (previewPalette?.name === palette.name || (!previewPalette && activePalette?.name === palette.name))
               ? "border-electric ring-4 ring-electric/10" 
               : "border-[var(--color-border)] hover:border-electric/30"
             }`}
@@ -306,7 +327,14 @@ export default function ThemeSettingsPage() {
                   {saving && activePalette?.name === palette.name ? <Loader2 size={16} className="animate-spin" /> : activePalette?.name === palette.name ? <Check size={16} /> : <MousePointer2 size={16} />}
                   {activePalette?.name === palette.name ? "Active" : "Apply Theme"}
                 </button>
-                <button className="w-12 bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-xl flex items-center justify-center text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:border-electric transition-all">
+                <button 
+                  onClick={() => handlePreview(palette)}
+                  className={`w-12 border rounded-xl flex items-center justify-center transition-all ${
+                    previewPalette?.name === palette.name
+                    ? "bg-electric border-electric text-white"
+                    : "bg-[var(--color-navy-light)] border-[var(--color-border)] text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:border-electric"
+                  }`}
+                >
                   <Eye size={18} />
                 </button>
               </div>
@@ -317,28 +345,38 @@ export default function ThemeSettingsPage() {
 
       {/* Live Preview Bar */}
       <AnimatePresence>
-        {activePalette && (
+        {previewPalette && (
           <motion.div 
             initial={{ y: 100 }}
             animate={{ y: 0 }}
+            exit={{ y: 100 }}
             className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[60] w-full max-w-4xl px-6"
           >
-            <div className="bg-slate-900/90 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-4 shadow-2xl flex items-center justify-between">
+            <div className="bg-slate-900/95 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-4 shadow-2xl flex items-center justify-between">
               <div className="flex items-center gap-6 pl-4">
                 <div className="flex -space-x-3">
-                  {[activePalette.primaryColor, activePalette.secondaryColor, activePalette.backgroundColor].map((c, i) => (
+                  {[previewPalette.primaryColor, previewPalette.secondaryColor, previewPalette.backgroundColor].map((c, i) => (
                     <div key={i} style={{ backgroundColor: c }} className="w-10 h-10 rounded-full border-4 border-slate-900 shadow-lg" />
                   ))}
                 </div>
                 <div>
                   <p className="text-white font-bold">Currently Previewing</p>
-                  <p className="text-white/50 text-xs uppercase tracking-widest">{activePalette.name}</p>
+                  <p className="text-white/50 text-xs uppercase tracking-widest">{previewPalette.name}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 pr-2">
-                <button className="px-6 py-3 text-white/70 hover:text-white font-bold text-sm">Discard</button>
-                <button className="bg-white text-slate-900 px-8 py-3 rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-xl">
-                  Save Permanently
+                <button 
+                  onClick={handleDiscard}
+                  className="px-6 py-3 text-white/70 hover:text-white font-bold text-sm"
+                >
+                  Discard
+                </button>
+                <button 
+                  onClick={() => handleApply(previewPalette)}
+                  disabled={saving}
+                  className="bg-white text-slate-900 px-8 py-3 rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-xl disabled:opacity-50"
+                >
+                  {saving ? "Saving..." : "Save Permanently"}
                 </button>
               </div>
             </div>

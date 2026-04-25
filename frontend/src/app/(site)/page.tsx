@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 const stats = [
-  { label: "Successful Projects", value: "120+", icon: Rocket },
+  { label: "Successful Projects", value: "12+", icon: Rocket },
   { label: "Growth Delivered", value: "3x", icon: Zap },
   { label: "Client Satisfaction", value: "100%", icon: Users },
   { label: "Support Coverage", value: "24/7", icon: Shield },
