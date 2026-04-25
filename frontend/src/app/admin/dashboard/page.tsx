@@ -17,6 +17,8 @@ const stats = [
   { name: "Site Visits", value: "12.4k", change: "+18%", trendingUp: true, icon: Users },
 ];
 
+export default function DashboardDashboard() {
+  return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold font-outfit text-[var(--color-text-main)]">Dashboard Overview</h1>

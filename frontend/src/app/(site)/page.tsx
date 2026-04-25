@@ -436,14 +436,14 @@ export default function Home() {
       {/* CTA Section */}
       {isEnabled('cta') && (
         <section className="max-w-7xl mx-auto px-6 w-full pb-20">
-          <div className="bg-gradient-to-br from-slate-900 via-[#0F172A] to-slate-900 border border-[var(--color-border)] rounded-[3rem] p-10 lg:p-16 text-center space-y-6 relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-electric)]/10 blur-[120px] -mr-48 -mt-48" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--color-accent)]/10 blur-[120px] -ml-48 -mb-48" />
+          <div className="bg-[var(--color-card)] border border-[var(--color-border)] rounded-[3rem] p-10 lg:p-16 text-center space-y-6 relative overflow-hidden shadow-2xl">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-electric)]/5 blur-[120px] -mr-48 -mt-48" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--color-accent)]/5 blur-[120px] -ml-48 -mb-48" />
 
-            <h2 className="text-3xl lg:text-5xl font-bold font-outfit max-w-3xl mx-auto leading-tight text-white">
+            <h2 className="text-3xl lg:text-5xl font-bold font-outfit max-w-3xl mx-auto leading-tight text-[var(--color-text-main)]">
               Ready to Accelerate Your <span className="text-gradient">Business Growth</span>?
             </h2>
-            <p className="text-white opacity-70 max-w-xl mx-auto leading-relaxed">
+            <p className="text-[var(--color-text-main)] opacity-70 max-w-xl mx-auto leading-relaxed">
               Stop settling for mediocre digital presence. Partner with Uma Techno to build a premium solution that commands authority and delivers results.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4 relative z-10">
@@ -456,7 +456,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/portfolio"
-                className="px-8 py-4 bg-white border border-[var(--color-border)] text-gray-900 hover:bg-white/90 rounded-xl font-bold text-base transition-all text-center"
+                className="px-8 py-4 bg-transparent border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-slate-50 rounded-xl font-bold text-base transition-all text-center"
               >
                 View Our Work
               </Link>
@@ -466,7 +466,7 @@ export default function Home() {
       )}
 
       {/* Sticky Bottom Mobile CTA */}
-      <div className="fixed bottom-0 left-0 w-full p-4 bg-white/90 backdrop-blur-md border-t border-[var(--color-border)] z-40 lg:hidden flex justify-center shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+      <div className="fixed bottom-0 left-0 w-full p-4 bg-[var(--background)]/90 backdrop-blur-md border-t border-[var(--color-border)] z-40 lg:hidden flex justify-center shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
         <Link href="/contact" className="w-full max-w-md py-4 bg-[var(--color-electric)] text-white font-bold rounded-xl text-center shadow-lg">
           Get Started Today
         </Link>

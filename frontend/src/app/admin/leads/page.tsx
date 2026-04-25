@@ -12,8 +12,13 @@ export default function LeadsDashboard() {
       try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/contacts`);
         if (res.ok) {
-          const data = await res.json();
-          setLeads(data);
+          const result = await res.json();
+          // The API returns { success: true, data: [...] }
+          if (result.success && Array.isArray(result.data)) {
+            setLeads(result.data);
+          } else if (Array.isArray(result)) {
+            setLeads(result);
+          }
         }
       } catch (err) {
         console.error("Failed to fetch leads", err);
@@ -90,7 +95,7 @@ export default function LeadsDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {leads.map((lead) => (
+                {Array.isArray(leads) && leads.map((lead) => (
                   <tr key={lead.id} className="border-b border-[var(--color-border)] hover:bg-[var(--color-navy)]/50 transition-colors">
                     <td className="p-4">
                       <div className="font-bold text-[var(--color-text-main)]">{lead.name}</div>

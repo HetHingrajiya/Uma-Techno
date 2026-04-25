@@ -13,8 +13,12 @@ export default function PortfolioManager() {
       try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/projects`);
         if (res.ok) {
-          const data = await res.json();
-          setProjects(data);
+          const result = await res.json();
+          if (result.success && Array.isArray(result.data)) {
+            setProjects(result.data);
+          } else if (Array.isArray(result)) {
+            setProjects(result);
+          }
         }
       } catch (err) {
         console.error("Failed to fetch projects", err);
@@ -64,7 +68,7 @@ export default function PortfolioManager() {
                 </tr>
               </thead>
               <tbody>
-                {projects.map((project) => (
+                {Array.isArray(projects) && projects.map((project) => (
                   <tr key={project.id} className="border-b border-[var(--color-border)] hover:bg-[var(--color-navy)]/50 transition-colors">
                     <td className="p-4 font-bold text-[var(--color-text-main)]">{project.title}</td>
                     <td className="p-4 text-sm text-[var(--color-text-main)] opacity-70">{project.category}</td>

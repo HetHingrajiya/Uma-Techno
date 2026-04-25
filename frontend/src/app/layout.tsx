@@ -62,7 +62,6 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "@/components/ThemeProvider";
-import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 export default function RootLayout({
   children,
