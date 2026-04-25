@@ -37,7 +37,14 @@ export default function SEOLandingPage({ params }: { params: { slug: string } })
    return (
       <div className="flex flex-col gap-16 lg:gap-32 pb-20 lg:pb-32 bg-[var(--background)] min-h-screen pt-32">
          <section className="max-w-7xl mx-auto px-6 w-full text-center space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
+            <div 
+               className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border"
+               style={{ 
+                  backgroundColor: "var(--color-blue-glow, rgba(6, 182, 212, 0.15))", 
+                  borderColor: "var(--color-blue-glow, rgba(6, 182, 212, 0.2))",
+                  color: "var(--color-electric)" 
+               }}
+            >
                Premium IT Solutions
             </div>
             <h1 className="text-4xl lg:text-6xl 2xl:text-7xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">
@@ -50,7 +57,8 @@ export default function SEOLandingPage({ params }: { params: { slug: string } })
             <div className="pt-8">
                <Link
                   href="/contact"
-                  className="px-8 py-4 bg-[var(--color-electric)] text-white hover:bg-[var(--color-electric)]/90 rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl btn-premium inline-block"
+                  className="px-8 py-4 text-white rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl btn-premium inline-block"
+                  style={{ backgroundColor: "var(--color-electric)" }}
                >
                   Get a Free Quote
                </Link>

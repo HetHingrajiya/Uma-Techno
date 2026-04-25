@@ -411,13 +411,14 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4 relative z-10">
               <Link
                 href="/contact"
-                className="px-8 py-4 bg-[var(--color-electric)] text-white hover:bg-[var(--color-electric)]/90 rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl btn-premium sticky top-24 z-50"
+                className="px-8 py-4 text-white rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl btn-premium text-center"
+                style={{ backgroundColor: "var(--color-electric)" }}
               >
                 Get Free Consultation
               </Link>
               <Link
                 href="/portfolio"
-                className="px-8 py-4 bg-white border border-[var(--color-border)] text-[var(--color-navy)] hover:bg-white/90 rounded-xl font-bold text-base transition-all"
+                className="px-8 py-4 bg-white border border-[var(--color-border)] text-gray-900 hover:bg-white/90 rounded-xl font-bold text-base transition-all text-center"
               >
                 View Our Work
               </Link>

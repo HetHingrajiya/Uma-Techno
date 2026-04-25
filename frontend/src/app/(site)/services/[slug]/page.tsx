@@ -70,7 +70,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     <div className="pt-32 pb-20">
       <section className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         <div className="space-y-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
+          <div 
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border"
+            style={{ 
+               backgroundColor: "var(--color-blue-glow, rgba(6, 182, 212, 0.15))", 
+               borderColor: "var(--color-blue-glow, rgba(6, 182, 212, 0.2))",
+               color: "var(--color-electric)" 
+            }}
+          >
             {service.seoFocus}
           </div>
           <h1 className="text-4xl lg:text-6xl font-bold font-outfit leading-tight text-[var(--color-text-main)]">
@@ -87,7 +94,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <div className="grid sm:grid-cols-2 gap-4">
             {service.features.map((feature: string, i: number) => (
               <div key={i} className="flex gap-3 items-center group">
-                <div className="w-5 h-5 rounded-full bg-[var(--color-electric)]/20 flex items-center justify-center text-[var(--color-electric)] group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all">
+                <div 
+                  className="w-5 h-5 rounded-full flex items-center justify-center text-[var(--color-electric)] group-hover:text-white transition-all"
+                  style={{ backgroundColor: "var(--color-blue-glow, rgba(6, 182, 212, 0.2))" }}
+                >
                   <CheckCircle size={12} />
                 </div>
                 <span className="text-[var(--color-text-main)] opacity-80 font-medium">{feature}</span>
@@ -98,7 +108,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <div className="pt-6">
             <Link 
               href="/contact" 
-              className="px-8 py-4 bg-[var(--color-electric)] text-white hover:brightness-110 rounded-xl font-bold text-base transition-all hover:scale-105 shadow-[0_0_20px_var(--color-electric)] inline-flex items-center gap-2"
+              className="px-8 py-4 text-white hover:brightness-110 rounded-xl font-bold text-base transition-all hover:scale-105 shadow-[0_0_20px_var(--color-electric)] inline-flex items-center gap-2"
+              style={{ backgroundColor: "var(--color-electric)" }}
             >
               Get Started with {service.title.split(' ')[0]} <ArrowRight size={20} />
             </Link>
