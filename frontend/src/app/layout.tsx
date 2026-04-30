@@ -132,6 +132,40 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const palette = JSON.parse(localStorage.getItem('active-palette'));
+                  if (palette) {
+                    const root = document.documentElement;
+                    root.style.setProperty('--color-electric', palette.primaryColor);
+                    root.style.setProperty('--color-text-main', palette.textColor);
+                    root.style.setProperty('--background', palette.backgroundColor);
+                    root.style.setProperty('--color-card', palette.cardColor);
+                    root.style.setProperty('--color-border', palette.borderColor);
+                    
+                    const bg = palette.backgroundColor.toLowerCase();
+                    const isDark = bg === '#000000' || bg.includes('020617') || bg.includes('0f172a') || bg.includes('0b0117');
+
+                    if (isDark) {
+                      root.style.setProperty('--color-navy', palette.backgroundColor);
+                      root.style.setProperty('--color-navy-light', palette.cardColor);
+                      root.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.6)');
+                      root.style.setProperty('--shadow-glow', palette.primaryColor + '25');
+                    } else {
+                      root.style.setProperty('--color-navy', '#0F172A');
+                      root.style.setProperty('--color-navy-light', palette.backgroundColor);
+                      root.style.setProperty('--shadow-color', 'rgba(15, 23, 42, 0.12)');
+                      root.style.setProperty('--shadow-glow', 'rgba(6, 182, 212, 0.2)');
+                    }
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
       </head>
       <body className={`${inter.variable} ${outfit.variable} font-sans min-h-screen flex flex-col`} suppressHydrationWarning>
         <ThemeProvider>

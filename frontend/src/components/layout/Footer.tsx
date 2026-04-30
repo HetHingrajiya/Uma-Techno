@@ -18,20 +18,20 @@ const Linkedin = (props: any) => (
 
 export default function Footer() {
   return (
-    <footer className="bg-[var(--background)] pt-20 pb-10 border-t border-[var(--color-border)]">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+    <footer className="bg-[var(--color-navy)] pt-20 pb-10 border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-white">
         {/* Company Info */}
         <div className="space-y-6">
           <Link href="/" className="flex items-center gap-3">
             <Logo className="w-8 h-8" />
             <span className="text-xl font-bold tracking-tighter uppercase">
-              <span className="text-[var(--color-electric)]">Uma</span><span className="text-[var(--color-text-main)]">Techno</span>
+              <span className="text-[var(--color-electric)]">Uma</span><span className="text-white">Techno</span>
             </span>
           </Link>
-          <p className="text-[10px] text-[var(--color-text-main)] opacity-40 font-bold tracking-[0.2em] uppercase mt-2">
+          <p className="text-[10px] text-white opacity-40 font-bold tracking-[0.2em] uppercase mt-2">
             Innovate. Create. <span className="text-[var(--color-electric)]">Elevate.</span>
           </p>
-          <p className="text-[var(--color-text-main)] opacity-60 text-sm leading-relaxed">
+          <p className="text-white opacity-60 text-sm leading-relaxed">
             A premium digital agency dedicated to engineering high-performance websites, 
             mobile applications, and custom business software that drive real growth.
           </p>
@@ -47,7 +47,7 @@ export default function Footer() {
                 href={href}
                 target={href !== "#" ? "_blank" : undefined}
                 rel={href !== "#" ? "noopener noreferrer" : undefined}
-                className="w-10 h-10 rounded-full bg-[var(--color-electric)]/5 flex items-center justify-center text-[var(--color-text-main)] opacity-40 hover:bg-[var(--color-electric)] hover:text-white transition-all shadow-sm hover:shadow-[var(--color-electric)]/20"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white opacity-40 hover:bg-[var(--color-electric)] hover:text-white transition-all shadow-sm hover:shadow-[var(--color-electric)]/20"
               >
                 <Icon size={18} />
               </a>
@@ -57,7 +57,7 @@ export default function Footer() {
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-[var(--color-text-main)] font-bold mb-6 text-lg">Quick Links</h4>
+          <h4 className="text-white font-bold mb-6 text-lg">Quick Links</h4>
           <ul className="space-y-4">
             {[
               { name: "About Us", href: "/about" },
@@ -66,7 +66,7 @@ export default function Footer() {
               { name: "Contact Us", href: "/contact" }
             ].map((item) => (
               <li key={item.name}>
-                <Link href={item.href} className="text-[var(--color-text-main)] opacity-60 hover:text-[var(--color-electric)] transition-colors">
+                <Link href={item.href} className="text-white opacity-60 hover:text-[var(--color-electric)] transition-colors">
                   {item.name}
                 </Link>
               </li>
@@ -76,7 +76,7 @@ export default function Footer() {
 
         {/* Services */}
         <div>
-          <h4 className="text-[var(--color-text-main)] font-bold mb-6 text-lg">Services</h4>
+          <h4 className="text-white font-bold mb-6 text-lg">Services</h4>
           <ul className="space-y-4">
             {[
               { name: "Web Development", href: "/services/web-development" },
@@ -86,7 +86,7 @@ export default function Footer() {
               { name: "Digital Branding", href: "/services/branding" }
             ].map((item) => (
               <li key={item.name}>
-                <Link href={item.href} className="text-[var(--color-text-main)] opacity-60 hover:text-[var(--color-electric)] transition-colors">
+                <Link href={item.href} className="text-white opacity-60 hover:text-[var(--color-electric)] transition-colors">
                   {item.name}
                 </Link>
               </li>
@@ -96,17 +96,17 @@ export default function Footer() {
 
         {/* Contact Info */}
         <div>
-          <h4 className="text-[var(--color-text-main)] font-bold mb-6 text-lg">Contact Us</h4>
+          <h4 className="text-white font-bold mb-6 text-lg">Contact Us</h4>
           <ul className="space-y-4">
-            <li className="flex gap-3 text-[var(--color-text-main)] opacity-60">
+            <li className="flex gap-3 text-white opacity-60">
               <MapPin className="text-[var(--color-electric)] shrink-0" size={20} />
               <span>Rajkot, Gujarat, India</span>
             </li>
-            <li className="flex gap-3 text-[var(--color-text-main)] opacity-60">
+            <li className="flex gap-3 text-white opacity-60">
               <Phone className="text-[var(--color-electric)] shrink-0" size={20} />
               <span>+91 92743 50728</span>
             </li>
-            <li className="flex gap-3 text-[var(--color-text-main)] opacity-60">
+            <li className="flex gap-3 text-white opacity-60">
               <Mail className="text-[var(--color-electric)] shrink-0" size={20} />
               <span>uma.techno585@gmail.com</span>
             </li>
@@ -114,15 +114,15 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-[var(--color-border)] flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="text-[var(--color-text-main)] opacity-40 text-sm">
+      <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p className="text-white opacity-40 text-sm">
           © {new Date().getFullYear()} Uma Techno. All rights reserved.
         </p>
         <div className="flex gap-8 text-sm">
-          <Link href="/privacy" className="text-[var(--color-text-main)] opacity-40 hover:text-[var(--color-electric)] transition-colors">
+          <Link href="/privacy" className="text-white opacity-40 hover:text-[var(--color-electric)] transition-colors">
             Privacy Policy
           </Link>
-          <Link href="/terms" className="text-[var(--color-text-main)] opacity-40 hover:text-[var(--color-electric)] transition-colors">
+          <Link href="/terms" className="text-white opacity-40 hover:text-[var(--color-electric)] transition-colors">
             Terms of Service
           </Link>
         </div>

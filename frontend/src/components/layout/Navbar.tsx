@@ -127,7 +127,7 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed inset-0 bg-white z-[100] md:hidden flex flex-col"
+            className="fixed inset-0 bg-[var(--color-card)] z-[100] md:hidden flex flex-col"
           >
             <div className="p-6 flex flex-col h-full">
               <div className="flex justify-between items-center mb-16">

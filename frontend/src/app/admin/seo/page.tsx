@@ -210,18 +210,18 @@ export default function SEODashboard() {
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="relative w-full max-w-2xl bg-white rounded-3xl md:rounded-[3rem] shadow-2xl border border-[var(--color-border)] max-h-[90vh] flex flex-col"
+              className="relative w-full max-w-2xl bg-[var(--color-card)] rounded-3xl md:rounded-[3rem] shadow-2xl border border-[var(--color-border)] max-h-[90vh] flex flex-col"
             >
-              <div className="p-6 md:p-10 border-b border-[var(--color-border)] flex justify-between items-center bg-slate-50/50 rounded-t-[3rem]">
+              <div className="p-6 md:p-10 border-b border-[var(--color-border)] flex justify-between items-center bg-[var(--color-navy-light)]/50 rounded-t-[3rem]">
                 <div>
-                  <h2 className="text-2xl md:text-3xl font-bold font-outfit text-slate-900">
+                  <h2 className="text-2xl md:text-3xl font-bold font-outfit text-[var(--color-text-main)]">
                     {currentSEO ? "Edit SEO Page" : "Add SEO Page"}
                   </h2>
-                  <p className="text-sm text-slate-500 mt-1 font-medium">Optimize your visibility for search engines.</p>
+                  <p className="text-sm text-[var(--color-text-main)] opacity-60 mt-1 font-medium">Optimize your visibility for search engines.</p>
                 </div>
                 <button 
                   onClick={() => setIsModalOpen(false)} 
-                  className="w-12 h-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all shadow-sm"
+                  className="w-12 h-12 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] flex items-center justify-center text-slate-400 hover:text-[var(--color-text-main)] transition-all shadow-sm"
                 >
                   <X size={24} />
                 </button>
@@ -238,7 +238,7 @@ export default function SEODashboard() {
                     value={formData.pagePath}
                     onChange={(e) => setFormData({...formData, pagePath: e.target.value})}
                     placeholder="e.g. /about or /services/web-development"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-slate-900 font-mono text-sm"
+                    className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-[var(--color-text-main)] font-mono text-sm"
                   />
                 </div>
 
@@ -253,7 +253,7 @@ export default function SEODashboard() {
                     value={formData.title}
                     onChange={(e) => setFormData({...formData, title: e.target.value})}
                     placeholder="Premium Web Development Rajkot | Uma Techno"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-slate-900"
+                    className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-[var(--color-text-main)]"
                   />
                 </div>
 
@@ -268,7 +268,7 @@ export default function SEODashboard() {
                     onChange={(e) => setFormData({...formData, description: e.target.value})}
                     placeholder="Best digital agency in Rajkot providing high-performance websites..."
                     rows={4}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-medium text-slate-700 resize-none"
+                    className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-medium text-slate-700 resize-none"
                   />
                 </div>
 
@@ -281,7 +281,7 @@ export default function SEODashboard() {
                     value={formData.ogImage}
                     onChange={(e) => setFormData({...formData, ogImage: e.target.value})}
                     placeholder="https://example.com/og-image.png"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-mono text-xs text-slate-500"
+                    className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-mono text-xs text-[var(--color-text-main)] opacity-60"
                   />
                 </div>
 
@@ -289,7 +289,7 @@ export default function SEODashboard() {
                   <button 
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="flex-1 py-4 text-slate-500 font-bold hover:text-slate-900 transition-colors text-sm"
+                    className="flex-1 py-4 text-[var(--color-text-main)] opacity-60 font-bold hover:text-[var(--color-text-main)] transition-colors text-sm"
                   >
                     Cancel
                   </button>

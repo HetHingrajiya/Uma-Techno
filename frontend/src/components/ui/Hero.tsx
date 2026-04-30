@@ -45,7 +45,7 @@ export default function Hero() {
                   </Link>
                   <Link
                     href="/portfolio"
-                    className="group px-8 py-4 bg-white border border-[var(--color-border)] text-[var(--color-text-main)] rounded-xl font-bold text-lg transition-all hover:bg-[var(--color-navy-light)] text-center shadow-sm"
+                    className="group px-8 py-4 bg-[var(--color-card)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-xl font-bold text-lg transition-all hover:bg-[var(--color-navy-light)] text-center shadow-sm"
                   >
                     View Portfolio
                   </Link>

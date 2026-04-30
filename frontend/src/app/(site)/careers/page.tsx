@@ -40,7 +40,7 @@ export default function CareersPage() {
       <section className="max-w-5xl mx-auto px-6 space-y-6">
         <h3 className="text-2xl font-bold font-outfit mb-8 text-[var(--color-text-main)]">Open Positions</h3>
         {jobs.map((job, i) => (
-          <div key={i} className="card-premium p-8 rounded-3xl border border-[var(--color-border)] hover:border-[var(--color-electric)]/30 transition-all flex flex-col md:flex-row justify-between items-center gap-6 group bg-white">
+          <div key={i} className="card-premium p-8 rounded-3xl border border-[var(--color-border)] hover:border-[var(--color-electric)]/30 transition-all flex flex-col md:flex-row justify-between items-center gap-6 group bg-[var(--color-card)]">
              <div className="space-y-2">
                 <h4 className="text-2xl font-bold font-outfit group-hover:text-[var(--color-electric)] transition-colors text-[var(--color-text-main)]">{job.title}</h4>
                 <div className="flex flex-wrap gap-4 text-sm text-[var(--color-text-main)] opacity-60 font-medium">
@@ -57,7 +57,7 @@ export default function CareersPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-6 py-20 text-center">
-          <div className="card-premium p-12 rounded-[3rem] border border-[var(--color-border)] space-y-8 bg-white">
+          <div className="card-premium p-12 rounded-[3rem] border border-[var(--color-border)] space-y-8 bg-[var(--color-card)]">
             <h3 className="text-3xl font-bold font-outfit text-[var(--color-text-main)]">Why Work at Uma Techno?</h3>
             <div className="grid md:grid-cols-3 gap-8">
                {[

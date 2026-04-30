@@ -211,9 +211,13 @@ export default function ThemeSettingsPage() {
     if (isDark) {
       root.style.setProperty('--color-navy', p.backgroundColor);
       root.style.setProperty('--color-navy-light', p.cardColor);
+      root.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.6)');
+      root.style.setProperty('--shadow-glow', `${p.primaryColor}25`);
     } else {
       root.style.setProperty('--color-navy', '#0F172A'); // Default dark
       root.style.setProperty('--color-navy-light', p.backgroundColor);
+      root.style.setProperty('--shadow-color', 'rgba(15, 23, 42, 0.12)');
+      root.style.setProperty('--shadow-glow', 'rgba(6, 182, 212, 0.2)');
     }
 
     localStorage.setItem('theme-updated', Date.now().toString());
@@ -326,7 +330,7 @@ export default function ThemeSettingsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
             key={palette.id || palette.name}
-            className={`group card-premium overflow-hidden border-2 transition-all cursor-pointer relative bg-white ${
+            className={`group card-premium overflow-hidden border-2 transition-all cursor-pointer relative bg-[var(--color-card)] ${
               (previewPalette?.name === palette.name || (!previewPalette && activePalette?.name === palette.name))
               ? "border-electric ring-4 ring-electric/10" 
               : "border-[var(--color-border)] hover:border-electric/30"
@@ -428,7 +432,7 @@ export default function ThemeSettingsPage() {
                 <button 
                   onClick={() => handleApply(previewPalette)}
                   disabled={saving}
-                  className="flex-[2] md:flex-none bg-white text-slate-900 px-4 md:px-8 py-2 md:py-3 rounded-xl md:rounded-2xl font-black text-[10px] md:text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-xl disabled:opacity-50"
+                  className="flex-[2] md:flex-none bg-[var(--color-card)] text-[var(--color-text-main)] px-4 md:px-8 py-2 md:py-3 rounded-xl md:rounded-2xl font-black text-[10px] md:text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-xl disabled:opacity-50"
                 >
                   {saving ? "Saving..." : "Save Permanently"}
                 </button>
@@ -453,24 +457,24 @@ export default function ThemeSettingsPage() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-2xl bg-white rounded-3xl md:rounded-[3rem] shadow-2xl overflow-hidden border border-[var(--color-border)] max-h-[90vh] overflow-y-auto"
+              className="relative w-full max-w-2xl bg-[var(--color-card)] rounded-3xl md:rounded-[3rem] shadow-2xl overflow-hidden border border-[var(--color-border)] max-h-[90vh] overflow-y-auto"
             >
               <div className="p-6 md:p-12 space-y-6 md:space-y-8">
                 <div className="flex justify-between items-center">
-                  <h2 className="text-2xl md:text-3xl font-bold font-outfit text-slate-900">Custom Builder</h2>
-                  <button onClick={() => setShowCustomBuilder(false)} className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors">
+                  <h2 className="text-2xl md:text-3xl font-bold font-outfit text-[var(--color-text-main)]">Custom Builder</h2>
+                  <button onClick={() => setShowCustomBuilder(false)} className="w-10 h-10 rounded-full bg-[var(--color-navy-light)] flex items-center justify-center text-slate-400 hover:text-[var(--color-text-main)] transition-colors">
                     <X size={20} />
                   </button>
                 </div>
 
                 <div className="space-y-6">
                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-slate-500 uppercase tracking-widest">Palette Name</label>
+                      <label className="text-xs font-bold text-[var(--color-text-main)] opacity-60 uppercase tracking-widest">Palette Name</label>
                       <input 
                         type="text" 
                         value={customPalette.name}
                         onChange={(e) => setCustomPalette({...customPalette, name: e.target.value})}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 focus:outline-none focus:border-electric font-bold text-slate-900"
+                        className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 focus:outline-none focus:border-electric font-bold text-[var(--color-text-main)]"
                       />
                    </div>
 
@@ -493,7 +497,7 @@ export default function ThemeSettingsPage() {
                                 onChange={(e) => setCustomPalette({...customPalette, [item.key]: e.target.value})}
                                 className="w-full h-10 md:h-12 rounded-xl cursor-pointer border-none p-0"
                               />
-                              <div className="absolute inset-0 pointer-events-none rounded-xl border border-slate-200 ring-1 ring-inset ring-white/10" />
+                              <div className="absolute inset-0 pointer-events-none rounded-xl border border-[var(--color-border)] ring-1 ring-inset ring-white/10" />
                            </div>
                         </div>
                       ))}
@@ -503,7 +507,7 @@ export default function ThemeSettingsPage() {
                 <div className="pt-4 md:pt-8 flex gap-4">
                   <button 
                     onClick={() => setShowCustomBuilder(false)}
-                    className="flex-1 py-3 md:py-4 text-slate-500 font-bold hover:text-slate-900 transition-colors text-sm"
+                    className="flex-1 py-3 md:py-4 text-[var(--color-text-main)] opacity-60 font-bold hover:text-[var(--color-text-main)] transition-colors text-sm"
                   >
                     Cancel
                   </button>

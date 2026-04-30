@@ -58,7 +58,7 @@ export default function BlogPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               key={post.slug}
-              className="card-premium group flex flex-col bg-white overflow-hidden"
+              className="card-premium group flex flex-col bg-[var(--color-card)] overflow-hidden"
             >
               <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
                 <img
@@ -67,7 +67,7 @@ export default function BlogPage() {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-white/90 backdrop-blur-md text-[var(--color-electric)] text-[10px] font-black uppercase tracking-widest rounded-full shadow-sm">
+                  <span className="px-3 py-1 bg-[var(--color-card)]/90 backdrop-blur-md text-[var(--color-electric)] text-[10px] font-black uppercase tracking-widest rounded-full shadow-sm">
                     {post.category}
                   </span>
                 </div>

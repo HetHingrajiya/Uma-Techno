@@ -334,7 +334,7 @@ export default function Home() {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute top-6 left-6 flex flex-col gap-2">
-                    <span className="px-4 py-2 bg-white/90 backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-border)] text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
+                    <span className="px-4 py-2 bg-[var(--color-card)]/90 backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-border)] text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
                       {project.category}
                     </span>
                     {project.industry && (
@@ -408,7 +408,7 @@ export default function Home() {
               ))
             ) : (
               [1, 2, 3].map((i) => (
-                <div key={i} className="bg-white border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all opacity-40 grayscale">
+                <div key={i} className="bg-[var(--color-card)] border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all opacity-40 grayscale">
                   <div className="flex gap-1 text-[#F59E0B] mb-6">
                     {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" />)}
                   </div>

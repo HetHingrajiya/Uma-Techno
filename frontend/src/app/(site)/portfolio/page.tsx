@@ -123,7 +123,7 @@ export default function PortfolioPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 key={project.slug || i}
-                className="card-premium group overflow-hidden flex flex-col bg-white"
+                className="card-premium group overflow-hidden flex flex-col bg-[var(--color-card)]"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
                   <img

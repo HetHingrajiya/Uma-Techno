@@ -232,19 +232,19 @@ export default function TestimonialsManager() {
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="relative w-full max-w-2xl bg-white rounded-3xl md:rounded-[3rem] shadow-2xl border border-[var(--color-border)] max-h-[90vh] flex flex-col"
+              className="relative w-full max-w-2xl bg-[var(--color-card)] rounded-3xl md:rounded-[3rem] shadow-2xl border border-[var(--color-border)] max-h-[90vh] flex flex-col"
             >
               {/* Modal Header */}
-              <div className="p-6 md:p-10 border-b border-[var(--color-border)] flex justify-between items-center bg-slate-50/50 rounded-t-[3rem]">
+              <div className="p-6 md:p-10 border-b border-[var(--color-border)] flex justify-between items-center bg-[var(--color-navy-light)]/50 rounded-t-[3rem]">
                 <div>
-                  <h2 className="text-2xl md:text-3xl font-bold font-outfit text-slate-900">
+                  <h2 className="text-2xl md:text-3xl font-bold font-outfit text-[var(--color-text-main)]">
                     {currentTestimonial ? "Edit Review" : "Add Review"}
                   </h2>
-                  <p className="text-sm text-slate-500 mt-1 font-medium">Feature your best client success stories.</p>
+                  <p className="text-sm text-[var(--color-text-main)] opacity-60 mt-1 font-medium">Feature your best client success stories.</p>
                 </div>
                 <button 
                   onClick={() => setIsModalOpen(false)} 
-                  className="w-12 h-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all shadow-sm"
+                  className="w-12 h-12 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] flex items-center justify-center text-slate-400 hover:text-[var(--color-text-main)] transition-all shadow-sm"
                 >
                   <X size={24} />
                 </button>
@@ -263,7 +263,7 @@ export default function TestimonialsManager() {
                         value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
                         placeholder="e.g. John Doe"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-slate-900 transition-colors"
+                        className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-[var(--color-text-main)] transition-colors"
                       />
                     </div>
                     
@@ -277,7 +277,7 @@ export default function TestimonialsManager() {
                         value={formData.role}
                         onChange={(e) => setFormData({...formData, role: e.target.value})}
                         placeholder="e.g. CEO, Tech Innovators"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-slate-900 transition-colors"
+                        className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-[var(--color-text-main)] transition-colors"
                       />
                     </div>
                 </div>
@@ -286,7 +286,7 @@ export default function TestimonialsManager() {
                     <label className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
                         <Star size={14} className="text-electric" /> Rating
                     </label>
-                    <div className="flex gap-4 items-center bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    <div className="flex gap-4 items-center bg-[var(--color-navy-light)] p-4 rounded-2xl border border-[var(--color-border)]">
                         {[1, 2, 3, 4, 5].map((s) => (
                             <button 
                                 key={s}
@@ -297,7 +297,7 @@ export default function TestimonialsManager() {
                                 <Star size={24} className={`${formData.rating >= s ? 'text-amber-400 fill-amber-400' : 'text-slate-400'}`} />
                             </button>
                         ))}
-                        <span className="ml-auto font-black text-slate-900">{formData.rating} Stars</span>
+                        <span className="ml-auto font-black text-[var(--color-text-main)]">{formData.rating} Stars</span>
                     </div>
                 </div>
 
@@ -311,7 +311,7 @@ export default function TestimonialsManager() {
                     onChange={(e) => setFormData({...formData, content: e.target.value})}
                     placeholder="What did they say about your work?"
                     rows={4}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-medium text-slate-700 resize-none transition-colors"
+                    className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-medium text-slate-700 resize-none transition-colors"
                   />
                 </div>
 
@@ -324,11 +324,11 @@ export default function TestimonialsManager() {
                     value={formData.image}
                     onChange={(e) => setFormData({...formData, image: e.target.value})}
                     placeholder="https://example.com/photo.jpg"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-mono text-xs text-slate-500"
+                    className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-mono text-xs text-[var(--color-text-main)] opacity-60"
                   />
                 </div>
 
-                <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                <div className="flex items-center gap-3 p-4 bg-[var(--color-navy-light)] rounded-2xl border border-[var(--color-border)]">
                     <input 
                         type="checkbox" 
                         id="active"
@@ -336,7 +336,7 @@ export default function TestimonialsManager() {
                         onChange={(e) => setFormData({...formData, active: e.target.checked})}
                         className="w-5 h-5 accent-electric"
                     />
-                    <label htmlFor="active" className="text-sm font-bold text-slate-900 cursor-pointer">Show this testimonial on the website</label>
+                    <label htmlFor="active" className="text-sm font-bold text-[var(--color-text-main)] cursor-pointer">Show this testimonial on the website</label>
                 </div>
 
                 {/* Submit Area */}
@@ -344,7 +344,7 @@ export default function TestimonialsManager() {
                   <button 
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="flex-1 py-4 text-slate-500 font-bold hover:text-slate-900 transition-colors text-sm"
+                    className="flex-1 py-4 text-[var(--color-text-main)] opacity-60 font-bold hover:text-[var(--color-text-main)] transition-colors text-sm"
                   >
                     Cancel
                   </button>

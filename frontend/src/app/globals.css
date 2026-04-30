@@ -9,8 +9,8 @@
   --color-border: var(--color-border, #E2E8F0);
   --color-blue-glow: var(--color-blue-glow, rgba(6, 182, 212, 0.15));
   --color-glass: var(--color-glass, rgba(255, 255, 255, 0.85));
-  
-  --font-sans: var(--font-sans, "Inter", "Outfit", sans-serif);
+  --shadow-color: var(--shadow-color, rgba(15, 23, 42, 0.08));
+  --shadow-glow: var(--shadow-glow, rgba(6, 182, 212, 0.15));
 }
 
 @layer base {
@@ -44,8 +44,8 @@
     backdrop-filter: blur(24px) saturate(180%);
     border: 1px solid rgba(15, 23, 42, 0.05);
     box-shadow: 
-      0 10px 40px -10px rgba(15, 23, 42, 0.03),
-      inset 0 1px 1px 0 rgba(255, 255, 255, 1);
+      0 10px 40px -10px var(--shadow-color),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
@@ -54,19 +54,19 @@
     border-color: var(--color-electric, #06B6D4);
     transform: translateY(-5px);
     box-shadow: 
-      0 30px 60px -12px rgba(15, 23, 42, 0.08),
-      inset 0 1px 1px 0 rgba(255, 255, 255, 1);
+      0 30px 60px -12px var(--shadow-glow),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   .card-premium {
     @apply border border-[var(--color-border)] rounded-[var(--radius)] transition-all duration-500;
     background: linear-gradient(135deg, var(--color-card) 0%, var(--background) 100%);
-    box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.05);
+    box-shadow: 0 20px 50px -12px var(--shadow-color);
   }
 
   .card-premium:hover {
     @apply -translate-y-2;
-    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.1);
+    box-shadow: 0 40px 80px -15px var(--shadow-glow);
   }
 
   .hover-lift {

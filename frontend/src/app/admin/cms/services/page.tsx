@@ -229,19 +229,19 @@ export default function ServicesManager() {
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="relative w-full max-w-4xl bg-white rounded-3xl md:rounded-[3rem] shadow-2xl border border-[var(--color-border)] max-h-[90vh] flex flex-col"
+              className="relative w-full max-w-4xl bg-[var(--color-card)] rounded-3xl md:rounded-[3rem] shadow-2xl border border-[var(--color-border)] max-h-[90vh] flex flex-col"
             >
               {/* Modal Header */}
-              <div className="p-6 md:p-10 border-b border-[var(--color-border)] flex justify-between items-center bg-slate-50/50 rounded-t-[3rem]">
+              <div className="p-6 md:p-10 border-b border-[var(--color-border)] flex justify-between items-center bg-[var(--color-navy-light)]/50 rounded-t-[3rem]">
                 <div>
-                  <h2 className="text-2xl md:text-3xl font-bold font-outfit text-slate-900">
+                  <h2 className="text-2xl md:text-3xl font-bold font-outfit text-[var(--color-text-main)]">
                     {currentService ? "Edit Service" : "Add New Service"}
                   </h2>
-                  <p className="text-sm text-slate-500 mt-1 font-medium">Configure your service details below.</p>
+                  <p className="text-sm text-[var(--color-text-main)] opacity-60 mt-1 font-medium">Configure your service details below.</p>
                 </div>
                 <button 
                   onClick={() => setIsModalOpen(false)} 
-                  className="w-12 h-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-900 hover:border-slate-300 transition-all shadow-sm"
+                  className="w-12 h-12 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] flex items-center justify-center text-slate-400 hover:text-[var(--color-text-main)] hover:border-slate-300 transition-all shadow-sm"
                 >
                   <X size={24} />
                 </button>
@@ -262,7 +262,7 @@ export default function ServicesManager() {
                         value={formData.title}
                         onChange={handleTitleChange}
                         placeholder="e.g. Web Development"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-slate-900 transition-colors"
+                        className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-[var(--color-text-main)] transition-colors"
                       />
                     </div>
                     
@@ -276,7 +276,7 @@ export default function ServicesManager() {
                         value={formData.slug}
                         onChange={(e) => setFormData({...formData, slug: e.target.value})}
                         placeholder="web-development"
-                        className="w-full bg-slate-100 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-mono text-sm text-slate-500 transition-colors"
+                        className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-mono text-sm text-[var(--color-text-main)] opacity-60 transition-colors"
                       />
                     </div>
 
@@ -289,21 +289,21 @@ export default function ServicesManager() {
                         value={formData.icon}
                         onChange={(e) => setFormData({...formData, icon: e.target.value})}
                         placeholder="e.g. Code, Database, Layout"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-slate-900 transition-colors"
+                        className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-[var(--color-text-main)] transition-colors"
                       />
                     </div>
 
-                    <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                    <div className="flex items-center justify-between p-4 bg-[var(--color-navy-light)] rounded-2xl border border-slate-100">
                       <div>
-                        <p className="font-bold text-slate-900">Publish Status</p>
-                        <p className="text-xs text-slate-500">Enable to show on live site</p>
+                        <p className="font-bold text-[var(--color-text-main)]">Publish Status</p>
+                        <p className="text-xs text-[var(--color-text-main)] opacity-60">Enable to show on live site</p>
                       </div>
                       <button 
                         type="button"
                         onClick={() => setFormData({...formData, published: !formData.published})}
                         className={`w-14 h-8 rounded-full transition-all relative flex items-center px-1 ${formData.published ? 'bg-electric' : 'bg-slate-300'}`}
                       >
-                        <div className={`w-6 h-6 bg-white rounded-full shadow-md transition-all transform ${formData.published ? 'translate-x-6' : 'translate-x-0'}`} />
+                        <div className={`w-6 h-6 bg-[var(--color-card)] rounded-full shadow-md transition-all transform ${formData.published ? 'translate-x-6' : 'translate-x-0'}`} />
                       </button>
                     </div>
                   </div>
@@ -320,7 +320,7 @@ export default function ServicesManager() {
                         onChange={(e) => setFormData({...formData, description: e.target.value})}
                         placeholder="A brief summary for cards..."
                         rows={3}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-medium text-slate-700 resize-none transition-colors"
+                        className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-medium text-slate-700 resize-none transition-colors"
                       />
                     </div>
 
@@ -334,7 +334,7 @@ export default function ServicesManager() {
                         onChange={(e) => setFormData({...formData, content: e.target.value})}
                         placeholder="Explain your service in detail..."
                         rows={7}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-medium text-slate-700 resize-none transition-colors"
+                        className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-medium text-slate-700 resize-none transition-colors"
                       />
                     </div>
                   </div>
@@ -345,7 +345,7 @@ export default function ServicesManager() {
                   <button 
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="flex-1 py-4 text-slate-500 font-bold hover:text-slate-900 transition-colors text-sm"
+                    className="flex-1 py-4 text-[var(--color-text-main)] opacity-60 font-bold hover:text-[var(--color-text-main)] transition-colors text-sm"
                   >
                     Cancel Changes
                   </button>

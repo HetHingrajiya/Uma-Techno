@@ -239,19 +239,19 @@ export default function PortfolioManager() {
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="relative w-full max-w-4xl bg-white rounded-3xl md:rounded-[3rem] shadow-2xl border border-[var(--color-border)] max-h-[90vh] flex flex-col"
+              className="relative w-full max-w-4xl bg-[var(--color-card)] rounded-3xl md:rounded-[3rem] shadow-2xl border border-[var(--color-border)] max-h-[90vh] flex flex-col"
             >
               {/* Modal Header */}
-              <div className="p-6 md:p-10 border-b border-[var(--color-border)] flex justify-between items-center bg-slate-50/50 rounded-t-[3rem]">
+              <div className="p-6 md:p-10 border-b border-[var(--color-border)] flex justify-between items-center bg-[var(--color-navy-light)]/50 rounded-t-[3rem]">
                 <div>
-                  <h2 className="text-2xl md:text-3xl font-bold font-outfit text-slate-900">
+                  <h2 className="text-2xl md:text-3xl font-bold font-outfit text-[var(--color-text-main)]">
                     {currentProject ? "Edit Project" : "Add New Project"}
                   </h2>
-                  <p className="text-sm text-slate-500 mt-1 font-medium">Capture the essence of your project showcase.</p>
+                  <p className="text-sm text-[var(--color-text-main)] opacity-60 mt-1 font-medium">Capture the essence of your project showcase.</p>
                 </div>
                 <button 
                   onClick={() => setIsModalOpen(false)} 
-                  className="w-12 h-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all shadow-sm"
+                  className="w-12 h-12 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] flex items-center justify-center text-slate-400 hover:text-[var(--color-text-main)] transition-all shadow-sm"
                 >
                   <X size={24} />
                 </button>
@@ -272,7 +272,7 @@ export default function PortfolioManager() {
                         value={formData.title}
                         onChange={handleTitleChange}
                         placeholder="e.g. E-commerce Platform"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-slate-900 transition-colors"
+                        className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-[var(--color-text-main)] transition-colors"
                       />
                     </div>
                     
@@ -286,7 +286,7 @@ export default function PortfolioManager() {
                                 value={formData.clientName}
                                 onChange={(e) => setFormData({...formData, clientName: e.target.value})}
                                 placeholder="Client name..."
-                                className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-slate-900"
+                                className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-[var(--color-text-main)]"
                             />
                         </div>
                         <div className="space-y-2">
@@ -294,7 +294,7 @@ export default function PortfolioManager() {
                             <select 
                                 value={formData.category}
                                 onChange={(e) => setFormData({...formData, category: e.target.value})}
-                                className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-slate-900 appearance-none"
+                                className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-[var(--color-text-main)] appearance-none"
                             >
                                 <option>Web Development</option>
                                 <option>Mobile App</option>
@@ -314,7 +314,7 @@ export default function PortfolioManager() {
                         value={formData.liveUrl}
                         onChange={(e) => setFormData({...formData, liveUrl: e.target.value})}
                         placeholder="https://example.com"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-medium text-slate-600"
+                        className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-medium text-slate-600"
                       />
                     </div>
 
@@ -327,7 +327,7 @@ export default function PortfolioManager() {
                         value={formData.featuredImage}
                         onChange={(e) => setFormData({...formData, featuredImage: e.target.value})}
                         placeholder="/images/portfolio/project1.png"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-mono text-xs text-slate-500"
+                        className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-mono text-xs text-[var(--color-text-main)] opacity-60"
                       />
                     </div>
                   </div>
@@ -342,7 +342,7 @@ export default function PortfolioManager() {
                         onChange={(e) => setFormData({...formData, description: e.target.value})}
                         placeholder="Brief overview for cards..."
                         rows={3}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-medium text-slate-700 resize-none transition-colors"
+                        className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-medium text-slate-700 resize-none transition-colors"
                       />
                     </div>
 
@@ -354,7 +354,7 @@ export default function PortfolioManager() {
                         onChange={(e) => setFormData({...formData, content: e.target.value})}
                         placeholder="Detailed technical information, process, and results..."
                         rows={10}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-medium text-slate-700 resize-none transition-colors"
+                        className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-medium text-slate-700 resize-none transition-colors"
                       />
                     </div>
                   </div>
@@ -365,7 +365,7 @@ export default function PortfolioManager() {
                   <button 
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="flex-1 py-4 text-slate-500 font-bold hover:text-slate-900 transition-colors text-sm"
+                    className="flex-1 py-4 text-[var(--color-text-main)] opacity-60 font-bold hover:text-[var(--color-text-main)] transition-colors text-sm"
                   >
                     Cancel
                   </button>
