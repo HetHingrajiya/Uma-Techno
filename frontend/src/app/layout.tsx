@@ -152,11 +152,15 @@ export default function RootLayout({
                     if (isDark) {
                       root.style.setProperty('--color-navy', palette.backgroundColor);
                       root.style.setProperty('--color-navy-light', palette.cardColor);
+                      root.style.setProperty('--color-glass', 'rgba(15, 23, 42, 0.6)');
+                      root.style.setProperty('--glass-border', 'rgba(255, 255, 255, 0.08)');
                       root.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.6)');
                       root.style.setProperty('--shadow-glow', palette.primaryColor + '25');
                     } else {
                       root.style.setProperty('--color-navy', '#0F172A');
                       root.style.setProperty('--color-navy-light', palette.backgroundColor);
+                      root.style.setProperty('--color-glass', 'rgba(255, 255, 255, 0.8)');
+                      root.style.setProperty('--glass-border', 'rgba(15, 23, 42, 0.05)');
                       root.style.setProperty('--shadow-color', 'rgba(15, 23, 42, 0.12)');
                       root.style.setProperty('--shadow-glow', 'rgba(6, 182, 212, 0.2)');
                     }

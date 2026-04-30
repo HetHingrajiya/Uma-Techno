@@ -208,7 +208,8 @@ export default function Home() {
                     href={`/services/${service.slug}`}
                     className="group bg-[var(--color-card)] border border-[var(--color-border)] p-10 rounded-[2.5rem] md:col-span-2 md:row-span-2 flex flex-col justify-between relative overflow-hidden min-h-[500px] lg:min-h-[600px] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500"
                   >
-                    <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-glow opacity-20 blur-[100px] -mr-32 -mt-32 group-hover:opacity-30 transition-all" />
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-glow -mr-32 -mt-32 group-hover:scale-110 transition-all duration-700" />
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-glow -ml-32 -mb-32 group-hover:scale-110 transition-all duration-700 opacity-20" />
                     <div className="space-y-6 relative z-10">
                       <div className="w-16 h-16 bg-gradient-premium rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
                         {getIcon(service.icon || 'Globe')}
@@ -233,7 +234,8 @@ export default function Home() {
                   className={`group bg-[var(--color-navy-light)] border border-[var(--color-border)] p-8 rounded-[2rem] ${index === 1 ? 'md:col-span-2' : ''} flex flex-col justify-center relative overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500`}
                 >
                   {/* Blurred Background Glow */}
-                  <div className="absolute bottom-0 right-0 w-56 h-56 bg-gradient-glow opacity-10 blur-[60px] -mr-16 -mb-16 group-hover:opacity-20 transition-all duration-500" />
+                  <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-gradient-glow group-hover:scale-125 transition-all duration-500" />
+                  <div className="absolute -top-10 -left-10 w-32 h-32 bg-gradient-glow opacity-10 group-hover:scale-125 transition-all duration-500" />
                   
                   <div className="space-y-4 relative z-10">
                     <div className="w-14 h-14 bg-[var(--color-electric)]/10 rounded-2xl flex items-center justify-center text-[var(--color-electric)] group-hover:bg-gradient-premium group-hover:text-white transition-all shadow-sm">
@@ -255,7 +257,8 @@ export default function Home() {
         <section className="max-w-7xl mx-auto px-6 w-full">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="relative group order-2 lg:order-1">
-              <div className="aspect-video bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2.5rem] overflow-hidden shadow-xl">
+              <div className="absolute -inset-10 bg-gradient-glow opacity-30 blur-[120px] group-hover:opacity-50 transition-all duration-700" />
+              <div className="relative aspect-video bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2.5rem] overflow-hidden shadow-xl">
                 <img
                   src="/images/templates.png"
                   alt="Website Templates"
@@ -333,7 +336,9 @@ export default function Home() {
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute top-6 left-6 flex flex-col gap-2">
+                  <div className="absolute inset-0 bg-gradient-glow opacity-0 group-hover:opacity-20 transition-opacity duration-700" />
+                  <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-gradient-glow group-hover:scale-150 transition-all duration-700" />
+                  <div className="absolute top-6 left-6 flex flex-col gap-2 z-10">
                     <span className="px-4 py-2 bg-[var(--color-card)]/90 backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-border)] text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
                       {project.category}
                     </span>
@@ -494,7 +499,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/portfolio"
-                className="px-8 py-4 bg-transparent border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-slate-50 rounded-xl font-bold text-base transition-all text-center"
+                className="px-8 py-4 bg-transparent border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-[var(--color-navy-light)] rounded-xl font-bold text-base transition-all text-center"
               >
                 View Our Work
               </Link>

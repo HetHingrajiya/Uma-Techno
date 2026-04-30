@@ -92,8 +92,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           --color-electric: ${theme.primaryColor};
           --color-secondary: ${theme.secondaryColor};
           --color-accent: ${theme.accentColor};
-          --color-navy: ${theme.headingColor};
-          --color-navy-light: ${theme.cardColor};
           --color-text-main: ${theme.textColor};
           --color-border: ${theme.borderColor};
           --color-card: ${theme.cardColor};
@@ -104,8 +102,33 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           --background: ${theme.backgroundColor};
           --foreground: ${theme.textColor};
           
+          /* Dynamic Semantic Colors */
+          ${(() => {
+            const bg = theme.backgroundColor.toLowerCase();
+            const isDark = bg === '#000000' || bg.includes('020617') || bg.includes('0f172a') || bg.includes('0b0117');
+            
+            if (isDark) {
+              return `
+                --color-navy: ${theme.backgroundColor};
+                --color-navy-light: ${theme.cardColor};
+                --color-glass: rgba(15, 23, 42, 0.6);
+                --glass-border: rgba(255, 255, 255, 0.08);
+                --shadow-color: rgba(0, 0, 0, 0.6);
+                --shadow-glow: ${theme.primaryColor}25;
+              `;
+            } else {
+              return `
+                --color-navy: #0F172A;
+                --color-navy-light: ${theme.backgroundColor};
+                --color-glass: rgba(255, 255, 255, 0.8);
+                --glass-border: rgba(15, 23, 42, 0.05);
+                --shadow-color: rgba(15, 23, 42, 0.12);
+                --shadow-glow: rgba(6, 182, 212, 0.2);
+              `;
+            }
+          })()}
+
           --color-blue-glow: ${theme.blueGlowColor || 'rgba(6, 182, 212, 0.15)'};
-          --color-glass: ${theme.glassBackgroundColor || 'rgba(255, 255, 255, 0.85)'};
           --scrollbar-thumb-color: ${theme.scrollbarThumbColor || '#06B6D4'};
           --scrollbar-track-color: ${theme.scrollbarTrackColor || '#f8fafc'};
         }

@@ -137,7 +137,7 @@ export default function ContactPage() {
                       type="text"
                       value={formData.name}
                       onChange={e => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-slate-50 border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
+                      className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
                       placeholder="John Doe"
                     />
                   </div>
@@ -148,7 +148,7 @@ export default function ContactPage() {
                       type="email"
                       value={formData.email}
                       onChange={e => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-slate-50 border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
+                      className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
                       placeholder="john@company.com"
                     />
                   </div>
@@ -161,7 +161,7 @@ export default function ContactPage() {
                       type="tel"
                       value={formData.phone}
                       onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-slate-50 border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
+                      className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors"
                       placeholder="+91 90000 00000"
                     />
                   </div>
@@ -170,7 +170,7 @@ export default function ContactPage() {
                     <select
                       value={formData.service}
                       onChange={e => setFormData({ ...formData, service: e.target.value })}
-                      className="w-full bg-slate-50 border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors appearance-none"
+                      className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors appearance-none"
                     >
                       <option>Web Development</option>
                       <option>E-commerce Solution</option>
@@ -188,7 +188,7 @@ export default function ContactPage() {
                     rows={5}
                     value={formData.message}
                     onChange={e => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-slate-50 border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors resize-none"
+                    className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-xl px-4 py-3 text-[var(--color-text-main)] focus:outline-none focus:border-[var(--color-electric)] transition-colors resize-none"
                     placeholder="Tell us about your project goals..."
                   ></textarea>
                 </div>
