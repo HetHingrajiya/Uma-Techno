@@ -9,7 +9,7 @@ export const trackVisit = async (req: Request, res: Response) => {
     const ip = req.ip || req.headers['x-forwarded-for'] as string;
     const userAgent = req.headers['user-agent'];
 
-    await (prisma as any).visit.create({
+    await prisma.visit.create({
       data: {
         path: path || '/',
         ip: ip || 'unknown',

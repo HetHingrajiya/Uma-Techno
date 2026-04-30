@@ -25,9 +25,9 @@ export const getDashboardStats = async (req: Request, res: Response) => {
         take: 5,
         orderBy: { createdAt: 'desc' }
       }),
-      (prisma as any).visit.count({ where: { createdAt: { gte: todayStart } } }),
-      (prisma as any).visit.count({ where: { createdAt: { gte: monthStart } } }),
-      (prisma as any).visit.count()
+      prisma.visit.count({ where: { createdAt: { gte: todayStart } } }),
+      prisma.visit.count({ where: { createdAt: { gte: monthStart } } }),
+      prisma.visit.count()
     ]);
 
     // Graph data for leads AND visits (last 7 months)
@@ -38,7 +38,7 @@ export const getDashboardStats = async (req: Request, res: Response) => {
         
         const [lCount, vCount] = await Promise.all([
             prisma.contact.count({ where: { createdAt: { gte: d, lt: nextD } } }),
-            (prisma as any).visit.count({ where: { createdAt: { gte: d, lt: nextD } } })
+            prisma.visit.count({ where: { createdAt: { gte: d, lt: nextD } } })
         ]);
 
         months.push({

@@ -113,16 +113,9 @@ export default function ThemeSettingsPage() {
     fetchPalettes();
   }, []);
 
-  const getApiUrl = () => {
-    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-      return 'http://localhost:5000';
-    }
-    return process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app';
-  };
-
   const fetchPalettes = async () => {
     try {
-      const res = await fetch(`${getApiUrl()}/api/v1/theme/palettes`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`);
       if (res.ok) {
         const data = await res.json();
         setSavedPalettes(data);
@@ -162,7 +155,7 @@ export default function ThemeSettingsPage() {
         }
       }
 
-      const res = await fetch(`${getApiUrl()}/api/v1/theme/palettes/${realId}/activate`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes/${realId}/activate`, {
         method: "PUT"
       });
       if (res.ok) {

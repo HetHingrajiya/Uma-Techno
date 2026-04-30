@@ -88,10 +88,9 @@ export const setActivePalette = async (req: Request, res: Response) => {
       data: { isActive: false }
     });
     
-    const { id } = req.params;
     // Activate selected
     const activePalette = await prisma.themePalette.update({
-      where: { id: id as string },
+      where: { id },
       data: { isActive: true }
     });
     
@@ -140,7 +139,7 @@ export const createPalette = async (req: Request, res: Response) => {
 export const deletePalette = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    await prisma.themePalette.delete({ where: { id: id as string } });
+    await prisma.themePalette.delete({ where: { id } });
     res.json({ message: 'Palette deleted' });
   } catch (error) {
     res.status(500).json({ error: 'Failed to delete palette' });
