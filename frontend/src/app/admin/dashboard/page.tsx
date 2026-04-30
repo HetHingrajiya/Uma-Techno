@@ -9,6 +9,7 @@ import {
   TrendingUp,
   ArrowUpRight,
   ArrowDownRight,
+  ArrowRight,
   RotateCcw,
   Loader2,
   Calendar,
