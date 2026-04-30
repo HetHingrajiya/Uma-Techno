@@ -163,7 +163,7 @@ export default function Home() {
 
       {/* Trust & Stats Section */}
       {isEnabled('stats') && (
-        <section className="max-w-7xl mx-auto px-6 w-full -mt-8 lg:-mt-16 relative z-20">
+        <section className="max-w-7xl mx-auto px-6 w-full -mt-8 lg:-mt-16 relative z-20 bg-gradient-soft/50 rounded-[3rem] py-12 lg:py-20 border border-[var(--color-border)]">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
             {stats.map((stat, i) => (
               <div key={i} className="card-premium p-6 lg:p-8 text-center flex flex-col items-center gap-4 bg-[var(--color-card)]/80 backdrop-blur-xl">
@@ -188,7 +188,7 @@ export default function Home() {
 
       {/* Services Section */}
       {isEnabled('services') && (
-        <section className="max-w-7xl mx-auto px-6 w-full">
+        <section className="max-w-7xl mx-auto px-6 w-full bg-gradient-soft/30 rounded-[3rem] py-20 lg:py-32 border border-[var(--color-border)]/50">
           <div className="text-center space-y-4 mb-20">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
               Premium Solutions
@@ -375,7 +375,7 @@ export default function Home() {
 
       {/* Testimonials Section */}
       {isEnabled('testimonials') && (
-        <section className="max-w-7xl mx-auto px-6 w-full">
+        <section className="max-w-7xl mx-auto px-6 w-full bg-gradient-soft rounded-[4rem] py-24 border border-[var(--color-border)]/30 shadow-2xl shadow-[var(--color-electric)]/5">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">What Our Clients <span className="text-gradient">Say</span></h2>
             <p className="text-[var(--color-text-main)] opacity-60 max-w-xl mx-auto">See why businesses trust Uma Techno for their digital growth.</p>
@@ -475,9 +475,9 @@ export default function Home() {
       {/* CTA Section */}
       {isEnabled('cta') && (
         <section className="max-w-7xl mx-auto px-6 w-full pb-20">
-          <div className="bg-[var(--color-card)] border border-[var(--color-border)] rounded-[3rem] p-10 lg:p-16 text-center space-y-6 relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-electric)]/5 blur-[120px] -mr-48 -mt-48" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--color-accent)]/5 blur-[120px] -ml-48 -mb-48" />
+          <div className="bg-gradient-soft border border-[var(--color-border)] rounded-[3rem] p-10 lg:p-24 text-center space-y-10 relative overflow-hidden shadow-2xl">
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--color-electric)]/10 blur-[150px] -mr-64 -mt-64" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[var(--color-accent)]/10 blur-[150px] -ml-64 -mb-64" />
 
             <h2 className="text-3xl lg:text-5xl font-bold font-outfit max-w-3xl mx-auto leading-tight text-[var(--color-text-main)]">
               Ready to Accelerate Your <span className="text-gradient">Business Growth</span>?
