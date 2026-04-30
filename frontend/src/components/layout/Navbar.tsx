@@ -144,19 +144,19 @@ export default function Navbar() {
                 </Link>
                 <button 
                   onClick={() => setIsOpen(false)} 
-                  className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-[var(--color-text-main)] border border-[var(--color-border)]"
+                  className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] flex items-center justify-center text-[var(--color-text-main)] border border-[var(--color-border)] shadow-sm"
                 >
                   <X size={24} />
                 </button>
               </div>
 
-              <div className="flex flex-col gap-8 overflow-y-auto flex-1">
+              <div className="flex flex-col gap-6 overflow-y-auto flex-1 pb-10">
                 {navLinks.map((link) => (
                   <div key={link.name} className="space-y-4">
                     <Link
                       href={link.href}
                       className={cn(
-                        "text-4xl font-bold font-outfit transition-colors",
+                        "text-2xl font-bold font-outfit transition-colors",
                         pathname === link.href ? "text-[var(--color-electric)]" : "text-[var(--color-text-main)]"
                       )}
                       onClick={() => !link.submenu && setIsOpen(false)}
@@ -164,12 +164,12 @@ export default function Navbar() {
                       {link.name}
                     </Link>
                     {link.submenu && (
-                      <div className="pl-4 flex flex-col gap-4 border-l border-electric/20">
+                      <div className="pl-4 flex flex-col gap-4 border-l border-[var(--color-electric)]/20">
                         {link.submenu.map((sub) => (
                           <Link
                             key={sub.name}
                             href={sub.href}
-                            className="text-[var(--color-text-main)] opacity-60 text-lg hover:text-[var(--color-electric)] transition-colors"
+                            className="text-[var(--color-text-main)] opacity-60 text-base font-medium hover:text-[var(--color-electric)] transition-colors"
                             onClick={() => setIsOpen(false)}
                           >
                             {sub.name}

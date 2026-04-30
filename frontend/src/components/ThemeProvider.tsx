@@ -105,15 +105,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           /* Dynamic Semantic Colors */
           ${(() => {
             const bg = theme.backgroundColor.toLowerCase();
-            const isDark = bg === '#000000' || bg.includes('020617') || bg.includes('0f172a') || bg.includes('0b0117');
+            // More robust isDark detection (check if it's not a light color)
+            const isLight = bg === '#ffffff' || bg === 'white' || bg.includes('f8fafc') || bg.includes('f1f5f9') || bg.includes('f9fafb');
+            const isDark = !isLight;
             
             if (isDark) {
               return `
                 --color-navy: ${theme.backgroundColor};
                 --color-navy-light: ${theme.cardColor};
-                --color-glass: rgba(15, 23, 42, 0.6);
+                --color-glass: rgba(255, 255, 255, 0.03);
                 --glass-border: rgba(255, 255, 255, 0.08);
-                --shadow-color: rgba(0, 0, 0, 0.6);
+                --shadow-color: rgba(0, 0, 0, 0.4);
                 --shadow-glow: ${theme.primaryColor}25;
               `;
             } else {

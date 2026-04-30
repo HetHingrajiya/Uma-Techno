@@ -62,11 +62,11 @@ export default function AdminLayout({
     <div className="flex min-h-screen bg-[var(--background)] text-[var(--color-text-main)] transition-colors duration-300">
       {/* Mobile Header */}
       <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[var(--color-navy-light)] border-b border-[var(--color-border)] flex items-center justify-between px-4 z-50">
-        <Link href="/admin/dashboard" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-electric text-white rounded-lg flex items-center justify-center font-bold">
+        <Link href="/admin/dashboard" className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-electric text-white rounded-2xl flex items-center justify-center font-black shadow-lg shadow-electric/20">
             U
           </div>
-          <span className="text-xl font-bold tracking-tight text-[var(--color-text-main)]">
+          <span className="text-lg font-black tracking-tight text-[var(--color-text-main)] uppercase">
             Uma<span className="text-electric">Admin</span>
           </span>
         </Link>
@@ -92,11 +92,11 @@ export default function AdminLayout({
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="p-6 flex items-center justify-between">
-          <Link href="/admin/dashboard" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-electric text-white rounded-lg flex items-center justify-center font-bold">
+          <Link href="/admin/dashboard" className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-electric text-white rounded-2xl flex items-center justify-center font-black shadow-lg shadow-electric/20">
               U
             </div>
-            <span className="text-xl font-bold tracking-tight text-[var(--color-text-main)]">
+            <span className="text-lg font-black tracking-tight text-[var(--color-text-main)] uppercase">
               Uma<span className="text-electric">Admin</span>
             </span>
           </Link>
@@ -159,7 +159,7 @@ export default function AdminLayout({
       </aside>
 
       {/* Main Content */}
-      <main className="flex-grow lg:ml-64 p-4 md:p-8 mt-16 lg:mt-0 transition-all duration-300">
+      <main className="flex-grow lg:ml-64 px-4 md:px-8 py-6 md:py-10 mt-16 lg:mt-0 transition-all duration-300 w-full overflow-x-hidden">
         <header className="flex flex-col md:flex-row md:justify-between md:items-start lg:items-center mb-6 md:mb-10 gap-4">
           <div>
             <h1 className="text-xl md:text-3xl font-bold font-outfit">

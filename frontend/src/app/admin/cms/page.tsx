@@ -72,7 +72,7 @@ export default function CMSDashboard() {
                 href={section.href}
                 className="flex-1 bg-[var(--color-navy)] border border-[var(--color-border)] hover:border-electric text-[var(--color-text-main)] py-2 rounded-lg flex items-center justify-center gap-2 text-sm font-medium transition-colors"
               >
-                Manage <ArrowRight size={16} />
+                Manage <ArrowRight size={16} className="hover-arrow" />
               </Link>
               <button className="px-4 bg-electric/20 hover:bg-electric text-electric hover:text-white rounded-lg flex items-center justify-center transition-all">
                 <Plus size={20} />

@@ -147,14 +147,15 @@ export default function RootLayout({
                     root.style.setProperty('--color-border', palette.borderColor);
                     
                     const bg = palette.backgroundColor.toLowerCase();
-                    const isDark = bg === '#000000' || bg.includes('020617') || bg.includes('0f172a') || bg.includes('0b0117');
+                    const isLight = bg === '#ffffff' || bg === 'white' || bg.includes('f8fafc') || bg.includes('f1f5f9') || bg.includes('f9fafb');
+                    const isDark = !isLight;
 
                     if (isDark) {
                       root.style.setProperty('--color-navy', palette.backgroundColor);
                       root.style.setProperty('--color-navy-light', palette.cardColor);
-                      root.style.setProperty('--color-glass', 'rgba(15, 23, 42, 0.6)');
+                      root.style.setProperty('--color-glass', 'rgba(255, 255, 255, 0.03)');
                       root.style.setProperty('--glass-border', 'rgba(255, 255, 255, 0.08)');
-                      root.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.6)');
+                      root.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.4)');
                       root.style.setProperty('--shadow-glow', palette.primaryColor + '25');
                     } else {
                       root.style.setProperty('--color-navy', '#0F172A');

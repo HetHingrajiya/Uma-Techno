@@ -103,7 +103,7 @@ export default function DashboardDashboard() {
                 stat.trendingUp ? "text-green-500 bg-green-500/10" : "text-red-500 bg-red-500/10"
               }`}>
                 {stat.change}
-                {stat.trendingUp ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
+                {stat.trendingUp ? <ArrowUpRight size={14} className="hover-arrow" /> : <ArrowDownRight size={14} className="hover-arrow" />}
               </div>
             </div>
             <h3 className="text-[var(--color-text-main)] opacity-70 text-sm font-bold uppercase tracking-tight">{stat.name}</h3>
@@ -128,7 +128,7 @@ export default function DashboardDashboard() {
           </div>
         </div>
 
-        <div className="h-[350px] w-full relative z-10">
+        <div className="h-[250px] sm:h-[350px] w-full relative z-10">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={data?.graphData || []} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <defs>
@@ -185,14 +185,16 @@ export default function DashboardDashboard() {
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
         {/* Recent Leads */}
         <div className="glass-card p-6 md:p-10 rounded-[2.5rem] border border-[var(--color-border)] shadow-sm">
           <div className="flex justify-between items-center mb-8">
             <h3 className="text-xl font-bold font-outfit text-[var(--color-text-main)] flex items-center gap-2">
                <CheckCircle size={20} className="text-electric" /> Recent Inquiries
             </h3>
-            <Link href="/admin/leads" className="text-electric text-sm font-bold hover:underline bg-electric/5 px-4 py-2 rounded-xl transition-all">View All</Link>
+            <Link href="/admin/leads" className="text-electric text-sm font-bold hover:underline bg-electric/5 px-4 py-2 rounded-xl transition-all flex items-center gap-1 group">
+              View All <ArrowRight size={14} className="hover-arrow" />
+            </Link>
           </div>
           <div className="space-y-4">
             {data?.recentLeads?.length > 0 ? (
@@ -229,11 +231,11 @@ export default function DashboardDashboard() {
         <div className="glass-card p-6 md:p-10 rounded-[2.5rem] border border-[var(--color-border)] shadow-sm">
           <div className="flex justify-between items-center mb-8">
             <h3 className="text-xl font-bold font-outfit text-[var(--color-text-main)]">System Health</h3>
-            <span className="flex items-center gap-2 text-xs font-bold text-green-500 bg-green-500/10 px-3 py-1 rounded-full uppercase tracking-widest">
-               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> All Systems Operational
+            <span className="flex items-center gap-2 text-[10px] font-bold text-green-500 bg-green-500/10 px-3 py-1 rounded-full uppercase tracking-widest">
+               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> Operational
             </span>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { label: "Site Performance", value: "98/100", status: "Optimal" },
               { label: "SEO Index Score", value: "85%", status: "Good" },

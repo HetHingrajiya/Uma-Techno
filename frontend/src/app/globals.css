@@ -74,6 +74,14 @@
     @apply transition-transform duration-500 hover:-translate-y-2;
   }
 
+  .hover-arrow {
+    @apply transition-transform duration-300;
+  }
+
+  .group:hover .hover-arrow {
+    @apply translate-x-1 -translate-y-1;
+  }
+
   .text-gradient {
     background: linear-gradient(135deg, var(--color-electric) 0%, var(--color-accent) 100%);
     -webkit-background-clip: text;
