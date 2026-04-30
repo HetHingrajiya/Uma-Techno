@@ -29,7 +29,7 @@ export default function Footer() {
             </span>
           </Link>
           <p className="text-[10px] text-[var(--color-text-main)] opacity-40 font-bold tracking-[0.2em] uppercase mt-2">
-            Engineering Excellence.
+            Innovate. Create. <span className="text-[var(--color-electric)]">Elevate.</span>
           </p>
           <p className="text-[var(--color-text-main)] opacity-60 text-sm leading-relaxed">
             A premium digital agency dedicated to engineering high-performance websites, 

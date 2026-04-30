@@ -234,18 +234,18 @@ export default function ThemeSettingsPage() {
   return (
     <div className="space-y-8 pb-20">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-[var(--color-navy-light)] p-8 rounded-3xl border border-[var(--color-border)] shadow-sm">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-[var(--color-navy-light)] p-4 md:p-8 rounded-2xl md:rounded-3xl border border-[var(--color-border)] shadow-sm">
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold font-outfit text-[var(--color-text-main)] flex items-center gap-3">
-            <Palette className="text-electric" size={32} /> Theme Settings
+          <h1 className="text-2xl md:text-3xl font-bold font-outfit text-[var(--color-text-main)] flex items-center gap-3">
+            <Palette className="text-electric" size={28} /> Theme Settings
           </h1>
-          <p className="text-[var(--color-text-main)] opacity-60 max-w-xl">
+          <p className="text-[var(--color-text-main)] opacity-60 max-w-xl text-sm md:text-base">
             Choose a professional color palette or build your own custom brand identity. Changes apply instantly across the whole website.
           </p>
         </div>
         <button 
           onClick={() => setShowCustomBuilder(true)}
-          className="bg-electric hover:bg-electric/90 text-white px-8 py-3 rounded-2xl font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-electric/30"
+          className="bg-electric hover:bg-electric/90 text-white px-6 md:px-8 py-3 rounded-xl md:rounded-2xl font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-electric/30 w-full md:w-auto justify-center"
         >
           <Plus size={20} /> Create Custom
         </button>
@@ -260,15 +260,15 @@ export default function ThemeSettingsPage() {
             placeholder="Search palettes..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl pl-12 pr-6 py-4 focus:outline-none focus:border-electric transition-colors text-[var(--color-text-main)]"
+            className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl pl-12 pr-6 py-3 md:py-4 focus:outline-none focus:border-electric transition-colors text-[var(--color-text-main)]"
           />
         </div>
-        <div className="flex gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
+        <div className="flex gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-hide">
           {["All", "Professional", "Premium", "Startup", "Nature", "Elegant"].map(cat => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-6 py-4 rounded-2xl font-bold text-sm whitespace-nowrap transition-all ${
+              className={`px-4 md:px-6 py-2 md:py-4 rounded-xl md:rounded-2xl font-bold text-xs md:text-sm whitespace-nowrap transition-all ${
                 activeCategory === cat 
                 ? "bg-electric text-white shadow-lg" 
                 : "bg-[var(--color-navy-light)] text-[var(--color-text-main)] opacity-60 hover:opacity-100 border border-[var(--color-border)]"
@@ -359,31 +359,31 @@ export default function ThemeSettingsPage() {
             initial={{ y: 100 }}
             animate={{ y: 0 }}
             exit={{ y: 100 }}
-            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[60] w-full max-w-4xl px-6"
+            className="fixed bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-[60] w-full max-w-4xl px-4 md:px-6"
           >
-            <div className="bg-slate-900/95 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-4 shadow-2xl flex items-center justify-between">
-              <div className="flex items-center gap-6 pl-4">
+            <div className="bg-slate-900/95 backdrop-blur-2xl border border-white/10 rounded-2xl md:rounded-[2.5rem] p-3 md:p-4 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-4 md:gap-6 pl-0 md:pl-4">
                 <div className="flex -space-x-3">
                   {[previewPalette.primaryColor, previewPalette.secondaryColor, previewPalette.backgroundColor].map((c, i) => (
-                    <div key={i} style={{ backgroundColor: c }} className="w-10 h-10 rounded-full border-4 border-slate-900 shadow-lg" />
+                    <div key={i} style={{ backgroundColor: c }} className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 md:border-4 border-slate-900 shadow-lg" />
                   ))}
                 </div>
                 <div>
-                  <p className="text-white font-bold">Currently Previewing</p>
-                  <p className="text-white/50 text-xs uppercase tracking-widest">{previewPalette.name}</p>
+                  <p className="text-white font-bold text-sm md:text-base">Currently Previewing</p>
+                  <p className="text-white/50 text-[10px] md:text-xs uppercase tracking-widest">{previewPalette.name}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 pr-2">
+              <div className="flex items-center gap-2 md:gap-3 pr-0 md:pr-2 w-full md:w-auto">
                 <button 
                   onClick={handleDiscard}
-                  className="px-6 py-3 text-white/70 hover:text-white font-bold text-sm"
+                  className="flex-1 md:flex-none px-4 md:px-6 py-2 md:py-3 text-white/70 hover:text-white font-bold text-xs md:text-sm"
                 >
                   Discard
                 </button>
                 <button 
                   onClick={() => handleApply(previewPalette)}
                   disabled={saving}
-                  className="bg-white text-slate-900 px-8 py-3 rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-xl disabled:opacity-50"
+                  className="flex-[2] md:flex-none bg-white text-slate-900 px-4 md:px-8 py-2 md:py-3 rounded-xl md:rounded-2xl font-black text-[10px] md:text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-xl disabled:opacity-50"
                 >
                   {saving ? "Saving..." : "Save Permanently"}
                 </button>
@@ -408,11 +408,11 @@ export default function ThemeSettingsPage() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-2xl bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-[var(--color-border)]"
+              className="relative w-full max-w-2xl bg-white rounded-3xl md:rounded-[3rem] shadow-2xl overflow-hidden border border-[var(--color-border)] max-h-[90vh] overflow-y-auto"
             >
-              <div className="p-8 lg:p-12 space-y-8">
+              <div className="p-6 md:p-12 space-y-6 md:space-y-8">
                 <div className="flex justify-between items-center">
-                  <h2 className="text-3xl font-bold font-outfit text-slate-900">Custom Palette Builder</h2>
+                  <h2 className="text-2xl md:text-3xl font-bold font-outfit text-slate-900">Custom Builder</h2>
                   <button onClick={() => setShowCustomBuilder(false)} className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors">
                     <X size={20} />
                   </button>
@@ -420,16 +420,16 @@ export default function ThemeSettingsPage() {
 
                 <div className="space-y-6">
                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-500 uppercase tracking-widest">Palette Name</label>
+                      <label className="text-xs font-bold text-slate-500 uppercase tracking-widest">Palette Name</label>
                       <input 
                         type="text" 
                         value={customPalette.name}
                         onChange={(e) => setCustomPalette({...customPalette, name: e.target.value})}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-electric font-bold text-slate-900"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 focus:outline-none focus:border-electric font-bold text-slate-900"
                       />
                    </div>
 
-                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                       {[
                         { label: "Primary", key: "primaryColor" },
                         { label: "Secondary", key: "secondaryColor" },
@@ -446,7 +446,7 @@ export default function ThemeSettingsPage() {
                                 type="color" 
                                 value={(customPalette as any)[item.key]}
                                 onChange={(e) => setCustomPalette({...customPalette, [item.key]: e.target.value})}
-                                className="w-full h-12 rounded-xl cursor-pointer border-none"
+                                className="w-full h-10 md:h-12 rounded-xl cursor-pointer border-none p-0"
                               />
                               <div className="absolute inset-0 pointer-events-none rounded-xl border border-slate-200 ring-1 ring-inset ring-white/10" />
                            </div>
@@ -455,19 +455,19 @@ export default function ThemeSettingsPage() {
                    </div>
                 </div>
 
-                <div className="pt-8 flex gap-4">
+                <div className="pt-4 md:pt-8 flex gap-4">
                   <button 
                     onClick={() => setShowCustomBuilder(false)}
-                    className="flex-1 py-4 text-slate-500 font-bold hover:text-slate-900 transition-colors"
+                    className="flex-1 py-3 md:py-4 text-slate-500 font-bold hover:text-slate-900 transition-colors text-sm"
                   >
                     Cancel
                   </button>
                   <button 
                     onClick={handleCreateCustom}
                     disabled={saving}
-                    className="flex-[2] bg-electric hover:bg-electric/90 text-white py-4 rounded-2xl font-black uppercase tracking-widest shadow-xl hover:shadow-electric/30 transition-all flex items-center justify-center gap-2"
+                    className="flex-[2] bg-electric hover:bg-electric/90 text-white py-3 md:py-4 rounded-xl md:rounded-2xl font-black uppercase tracking-widest shadow-xl hover:shadow-electric/30 transition-all flex items-center justify-center gap-2 text-xs md:text-sm"
                   >
-                    {saving ? <Loader2 size={20} className="animate-spin" /> : <Save size={20} />} Save Palette
+                    {saving ? <Loader2 size={20} className="animate-spin" /> : <Save size={20} />} Save
                   </button>
                 </div>
               </div>

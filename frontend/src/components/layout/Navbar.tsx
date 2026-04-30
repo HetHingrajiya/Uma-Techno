@@ -66,7 +66,7 @@ export default function Navbar() {
               <span className="text-[var(--color-electric)]">Uma</span><span className="text-[var(--color-text-main)]">Techno</span>
             </span>
             <span className="text-[10px] lg:text-[11px] text-[var(--color-text-main)] opacity-50 font-bold tracking-[0.3em] uppercase mt-1">
-              Engineering Excellence.
+              Innovate. Create. <span className="text-[var(--color-electric)]">Elevate.</span>
             </span>
           </div>
         </Link>
@@ -138,7 +138,7 @@ export default function Navbar() {
                       <span className="text-electric">Uma</span><span className="text-[var(--color-text-main)]">Techno</span>
                     </span>
                     <span className="text-[7px] text-gray-500 font-bold tracking-[0.2em] uppercase mt-0.5">
-                      Engineering Excellence.
+                      Innovate. Create. <span className="text-[var(--color-electric)]">Elevate.</span>
                     </span>
                   </div>
                 </Link>

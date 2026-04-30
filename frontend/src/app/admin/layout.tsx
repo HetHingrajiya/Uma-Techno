@@ -12,7 +12,9 @@ import {
   MessageSquare,
   Briefcase,
   Layers,
-  RefreshCw
+  RefreshCw,
+  Menu,
+  X
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -33,6 +35,12 @@ export default function AdminLayout({
   const pathname = usePathname();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [clearingCache, setClearingCache] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Close sidebar on route change
+  useEffect(() => {
+    setIsSidebarOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     // Basic auth check
@@ -52,9 +60,38 @@ export default function AdminLayout({
 
   return (
     <div className="flex min-h-screen bg-[var(--background)] text-[var(--color-text-main)] transition-colors duration-300">
+      {/* Mobile Header */}
+      <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[var(--color-navy-light)] border-b border-[var(--color-border)] flex items-center justify-between px-4 z-50">
+        <Link href="/admin/dashboard" className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-electric text-white rounded-lg flex items-center justify-center font-bold">
+            U
+          </div>
+          <span className="text-xl font-bold tracking-tight text-[var(--color-text-main)]">
+            Uma<span className="text-electric">Admin</span>
+          </span>
+        </Link>
+        <button 
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          className="p-2 text-[var(--color-text-main)] hover:bg-white/5 rounded-lg transition-colors"
+        >
+          {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </header>
+
+      {/* Sidebar Overlay (Mobile) */}
+      {isSidebarOpen && (
+        <div 
+          className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 bg-[var(--color-navy-light)] border-r border-[var(--color-border)] flex flex-col fixed inset-y-0 left-0 z-40">
-        <div className="p-6">
+      <aside className={cn(
+        "w-64 bg-[var(--color-navy-light)] border-r border-[var(--color-border)] flex flex-col fixed inset-y-0 left-0 z-50 transition-transform duration-300 lg:translate-x-0",
+        isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+      )}>
+        <div className="p-6 flex items-center justify-between">
           <Link href="/admin/dashboard" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-electric text-white rounded-lg flex items-center justify-center font-bold">
               U
@@ -63,9 +100,15 @@ export default function AdminLayout({
               Uma<span className="text-electric">Admin</span>
             </span>
           </Link>
+          <button 
+            onClick={() => setIsSidebarOpen(false)}
+            className="lg:hidden p-2 text-[var(--color-text-main)] opacity-50 hover:opacity-100"
+          >
+            <X size={20} />
+          </button>
         </div>
 
-        <nav className="flex-grow px-4 space-y-2 mt-4">
+        <nav className="flex-grow px-4 space-y-2 mt-4 overflow-y-auto">
           {sidebarLinks.map((link) => (
             <Link
               key={link.name}
@@ -116,18 +159,21 @@ export default function AdminLayout({
       </aside>
 
       {/* Main Content */}
-      <main className="flex-grow ml-64 p-8">
-        <header className="flex justify-between items-center mb-10">
-          <h1 className="text-3xl font-bold font-outfit">
-            {sidebarLinks.find(l => l.href === pathname)?.name || "Admin"}
-          </h1>
-          <div className="flex items-center gap-4">
-            <div className="text-right">
-              <p className="text-sm font-bold">Admin User</p>
-              <p className="text-xs text-gray-400">admin@umatechno.com</p>
-            </div>
-            <div className="w-10 h-10 rounded-full bg-electric/20 border border-electric/30 flex items-center justify-center font-bold text-electric">
+      <main className="flex-grow lg:ml-64 p-4 md:p-8 mt-16 lg:mt-0 transition-all duration-300">
+        <header className="flex flex-col md:flex-row md:justify-between md:items-start lg:items-center mb-6 md:mb-10 gap-4">
+          <div>
+            <h1 className="text-xl md:text-3xl font-bold font-outfit">
+              {sidebarLinks.find(l => l.href === pathname)?.name || "Admin"}
+            </h1>
+            <p className="text-xs text-gray-400 lg:hidden mt-1">admin@umatechno.com</p>
+          </div>
+          <div className="flex items-center gap-4 bg-[var(--color-navy-light)] p-2 pr-4 rounded-2xl border border-[var(--color-border)] md:bg-transparent md:p-0 md:border-0">
+            <div className="w-10 h-10 rounded-full bg-electric/20 border border-electric/30 flex items-center justify-center font-bold text-electric shrink-0">
               AD
+            </div>
+            <div className="text-left md:text-right">
+              <p className="text-sm font-bold">Admin User</p>
+              <p className="text-xs text-gray-400 hidden lg:block">admin@umatechno.com</p>
             </div>
           </div>
         </header>

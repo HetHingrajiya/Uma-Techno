@@ -38,9 +38,9 @@ export default function CMSDashboard() {
 
   return (
     <div className="space-y-8">
-      <div className="flex justify-between items-center bg-[var(--color-navy-light)] p-6 rounded-2xl border border-[var(--color-border)]">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 bg-[var(--color-navy-light)] p-4 md:p-6 rounded-2xl border border-[var(--color-border)]">
         <div>
-          <h2 className="text-xl font-bold flex items-center gap-2"><FileText size={20} className="text-electric" /> Content Management System</h2>
+          <h2 className="text-lg md:text-xl font-bold flex items-center gap-2"><FileText size={20} className="text-electric" /> Content Management System</h2>
           <p className="text-[var(--color-text-main)] opacity-70 text-sm mt-1">Manage all website content without writing code.</p>
         </div>
       </div>

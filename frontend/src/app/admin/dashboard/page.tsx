@@ -19,18 +19,18 @@ const stats = [
 
 export default function DashboardDashboard() {
   return (
-    <div className="space-y-8">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold font-outfit text-[var(--color-text-main)]">Dashboard Overview</h1>
+    <div className="space-y-6 md:space-y-8">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+        <h1 className="text-xl md:text-2xl font-bold font-outfit text-[var(--color-text-main)]">Dashboard Overview</h1>
         <button 
-          className="flex items-center gap-2 px-4 py-2 bg-[var(--color-electric)]/10 text-[var(--color-electric)] rounded-xl font-bold text-sm hover:bg-[var(--color-electric)] hover:text-white transition-all shadow-sm"
+          className="flex items-center justify-center gap-2 px-4 py-2 bg-[var(--color-electric)]/10 text-[var(--color-electric)] rounded-xl font-bold text-sm hover:bg-[var(--color-electric)] hover:text-white transition-all shadow-sm w-full sm:w-auto"
           onClick={() => alert("System Cache Cleared Successfully!")}
         >
           <RotateCcw size={16} /> Clear Cache
         </button>
       </div>
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {stats.map((stat) => (
           <div key={stat.name} className="glass-card p-6 rounded-2xl border-[var(--color-border)]">
             <div className="flex justify-between items-start mb-4">
@@ -53,7 +53,7 @@ export default function DashboardDashboard() {
 
       <div className="grid lg:grid-cols-2 gap-8">
         {/* Recent Leads */}
-        <div className="glass-card p-8 rounded-[2rem] border-[var(--color-border)]">
+        <div className="glass-card p-4 md:p-8 rounded-2xl md:rounded-[2rem] border-[var(--color-border)]">
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-xl font-bold font-outfit text-[var(--color-text-main)]">Recent Leads</h3>
             <button className="text-electric text-sm font-bold hover:underline">View All</button>
@@ -80,7 +80,7 @@ export default function DashboardDashboard() {
         </div>
 
         {/* System Activity */}
-        <div className="glass-card p-8 rounded-[2rem] border-[var(--color-border)]">
+        <div className="glass-card p-4 md:p-8 rounded-2xl md:rounded-[2rem] border-[var(--color-border)]">
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-xl font-bold font-outfit text-[var(--color-text-main)]">System Activity</h3>
             <button className="text-electric text-sm font-bold hover:underline">Clear Logs</button>

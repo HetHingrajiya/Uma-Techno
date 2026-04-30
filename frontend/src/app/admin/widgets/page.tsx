@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Loader2, Save, Layout, GripVertical, Eye, EyeOff } from "lucide-react";
+import { Loader2, Save, Layout, GripVertical, Eye, EyeOff, ChevronUp, ChevronDown } from "lucide-react";
 
 export default function WidgetControlPage() {
   const [loading, setLoading] = useState(true);
@@ -96,7 +96,7 @@ export default function WidgetControlPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center bg-[var(--color-navy-light)] p-6 rounded-2xl border border-[var(--color-border)]">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 bg-[var(--color-navy-light)] p-6 rounded-2xl border border-[var(--color-border)]">
         <div>
           <h2 className="text-xl font-bold flex items-center gap-2"><Layout size={20} className="text-electric" /> Widget Control Panel</h2>
           <p className="text-[var(--color-text-main)] opacity-70 text-sm mt-1">Enable, disable, and reorder homepage sections.</p>
@@ -104,7 +104,7 @@ export default function WidgetControlPage() {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="bg-electric hover:bg-electric/90 text-white px-6 py-2 rounded-xl font-medium flex items-center gap-2 transition-all"
+          className="bg-electric hover:bg-electric/90 text-white px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-electric/20 w-full sm:w-auto"
         >
           {saving ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
           Save Layout
@@ -122,9 +122,21 @@ export default function WidgetControlPage() {
                 }`}
             >
               <div className="flex items-center gap-4">
-                <div className="flex flex-col gap-1 text-[var(--color-text-main)] opacity-50">
-                  <button onClick={() => moveUp(index)} disabled={index === 0} className="hover:opacity-100 disabled:opacity-30">▲</button>
-                  <button onClick={() => moveDown(index)} disabled={index === widgets.length - 1} className="hover:opacity-100 disabled:opacity-30">▼</button>
+                <div className="flex flex-col gap-1">
+                  <button 
+                    onClick={() => moveUp(index)} 
+                    disabled={index === 0} 
+                    className="p-1 text-[var(--color-text-main)] opacity-40 hover:opacity-100 hover:bg-[var(--color-navy-light)] rounded transition-all disabled:opacity-10"
+                  >
+                    <ChevronUp size={16} />
+                  </button>
+                  <button 
+                    onClick={() => moveDown(index)} 
+                    disabled={index === widgets.length - 1} 
+                    className="p-1 text-[var(--color-text-main)] opacity-40 hover:opacity-100 hover:bg-[var(--color-navy-light)] rounded transition-all disabled:opacity-10"
+                  >
+                    <ChevronDown size={16} />
+                  </button>
                 </div>
                 <div className="p-2 bg-[var(--color-navy-light)] rounded-lg border border-[var(--color-border)]">
                   <Layout size={20} className={widget.enabled ? "text-electric" : "opacity-50"} />

@@ -47,15 +47,15 @@ export default function LeadsDashboard() {
 
   return (
     <div className="space-y-8">
-      <div className="flex justify-between items-center bg-[var(--color-navy-light)] p-6 rounded-2xl border border-[var(--color-border)]">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 bg-[var(--color-navy-light)] p-4 md:p-6 rounded-2xl border border-[var(--color-border)]">
         <div>
-          <h2 className="text-xl font-bold flex items-center gap-2"><Mail size={20} className="text-electric" /> Lead Generation</h2>
+          <h2 className="text-lg md:text-xl font-bold flex items-center gap-2"><Mail size={20} className="text-electric" /> Lead Generation</h2>
           <p className="text-[var(--color-text-main)] opacity-70 text-sm mt-1">Manage and export your incoming client inquiries.</p>
         </div>
         <button
           onClick={handleExport}
           disabled={leads.length === 0}
-          className="flex items-center gap-2 bg-electric text-white px-4 py-2 rounded-lg font-bold text-sm hover:bg-electric/90 transition-colors disabled:opacity-50"
+          className="flex items-center justify-center gap-2 bg-electric text-white px-4 py-2 rounded-lg font-bold text-sm hover:bg-electric/90 transition-colors disabled:opacity-50 w-full sm:w-auto"
         >
           <Download size={16} /> Export CSV
         </button>
@@ -73,7 +73,7 @@ export default function LeadsDashboard() {
           </div>
         </div>
 
-        <div className="p-0">
+        <div className="p-0 overflow-x-auto">
           {loading ? (
             <div className="p-8 text-center text-[var(--color-text-main)] opacity-50">Loading leads...</div>
           ) : leads.length === 0 ? (
@@ -85,40 +85,42 @@ export default function LeadsDashboard() {
               <p className="text-[var(--color-text-main)] opacity-60 max-w-sm">When visitors fill out your contact form, their inquiries will appear here.</p>
             </div>
           ) : (
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="bg-[var(--color-navy)] border-b border-[var(--color-border)]">
-                  <th className="p-4 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-wider opacity-60">Client Details</th>
-                  <th className="p-4 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-wider opacity-60">Interested In</th>
-                  <th className="p-4 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-wider opacity-60">Message</th>
-                  <th className="p-4 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-wider opacity-60 text-right">Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Array.isArray(leads) && leads.map((lead) => (
-                  <tr key={lead.id} className="border-b border-[var(--color-border)] hover:bg-[var(--color-navy)]/50 transition-colors">
-                    <td className="p-4">
-                      <div className="font-bold text-[var(--color-text-main)]">{lead.name}</div>
-                      <div className="text-sm text-[var(--color-text-main)] opacity-70 flex items-center gap-1 mt-1"><Mail size={12} /> {lead.email}</div>
-                      {lead.phone && <div className="text-sm text-[var(--color-text-main)] opacity-70 flex items-center gap-1 mt-1"><Phone size={12} /> {lead.phone}</div>}
-                    </td>
-                    <td className="p-4">
-                      <span className="px-3 py-1 bg-electric/10 text-electric rounded-full text-xs font-bold">
-                        {lead.service || 'General Inquiry'}
-                      </span>
-                    </td>
-                    <td className="p-4">
-                      <p className="text-sm text-[var(--color-text-main)] opacity-80 max-w-md truncate" title={lead.message}>
-                        {lead.message}
-                      </p>
-                    </td>
-                    <td className="p-4 text-right text-sm text-[var(--color-text-main)] opacity-70 whitespace-nowrap">
-                      {new Date(lead.createdAt).toLocaleDateString()}
-                    </td>
+            <div className="min-w-[800px]">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="bg-[var(--color-navy)] border-b border-[var(--color-border)]">
+                    <th className="p-4 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-wider opacity-60">Client Details</th>
+                    <th className="p-4 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-wider opacity-60">Interested In</th>
+                    <th className="p-4 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-wider opacity-60">Message</th>
+                    <th className="p-4 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-wider opacity-60 text-right">Date</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {Array.isArray(leads) && leads.map((lead) => (
+                    <tr key={lead.id} className="border-b border-[var(--color-border)] hover:bg-[var(--color-navy)]/50 transition-colors">
+                      <td className="p-4">
+                        <div className="font-bold text-[var(--color-text-main)]">{lead.name}</div>
+                        <div className="text-sm text-[var(--color-text-main)] opacity-70 flex items-center gap-1 mt-1"><Mail size={12} /> {lead.email}</div>
+                        {lead.phone && <div className="text-sm text-[var(--color-text-main)] opacity-70 flex items-center gap-1 mt-1"><Phone size={12} /> {lead.phone}</div>}
+                      </td>
+                      <td className="p-4">
+                        <span className="px-3 py-1 bg-electric/10 text-electric rounded-full text-xs font-bold">
+                          {lead.service || 'General Inquiry'}
+                        </span>
+                      </td>
+                      <td className="p-4">
+                        <p className="text-sm text-[var(--color-text-main)] opacity-80 max-w-md truncate" title={lead.message}>
+                          {lead.message}
+                        </p>
+                      </td>
+                      <td className="p-4 text-right text-sm text-[var(--color-text-main)] opacity-70 whitespace-nowrap">
+                        {new Date(lead.createdAt).toLocaleDateString()}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </div>
