@@ -18,7 +18,7 @@ const Linkedin = (props: any) => (
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-50 pt-20 pb-10 border-t border-[var(--color-border)]">
+    <footer className="bg-[var(--color-navy-light)] pt-20 pb-10 border-t border-[var(--color-border)]">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
         {/* Company Info */}
         <div className="space-y-6">

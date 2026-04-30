@@ -8,11 +8,11 @@ import Logo from "./Logo";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[600px] lg:min-h-[800px] 2xl:min-h-screen flex items-center overflow-hidden pt-24 pb-12 bg-white">
+    <section className="relative min-h-[600px] lg:min-h-[800px] 2xl:min-h-screen flex items-center overflow-hidden pt-24 pb-12 bg-[var(--background)]">
       {/* Background Animated Elements (Light Theme) */}
       <div className="absolute inset-0 z-0 opacity-40">
-        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-[var(--color-electric)]/10 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[10%] right-[-5%] w-[50%] h-[50%] bg-[var(--color-accent)]/10 rounded-full blur-[140px] animate-pulse delay-700" />
+        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-gradient-glow opacity-20 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[10%] right-[-5%] w-[50%] h-[50%] bg-gradient-glow opacity-10 rounded-full blur-[140px] animate-pulse delay-700" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
@@ -39,8 +39,7 @@ export default function Hero() {
                 <div className="flex flex-col sm:flex-row gap-4 pt-2">
                   <Link
                     href="/contact"
-                    className="group relative px-8 py-4 text-white rounded-xl font-bold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-[var(--color-electric)]/30 text-center flex justify-center items-center gap-2"
-                    style={{ backgroundColor: "var(--color-electric)" }}
+                    className="group relative px-8 py-4 text-white rounded-xl font-bold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-[var(--color-electric)]/30 text-center flex justify-center items-center gap-2 bg-gradient-premium"
                   >
                     Get Free Quote <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                   </Link>
@@ -63,7 +62,7 @@ export default function Hero() {
             className="relative perspective-2000 block mt-12 lg:mt-0"
           >
             <div className="animate-float-complex max-w-md mx-auto lg:max-w-none">
-              <div className="bg-white rounded-[2.5rem] lg:rounded-[3rem] p-2 aspect-[4/5] lg:aspect-square relative overflow-hidden group border border-[var(--color-border)] shadow-2xl">
+              <div className="bg-[var(--color-card)] rounded-[2.5rem] lg:rounded-[3rem] p-2 aspect-[4/5] lg:aspect-square relative overflow-hidden group border border-[var(--color-border)] shadow-2xl">
                  <img 
                    src="/images/portfolio-showcase.png" 
                    alt="Portfolio Showcase" 
@@ -71,7 +70,7 @@ export default function Hero() {
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)]/80 via-transparent to-transparent pointer-events-none" />
                  
-                 <div className="absolute bottom-6 left-6 right-6 z-10 bg-white/90 backdrop-blur-xl rounded-[var(--radius)] p-6 border border-white shadow-xl">
+                 <div className="absolute bottom-6 left-6 right-6 z-10 bg-[var(--color-card)]/90 backdrop-blur-xl rounded-[var(--radius)] p-6 border border-white/10 shadow-xl">
                     <div className="flex justify-between items-start mb-4">
                        <div>
                          <h3 className="text-xl font-bold font-outfit text-[var(--color-text-main)]">Premium E-commerce</h3>
@@ -89,7 +88,7 @@ export default function Hero() {
                  </div>
                  
                   {/* Floating Badge */}
-                  <div className="absolute top-8 right-[-20px] bg-white border border-[var(--color-border)] rounded-[var(--radius)] p-4 shadow-xl flex items-center gap-3 animate-float delay-500 hover:scale-105 transition-transform cursor-default">
+                  <div className="absolute top-8 right-[-20px] bg-[var(--color-card)] border border-[var(--color-border)] rounded-[var(--radius)] p-4 shadow-xl flex items-center gap-3 animate-float delay-500 hover:scale-105 transition-transform cursor-default">
                      <div className="w-10 h-10 bg-[#10B981]/10 rounded-full flex items-center justify-center text-[#10B981]">
                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                      </div>

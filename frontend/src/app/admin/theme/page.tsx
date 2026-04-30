@@ -41,41 +41,49 @@ const PALETTE_PACKS = [
     category: "Professional",
     palettes: [
       { name: "Cyan Professional", primaryColor: "#06B6D4", secondaryColor: "#0891B2", accentColor: "#22D3EE", backgroundColor: "#F8FAFC", textColor: "#0F172A", cardColor: "#FFFFFF", borderColor: "#E2E8F0" },
-      { name: "Navy Corporate", primaryColor: "#0F172A", secondaryColor: "#1E293B", accentColor: "#38B2AC", backgroundColor: "#F1F5F9", textColor: "#0F172A", cardColor: "#FFFFFF", borderColor: "#CBD5E1" },
-      { name: "Sky Digital", primaryColor: "#0EA5E9", secondaryColor: "#0284C7", accentColor: "#7DD3FC", backgroundColor: "#F8FAFC", textColor: "#0F172A", cardColor: "#FFFFFF", borderColor: "#E0F2FE" }
+      { name: "Navy Corporate", primaryColor: "#0F172A", secondaryColor: "#1E293B", accentColor: "#3B82F6", backgroundColor: "#F1F5F9", textColor: "#0F172A", cardColor: "#FFFFFF", borderColor: "#CBD5E1" },
+      { name: "Sky Digital", primaryColor: "#0EA5E9", secondaryColor: "#0284C7", accentColor: "#7DD3FC", backgroundColor: "#F8FAFC", textColor: "#0F172A", cardColor: "#FFFFFF", borderColor: "#E0F2FE" },
+      { name: "Slate Minimal", primaryColor: "#475569", secondaryColor: "#334155", accentColor: "#94A3B8", backgroundColor: "#F8FAFC", textColor: "#1E293B", cardColor: "#FFFFFF", borderColor: "#F1F5F9" }
+    ]
+  },
+  {
+    category: "Dark / OLED",
+    palettes: [
+      { name: "Midnight Gold", primaryColor: "#D4AF37", secondaryColor: "#B8860B", accentColor: "#FFD700", backgroundColor: "#020617", textColor: "#F8FAFC", cardColor: "#0F172A", borderColor: "#1E293B" },
+      { name: "Onyx Premium", primaryColor: "#D4AF37", secondaryColor: "#B8860B", accentColor: "#FFD700", backgroundColor: "#0F172A", textColor: "#F8FAFC", cardColor: "#1E293B", borderColor: "#334155" },
+      { name: "Cyber Neon", primaryColor: "#06B6D4", secondaryColor: "#0891B2", accentColor: "#FF00FF", backgroundColor: "#000000", textColor: "#F8FAFC", cardColor: "#0A0A0A", borderColor: "#1A1A1A" },
+      { name: "Deep Amethyst", primaryColor: "#8B5CF6", secondaryColor: "#7C3AED", accentColor: "#C084FC", backgroundColor: "#0B0117", textColor: "#F5F3FF", cardColor: "#160D26", borderColor: "#2D1B4E" }
     ]
   },
   {
     category: "Premium",
     palettes: [
-      { name: "Midnight Gold", primaryColor: "#D4AF37", secondaryColor: "#B8860B", accentColor: "#FFD700", backgroundColor: "#0F172A", textColor: "#F8FAFC", cardColor: "#1E293B", borderColor: "#334155" },
-      { name: "Onyx Premium", primaryColor: "#111827", secondaryColor: "#1F2937", accentColor: "#D4AF37", backgroundColor: "#F9FAFB", text: "#111827", card: "#FFFFFF", border: "#E5E7EB" }
+      { name: "Royal Sapphire", primaryColor: "#1E40AF", secondaryColor: "#1D4ED8", accentColor: "#60A5FA", backgroundColor: "#EFF6FF", textColor: "#1E3A8A", cardColor: "#FFFFFF", borderColor: "#DBEAFE" },
+      { name: "Sunset Energy", primaryColor: "#F59E0B", secondaryColor: "#D97706", accentColor: "#FCD34D", backgroundColor: "#FFFBEB", textColor: "#78350F", cardColor: "#FFFFFF", borderColor: "#FEF3C7" },
+      { name: "Luxury Emerald", primaryColor: "#065F46", secondaryColor: "#064E3B", accentColor: "#34D399", backgroundColor: "#F0FDF4", textColor: "#064E3B", cardColor: "#FFFFFF", borderColor: "#DCFCE7" }
     ]
   },
   {
     category: "Startup",
     palettes: [
       { name: "Electric Purple", primaryColor: "#8B5CF6", secondaryColor: "#7C3AED", accentColor: "#C084FC", backgroundColor: "#FDF4FF", textColor: "#2E1065", cardColor: "#FFFFFF", borderColor: "#F5D0FE" },
-      { name: "Modern Teal", primaryColor: "#14B8A6", secondaryColor: "#0D9488", accentColor: "#5EEAD4", backgroundColor: "#F0FDFA", textColor: "#134E4A", cardColor: "#FFFFFF", borderColor: "#CCFBF1" }
+      { name: "Modern Teal", primaryColor: "#14B8A6", secondaryColor: "#0D9488", accentColor: "#5EEAD4", backgroundColor: "#F0FDFA", textColor: "#134E4A", cardColor: "#FFFFFF", borderColor: "#CCFBF1" },
+      { name: "Vibrant Indigo", primaryColor: "#6366F1", secondaryColor: "#4F46E5", accentColor: "#A5B4FC", backgroundColor: "#EEF2FF", textColor: "#312E81", cardColor: "#FFFFFF", borderColor: "#E0E7FF" }
     ]
   },
   {
     category: "Nature",
     palettes: [
       { name: "Mint Growth", primaryColor: "#10B981", secondaryColor: "#059669", accentColor: "#6EE7B7", backgroundColor: "#F0FDF4", textColor: "#064E3B", cardColor: "#FFFFFF", borderColor: "#DCFCE7" },
-      { name: "Forest Deep", primaryColor: "#065F46", secondaryColor: "#064E3B", accentColor: "#A7F3D0", backgroundColor: "#F9FAFB", textColor: "#064E3B", cardColor: "#FFFFFF", borderColor: "#E5E7EB" }
-    ]
-  },
-  {
-    category: "Premium",
-    palettes: [
-      { name: "Sunset Energy", primaryColor: "#F59E0B", secondaryColor: "#D97706", accentColor: "#FCD34D", backgroundColor: "#FFFBEB", textColor: "#78350F", cardColor: "#FFFFFF", borderColor: "#FEF3C7" }
+      { name: "Forest Deep", primaryColor: "#065F46", secondaryColor: "#064E3B", accentColor: "#A7F3D0", backgroundColor: "#F9FAFB", textColor: "#064E3B", cardColor: "#FFFFFF", borderColor: "#E5E7EB" },
+      { name: "Earth Sand", primaryColor: "#B45309", secondaryColor: "#92400E", accentColor: "#F59E0B", backgroundColor: "#FFFBEB", textColor: "#451A03", cardColor: "#FFFFFF", borderColor: "#FEF3C7" }
     ]
   },
   {
     category: "Elegant",
     palettes: [
-      { name: "Rose Elegant", primaryColor: "#E11D48", secondaryColor: "#BE123C", accentColor: "#FDA4AF", backgroundColor: "#FFF1F2", textColor: "#4C0519", cardColor: "#FFFFFF", borderColor: "#FFE4E6" }
+      { name: "Rose Elegant", primaryColor: "#E11D48", secondaryColor: "#BE123C", accentColor: "#FDA4AF", backgroundColor: "#FFF1F2", textColor: "#4C0519", cardColor: "#FFFFFF", borderColor: "#FFE4E6" },
+      { name: "Lavender Soft", primaryColor: "#A855F7", secondaryColor: "#9333EA", accentColor: "#D8B4FE", backgroundColor: "#FAF5FF", textColor: "#3B0764", cardColor: "#FFFFFF", borderColor: "#F3E8FF" }
     ]
   }
 ];
@@ -192,6 +200,21 @@ export default function ThemeSettingsPage() {
     root.style.setProperty('--background', p.backgroundColor);
     root.style.setProperty('--color-card', p.cardColor);
     root.style.setProperty('--color-border', p.borderColor);
+    
+    // Dynamically set semantic colors based on theme darkness
+    const isDark = p.backgroundColor.toLowerCase() === '#000000' || 
+                   p.backgroundColor.toLowerCase().includes('020617') || 
+                   p.backgroundColor.toLowerCase().includes('0f172a') || 
+                   p.backgroundColor.toLowerCase().includes('0b0117');
+
+    if (isDark) {
+      root.style.setProperty('--color-navy', p.backgroundColor);
+      root.style.setProperty('--color-navy-light', p.cardColor);
+    } else {
+      root.style.setProperty('--color-navy', '#0F172A'); // Default dark
+      root.style.setProperty('--color-navy-light', p.backgroundColor);
+    }
+
     localStorage.setItem('theme-updated', Date.now().toString());
   };
 
@@ -264,7 +287,7 @@ export default function ThemeSettingsPage() {
           />
         </div>
         <div className="flex gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-hide">
-          {["All", "Professional", "Premium", "Startup", "Nature", "Elegant"].map(cat => (
+          {["All", "Professional", "Dark / OLED", "Premium", "Startup", "Nature", "Elegant"].map(cat => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}

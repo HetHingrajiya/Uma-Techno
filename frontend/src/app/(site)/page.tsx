@@ -28,6 +28,7 @@ export default function Home() {
   const [widgets, setWidgets] = useState<any[]>([]);
   const [services, setServices] = useState<any[]>([]);
   const [projects, setProjects] = useState<any[]>([]);
+  const [testimonials, setTestimonials] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -116,6 +117,16 @@ export default function Home() {
           setProjects(data.length > 0 ? data : fallbackProjects);
         }
 
+        try {
+          const tRes = await fetch(`${baseUrl}/api/v1/testimonials`);
+          if (tRes.ok) {
+            const data = await tRes.json();
+            setTestimonials(data);
+          }
+        } catch (err) {
+          console.error("Testimonials fetch failed");
+        }
+
       } catch (err) {
         console.error("API fetch failed, using fallback data", err);
         setWidgets(fallbackWidgets);
@@ -147,7 +158,7 @@ export default function Home() {
   if (loading) return null;
 
   return (
-    <div className="flex flex-col gap-16 lg:gap-32 pb-20 lg:pb-32 bg-white">
+    <div className="flex flex-col gap-16 lg:gap-32 pb-20 lg:pb-32 bg-[var(--background)]">
       {isEnabled('hero') && <Hero />}
 
       {/* Trust & Stats Section */}
@@ -155,7 +166,7 @@ export default function Home() {
         <section className="max-w-7xl mx-auto px-6 w-full -mt-8 lg:-mt-16 relative z-20">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
             {stats.map((stat, i) => (
-              <div key={i} className="card-premium p-6 lg:p-8 text-center flex flex-col items-center gap-4 bg-white/80 backdrop-blur-xl">
+              <div key={i} className="card-premium p-6 lg:p-8 text-center flex flex-col items-center gap-4 bg-[var(--color-card)]/80 backdrop-blur-xl">
                 <div className="w-12 h-12 rounded-2xl bg-[var(--color-electric)]/10 text-[var(--color-electric)] flex items-center justify-center">
                   <stat.icon size={24} />
                 </div>
@@ -197,9 +208,9 @@ export default function Home() {
                     href={`/services/${service.slug}`}
                     className="group bg-[var(--color-card)] border border-[var(--color-border)] p-10 rounded-[2.5rem] md:col-span-2 md:row-span-2 flex flex-col justify-between relative overflow-hidden min-h-[500px] lg:min-h-[600px] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500"
                   >
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-electric)]/10 blur-[100px] -mr-32 -mt-32 group-hover:bg-[var(--color-electric)]/20 transition-all" />
+                    <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-glow opacity-20 blur-[100px] -mr-32 -mt-32 group-hover:opacity-30 transition-all" />
                     <div className="space-y-6 relative z-10">
-                      <div className="w-16 h-16 bg-[var(--color-electric)] rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                      <div className="w-16 h-16 bg-gradient-premium rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
                         {getIcon(service.icon || 'Globe')}
                       </div>
                       <h4 className="text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] uppercase tracking-tighter">
@@ -222,10 +233,10 @@ export default function Home() {
                   className={`group bg-[var(--color-navy-light)] border border-[var(--color-border)] p-8 rounded-[2rem] ${index === 1 ? 'md:col-span-2' : ''} flex flex-col justify-center relative overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500`}
                 >
                   {/* Blurred Background Glow */}
-                  <div className="absolute bottom-0 right-0 w-48 h-48 bg-[var(--color-electric)]/10 blur-[60px] -mr-16 -mb-16 group-hover:bg-[var(--color-electric)]/20 transition-all duration-500" />
+                  <div className="absolute bottom-0 right-0 w-56 h-56 bg-gradient-glow opacity-10 blur-[60px] -mr-16 -mb-16 group-hover:opacity-20 transition-all duration-500" />
                   
                   <div className="space-y-4 relative z-10">
-                    <div className="w-14 h-14 bg-[var(--color-electric)]/10 rounded-2xl flex items-center justify-center text-[var(--color-electric)] group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all shadow-sm">
+                    <div className="w-14 h-14 bg-[var(--color-electric)]/10 rounded-2xl flex items-center justify-center text-[var(--color-electric)] group-hover:bg-gradient-premium group-hover:text-white transition-all shadow-sm">
                       {getIcon(service.icon || 'Code')}
                     </div>
                     <div>
@@ -315,7 +326,7 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.slice(0, 3).map((project, i) => (
-              <div key={i} className="card-premium group overflow-hidden flex flex-col h-full bg-white">
+              <div key={i} className="card-premium group overflow-hidden flex flex-col h-full bg-[var(--color-card)]">
                 <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
                   <img
                     src={project.featuredImage || '/images/project-1.png'}
@@ -367,25 +378,53 @@ export default function Home() {
         <section className="max-w-7xl mx-auto px-6 w-full">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">What Our Clients <span className="text-gradient">Say</span></h2>
+            <p className="text-[var(--color-text-main)] opacity-60 max-w-xl mx-auto">See why businesses trust Uma Techno for their digital growth.</p>
+            <div className="pt-4">
+               <button className="px-6 py-2 border border-[var(--color-electric)] text-[var(--color-electric)] rounded-full text-xs font-bold uppercase tracking-widest hover:bg-[var(--color-electric)] hover:text-white transition-all">
+                 Share Your Experience
+               </button>
+            </div>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-white border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all">
-                <div className="flex gap-1 text-[#F59E0B] mb-6">
-                  {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" />)}
-                </div>
-                <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic">"Uma Techno delivered exactly what we needed. Their attention to detail and premium design aesthetic helped us increase our conversions by over 300% within the first month."</p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] overflow-hidden">
-                    <img src={`https://i.pravatar.cc/100?img=${i + 20}`} alt="Client" className="w-full h-full object-cover" />
+            {testimonials.length > 0 ? (
+              testimonials.map((t, i) => (
+                <div key={i} className="bg-[var(--color-card)] border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all">
+                  <div className="flex gap-1 text-[#F59E0B] mb-6">
+                    {Array.from({ length: t.rating || 5 }).map((_, star) => (
+                      <Star key={star} size={16} fill="currentColor" />
+                    ))}
                   </div>
-                  <div>
-                    <h4 className="font-bold text-[var(--color-text-main)]">John Doe {i}</h4>
-                    <p className="text-xs text-[var(--color-text-main)] opacity-50">CEO, Tech Innovators</p>
+                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic">"{t.content}"</p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] overflow-hidden">
+                      <img src={t.image || `https://i.pravatar.cc/100?u=${t.id}`} alt={t.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-[var(--color-text-main)]">{t.name}</h4>
+                      <p className="text-xs text-[var(--color-text-main)] opacity-50">{t.role}{t.company ? `, ${t.company}` : ''}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              [1, 2, 3].map((i) => (
+                <div key={i} className="bg-white border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all opacity-40 grayscale">
+                  <div className="flex gap-1 text-[#F59E0B] mb-6">
+                    {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" />)}
+                  </div>
+                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic">"Uma Techno delivered exactly what we needed. Their attention to detail and premium design aesthetic helped us increase our conversions by over 300% within the first month."</p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] overflow-hidden">
+                      <img src={`https://i.pravatar.cc/100?img=${i + 20}`} alt="Client" className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-[var(--color-text-main)]">John Doe {i}</h4>
+                      <p className="text-xs text-[var(--color-text-main)] opacity-50">CEO, Tech Innovators</p>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </section>
       )}
@@ -449,8 +488,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4 relative z-10">
               <Link
                 href="/contact"
-                className="px-8 py-4 text-white rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl btn-premium text-center"
-                style={{ backgroundColor: "var(--color-electric)" }}
+                className="px-8 py-4 text-white rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl bg-gradient-premium text-center"
               >
                 Get Free Consultation
               </Link>
@@ -467,7 +505,7 @@ export default function Home() {
 
       {/* Sticky Bottom Mobile CTA */}
       <div className="fixed bottom-0 left-0 w-full p-4 bg-[var(--background)]/90 backdrop-blur-md border-t border-[var(--color-border)] z-40 lg:hidden flex justify-center shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
-        <Link href="/contact" className="w-full max-w-md py-4 bg-[var(--color-electric)] text-white font-bold rounded-xl text-center shadow-lg">
+        <Link href="/contact" className="w-full max-w-md py-4 bg-gradient-premium text-white font-bold rounded-xl text-center shadow-lg">
           Get Started Today
         </Link>
       </div>

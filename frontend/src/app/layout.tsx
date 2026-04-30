@@ -62,6 +62,7 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "@/components/ThemeProvider";
+import VisitTracker from "@/components/utils/VisitTracker";
 
 export default function RootLayout({
   children,
@@ -134,6 +135,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${outfit.variable} font-sans min-h-screen flex flex-col`} suppressHydrationWarning>
         <ThemeProvider>
+          <VisitTracker />
           {children}
           <WhatsAppButton />
         </ThemeProvider>

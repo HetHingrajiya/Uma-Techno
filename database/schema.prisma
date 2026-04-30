@@ -199,3 +199,10 @@ model ThemePalette {
   updatedAt       DateTime @updatedAt
 }
 
+model Visit {
+  id        String   @id @default(cuid())
+  path      String   // The page path visited
+  ip        String?  // Optional: for unique visitor tracking
+  userAgent String?
+  createdAt DateTime @default(now())
+}

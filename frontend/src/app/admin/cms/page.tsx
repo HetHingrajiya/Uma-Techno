@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { FileText, Layers, Briefcase, MessageSquare, Plus, ArrowRight } from "lucide-react";
+import { FileText, Layers, Briefcase, MessageSquare, Plus, ArrowRight, Star } from "lucide-react";
 
 export default function CMSDashboard() {
   const cmsSections = [
@@ -33,6 +33,13 @@ export default function CMSDashboard() {
       icon: MessageSquare,
       href: "/admin/cms/blogs",
       count: 24
+    },
+    {
+      title: "Testimonials",
+      description: "Manage client reviews and ratings shown on the homepage.",
+      icon: Star,
+      href: "/admin/cms/testimonials",
+      count: 15
     }
   ];
 
