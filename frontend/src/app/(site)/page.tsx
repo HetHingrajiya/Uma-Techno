@@ -383,16 +383,16 @@ export default function Home() {
         <section className="max-w-7xl mx-auto px-6 w-full py-24 relative">
           <div className="absolute inset-0 bg-gradient-glow scale-75 opacity-10 pointer-events-none" />
           <div className="bg-gradient-soft rounded-[4rem] p-12 md:p-20 border border-[var(--color-border)]/30 shadow-2xl relative z-10">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">What Our Clients <span className="text-gradient">Say</span></h2>
-            <p className="text-[var(--color-text-main)] opacity-60 max-w-xl mx-auto">See why businesses trust Uma Techno for their digital growth.</p>
-            <div className="pt-4">
-               <button className="px-6 py-2 border border-[var(--color-electric)] text-[var(--color-electric)] rounded-full text-xs font-bold uppercase tracking-widest hover:bg-[var(--color-electric)] hover:text-white transition-all">
-                 Share Your Experience
-               </button>
+            <div className="text-center space-y-4 mb-16">
+              <h2 className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">What Our Clients <span className="text-gradient">Say</span></h2>
+              <p className="text-[var(--color-text-main)] opacity-60 max-w-xl mx-auto">See why businesses trust Uma Techno for their digital growth.</p>
+              <div className="pt-4">
+                 <button className="px-6 py-2 border border-[var(--color-electric)] text-[var(--color-electric)] rounded-full text-xs font-bold uppercase tracking-widest hover:bg-[var(--color-electric)] hover:text-white transition-all">
+                   Share Your Experience
+                 </button>
+              </div>
             </div>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.length > 0 ? (
               testimonials.map((t, i) => (
                 <div key={i} className="bg-[var(--color-card)] border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all">
@@ -432,6 +432,7 @@ export default function Home() {
                 </div>
               ))
             )}
+            </div>
           </div>
         </section>
       )}
