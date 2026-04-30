@@ -380,7 +380,9 @@ export default function Home() {
 
       {/* Testimonials Section */}
       {isEnabled('testimonials') && (
-        <section className="max-w-7xl mx-auto px-6 w-full bg-gradient-soft rounded-[4rem] py-24 border border-[var(--color-border)]/30 shadow-2xl shadow-[var(--color-electric)]/5">
+        <section className="max-w-7xl mx-auto px-6 w-full py-24 relative">
+          <div className="absolute inset-0 bg-gradient-glow scale-75 opacity-10 pointer-events-none" />
+          <div className="bg-gradient-soft rounded-[4rem] p-12 md:p-20 border border-[var(--color-border)]/30 shadow-2xl relative z-10">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">What Our Clients <span className="text-gradient">Say</span></h2>
             <p className="text-[var(--color-text-main)] opacity-60 max-w-xl mx-auto">See why businesses trust Uma Techno for their digital growth.</p>
@@ -413,17 +415,17 @@ export default function Home() {
               ))
             ) : (
               [1, 2, 3].map((i) => (
-                <div key={i} className="bg-[var(--color-card)] border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all opacity-40 grayscale">
+                <div key={i} className="glass-card p-8 rounded-[var(--radius)] border border-[var(--color-border)] hover:shadow-xl transition-all group">
                   <div className="flex gap-1 text-[#F59E0B] mb-6">
                     {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" />)}
                   </div>
                   <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic">"Uma Techno delivered exactly what we needed. Their attention to detail and premium design aesthetic helped us increase our conversions by over 300% within the first month."</p>
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] overflow-hidden">
+                    <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] border border-[var(--color-border)] overflow-hidden">
                       <img src={`https://i.pravatar.cc/100?img=${i + 20}`} alt="Client" className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-[var(--color-text-main)]">John Doe {i}</h4>
+                      <h4 className="font-bold text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">John Doe {i}</h4>
                       <p className="text-xs text-[var(--color-text-main)] opacity-50">CEO, Tech Innovators</p>
                     </div>
                   </div>
