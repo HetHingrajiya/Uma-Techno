@@ -30,7 +30,7 @@ export const getServiceBySlug = async (req: Request, res: Response) => {
   try {
     const { slug } = req.params;
     const service = await prisma.service.findUnique({
-      where: { slug }
+      where: { slug: slug as string }
     });
     if (!service) return res.status(404).json({ success: false, message: 'Not found' });
     res.status(200).json(service);
@@ -59,7 +59,7 @@ export const updateService = async (req: Request, res: Response) => {
     const { id } = req.params;
     const data = ServiceSchema.partial().parse(req.body);
     const service = await prisma.service.update({
-      where: { id },
+      where: { id: id as string },
       data
     });
     res.status(200).json({ success: true, data: service });
@@ -72,7 +72,7 @@ export const updateService = async (req: Request, res: Response) => {
 export const deleteService = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    await prisma.service.delete({ where: { id } });
+    await prisma.service.delete({ where: { id: id as string } });
     res.status(200).json({ success: true, message: 'Service deleted' });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Failed to delete service' });

@@ -36,7 +36,7 @@ export const getProjectBySlug = async (req: Request, res: Response) => {
   try {
     const { slug } = req.params;
     const project = await prisma.project.findUnique({
-      where: { slug }
+      where: { slug: slug as string }
     });
     if (!project) return res.status(404).json({ success: false, message: 'Not found' });
     res.status(200).json(project);
@@ -65,7 +65,7 @@ export const updateProject = async (req: Request, res: Response) => {
     const { id } = req.params;
     const data = ProjectSchema.partial().parse(req.body);
     const project = await prisma.project.update({
-      where: { id },
+      where: { id: id as string },
       data
     });
     res.status(200).json({ success: true, data: project });
@@ -78,7 +78,7 @@ export const updateProject = async (req: Request, res: Response) => {
 export const deleteProject = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    await prisma.project.delete({ where: { id } });
+    await prisma.project.delete({ where: { id: id as string } });
     res.status(200).json({ success: true, message: 'Project deleted' });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Failed to delete project' });

@@ -20,7 +20,7 @@ export const updateWidget = async (req: Request, res: Response): Promise<void> =
     const { id } = req.params;
     const data = req.body;
     const widget = await prisma.widget.update({
-      where: { id },
+      where: { id: id as string },
       data
     });
     res.json(widget);
