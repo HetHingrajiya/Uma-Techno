@@ -6,10 +6,10 @@ const prisma = new PrismaClient();
 export const trackVisit = async (req: Request, res: Response) => {
   try {
     const { path } = req.body;
-    const ip = req.ip || req.headers['x-forwarded-for'] as string;
+    const ip = (req.headers['x-forwarded-for'] as string) || req.ip;
     const userAgent = req.headers['user-agent'];
 
-    await prisma.visit.create({
+    await (prisma as any).visit.create({
       data: {
         path: path || '/',
         ip: ip || 'unknown',

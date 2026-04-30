@@ -80,7 +80,7 @@ export const getPalettes = async (req: Request, res: Response) => {
 
 export const setActivePalette = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     
     // Deactivate all others
     await prisma.themePalette.updateMany({
@@ -138,7 +138,7 @@ export const createPalette = async (req: Request, res: Response) => {
 
 export const deletePalette = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     await prisma.themePalette.delete({ where: { id } });
     res.json({ message: 'Palette deleted' });
   } catch (error) {

@@ -28,7 +28,7 @@ export const getServices = async (req: Request, res: Response) => {
 
 export const getServiceBySlug = async (req: Request, res: Response) => {
   try {
-    const { slug } = req.params;
+    const slug = req.params.slug as string;
     const service = await prisma.service.findUnique({
       where: { slug }
     });
@@ -56,7 +56,7 @@ export const createService = async (req: Request, res: Response) => {
 
 export const updateService = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const data = ServiceSchema.partial().parse(req.body);
     const service = await prisma.service.update({
       where: { id },
@@ -71,7 +71,7 @@ export const updateService = async (req: Request, res: Response) => {
 
 export const deleteService = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     await prisma.service.delete({ where: { id } });
     res.status(200).json({ success: true, message: 'Service deleted' });
   } catch (error) {

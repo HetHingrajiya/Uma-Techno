@@ -25,7 +25,8 @@ export const getSEOPages = async (req: Request, res: Response) => {
 
 export const getSEOByPath = async (req: Request, res: Response) => {
   try {
-    const { pagePath } = req.query;
+    const ip = (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress;
+    const pagePath = req.query.pagePath as string;
     if (!pagePath || typeof pagePath !== 'string') {
       return res.status(400).json({ success: false, message: 'Path is required' });
     }

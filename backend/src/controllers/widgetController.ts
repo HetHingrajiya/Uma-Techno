@@ -17,7 +17,7 @@ export const getWidgets = async (req: Request, res: Response): Promise<void> => 
 
 export const updateWidget = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const data = req.body;
     const widget = await prisma.widget.update({
       where: { id },

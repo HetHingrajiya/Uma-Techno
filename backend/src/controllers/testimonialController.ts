@@ -40,7 +40,7 @@ export const createTestimonial = async (req: Request, res: Response) => {
 
 export const updateTestimonial = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const data = TestimonialSchema.partial().parse(req.body);
     const testimonial = await prisma.testimonial.update({
       where: { id },
@@ -55,7 +55,7 @@ export const updateTestimonial = async (req: Request, res: Response) => {
 
 export const deleteTestimonial = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     await prisma.testimonial.delete({ where: { id } });
     res.status(200).json({ success: true, message: 'Testimonial deleted' });
   } catch (error) {

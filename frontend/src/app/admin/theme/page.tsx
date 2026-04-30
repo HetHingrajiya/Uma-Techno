@@ -108,6 +108,7 @@ export default function ThemeSettingsPage() {
     cardColor: "#FFFFFF",
     borderColor: "#E2E8F0"
   });
+  const [editingPaletteId, setEditingPaletteId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchPalettes();
@@ -216,6 +217,21 @@ export default function ThemeSettingsPage() {
     }
 
     localStorage.setItem('theme-updated', Date.now().toString());
+  };
+
+  const handleEdit = (palette: PaletteType) => {
+    setCustomPalette({
+      name: palette.name,
+      primaryColor: palette.primaryColor,
+      secondaryColor: palette.secondaryColor,
+      accentColor: palette.accentColor,
+      backgroundColor: palette.backgroundColor,
+      textColor: palette.textColor,
+      cardColor: palette.cardColor,
+      borderColor: palette.borderColor
+    });
+    setEditingPaletteId(palette.id.startsWith('prebuilt-') ? null : palette.id);
+    setShowCustomBuilder(true);
   };
 
   const handleCreateCustom = async () => {
@@ -340,9 +356,15 @@ export default function ThemeSettingsPage() {
                    <button className="text-[var(--color-text-main)] opacity-30 hover:opacity-100 transition-opacity">
                       <Heart size={16} />
                    </button>
-                   <button className="text-[var(--color-text-main)] opacity-30 hover:opacity-100 transition-opacity">
-                      <Copy size={16} />
-                   </button>
+                    <button className="text-[var(--color-text-main)] opacity-30 hover:opacity-100 transition-opacity">
+                       <Copy size={16} />
+                    </button>
+                    <button 
+                      onClick={(e) => { e.stopPropagation(); handleEdit(palette); }}
+                      className="text-[var(--color-text-main)] opacity-30 hover:opacity-100 transition-opacity"
+                    >
+                       <Edit3 size={16} />
+                    </button>
                 </div>
               </div>
 
