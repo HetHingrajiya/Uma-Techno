@@ -167,18 +167,20 @@ export default function DashboardDashboard() {
                 type="monotone" 
                 dataKey="visits" 
                 stroke="var(--color-accent)" 
-                strokeWidth={2}
+                strokeWidth={3}
                 strokeDasharray="5 5"
                 fillOpacity={1} 
                 fill="url(#colorVisits)" 
+                isAnimationActive={true}
               />
               <Area 
                 type="monotone" 
                 dataKey="leads" 
                 stroke="var(--color-electric)" 
-                strokeWidth={4}
+                strokeWidth={5}
                 fillOpacity={1} 
                 fill="url(#colorLeads)" 
+                isAnimationActive={true}
               />
             </AreaChart>
           </ResponsiveContainer>
@@ -240,10 +242,12 @@ export default function DashboardDashboard() {
               { label: "Database Health", value: "100%", status: "Stable" },
               { label: "Server Latency", value: "24ms", status: "Low" },
             ].map((item, i) => (
-              <div key={i} className="p-5 rounded-2xl bg-[var(--color-navy)] border border-[var(--color-border)]">
-                 <p className="text-[10px] font-black text-[var(--color-text-main)] opacity-40 uppercase tracking-widest mb-1">{item.label}</p>
+              <div key={i} className="p-5 rounded-2xl bg-[var(--color-navy-light)] border border-[var(--color-border)] shadow-sm hover:border-electric/30 transition-all">
+                 <p className="text-[10px] font-black text-[var(--color-text-main)] opacity-50 uppercase tracking-widest mb-1">{item.label}</p>
                  <p className="text-xl font-black text-[var(--color-text-main)]">{item.value}</p>
-                 <p className="text-[10px] font-bold text-green-500 mt-1 uppercase tracking-tighter">{item.status}</p>
+                 <p className="text-[10px] font-bold text-green-500 mt-1 uppercase tracking-tighter flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500" /> {item.status}
+                 </p>
               </div>
             ))}
           </div>
