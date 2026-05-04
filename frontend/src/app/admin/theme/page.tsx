@@ -262,7 +262,8 @@ export default function ThemeSettingsPage() {
       cardColor: palette.cardColor,
       borderColor: palette.borderColor,
       headerColor: palette.headerColor || palette.cardColor,
-      footerColor: palette.footerColor || palette.backgroundColor
+      footerColor: palette.footerColor || palette.backgroundColor,
+      category: palette.category || "Custom"
     });
     setEditingPaletteId(palette.id.startsWith('prebuilt-') ? null : palette.id);
     setShowCustomBuilder(true);
