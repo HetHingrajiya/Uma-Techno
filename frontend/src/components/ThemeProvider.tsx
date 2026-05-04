@@ -49,6 +49,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         // First check if there is a preview theme in localStorage
         const previewData = localStorage.getItem('preview-theme');
         if (previewData) {
+          const p = JSON.parse(previewData);
           setTheme(prev => ({ 
             ...prev, 
             ...p,
