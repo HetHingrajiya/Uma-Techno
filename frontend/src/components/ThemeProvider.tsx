@@ -158,8 +158,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
               `;
             } else {
               return `
-                --color-navy: #0F172A;
-                --color-navy-light: #F1F5F9;
+                --color-navy: ${theme.cardColor};
+                --color-navy-light: #FFFFFF;
                 --color-glass: rgba(255, 255, 255, 0.8);
                 --glass-border: rgba(15, 23, 42, 0.05);
                 --shadow-color: rgba(15, 23, 42, 0.12);
