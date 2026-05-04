@@ -57,7 +57,7 @@ export const createOrUpdateSEO = async (req: Request, res: Response) => {
 
 export const deleteSEO = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     await prisma.sEOPage.delete({ where: { id } });
     res.status(200).json({ success: true, message: 'SEO metadata deleted' });
   } catch (error) {
