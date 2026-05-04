@@ -131,7 +131,7 @@ export default function AdminLayout({
             onClick={async () => {
               setClearingCache(true);
               try {
-                await fetch('/api/clear-cache', { method: 'POST' });
+                await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/clear-cache`, { method: 'POST' });
                 alert('Cache cleared successfully!');
               } catch (e) {
                 alert('Failed to clear cache');

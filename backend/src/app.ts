@@ -15,6 +15,7 @@ import seoRoutes from './routes/seoRoutes';
 import testimonialRoutes from './routes/testimonialRoutes';
 import dashboardRoutes from './routes/dashboardRoutes';
 import analyticsRoutes from './routes/analyticsRoutes';
+import systemRoutes from './routes/systemRoutes';
 
 dotenv.config();
 
@@ -55,6 +56,7 @@ app.use('/api/v1/seo', seoRoutes);
 app.use('/api/v1/testimonials', testimonialRoutes);
 app.use('/api/v1/dashboard', dashboardRoutes);
 app.use('/api/v1/analytics', analyticsRoutes);
+app.use('/api/v1', systemRoutes);
 
 // Error Handling
 // app.use(errorHandler);
