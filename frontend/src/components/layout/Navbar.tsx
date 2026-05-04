@@ -30,14 +30,24 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+    const handleClickOutside = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest('.nav-item-container')) {
+        setActiveSubmenu(null);
+      }
+    };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   useEffect(() => {
@@ -51,11 +61,18 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
+  const handleLinkClick = (link: any, e: React.MouseEvent) => {
+    if (link.submenu) {
+      e.preventDefault();
+      setActiveSubmenu(activeSubmenu === link.name ? null : link.name);
+    }
+  };
+
   return (
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4",
-        scrolled ? "bg-[var(--background)]/80 backdrop-blur-lg border-b border-[var(--color-border)] py-3 shadow-lg" : "bg-transparent"
+        scrolled ? "bg-[var(--color-header)]/80 backdrop-blur-lg border-b border-[var(--color-border)] py-3 shadow-lg" : "bg-transparent"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
@@ -74,27 +91,41 @@ export default function Navbar() {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-10 lg:gap-14">
           {navLinks.map((link) => (
-            <div key={link.name} className="relative group">
+            <div 
+              key={link.name} 
+              className="relative group nav-item-container"
+              onMouseEnter={() => link.submenu && setActiveSubmenu(link.name)}
+              onMouseLeave={() => link.submenu && setActiveSubmenu(null)}
+            >
               <Link
                 href={link.href}
+                onClick={(e) => handleLinkClick(link, e)}
                 className={cn(
-                  "text-base font-bold transition-all hover:text-[var(--color-electric)] flex items-center gap-1 tracking-wide",
-                  pathname === link.href ? "text-[var(--color-electric)]" : "text-[var(--color-text-main)] opacity-70 hover:opacity-100"
+                  "text-base font-bold transition-all hover:text-[var(--color-electric)] flex items-center gap-1 tracking-wide cursor-pointer py-2",
+                  (pathname === link.href || activeSubmenu === link.name) ? "text-[var(--color-electric)]" : "text-[var(--color-text-main)] opacity-70 hover:opacity-100"
                 )}
               >
                 {link.name}
-                {link.submenu && <ChevronDown size={14} className="group-hover:rotate-180 transition-transform" />}
+                {link.submenu && <ChevronDown size={14} className={cn("transition-transform duration-300", activeSubmenu === link.name && "rotate-180")} />}
               </Link>
               
               {link.submenu && (
-                <div className="absolute top-full left-0 mt-2 w-56 bg-[var(--color-card)] border border-[var(--color-border)] rounded-2xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 shadow-2xl z-[60]">
+                <div 
+                  className={cn(
+                    "absolute top-full left-0 mt-2 w-56 bg-[var(--color-card)] border border-[var(--color-border)] rounded-2xl overflow-hidden transition-all duration-300 shadow-2xl z-[60]",
+                    activeSubmenu === link.name 
+                      ? "opacity-100 visible translate-y-0" 
+                      : "opacity-0 invisible translate-y-2"
+                  )}
+                >
                   {link.submenu.map((sub) => (
                     <Link
                       key={sub.name}
                       href={sub.href}
-                      className="block px-6 py-4 text-sm font-bold text-[var(--color-text-main)] opacity-70 hover:opacity-100 hover:bg-[var(--color-electric)]/10 hover:text-[var(--color-electric)] transition-all flex items-center gap-2"
+                      onClick={() => setActiveSubmenu(null)}
+                      className="block px-6 py-4 text-sm font-bold text-[var(--color-text-main)] opacity-70 hover:opacity-100 hover:bg-[var(--color-electric)]/10 hover:text-[var(--color-electric)] transition-all flex items-center gap-2 group/sub"
                     >
-                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-electric)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-electric)] opacity-0 group-hover/sub:opacity-100 transition-opacity" />
                       {sub.name}
                     </Link>
                   ))}

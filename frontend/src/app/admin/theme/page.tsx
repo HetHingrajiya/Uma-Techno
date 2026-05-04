@@ -30,8 +30,10 @@ interface PaletteType {
   accentColor: string;
   backgroundColor: string;
   textColor: string;
-  cardColor: string;
+   cardColor: string;
   borderColor: string;
+  headerColor?: string;
+  footerColor?: string;
   isCustom?: boolean;
 }
 
@@ -106,7 +108,9 @@ export default function ThemeSettingsPage() {
     backgroundColor: "#F8FAFC",
     textColor: "#0F172A",
     cardColor: "#FFFFFF",
-    borderColor: "#E2E8F0"
+    borderColor: "#E2E8F0",
+    headerColor: "#FFFFFF",
+    footerColor: "#0F172A"
   });
   const [editingPaletteId, setEditingPaletteId] = useState<string | null>(null);
 
@@ -195,28 +199,45 @@ export default function ThemeSettingsPage() {
 
   const applyThemeLocally = (p: PaletteType) => {
     const root = document.documentElement;
+    
+    // Core Colors
     root.style.setProperty('--color-electric', p.primaryColor);
-    root.style.setProperty('--color-blue-glow', p.primaryColor);
+    root.style.setProperty('--color-secondary', p.secondaryColor || p.primaryColor);
+    root.style.setProperty('--color-accent', p.accentColor || p.primaryColor);
     root.style.setProperty('--color-text-main', p.textColor);
+    root.style.setProperty('--foreground', p.textColor);
     root.style.setProperty('--background', p.backgroundColor);
     root.style.setProperty('--color-card', p.cardColor);
     root.style.setProperty('--color-border', p.borderColor);
+    root.style.setProperty('--color-header', p.headerColor || p.cardColor);
+    root.style.setProperty('--color-footer', p.footerColor || p.backgroundColor);
+    root.style.setProperty('--color-blue-glow', p.primaryColor + '25');
     
-    // Dynamically set semantic colors based on theme darkness
-    const isDark = p.backgroundColor.toLowerCase() === '#000000' || 
-                   p.backgroundColor.toLowerCase().includes('020617') || 
-                   p.backgroundColor.toLowerCase().includes('0f172a') || 
-                   p.backgroundColor.toLowerCase().includes('0b0117');
+    // Luminance detection
+    const hexToRgb = (hex: string) => {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return { r, g, b };
+    };
+    const getLuminance = (hex: string) => {
+      try {
+        const { r, g, b } = hexToRgb(hex);
+        return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+      } catch (e) { return 1; }
+    };
+
+    const isDark = getLuminance(p.backgroundColor) < 0.5;
 
     if (isDark) {
       root.style.setProperty('--color-navy', p.backgroundColor);
       root.style.setProperty('--color-navy-light', p.cardColor);
-      root.style.setProperty('--color-glass', 'rgba(15, 23, 42, 0.6)');
-      root.style.setProperty('--glass-border', 'rgba(255, 255, 255, 0.08)');
-      root.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.6)');
+      root.style.setProperty('--color-glass', 'rgba(255, 255, 255, 0.05)');
+      root.style.setProperty('--glass-border', 'rgba(255, 255, 255, 0.1)');
+      root.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.4)');
       root.style.setProperty('--shadow-glow', `${p.primaryColor}25`);
     } else {
-      root.style.setProperty('--color-navy', '#0F172A'); // Default dark
+      root.style.setProperty('--color-navy', '#0F172A');
       root.style.setProperty('--color-navy-light', p.backgroundColor);
       root.style.setProperty('--color-glass', 'rgba(255, 255, 255, 0.8)');
       root.style.setProperty('--glass-border', 'rgba(15, 23, 42, 0.05)');
@@ -224,6 +245,8 @@ export default function ThemeSettingsPage() {
       root.style.setProperty('--shadow-glow', 'rgba(6, 182, 212, 0.2)');
     }
 
+    // Persist for pre-hydration script
+    localStorage.setItem('active-palette', JSON.stringify(p));
     localStorage.setItem('theme-updated', Date.now().toString());
   };
 
@@ -490,7 +513,9 @@ export default function ThemeSettingsPage() {
                         { label: "Background", key: "backgroundColor" },
                         { label: "Text", key: "textColor" },
                         { label: "Card", key: "cardColor" },
-                        { label: "Border", key: "borderColor" }
+                        { label: "Border", key: "borderColor" },
+                        { label: "Header", key: "headerColor" },
+                        { label: "Footer", key: "footerColor" }
                       ].map(item => (
                         <div key={item.key} className="space-y-2">
                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-tighter">{item.label}</label>

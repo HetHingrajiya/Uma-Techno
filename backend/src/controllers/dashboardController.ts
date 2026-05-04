@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import prisma from '../lib/prisma';
 
 export const getDashboardStats = async (req: Request, res: Response) => {
   try {
@@ -25,41 +23,42 @@ export const getDashboardStats = async (req: Request, res: Response) => {
         take: 5,
         orderBy: { createdAt: 'desc' }
       }),
-      (prisma as any).visit.count({ where: { createdAt: { gte: todayStart } } }),
-      (prisma as any).visit.count({ where: { createdAt: { gte: monthStart } } }),
-      (prisma as any).visit.count()
+      prisma.visit.count({ where: { createdAt: { gte: todayStart } } }),
+      prisma.visit.count({ where: { createdAt: { gte: monthStart } } }),
+      prisma.visit.count()
     ]);
 
-    // Graph data for leads AND visits (last 7 months)
-    const months = [];
+    // Graph data for last 7 months
+    const graphData = [];
     for (let i = 6; i >= 0; i--) {
         const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
         const nextD = new Date(now.getFullYear(), now.getMonth() - i + 1, 1);
         
         const [lCount, vCount] = await Promise.all([
             prisma.contact.count({ where: { createdAt: { gte: d, lt: nextD } } }),
-            (prisma as any).visit.count({ where: { createdAt: { gte: d, lt: nextD } } })
+            prisma.visit.count({ where: { createdAt: { gte: d, lt: nextD } } })
         ]);
 
-        months.push({
+        graphData.push({
             name: d.toLocaleString('default', { month: 'short' }),
-            leads: lCount || Math.floor(Math.random() * 20) + 5,
-            visits: vCount || Math.floor(Math.random() * 1000) + 500
+            leads: lCount,
+            visits: vCount
         });
     }
 
     res.status(200).json({
       stats: [
-        { name: "Total Leads", value: totalLeads.toString(), change: "+12%", trendingUp: true },
-        { name: "Today's Visits", value: todayVisits.toString(), change: "+18%", trendingUp: true },
-        { name: "Monthly Visits", value: monthVisits.toString(), change: "+25%", trendingUp: true },
-        { name: "Active Projects", value: totalProjects.toString(), change: "+5%", trendingUp: true },
-        { name: "All-Time Visits", value: totalVisits.toLocaleString(), change: "+10%", trendingUp: true },
+        { name: "Total Leads", value: totalLeads.toString(), change: "Live", trendingUp: true },
+        { name: "Today's Visits", value: todayVisits.toString(), change: "Live", trendingUp: true },
+        { name: "Monthly Visits", value: monthVisits.toString(), change: "Live", trendingUp: true },
+        { name: "Active Projects", value: totalProjects.toString(), change: "Live", trendingUp: true },
+        { name: "All-Time Visits", value: totalVisits.toLocaleString(), change: "Total", trendingUp: true },
       ],
       recentLeads,
-      graphData: months
+      graphData
     });
   } catch (error) {
+    console.error('Dashboard Stats Error:', error);
     res.status(500).json({ success: false, message: 'Failed to fetch dashboard stats' });
   }
 };

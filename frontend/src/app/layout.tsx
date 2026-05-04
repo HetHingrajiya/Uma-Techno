@@ -140,23 +140,42 @@ export default function RootLayout({
                   const palette = JSON.parse(localStorage.getItem('active-palette'));
                   if (palette) {
                     const root = document.documentElement;
-                    root.style.setProperty('--color-electric', palette.primaryColor);
+                    const primary = palette.primaryColor;
+                    
+                    root.style.setProperty('--color-electric', primary);
+                    root.style.setProperty('--color-secondary', palette.secondaryColor || primary);
+                    root.style.setProperty('--color-accent', palette.accentColor || primary);
                     root.style.setProperty('--color-text-main', palette.textColor);
+                    root.style.setProperty('--foreground', palette.textColor);
                     root.style.setProperty('--background', palette.backgroundColor);
                     root.style.setProperty('--color-card', palette.cardColor);
                     root.style.setProperty('--color-border', palette.borderColor);
+                    root.style.setProperty('--color-header', palette.headerColor || palette.cardColor);
+                    root.style.setProperty('--color-footer', palette.footerColor || palette.backgroundColor);
+                    root.style.setProperty('--color-blue-glow', primary + '25');
                     
-                    const bg = palette.backgroundColor.toLowerCase();
-                    const isLight = bg === '#ffffff' || bg === 'white' || bg.includes('f8fafc') || bg.includes('f1f5f9') || bg.includes('f9fafb');
-                    const isDark = !isLight;
+                    const hexToRgb = (hex) => {
+                      const r = parseInt(hex.slice(1, 3), 16);
+                      const g = parseInt(hex.slice(3, 5), 16);
+                      const b = parseInt(hex.slice(5, 7), 16);
+                      return { r, g, b };
+                    };
+                    const getLum = (hex) => {
+                      try {
+                        const rgb = hexToRgb(hex);
+                        return (0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b) / 255;
+                      } catch (e) { return 1; }
+                    };
+
+                    const isDark = getLum(palette.backgroundColor) < 0.5;
 
                     if (isDark) {
                       root.style.setProperty('--color-navy', palette.backgroundColor);
                       root.style.setProperty('--color-navy-light', palette.cardColor);
-                      root.style.setProperty('--color-glass', 'rgba(255, 255, 255, 0.03)');
-                      root.style.setProperty('--glass-border', 'rgba(255, 255, 255, 0.08)');
+                      root.style.setProperty('--color-glass', 'rgba(255, 255, 255, 0.05)');
+                      root.style.setProperty('--glass-border', 'rgba(255, 255, 255, 0.1)');
                       root.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.4)');
-                      root.style.setProperty('--shadow-glow', palette.primaryColor + '25');
+                      root.style.setProperty('--shadow-glow', primary + '25');
                     } else {
                       root.style.setProperty('--color-navy', '#0F172A');
                       root.style.setProperty('--color-navy-light', palette.backgroundColor);

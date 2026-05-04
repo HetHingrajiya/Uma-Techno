@@ -92,9 +92,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           --color-electric: ${theme.primaryColor};
           --color-secondary: ${theme.secondaryColor};
           --color-accent: ${theme.accentColor};
-          --color-text-main: ${theme.textColor};
+           --color-text-main: ${theme.textColor};
           --color-border: ${theme.borderColor};
           --color-card: ${theme.cardColor};
+          --color-header: ${theme.headerColor || theme.cardColor};
+          --color-footer: ${theme.footerColor || theme.backgroundColor};
           
           --font-sans: ${theme.fontFamily};
           --radius: ${theme.borderRadius};
@@ -104,17 +106,31 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           
           /* Dynamic Semantic Colors */
           ${(() => {
-            const bg = theme.backgroundColor.toLowerCase();
-            // More robust isDark detection (check if it's not a light color)
-            const isLight = bg === '#ffffff' || bg === 'white' || bg.includes('f8fafc') || bg.includes('f1f5f9') || bg.includes('f9fafb');
-            const isDark = !isLight;
+            const hexToRgb = (hex: string) => {
+              const r = parseInt(hex.slice(1, 3), 16);
+              const g = parseInt(hex.slice(3, 5), 16);
+              const b = parseInt(hex.slice(5, 7), 16);
+              return { r, g, b };
+            };
+
+            const getLuminance = (hex: string) => {
+              try {
+                const { r, g, b } = hexToRgb(hex);
+                return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+              } catch (e) {
+                return 1; // Default to light if invalid
+              }
+            };
+
+            const bg = theme.backgroundColor || "#FFFFFF";
+            const isDark = getLuminance(bg) < 0.5;
             
             if (isDark) {
               return `
                 --color-navy: ${theme.backgroundColor};
                 --color-navy-light: ${theme.cardColor};
-                --color-glass: rgba(255, 255, 255, 0.03);
-                --glass-border: rgba(255, 255, 255, 0.08);
+                --color-glass: rgba(255, 255, 255, 0.05);
+                --glass-border: rgba(255, 255, 255, 0.1);
                 --shadow-color: rgba(0, 0, 0, 0.4);
                 --shadow-glow: ${theme.primaryColor}25;
               `;
@@ -138,7 +154,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           background-color: var(--background);
           color: var(--foreground);
           font-family: var(--font-sans);
-          transition: background-color 0.5s ease, color 0.5s ease;
+          transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         * {
           transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;

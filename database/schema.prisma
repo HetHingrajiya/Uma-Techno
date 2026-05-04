@@ -122,9 +122,11 @@ model ThemeSetting {
   sectionSpacing      String   @default("4rem")
   buttonShape         String   @default("rounded-xl")
   blueGlowColor       String   @default("rgba(6, 182, 212, 0.15)")
-  glassBackgroundColor String  @default("rgba(255, 255, 255, 0.85)")
+   glassBackgroundColor String  @default("rgba(255, 255, 255, 0.85)")
   scrollbarThumbColor String   @default("#06B6D4")
   scrollbarTrackColor String   @default("#f8fafc")
+  headerColor         String   @default("#FFFFFF")
+  footerColor         String   @default("#0F172A")
   themeMode           String   @default("light") // light, dark, auto
   updatedAt           DateTime @updatedAt
 }
@@ -193,6 +195,8 @@ model ThemePalette {
   cardColor       String
   textColor       String
   borderColor     String
+  headerColor     String   @default("#FFFFFF")
+  footerColor     String   @default("#0F172A")
   isDefault       Boolean  @default(false)
   isActive        Boolean  @default(false)
   createdAt       DateTime @default(now())
