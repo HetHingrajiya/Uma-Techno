@@ -42,19 +42,19 @@ const PALETTE_PACKS = [
   {
     category: "Professional",
     palettes: [
-      { name: "Cyan Professional", primaryColor: "#06B6D4", secondaryColor: "#0891B2", accentColor: "#22D3EE", backgroundColor: "#F8FAFC", textColor: "#0F172A", cardColor: "#FFFFFF", borderColor: "#E2E8F0" },
-      { name: "Navy Corporate", primaryColor: "#0F172A", secondaryColor: "#1E293B", accentColor: "#3B82F6", backgroundColor: "#F1F5F9", textColor: "#0F172A", cardColor: "#FFFFFF", borderColor: "#CBD5E1" },
-      { name: "Sky Digital", primaryColor: "#0EA5E9", secondaryColor: "#0284C7", accentColor: "#7DD3FC", backgroundColor: "#F8FAFC", textColor: "#0F172A", cardColor: "#FFFFFF", borderColor: "#E0F2FE" },
-      { name: "Slate Minimal", primaryColor: "#475569", secondaryColor: "#334155", accentColor: "#94A3B8", backgroundColor: "#F8FAFC", textColor: "#1E293B", cardColor: "#FFFFFF", borderColor: "#F1F5F9" }
+      { name: "Cyan Professional", primaryColor: "#06B6D4", secondaryColor: "#0891B2", accentColor: "#22D3EE", backgroundColor: "#F8FAFC", textColor: "#0F172A", cardColor: "#FFFFFF", borderColor: "#E2E8F0", headerColor: "#FFFFFF", footerColor: "#0F172A" },
+      { name: "Navy Corporate", primaryColor: "#0F172A", secondaryColor: "#1E293B", accentColor: "#3B82F6", backgroundColor: "#F1F5F9", textColor: "#0F172A", cardColor: "#FFFFFF", borderColor: "#CBD5E1", headerColor: "#FFFFFF", footerColor: "#0F172A" },
+      { name: "Sky Digital", primaryColor: "#0EA5E9", secondaryColor: "#0284C7", accentColor: "#7DD3FC", backgroundColor: "#F8FAFC", textColor: "#0F172A", cardColor: "#FFFFFF", borderColor: "#E0F2FE", headerColor: "#FFFFFF", footerColor: "#0F172A" },
+      { name: "Slate Minimal", primaryColor: "#475569", secondaryColor: "#334155", accentColor: "#94A3B8", backgroundColor: "#F8FAFC", textColor: "#1E293B", cardColor: "#FFFFFF", borderColor: "#F1F5F9", headerColor: "#FFFFFF", footerColor: "#0F172A" }
     ]
   },
   {
     category: "Dark / OLED",
     palettes: [
-      { name: "Midnight Gold", primaryColor: "#D4AF37", secondaryColor: "#B8860B", accentColor: "#FFD700", backgroundColor: "#020617", textColor: "#F8FAFC", cardColor: "#0F172A", borderColor: "#1E293B" },
-      { name: "Onyx Premium", primaryColor: "#D4AF37", secondaryColor: "#B8860B", accentColor: "#FFD700", backgroundColor: "#0F172A", textColor: "#F8FAFC", cardColor: "#1E293B", borderColor: "#334155" },
-      { name: "Cyber Neon", primaryColor: "#06B6D4", secondaryColor: "#0891B2", accentColor: "#FF00FF", backgroundColor: "#000000", textColor: "#F8FAFC", cardColor: "#0A0A0A", borderColor: "#1A1A1A" },
-      { name: "Deep Amethyst", primaryColor: "#8B5CF6", secondaryColor: "#7C3AED", accentColor: "#C084FC", backgroundColor: "#0B0117", textColor: "#F5F3FF", cardColor: "#160D26", borderColor: "#2D1B4E" }
+      { name: "Midnight Gold", primaryColor: "#D4AF37", secondaryColor: "#B8860B", accentColor: "#FFD700", backgroundColor: "#020617", textColor: "#F8FAFC", cardColor: "#0F172A", borderColor: "#1E293B", headerColor: "#020617", footerColor: "#020617" },
+      { name: "Onyx Premium", primaryColor: "#D4AF37", secondaryColor: "#B8860B", accentColor: "#FFD700", backgroundColor: "#0F172A", textColor: "#F8FAFC", cardColor: "#1E293B", borderColor: "#334155", headerColor: "#0F172A", footerColor: "#0F172A" },
+      { name: "Cyber Neon", primaryColor: "#06B6D4", secondaryColor: "#0891B2", accentColor: "#FF00FF", backgroundColor: "#000000", textColor: "#F8FAFC", cardColor: "#0A0A0A", borderColor: "#1A1A1A", headerColor: "#000000", footerColor: "#000000" },
+      { name: "Deep Amethyst", primaryColor: "#8B5CF6", secondaryColor: "#7C3AED", accentColor: "#C084FC", backgroundColor: "#0B0117", textColor: "#F5F3FF", cardColor: "#160D26", borderColor: "#2D1B4E", headerColor: "#0B0117", footerColor: "#0B0117" }
     ]
   },
   {
@@ -259,7 +259,9 @@ export default function ThemeSettingsPage() {
       backgroundColor: palette.backgroundColor,
       textColor: palette.textColor,
       cardColor: palette.cardColor,
-      borderColor: palette.borderColor
+      borderColor: palette.borderColor,
+      headerColor: palette.headerColor || palette.cardColor,
+      footerColor: palette.footerColor || palette.backgroundColor
     });
     setEditingPaletteId(palette.id.startsWith('prebuilt-') ? null : palette.id);
     setShowCustomBuilder(true);

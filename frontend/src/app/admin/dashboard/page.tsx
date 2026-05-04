@@ -65,9 +65,10 @@ export default function DashboardDashboard() {
   ];
 
   const getIcon = (name: string) => {
-    if (name.includes("Leads")) return <MessageSquare size={24} />;
-    if (name.includes("Projects")) return <TrendingUp size={24} />;
-    if (name.includes("Visits")) return <Users size={24} />;
+    const n = name || "";
+    if (n.includes("Leads")) return <MessageSquare size={24} />;
+    if (n.includes("Projects")) return <TrendingUp size={24} />;
+    if (n.includes("Visits")) return <Users size={24} />;
     return <Layers size={24} />;
   };
 
@@ -94,7 +95,7 @@ export default function DashboardDashboard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {stats.map((stat: any) => (
+        {stats.length > 0 ? stats.map((stat: any) => (
           <div key={stat.name} className="glass-card p-6 rounded-2xl border border-[var(--color-border)] shadow-sm hover:shadow-xl transition-all">
             <div className="flex justify-between items-start mb-4">
               <div className="w-12 h-12 bg-electric/10 rounded-xl flex items-center justify-center text-electric">
@@ -103,14 +104,18 @@ export default function DashboardDashboard() {
               <div className={`flex items-center gap-1 text-[10px] font-black px-2 py-1 rounded-lg uppercase tracking-tighter ${
                 stat.trendingUp ? "text-green-500 bg-green-500/10" : "text-red-500 bg-red-500/10"
               }`}>
-                {stat.change}
+                {stat.change || "Live"}
                 {stat.trendingUp ? <ArrowUpRight size={14} className="hover-arrow" /> : <ArrowDownRight size={14} className="hover-arrow" />}
               </div>
             </div>
             <h3 className="text-[var(--color-text-main)] opacity-70 text-sm font-bold uppercase tracking-tight">{stat.name}</h3>
-            <p className="text-3xl font-black font-outfit mt-1 text-[var(--color-text-main)]">{stat.value}</p>
+            <p className="text-3xl font-black font-outfit mt-1 text-[var(--color-text-main)]">{stat.value || "0"}</p>
           </div>
-        ))}
+        )) : (
+          <div className="col-span-full p-12 text-center glass-card rounded-2xl opacity-50 font-bold">
+            No statistics available yet.
+          </div>
+        )}
       </div>
 
       {/* Main Analytics Graph */}
@@ -125,7 +130,7 @@ export default function DashboardDashboard() {
             <p className="text-sm text-[var(--color-text-main)] opacity-50 font-medium">Monthly acquisition analytics for your business.</p>
           </div>
           <div className="flex gap-2">
-             <span className="px-4 py-1.5 bg-[var(--color-navy)] rounded-full text-[10px] font-bold text-[var(--color-text-main)] opacity-70 uppercase tracking-widest border border-[var(--color-border)]">Last 7 Months</span>
+             <span className="px-4 py-1.5 bg-[var(--color-navy-light)] rounded-full text-[10px] font-bold text-[var(--color-text-main)] opacity-70 uppercase tracking-widest border border-[var(--color-border)]">Last 7 Months</span>
           </div>
         </div>
 
@@ -157,10 +162,11 @@ export default function DashboardDashboard() {
               />
               <Tooltip 
                 contentStyle={{ 
-                  backgroundColor: 'white', 
+                  backgroundColor: 'var(--color-card)', 
                   borderRadius: '16px', 
                   border: '1px solid var(--color-border)',
                   boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                  color: 'var(--color-text-main)',
                   fontWeight: 'bold'
                 }}
               />
@@ -243,7 +249,7 @@ export default function DashboardDashboard() {
               { label: "Database Health", value: "100%", status: "Stable" },
               { label: "Server Latency", value: "24ms", status: "Low" },
             ].map((item, i) => (
-              <div key={i} className="p-5 rounded-2xl bg-[var(--color-navy)] border border-[var(--color-border)]">
+              <div key={i} className="p-5 rounded-2xl bg-[var(--color-navy-light)] border border-[var(--color-border)]">
                  <p className="text-[10px] font-black text-[var(--color-text-main)] opacity-40 uppercase tracking-widest mb-1">{item.label}</p>
                  <p className="text-xl font-black text-[var(--color-text-main)]">{item.value}</p>
                  <p className="text-[10px] font-bold text-green-500 mt-1 uppercase tracking-tighter">{item.status}</p>

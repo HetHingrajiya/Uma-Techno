@@ -11,6 +11,8 @@ interface ThemeSettings {
   textColor: string;
   headingColor: string;
   borderColor: string;
+  headerColor: string;
+  footerColor: string;
   fontFamily: string;
   borderRadius: string;
   blueGlowColor: string;
@@ -28,6 +30,8 @@ const defaultTheme: ThemeSettings = {
   textColor: "#0F172A",
   headingColor: "#0F172A",
   borderColor: "#E2E8F0",
+  headerColor: "#FFFFFF",
+  footerColor: "#0F172A",
   fontFamily: "Inter, Outfit, sans-serif",
   borderRadius: "1.25rem",
   blueGlowColor: "rgba(6, 182, 212, 0.1)",
@@ -45,17 +49,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         // First check if there is a preview theme in localStorage
         const previewData = localStorage.getItem('preview-theme');
         if (previewData) {
-          const p = JSON.parse(previewData);
           setTheme(prev => ({ 
             ...prev, 
-            primaryColor: p.primaryColor,
+            ...p,
             secondaryColor: p.secondaryColor || p.primaryColor,
             accentColor: p.accentColor || p.primaryColor,
-            backgroundColor: p.backgroundColor,
-            cardColor: p.cardColor,
-            textColor: p.textColor,
-            borderColor: p.borderColor,
-            headingColor: p.textColor
+            headerColor: p.headerColor || p.cardColor || "#FFFFFF",
+            footerColor: p.footerColor || p.backgroundColor || "#0F172A"
           }));
           return;
         }
@@ -64,7 +64,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         if (res.ok) {
           const data = await res.json();
           if (data && data.primaryColor) {
-            setTheme(prev => ({ ...prev, ...data }));
+            setTheme(prev => ({ 
+              ...prev, 
+              ...data,
+              headerColor: data.headerColor || data.cardColor || prev.headerColor,
+              footerColor: data.footerColor || data.backgroundColor || prev.footerColor
+            }));
           }
         }
       } catch (error) {
@@ -92,11 +97,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           --color-electric: ${theme.primaryColor};
           --color-secondary: ${theme.secondaryColor};
           --color-accent: ${theme.accentColor};
-           --color-text-main: ${theme.textColor};
+          --color-text-main: ${theme.textColor};
           --color-border: ${theme.borderColor};
           --color-card: ${theme.cardColor};
-          --color-header: ${theme.headerColor || theme.cardColor};
-          --color-footer: ${theme.footerColor || theme.backgroundColor};
+          --color-header: ${theme.headerColor};
+          --color-footer: ${theme.footerColor};
           
           --font-sans: ${theme.fontFamily};
           --radius: ${theme.borderRadius};
@@ -137,7 +142,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
             } else {
               return `
                 --color-navy: #0F172A;
-                --color-navy-light: ${theme.backgroundColor};
+                --color-navy-light: #F1F5F9;
                 --color-glass: rgba(255, 255, 255, 0.8);
                 --glass-border: rgba(15, 23, 42, 0.05);
                 --shadow-color: rgba(15, 23, 42, 0.12);
