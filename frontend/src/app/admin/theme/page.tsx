@@ -110,7 +110,8 @@ export default function ThemeSettingsPage() {
     cardColor: "#FFFFFF",
     borderColor: "#E2E8F0",
     headerColor: "#FFFFFF",
-    footerColor: "#0F172A"
+    footerColor: "#0F172A",
+    category: "Custom"
   });
   const [editingPaletteId, setEditingPaletteId] = useState<string | null>(null);
 
