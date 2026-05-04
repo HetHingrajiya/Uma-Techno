@@ -104,6 +104,22 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           --color-header: ${theme.headerColor};
           --color-footer: ${theme.footerColor};
           
+          ${(() => {
+            const hexToRgb = (hex: string) => {
+              try {
+                const h = hex.startsWith('#') ? hex : '#FFFFFF';
+                const r = parseInt(h.slice(1, 3), 16);
+                const g = parseInt(h.slice(3, 5), 16);
+                const b = parseInt(h.slice(5, 7), 16);
+                return `${r}, ${g}, ${b}`;
+              } catch (e) { return "255, 255, 255"; }
+            };
+            return `
+              --color-header-rgb: ${hexToRgb(theme.headerColor)};
+              --color-footer-rgb: ${hexToRgb(theme.footerColor)};
+            `;
+          })()}
+          
           --font-sans: ${theme.fontFamily};
           --radius: ${theme.borderRadius};
           

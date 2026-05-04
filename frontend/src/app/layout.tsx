@@ -154,6 +154,19 @@ export default function RootLayout({
                     root.style.setProperty('--color-footer', palette.footerColor || palette.backgroundColor);
                     root.style.setProperty('--color-blue-glow', primary + '25');
                     
+                    const hexToRgbStr = (hex) => {
+                      try {
+                        const h = hex.startsWith('#') ? hex : '#FFFFFF';
+                        const r = parseInt(h.slice(1, 3), 16);
+                        const g = parseInt(h.slice(3, 5), 16);
+                        const b = parseInt(h.slice(5, 7), 16);
+                        return r + ", " + g + ", " + b;
+                      } catch (e) { return "255, 255, 255"; }
+                    };
+
+                    root.style.setProperty('--color-header-rgb', hexToRgbStr(palette.headerColor || palette.cardColor || "#FFFFFF"));
+                    root.style.setProperty('--color-footer-rgb', hexToRgbStr(palette.footerColor || palette.backgroundColor || "#0F172A"));
+
                     const hexToRgb = (hex) => {
                       const r = parseInt(hex.slice(1, 3), 16);
                       const g = parseInt(hex.slice(3, 5), 16);

@@ -71,9 +71,10 @@ export default function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4",
-        scrolled ? "bg-[var(--color-header)]/80 backdrop-blur-lg border-b border-[var(--color-border)] py-3 shadow-lg" : "bg-transparent"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6",
+        scrolled ? "py-3 backdrop-blur-lg border-b border-[var(--color-border)] shadow-lg" : "py-6 bg-transparent"
       )}
+      style={scrolled ? { backgroundColor: `rgba(var(--color-header-rgb), 0.85)` } : {}}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-4">
