@@ -288,14 +288,21 @@ export default function ThemeSettingsPage() {
   const handleCreateCustom = async () => {
     setSaving(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`, {
-        method: "POST",
+      const isEditing = !!editingPaletteId;
+      const url = isEditing 
+        ? `${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes/${editingPaletteId}`
+        : `${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`;
+        
+      const res = await fetch(url, {
+        method: isEditing ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(customPalette)
       });
+      
       if (res.ok) {
-        alert("Custom palette created and saved successfully!");
+        alert(isEditing ? "Palette updated successfully!" : "Custom palette created and saved successfully!");
         setShowCustomBuilder(false);
+        setEditingPaletteId(null);
         fetchPalettes();
       } else {
         const errData = await res.json().catch(() => ({}));
@@ -334,7 +341,21 @@ export default function ThemeSettingsPage() {
           </p>
         </div>
         <button 
-          onClick={() => setShowCustomBuilder(true)}
+          onClick={() => {
+            setEditingPaletteId(null);
+            setCustomPalette({
+              name: "My Custom Brand",
+              primaryColor: "#06B6D4",
+              secondaryColor: "#0891B2",
+              accentColor: "#22D3EE",
+              backgroundColor: "#F8FAFC",
+              textColor: "#0F172A",
+              cardColor: "#FFFFFF",
+              borderColor: "#E2E8F0",
+              category: "Custom"
+            });
+            setShowCustomBuilder(true);
+          }}
           className="bg-electric hover:bg-electric/90 text-white px-6 md:px-8 py-3 rounded-xl md:rounded-2xl font-bold flex items-center gap-2 transition-all shadow-lg hover:shadow-electric/30 w-full md:w-auto justify-center"
         >
           <Plus size={20} /> Create Custom

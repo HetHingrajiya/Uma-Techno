@@ -24,30 +24,20 @@ export default function StickyCTA() {
     <AnimatePresence>
       {isVisible && (
         <motion.div
+          drag
+          dragConstraints={{ left: 0, right: 0, top: -500, bottom: 0 }}
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
-          className="fixed bottom-0 left-0 right-0 z-[998] md:hidden p-4 bg-gradient-to-t from-[var(--background)] to-transparent"
+          className="fixed bottom-6 left-6 z-[998] md:hidden cursor-move"
         >
-          <div className="flex gap-3">
-            <Link
-              href="/contact"
-              className="flex-1 bg-[var(--color-electric)] text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl active:scale-95 transition-all"
-            >
-              <Send size={20} />
-              GET FREE AUDIT
-            </Link>
-            <div className="bg-[var(--color-card)] border border-[var(--color-border)] px-4 rounded-2xl flex flex-col items-center justify-center shadow-lg">
-              <div className="flex gap-0.5 text-yellow-500">
-                <Star size={12} fill="currentColor" />
-                <Star size={12} fill="currentColor" />
-                <Star size={12} fill="currentColor" />
-                <Star size={12} fill="currentColor" />
-                <Star size={12} fill="currentColor" />
-              </div>
-              <span className="text-[10px] font-bold opacity-50 uppercase tracking-tighter">4.9/5 Trust</span>
-            </div>
-          </div>
+          <Link
+            href="/contact"
+            className="bg-[var(--color-electric)] text-white px-6 py-4 rounded-full font-black text-sm flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(var(--color-header-rgb),0.3)] active:scale-95 transition-all border border-white/20 uppercase tracking-widest whitespace-nowrap"
+          >
+            <Send size={18} />
+            GET STARTED TODAY
+          </Link>
         </motion.div>
       )}
     </AnimatePresence>

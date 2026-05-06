@@ -11,6 +11,9 @@ export const getTheme = async (req: Request, res: Response): Promise<void> => {
         data: {} // Uses defaults from schema
       });
     }
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
     res.json(theme);
   } catch (error) {
     console.error('Error fetching theme:', error);
@@ -137,6 +140,21 @@ export const createPalette = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error('Palette creation error:', error);
     res.status(500).json({ error: error.message || 'Failed to create palette' });
+  }
+};
+
+export const updatePalette = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id as string;
+    const data = req.body;
+    const palette = await prisma.themePalette.update({
+      where: { id },
+      data
+    });
+    res.json(palette);
+  } catch (error: any) {
+    console.error('Palette update error:', error);
+    res.status(500).json({ error: error.message || 'Failed to update palette' });
   }
 };
 
