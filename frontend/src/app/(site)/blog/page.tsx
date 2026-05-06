@@ -1,104 +1,115 @@
-"use client";
-
-import React, { useState } from "react";
-import { ArrowRight, Calendar, User, Tag } from "lucide-react";
+import React from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import Image from "next/image";
+import { Metadata } from "next";
+import { ArrowRight, Calendar, User, Clock } from "lucide-react";
 
-const blogPosts = [
+export const metadata: Metadata = {
+  title: "Insights & Tech Blog | Uma Techno Rajkot",
+  description: "Explore the latest trends in web development, SEO, and digital marketing. Stay ahead of the competition with insights from Uma Techno, Rajkot.",
+  alternates: {
+    canonical: "https://umatechno.in/blog",
+  },
+};
+
+const posts = [
   {
-    title: "How Premium Web Design Drives Business Growth in 2026",
-    excerpt: "Discover why a high-end digital presence is no longer optional for businesses looking to scale in the modern economy.",
-    date: "April 24, 2026",
-    author: "Admin",
-    category: "Design",
-    image: "/images/project-1.png",
-    slug: "web-design-growth"
+    title: "Best Web Development Company in Rajkot: How to Choose?",
+    excerpt: "Discover what makes a web development company stand out in Rajkot and how to choose the right partner for your digital success.",
+    date: "May 5, 2026",
+    author: "Uma Team",
+    readTime: "8 min read",
+    image: "/images/blog-1.png",
+    slug: "best-web-development-company-rajkot"
   },
   {
-    title: "The Importance of Technical SEO for Local Businesses in Rajkot",
-    excerpt: "Learn how to optimize your local presence and dominate search results in Gujarat's competitive market.",
-    date: "April 22, 2026",
-    author: "Admin",
-    category: "SEO",
-    image: "/images/project-2.png",
-    slug: "local-seo-rajkot"
+    title: "SEO Services Guide for Local Businesses in Gujarat",
+    excerpt: "Learn the secrets of local SEO and how to dominate search results in Rajkot, Ahmedabad, and beyond.",
+    date: "May 3, 2026",
+    author: "SEO Expert",
+    readTime: "12 min read",
+    image: "/images/blog-2.png",
+    slug: "seo-services-guide-local-business"
   },
   {
-    title: "Building Scalable Mobile Apps with Next.js and Tailwind CSS",
-    excerpt: "A deep dive into the tech stack that powers the world's most successful startups and enterprises.",
+    title: "Website Cost in India 2026: A Comprehensive Breakdown",
+    excerpt: "How much does a website really cost in 2026? We break down the pricing for startups, SMEs, and enterprises.",
+    date: "April 28, 2026",
+    author: "Uma Team",
+    readTime: "10 min read",
+    image: "/images/blog-3.png",
+    slug: "website-cost-india-2026"
+  },
+  {
+    title: "Why Your Business Needs a Website in the AI Era",
+    excerpt: "In 2026, a website is more than just a digital brochure. Discover why your business needs a robust digital presence now more than ever.",
+    date: "April 25, 2026",
+    author: "Tech Analyst",
+    readTime: "7 min read",
+    image: "/images/blog-4.png",
+    slug: "why-business-needs-website"
+  },
+  {
+    title: "Digital Marketing Tips for 2026: Gujarat Market Trends",
+    excerpt: "Stay ahead with these digital marketing strategies specifically tailored for the unique business landscape of Gujarat.",
     date: "April 20, 2026",
-    author: "Admin",
-    category: "Development",
-    image: "/images/project-3.png",
-    slug: "scalable-mobile-apps"
+    author: "Marketing Strategist",
+    readTime: "15 min read",
+    image: "/images/blog-5.png",
+    slug: "digital-marketing-tips-2026"
   }
 ];
 
 export default function BlogPage() {
   return (
-    <div className="pt-32 pb-20 lg:pt-40 lg:pb-32 bg-[var(--background)] min-h-screen">
+    <div className="pt-32 lg:pt-48 pb-32 bg-[var(--background)] min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center space-y-6 mb-20">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
-            Insights & News
+            Our Insights
           </div>
-          <h1 className="text-4xl lg:text-6xl font-bold font-outfit text-[var(--color-text-main)]">
-            Our <span className="text-gradient">Blog</span>
+          <h1 className="text-4xl lg:text-7xl font-bold font-outfit text-[var(--color-text-main)]">
+            The <span className="text-gradient">Tech & Growth</span> Blog
           </h1>
           <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto text-lg">
-            Expert perspectives on technology, design, and digital strategy to help you stay ahead of the curve.
+            Stay updated with the latest trends in web engineering, search algorithms, and conversion psychology.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-          {blogPosts.map((post, i) => (
-            <motion.article
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              key={post.slug}
-              className="card-premium group flex flex-col bg-[var(--color-card)] overflow-hidden"
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post, i) => (
+            <Link 
+              key={i} 
+              href={`/blog/${post.slug}`}
+              className="group flex flex-col bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2rem] overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2"
             >
-              <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              <div className="aspect-[16/10] relative overflow-hidden">
+                <div className="absolute inset-0 bg-[var(--color-electric)]/20 group-hover:bg-transparent transition-colors z-10" />
+                <Image 
+                  src={post.image} 
+                  alt={post.title} 
+                  fill 
+                  className="object-cover group-hover:scale-110 transition-all duration-700" 
                 />
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-[var(--color-card)]/90 backdrop-blur-md text-[var(--color-electric)] text-[10px] font-black uppercase tracking-widest rounded-full shadow-sm">
-                    {post.category}
-                  </span>
-                </div>
               </div>
-
-              <div className="p-8 space-y-4 flex-1 flex flex-col justify-between">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-4 text-xs text-[var(--color-text-main)] opacity-50 font-bold">
-                    <div className="flex items-center gap-1">
-                      <Calendar size={14} /> {post.date}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <User size={14} /> {post.author}
-                    </div>
+              <div className="p-8 flex-1 flex flex-col justify-between space-y-6">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4 text-[10px] font-bold text-[var(--color-text-main)] opacity-50 uppercase tracking-widest">
+                    <span className="flex items-center gap-1"><Calendar size={12} /> {post.date}</span>
+                    <span className="flex items-center gap-1"><Clock size={12} /> {post.readTime}</span>
                   </div>
-                  <h3 className="text-xl lg:text-2xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors leading-tight">
+                  <h2 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors leading-tight">
                     {post.title}
-                  </h3>
-                  <p className="text-[var(--color-text-main)] opacity-60 text-sm leading-relaxed line-clamp-3">
+                  </h2>
+                  <p className="text-sm text-[var(--color-text-main)] opacity-60 leading-relaxed">
                     {post.excerpt}
                   </p>
                 </div>
-
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="flex items-center gap-2 text-[var(--color-electric)] font-bold text-sm tracking-widest uppercase mt-6 group/link"
-                >
-                  Read Article <ArrowRight size={16} className="group-hover/link:translate-x-2 transition-transform" />
-                </Link>
+                <div className="flex items-center gap-2 text-sm font-bold text-[var(--color-electric)] uppercase tracking-wider group-hover:gap-4 transition-all">
+                  Read Article <ArrowRight size={18} />
+                </div>
               </div>
-            </motion.article>
+            </Link>
           ))}
         </div>
       </div>

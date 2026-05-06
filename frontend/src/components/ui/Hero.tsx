@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle, Star } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import Logo from "./Logo";
 
 export default function Hero() {
@@ -63,9 +64,11 @@ export default function Hero() {
           >
             <div className="animate-float-complex max-w-md mx-auto lg:max-w-none">
               <div className="bg-[var(--color-card)] rounded-[2.5rem] lg:rounded-[3rem] p-2 aspect-[4/5] lg:aspect-square relative overflow-hidden group border border-[var(--color-border)] shadow-2xl">
-                 <img 
-                   src="/images/portfolio-showcase.png" 
-                   alt="Portfolio Showcase" 
+                 <Image 
+                   src="/images/portfolio-v2.webp?v=2" 
+                   alt="Portfolio Showcase - Web Development Rajkot" 
+                   fill
+                   priority
                    className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-700"
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)]/80 via-transparent to-transparent pointer-events-none" />

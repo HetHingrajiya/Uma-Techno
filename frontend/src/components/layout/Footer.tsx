@@ -79,11 +79,11 @@ export default function Footer() {
           <h4 className="text-white font-bold mb-6 text-lg">Services</h4>
           <ul className="space-y-4">
             {[
-              { name: "Web Development", href: "/services/web-development" },
+              { name: "Web Development", href: "/web-development" },
+              { name: "SEO Services", href: "/seo-services" },
+              { name: "Digital Marketing", href: "/digital-marketing" },
               { name: "App Development", href: "/services/app-development" },
               { name: "UI/UX Design", href: "/services/ui-ux" },
-              { name: "SEO Optimization", href: "/services/seo" },
-              { name: "Digital Branding", href: "/services/branding" }
             ].map((item) => (
               <li key={item.name}>
                 <Link href={item.href} className="text-white opacity-60 hover:text-[var(--color-electric)] transition-colors">
@@ -119,7 +119,7 @@ export default function Footer() {
           © {new Date().getFullYear()} Uma Techno. All rights reserved.
         </p>
         <div className="flex gap-8 text-sm">
-          <Link href="/privacy" className="text-white opacity-40 hover:text-[var(--color-electric)] transition-colors">
+          <Link href="/privacy-policy" className="text-white opacity-40 hover:text-[var(--color-electric)] transition-colors">
             Privacy Policy
           </Link>
           <Link href="/terms" className="text-white opacity-40 hover:text-[var(--color-electric)] transition-colors">

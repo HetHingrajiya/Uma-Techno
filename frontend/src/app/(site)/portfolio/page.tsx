@@ -26,42 +26,42 @@ export default function PortfolioPage() {
                 title: "Premium Jewelry E-commerce", 
                 category: "E-commerce", 
                 description: "Luxury digital presence for a high-end jewelry showroom.", 
-                featuredImage: "/images/project-1.png", 
+                featuredImage: "/images/project-1-v2.webp?v=2", 
                 slug: "jewelry-ecommerce" 
               },
               { 
                 title: "Healthcare Booking System", 
                 category: "Web App", 
                 description: "Automated real-time slot management for multi-location clinics.", 
-                featuredImage: "/images/project-2.png", 
+                featuredImage: "/images/project-2-v2.webp?v=2", 
                 slug: "booking-platform" 
               },
               { 
                 title: "Corporate Fintech Dashboard", 
                 category: "Software", 
                 description: "Secure data visualization for enterprise financial tracking.", 
-                featuredImage: "/images/project-3.png", 
+                featuredImage: "/images/project-3-v2.webp?v=2", 
                 slug: "fintech-dashboard" 
               },
               { 
                 title: "Global Real Estate Portal", 
                 category: "Web App", 
                 description: "Interactive property listing platform with map-based search.", 
-                featuredImage: "/images/templates.png", 
+                featuredImage: "/images/templates-v2.webp?v=2", 
                 slug: "real-estate-portal" 
               },
               { 
                 title: "Educational LMS Platform", 
                 category: "Web App", 
                 description: "Video-based learning management system with course progress tracking.", 
-                featuredImage: "/images/project-1.png", 
+                featuredImage: "/images/project-1-v2.webp?v=2", 
                 slug: "educational-lms" 
               },
               { 
                 title: "Industrial CRM System", 
                 category: "Software", 
                 description: "Custom internal tool for managing manufacturing workflows.", 
-                featuredImage: "/images/project-2.png", 
+                featuredImage: "/images/project-2-v2.webp?v=2", 
                 slug: "industrial-crm" 
               }
             ]);

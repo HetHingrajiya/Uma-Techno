@@ -262,6 +262,9 @@ export default function ThemeSettingsPage() {
     // Persist for pre-hydration script
     localStorage.setItem('active-palette', JSON.stringify(p));
     localStorage.setItem('theme-updated', Date.now().toString());
+
+    // Dispatch custom event for same-tab updates
+    window.dispatchEvent(new CustomEvent('theme-change'));
   };
 
   const handleEdit = (palette: PaletteType) => {

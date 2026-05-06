@@ -30,8 +30,10 @@ import {
 export default function DashboardDashboard() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     fetchStats();
   }, []);
 
@@ -79,7 +81,7 @@ export default function DashboardDashboard() {
         <div>
            <h1 className="text-xl md:text-2xl font-bold font-outfit text-[var(--color-text-main)]">Dashboard Overview</h1>
            <p className="text-xs text-[var(--color-text-main)] opacity-50 font-bold uppercase tracking-widest mt-1 flex items-center gap-2">
-             <Calendar size={12} /> {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+             <Calendar size={12} /> {mounted ? new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'Loading date...'}
            </p>
         </div>
         <button 
@@ -135,60 +137,64 @@ export default function DashboardDashboard() {
         </div>
 
         <div className="h-[250px] sm:h-[350px] w-full relative z-10">
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={data?.graphData || []} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-              <defs>
-                <linearGradient id="colorLeads" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="var(--color-electric)" stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor="var(--color-electric)" stopOpacity={0}/>
-                </linearGradient>
-                <linearGradient id="colorVisits" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="var(--color-accent)" stopOpacity={0.1}/>
-                  <stop offset="95%" stopColor="var(--color-accent)" stopOpacity={0}/>
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(15, 23, 42, 0.05)" />
-              <XAxis 
-                dataKey="name" 
-                axisLine={false} 
-                tickLine={false} 
-                tick={{ fill: 'var(--color-text-main)', opacity: 0.5, fontSize: 12, fontWeight: 'bold' }}
-                dy={10}
-              />
-              <YAxis 
-                axisLine={false} 
-                tickLine={false} 
-                tick={{ fill: 'var(--color-text-main)', opacity: 0.5, fontSize: 12, fontWeight: 'bold' }}
-              />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: 'var(--color-card)', 
-                  borderRadius: '16px', 
-                  border: '1px solid var(--color-border)',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
-                  color: 'var(--color-text-main)',
-                  fontWeight: 'bold'
-                }}
-              />
-              <Area 
-                type="monotone" 
-                dataKey="visits" 
-                stroke="var(--color-accent)" 
-                strokeWidth={2}
-                strokeDasharray="5 5"
-                fillOpacity={1} 
-                fill="url(#colorVisits)" 
-              />
-              <Area 
-                type="monotone" 
-                dataKey="leads" 
-                stroke="var(--color-electric)" 
-                strokeWidth={4}
-                fillOpacity={1} 
-                fill="url(#colorLeads)" 
-              />
-            </AreaChart>
-          </ResponsiveContainer>
+          {mounted ? (
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={data?.graphData || []} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="colorLeads" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="var(--color-electric)" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="var(--color-electric)" stopOpacity={0}/>
+                  </linearGradient>
+                  <linearGradient id="colorVisits" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="var(--color-accent)" stopOpacity={0.1}/>
+                    <stop offset="95%" stopColor="var(--color-accent)" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(15, 23, 42, 0.05)" />
+                <XAxis 
+                  dataKey="name" 
+                  axisLine={false} 
+                  tickLine={false} 
+                  tick={{ fill: 'var(--color-text-main)', opacity: 0.5, fontSize: 12, fontWeight: 'bold' }}
+                  dy={10}
+                />
+                <YAxis 
+                  axisLine={false} 
+                  tickLine={false} 
+                  tick={{ fill: 'var(--color-text-main)', opacity: 0.5, fontSize: 12, fontWeight: 'bold' }}
+                />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: 'var(--color-card)', 
+                    borderRadius: '16px', 
+                    border: '1px solid var(--color-border)',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                    color: 'var(--color-text-main)',
+                    fontWeight: 'bold'
+                  }}
+                />
+                <Area 
+                  type="monotone" 
+                  dataKey="visits" 
+                  stroke="var(--color-accent)" 
+                  strokeWidth={2}
+                  strokeDasharray="5 5"
+                  fillOpacity={1} 
+                  fill="url(#colorVisits)" 
+                />
+                <Area 
+                  type="monotone" 
+                  dataKey="leads" 
+                  stroke="var(--color-electric)" 
+                  strokeWidth={4}
+                  fillOpacity={1} 
+                  fill="url(#colorLeads)" 
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          ) : (
+            <div className="w-full h-full flex items-center justify-center opacity-20">Initializing analytics...</div>
+          )}
         </div>
       </div>
 

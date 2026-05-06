@@ -14,14 +14,18 @@ import {
   Layers,
   RefreshCw,
   Menu,
-  X
+  X,
+  Globe
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const sidebarLinks = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { name: "Leads", href: "/admin/leads", icon: MessageSquare },
-  { name: "CMS", href: "/admin/cms", icon: FileText },
+  { name: "Services", href: "/admin/cms/services", icon: Briefcase },
+  { name: "Portfolio", href: "/admin/cms/portfolio", icon: FileText },
+  { name: "Testimonials", href: "/admin/cms/testimonials", icon: Users },
+  { name: "SEO Manager", href: "/admin/seo", icon: Globe },
   { name: "Widgets", href: "/admin/widgets", icon: Layers },
   { name: "Theme Settings", href: "/admin/theme", icon: Settings },
 ];

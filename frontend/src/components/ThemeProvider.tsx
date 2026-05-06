@@ -61,7 +61,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           return;
         }
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme?t=${Date.now()}`);
         if (res.ok) {
           const data = await res.json();
           if (data && data.primaryColor) {
@@ -87,7 +87,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       }
     };
     window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+    
+    // Also listen for custom events in the same tab
+    const handleCustomEvent = () => fetchTheme();
+    window.addEventListener('theme-change', handleCustomEvent);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('theme-change', handleCustomEvent);
+    };
   }, []);
 
   return (

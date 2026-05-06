@@ -1,6 +1,6 @@
 import { Globe, Rocket, Smartphone, Code, BarChart, CheckCircle, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 const serviceData: Record<string, any> = {
   "web-development": {
@@ -63,6 +63,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   if (!service) {
     notFound();
   }
+
+  // Redirect to new root-level SEO pages for specific services
+  if (slug === 'web-development') redirect('/web-development');
+  if (slug === 'seo') redirect('/seo-services');
+  if (slug === 'digital-marketing') redirect('/digital-marketing');
 
   const Icon = service.icon;
 

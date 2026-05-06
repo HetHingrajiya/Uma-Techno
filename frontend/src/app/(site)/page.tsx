@@ -8,6 +8,7 @@ import {
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 
 const stats = [
   { label: "Successful Projects", value: "12+", icon: Rocket },
@@ -42,11 +43,11 @@ export default function Home() {
       ];
       
       const fallbackServices = [
-        { title: "Web Engineering", description: "Scalable, secure, and conversion-optimized web platforms for growing businesses.", icon: "Globe", slug: "web-development" },
+        { title: "Web Engineering", description: "Scalable, secure, and conversion-optimized web platforms for growing businesses in Rajkot.", icon: "Globe", slug: "web-development" },
+        { title: "SEO Mastery", description: "Technical SEO and digital strategy to dominate search results and drive local leads in Gujarat.", icon: "BarChart", slug: "seo-services" },
+        { title: "Digital Marketing", description: "Full-stack marketing solutions focused on ROI and lead generation for local brands.", icon: "Megaphone", slug: "digital-marketing" },
         { title: "E-commerce Growth", description: "End-to-end online stores with advanced payment integrations and marketing focus.", icon: "Rocket", slug: "ecommerce" },
         { title: "Mobile Innovation", description: "Native-quality iOS and Android applications that deliver exceptional user experiences.", icon: "Smartphone", slug: "app-development" },
-        { title: "Enterprise Solutions", description: "Custom CRM and internal tools designed to automate your business operations.", icon: "Code", slug: "custom-software" },
-        { title: "Strategy & SEO", description: "Technical SEO and digital strategy to dominate search results and drive leads.", icon: "BarChart", slug: "seo" },
       ];
 
       const fallbackProjects = [
@@ -54,22 +55,22 @@ export default function Home() {
           title: "Premium Jewelry E-commerce", 
           category: "E-commerce", 
           industry: "Fashion & Jewelry",
-          challenge: "Needed a luxury digital presence that matched their physical showroom quality.",
+          challenge: "Needed a luxury digital presence that matched their physical showroom quality in Rajkot.",
           solution: "Built a custom Next.js storefront with high-fidelity visuals and 3D product previews.",
           result: "+450% Conversion Increase",
           tech: ["Next.js", "Three.js", "Prisma"],
-          featuredImage: "/images/project-1.png", 
+          featuredImage: "/images/project-1-v2.webp?v=2", 
           slug: "jewelry-ecommerce" 
         },
         { 
           title: "Healthcare Booking System", 
           category: "Web App", 
           industry: "Medical",
-          challenge: "Manual appointment scheduling was causing 40% lead leakage.",
+          challenge: "Manual appointment scheduling was causing 40% lead leakage for local clinics.",
           solution: "Automated booking system with real-time slot management and SMS notifications.",
           result: "Zero Manual Overhead",
           tech: ["React", "Node.js", "PostgreSQL"],
-          featuredImage: "/images/project-2.png", 
+          featuredImage: "/images/project-2-v2.webp?v=2", 
           slug: "booking-platform" 
         },
         { 
@@ -80,7 +81,7 @@ export default function Home() {
           solution: "End-to-end encrypted dashboard with real-time data visualization.",
           result: "99.9% System Uptime",
           tech: ["TypeScript", "D3.js", "Azure"],
-          featuredImage: "/images/project-3.png", 
+          featuredImage: "/images/project-3-v2.webp?v=2", 
           slug: "fintech-dashboard" 
         }
       ];
@@ -151,6 +152,7 @@ export default function Home() {
       case 'Smartphone': return <Smartphone size={32} />;
       case 'Code': return <Code size={32} />;
       case 'BarChart': return <BarChart size={32} />;
+      case 'Megaphone': return <Megaphone size={32} />;
       default: return <Zap size={32} />;
     }
   };
@@ -195,55 +197,37 @@ export default function Home() {
             </div>
             <h2 className="text-3xl lg:text-5xl 2xl:text-6xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Business Engines Built <br /> <span className="text-gradient">For Growth</span></h2>
             <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto 2xl:text-lg">
-              We don&apos;t just build websites. We engineer high-performance digital systems that capture leads, automate operations, and scale revenue.
+              We don&apos;t just build websites. We engineer high-performance digital systems that capture leads, automate operations, and scale revenue in Rajkot.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {services.map((service, index) => {
-              if (index === 0) {
-                return (
-                  <Link
-                    key={service.slug}
-                    href={`/services/${service.slug}`}
-                    className="group bg-[var(--color-card)] border border-[var(--color-border)] p-10 rounded-[2.5rem] md:col-span-2 md:row-span-2 flex flex-col justify-between relative overflow-hidden min-h-[500px] lg:min-h-[600px] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500"
-                  >
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-glow -mr-32 -mt-32 group-hover:scale-110 transition-all duration-700" />
-                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-glow -ml-32 -mb-32 group-hover:scale-110 transition-all duration-700 opacity-20" />
-                    <div className="space-y-6 relative z-10">
-                      <div className="w-16 h-16 bg-gradient-premium rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
-                        {getIcon(service.icon || 'Globe')}
-                      </div>
-                      <h4 className="text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] uppercase tracking-tighter">
-                        {service.title}
-                      </h4>
-                      <p className="text-[var(--color-text-main)] opacity-70 leading-relaxed max-w-sm">
-                        {service.description}
-                      </p>
-                    </div>
-                    <div className="mt-8 flex items-center gap-4 text-sm font-black tracking-widest text-[var(--color-electric)] uppercase group-hover:gap-6 transition-all">
-                      VIEW SOLUTIONS <ArrowRight size={20} />
-                    </div>
-                  </Link>
-                );
-              }
+              const isLarge = index === 0 || index === 3;
               return (
                 <Link
                   key={service.slug}
-                  href={`/services/${service.slug}`}
-                  className={`group bg-[var(--color-navy-light)] border border-[var(--color-border)] p-8 rounded-[2rem] ${index === 1 ? 'md:col-span-2' : ''} flex flex-col justify-center relative overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500`}
+                  href={service.slug.startsWith('/') ? service.slug : `/${service.slug}`}
+                  className={cn(
+                    "group bg-[var(--color-card)] border border-[var(--color-border)] p-10 rounded-[2.5rem] flex flex-col justify-between relative overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500",
+                    isLarge ? "lg:col-span-2 min-h-[400px]" : "min-h-[400px]"
+                  )}
                 >
-                  {/* Blurred Background Glow */}
-                  <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-gradient-glow group-hover:scale-125 transition-all duration-500" />
-                  <div className="absolute -top-10 -left-10 w-32 h-32 bg-gradient-glow opacity-10 group-hover:scale-125 transition-all duration-500" />
-                  
-                  <div className="space-y-4 relative z-10">
-                    <div className="w-14 h-14 bg-[var(--color-electric)]/10 rounded-2xl flex items-center justify-center text-[var(--color-electric)] group-hover:bg-gradient-premium group-hover:text-white transition-all shadow-sm">
-                      {getIcon(service.icon || 'Code')}
+                  <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-glow -mr-32 -mt-32 group-hover:scale-110 transition-all duration-700" />
+                  <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-glow -ml-32 -mb-32 group-hover:scale-110 transition-all duration-700 opacity-20" />
+                  <div className="space-y-6 relative z-10">
+                    <div className="w-16 h-16 bg-gradient-premium rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                      {getIcon(service.icon || 'Globe')}
                     </div>
-                    <div>
-                      <h4 className="text-xl font-bold font-outfit text-[var(--color-text-main)] uppercase tracking-tight">{service.title}</h4>
-                    </div>
+                    <h4 className="text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] uppercase tracking-tighter">
+                      {service.title}
+                    </h4>
+                    <p className="text-[var(--color-text-main)] opacity-70 leading-relaxed max-w-sm">
+                      {service.description}
+                    </p>
+                  </div>
+                  <div className="mt-8 flex items-center gap-4 text-sm font-black tracking-widest text-[var(--color-electric)] uppercase group-hover:gap-6 transition-all">
+                    EXPLORE SOLUTIONS <ArrowRight size={20} />
                   </div>
                 </Link>
               );
@@ -260,7 +244,7 @@ export default function Home() {
               <div className="absolute -inset-10 bg-gradient-glow opacity-30 blur-[120px] group-hover:opacity-50 transition-all duration-700" />
               <div className="relative aspect-video bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2.5rem] overflow-hidden shadow-xl">
                 <img
-                  src="/images/templates.png"
+                  src="/images/templates-v2.webp?v=2"
                   alt="Website Templates"
                   className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                 />
@@ -463,7 +447,7 @@ export default function Home() {
             <div className="relative group">
               <div className="aspect-square bg-[var(--color-card)] rounded-[var(--radius)] overflow-hidden relative group shadow-xl">
                 <img
-                  src="/images/process-visual.png"
+                  src="/images/process-visual-v2.webp?v=2"
                   alt="Process"
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                 />

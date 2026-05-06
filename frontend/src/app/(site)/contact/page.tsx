@@ -97,9 +97,23 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="font-bold text-[var(--color-text-main)] mb-1">Headquarters</h4>
-                    <p className="text-[var(--color-text-main)] opacity-70 text-sm">Rajkot, Gujarat, India</p>
+                    <p className="text-[var(--color-text-main)] opacity-70 text-sm">Mavdi Main Road, Rajkot, Gujarat, India</p>
                   </div>
                 </div>
+              </div>
+
+              <div className="pt-8">
+                 <div className="rounded-2xl overflow-hidden h-64 w-full border border-[var(--color-border)] grayscale hover:grayscale-0 transition-all duration-700">
+                    <iframe 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118147.68202052528!2d70.73889445!3d22.2745903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959c98ac1dbc5ff%3A0x7c7cc58a5d3f5ad2!2sRajkot%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1715000000000!5m2!1sen!2sin" 
+                      width="100%" 
+                      height="100%" 
+                      style={{ border: 0 }} 
+                      allowFullScreen={true} 
+                      loading="lazy" 
+                      referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                 </div>
               </div>
             </div>
           </div>

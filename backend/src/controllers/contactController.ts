@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { z } from 'zod';
+import { sendContactEmail } from '../services/emailService';
 
 const prisma = new PrismaClient();
 
@@ -19,6 +20,15 @@ export const submitContact = async (req: Request, res: Response) => {
     const contact = await prisma.contact.create({
       data: validatedData,
     });
+
+    // Send email notification in the background
+    sendContactEmail({
+      name: validatedData.name,
+      email: validatedData.email,
+      phone: validatedData.phone,
+      subject: validatedData.subject,
+      message: validatedData.message
+    }).catch(err => console.error("Failed to send lead email:", err));
 
     return res.status(201).json({
       success: true,

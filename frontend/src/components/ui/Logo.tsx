@@ -1,11 +1,14 @@
-import React from "react";
+import Image from "next/image";
 
 export default function Logo({ className = "w-10 h-10" }: { className?: string }) {
   return (
     <div className={`relative flex items-center justify-center ${className}`}>
-      <img
-        src="/logo.png?v=1.1"
-        alt="Uma Techno Logo"
+      <Image
+        src="/logo-v2.webp?v=2"
+        alt="Uma Techno Logo - Web Development Agency"
+        width={100}
+        height={100}
+        priority
         className="w-full h-full object-contain"
       />
     </div>

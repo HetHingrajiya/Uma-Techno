@@ -1,7 +1,21 @@
-import React from "react";
 import { Target, Eye, Heart, Users, Award, Shield } from "lucide-react";
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
+import { Metadata } from "next";
+import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "About Us | Uma Techno - Premium IT Agency in Rajkot",
+  description: "Learn about Uma Techno, the leading digital agency in Rajkot, Gujarat. We are a team of experts dedicated to building masterpieces in web development and SEO.",
+  alternates: {
+    canonical: "https://umatechno.in/about",
+  },
+  openGraph: {
+    title: "About Uma Techno | Premium Agency in Rajkot",
+    description: "Learn about our mission, vision, and the team behind the most innovative digital agency in Gujarat.",
+    images: ["/images/about.png"],
+  },
+};
 
 const values = [
   { name: "Innovation", icon: Target, description: "We push boundaries and explore new technologies." },
@@ -13,8 +27,31 @@ const values = [
 ];
 
 export default function AboutPage() {
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://umatechno.in"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "About",
+        "item": "https://umatechno.in/about"
+      }
+    ]
+  };
+
   return (
     <div className="py-20 space-y-32 bg-[var(--background)]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <section className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         <div className="space-y-8">
           <h2 className="text-electric font-bold tracking-widest text-sm uppercase">About Uma Techno</h2>
@@ -40,9 +77,10 @@ export default function AboutPage() {
         </div>
         <div className="relative group">
            <div className="aspect-square glass-card rounded-[3rem] overflow-hidden rotate-3 relative z-10 border border-white/5">
-              <img 
-                src="/images/about.png" 
-                alt="Digital Masterpiece" 
+              <Image 
+                src="/images/about-v2.webp?v=2" 
+                alt="Digital Masterpiece - Uma Techno Rajkot Team" 
+                fill
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-40" />
