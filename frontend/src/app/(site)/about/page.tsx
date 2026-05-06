@@ -78,7 +78,7 @@ export default function AboutPage() {
         <div className="relative group">
            <div className="aspect-square glass-card rounded-[3rem] overflow-hidden rotate-3 relative z-10 border border-white/5">
               <Image 
-                src="/images/about-v2.webp?v=2" 
+                src="/images/about.png" 
                 alt="Digital Masterpiece - Uma Techno Rajkot Team" 
                 fill
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"

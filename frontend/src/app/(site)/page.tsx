@@ -59,7 +59,7 @@ export default function Home() {
           solution: "Built a custom Next.js storefront with high-fidelity visuals and 3D product previews.",
           result: "+450% Conversion Increase",
           tech: ["Next.js", "Three.js", "Prisma"],
-          featuredImage: "/images/project-1-v2.webp?v=2", 
+          featuredImage: "/images/project-1.png", 
           slug: "jewelry-ecommerce" 
         },
         { 
@@ -70,7 +70,7 @@ export default function Home() {
           solution: "Automated booking system with real-time slot management and SMS notifications.",
           result: "Zero Manual Overhead",
           tech: ["React", "Node.js", "PostgreSQL"],
-          featuredImage: "/images/project-2-v2.webp?v=2", 
+          featuredImage: "/images/project-2.png", 
           slug: "booking-platform" 
         },
         { 
@@ -81,7 +81,7 @@ export default function Home() {
           solution: "End-to-end encrypted dashboard with real-time data visualization.",
           result: "99.9% System Uptime",
           tech: ["TypeScript", "D3.js", "Azure"],
-          featuredImage: "/images/project-3-v2.webp?v=2", 
+          featuredImage: "/images/project-3.png", 
           slug: "fintech-dashboard" 
         }
       ];
@@ -244,7 +244,7 @@ export default function Home() {
               <div className="absolute -inset-10 bg-gradient-glow opacity-30 blur-[120px] group-hover:opacity-50 transition-all duration-700" />
               <div className="relative aspect-video bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2.5rem] overflow-hidden shadow-xl">
                 <img
-                  src="/images/templates-v2.webp?v=2"
+                  src="/images/templates.png"
                   alt="Website Templates"
                   className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                 />
@@ -447,7 +447,7 @@ export default function Home() {
             <div className="relative group">
               <div className="aspect-square bg-[var(--color-card)] rounded-[var(--radius)] overflow-hidden relative group shadow-xl">
                 <img
-                  src="/images/process-visual-v2.webp?v=2"
+                  src="/images/process-visual.png"
                   alt="Process"
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                 />
