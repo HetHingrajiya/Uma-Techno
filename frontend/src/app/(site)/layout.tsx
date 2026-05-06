@@ -1,7 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import WhatsAppButton from "@/components/ui/WhatsAppButton";
-import StickyCTA from "@/components/ui/StickyCTA";
 
 export default function SiteLayout({
   children,
@@ -15,8 +13,6 @@ export default function SiteLayout({
         {children}
       </main>
       <Footer />
-      <WhatsAppButton />
-      <StickyCTA />
     </>
   );
 }
