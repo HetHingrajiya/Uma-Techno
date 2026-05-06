@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Calendar, User, Clock, ArrowLeft, Share2, Facebook, Twitter, Linkedin } from "lucide-react";
+import { Calendar, User, Clock, ArrowLeft, Share2 } from "lucide-react";
 
 // In a real app, this would come from a database or CMS
 const blogData: Record<string, any> = {
