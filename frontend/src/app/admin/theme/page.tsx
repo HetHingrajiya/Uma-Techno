@@ -277,6 +277,7 @@ export default function ThemeSettingsPage() {
 
   const handleEdit = (palette: PaletteType) => {
     setCustomPalette({
+      id: palette.id,
       name: palette.name,
       primaryColor: palette.primaryColor,
       secondaryColor: palette.secondaryColor,
