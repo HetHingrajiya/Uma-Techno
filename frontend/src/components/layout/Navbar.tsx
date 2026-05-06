@@ -72,7 +72,7 @@ export default function Navbar() {
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6",
-        scrolled ? "py-3 backdrop-blur-lg border-b border-[var(--color-border)] shadow-lg" : "py-6 bg-transparent"
+        scrolled ? "py-4 backdrop-blur-lg border-b border-[var(--color-border)] shadow-lg" : "py-6 bg-transparent"
       )}
       style={scrolled ? { backgroundColor: `rgba(var(--color-header-rgb), 0.85)` } : {}}
     >

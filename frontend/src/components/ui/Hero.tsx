@@ -9,7 +9,7 @@ import Logo from "./Logo";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[600px] lg:min-h-[800px] 2xl:min-h-screen flex items-center overflow-hidden pt-24 pb-12 bg-[var(--background)]">
+    <section className="relative min-h-[600px] lg:min-h-[800px] 2xl:min-h-screen flex items-center overflow-hidden pt-24 pb-24 bg-[var(--background)]">
       {/* Background Animated Elements (Light Theme) */}
       <div className="absolute inset-0 z-0 opacity-40">
         <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-gradient-glow opacity-20 rounded-full blur-[120px] animate-pulse" />
