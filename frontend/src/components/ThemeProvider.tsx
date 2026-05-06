@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface ThemeSettings {
   primaryColor: string;
@@ -19,7 +19,12 @@ interface ThemeSettings {
   glassBackgroundColor: string;
   scrollbarThumbColor: string;
   scrollbarTrackColor: string;
+  logoUrl: string | null;
+  heroImageUrl: string | null;
+  aboutImageUrl: string | null;
 }
+
+const ThemeContext = createContext<{ theme: ThemeSettings } | undefined>(undefined);
 
 const defaultTheme: ThemeSettings = {
   primaryColor: "#06B6D4",
@@ -38,7 +43,18 @@ const defaultTheme: ThemeSettings = {
   glassBackgroundColor: "rgba(255, 255, 255, 0.9)",
   scrollbarThumbColor: "#06B6D4",
   scrollbarTrackColor: "#F8FAFC",
+  logoUrl: null,
+  heroImageUrl: null,
+  aboutImageUrl: null,
 };
+
+export function useTheme() {
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+  return context;
+}
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<ThemeSettings>(defaultTheme);
@@ -190,7 +206,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
         }
       `}} />
-      {children}
+      <ThemeContext.Provider value={{ theme }}>
+        {children}
+      </ThemeContext.Provider>
     </>
   );
 }

@@ -110,7 +110,10 @@ export const setActivePalette = async (req: Request, res: Response) => {
       textColor: activePalette.textColor,
       borderColor: activePalette.borderColor,
       headerColor: activePalette.headerColor,
-      footerColor: activePalette.footerColor
+      footerColor: activePalette.footerColor,
+      logoUrl: activePalette.logoUrl,
+      heroImageUrl: activePalette.heroImageUrl,
+      aboutImageUrl: activePalette.aboutImageUrl
     };
 
     if (theme) {

@@ -6,10 +6,26 @@ import { ArrowRight, CheckCircle, Star } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "./Logo";
+import { useTheme } from "@/components/ThemeProvider";
 
 export default function Hero() {
+  const { theme } = useTheme();
+
   return (
     <section className="relative min-h-[600px] lg:min-h-[800px] 2xl:min-h-screen flex items-center overflow-hidden pt-24 pb-24 bg-[var(--background)]">
+      {/* Dynamic Background Image */}
+      {theme.heroImageUrl && (
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src={theme.heroImageUrl} 
+            alt="Hero Background" 
+            fill 
+            className="object-cover opacity-10"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)] via-transparent to-[var(--background)]" />
+        </div>
+      )}
       {/* Background Animated Elements (Light Theme) */}
       <div className="absolute inset-0 z-0 opacity-40">
         <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-gradient-glow opacity-20 rounded-full blur-[120px] animate-pulse" />
@@ -65,7 +81,7 @@ export default function Hero() {
             <div className="animate-float-complex max-w-md mx-auto lg:max-w-none">
               <div className="bg-[var(--color-card)] rounded-[2.5rem] lg:rounded-[3rem] p-2 aspect-[4/5] lg:aspect-square relative overflow-hidden group border border-[var(--color-border)] shadow-2xl">
                  <Image 
-                   src="/images/portfolio-showcase.png" 
+                   src={theme.heroImageUrl || "/images/portfolio-showcase.png"} 
                    alt="Portfolio Showcase - Web Development Rajkot" 
                    fill
                    priority

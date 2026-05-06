@@ -128,6 +128,9 @@ model ThemeSetting {
   headerColor         String   @default("#FFFFFF")
   footerColor         String   @default("#0F172A")
   themeMode           String   @default("light") // light, dark, auto
+  logoUrl             String?
+  heroImageUrl        String?
+  aboutImageUrl       String?
   updatedAt           DateTime @updatedAt
 }
 
