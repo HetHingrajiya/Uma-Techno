@@ -104,17 +104,21 @@ export default function ThemeSettingsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [showCustomBuilder, setShowCustomBuilder] = useState(false);
-  const [customPalette, setCustomPalette] = useState({
+  const [customPalette, setCustomPalette] = useState<PaletteType>({
+    id: "new",
     name: "New Custom Palette",
     primaryColor: "#06B6D4",
     secondaryColor: "#3B82F6",
-    accentColor: "#10B981",
+    accentColor: "#22D3EE",
     backgroundColor: "#F8FAFC",
     textColor: "#0F172A",
     cardColor: "#FFFFFF",
     borderColor: "#E2E8F0",
     headerColor: "#FFFFFF",
     footerColor: "#0F172A",
+    logoUrl: null,
+    heroImageUrl: null,
+    aboutImageUrl: null,
     category: "Custom"
   });
   const [editingPaletteId, setEditingPaletteId] = useState<string | null>(null);
@@ -351,6 +355,7 @@ export default function ThemeSettingsPage() {
           onClick={() => {
             setEditingPaletteId(null);
             setCustomPalette({
+              id: "new",
               name: "My Custom Brand",
               primaryColor: "#06B6D4",
               secondaryColor: "#0891B2",
