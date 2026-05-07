@@ -64,12 +64,15 @@ export default function Navbar() {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-2 backdrop-blur-lg border-b border-[var(--color-border)] shadow-lg"
-      style={{ backgroundColor: `rgba(var(--color-header-rgb), 0.85)` }}
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6",
+        "py-3 backdrop-blur-lg border-b border-[var(--color-border)] shadow-sm"
+      )}
+      style={{ backgroundColor: `rgba(var(--color-header-rgb, 255, 255, 255), 0.9)` }}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
-          <Logo className="transition-all duration-500 w-10 h-10 lg:w-12 lg:h-12" />
+          <Logo className="transition-all duration-500 w-12 h-12 lg:w-14 lg:h-14" />
           <div className="flex flex-col leading-none">
             <span className="font-bold tracking-tighter uppercase transition-all duration-500 text-xl lg:text-2xl">
               <span className="text-[var(--color-electric)]">Uma</span><span className="text-[var(--color-text-main)]">Techno</span>
@@ -93,7 +96,8 @@ export default function Navbar() {
                 href={link.href}
                 onClick={(e) => handleLinkClick(link, e)}
                 className={cn(
-                  "font-bold transition-all hover:text-[var(--color-electric)] flex items-center gap-1 tracking-wide cursor-pointer text-sm py-1",
+                  "font-bold transition-all hover:text-[var(--color-electric)] flex items-center gap-1 tracking-wide cursor-pointer",
+                  "text-sm py-1.5",
                   (pathname === link.href || activeSubmenu === link.name) ? "text-[var(--color-electric)]" : "text-[var(--color-text-main)] opacity-70 hover:opacity-100"
                 )}
               >
@@ -127,7 +131,10 @@ export default function Navbar() {
           ))}
             <Link
               href="/contact"
-              className="bg-[var(--color-electric)] hover:brightness-110 text-white rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_var(--color-electric)] text-center px-4 py-1.5 text-xs"
+              className={cn(
+                "bg-[var(--color-electric)] hover:brightness-110 text-white rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_var(--color-electric)] text-center",
+                "px-5 py-2 text-sm"
+              )}
             >
             Get a Quote
           </Link>
