@@ -72,25 +72,25 @@ export default function Navbar() {
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6",
-        scrolled ? "py-1.5 backdrop-blur-lg border-b border-[var(--color-border)] shadow-lg" : "py-4 bg-transparent"
+        scrolled ? "py-1 backdrop-blur-lg border-b border-[var(--color-border)] shadow-lg" : "py-3 bg-transparent"
       )}
       style={scrolled ? { backgroundColor: `rgba(var(--color-header-rgb), 0.85)` } : {}}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <Logo className={cn("transition-all duration-500", scrolled ? "w-8 h-8 lg:w-10 lg:h-10" : "w-10 h-10 lg:w-14 lg:h-14")} />
+        <Link href="/" className="flex items-center gap-3">
+          <Logo className={cn("transition-all duration-500", scrolled ? "w-7 h-7 lg:w-9 lg:h-9" : "w-9 h-9 lg:w-12 lg:h-12")} />
           <div className="flex flex-col leading-none">
-            <span className={cn("font-bold tracking-tighter uppercase transition-all duration-500", scrolled ? "text-lg lg:text-xl" : "text-xl lg:text-2xl")}>
+            <span className={cn("font-bold tracking-tighter uppercase transition-all duration-500", scrolled ? "text-base lg:text-lg" : "text-lg lg:text-xl")}>
               <span className="text-[var(--color-electric)]">Uma</span><span className="text-[var(--color-text-main)]">Techno</span>
             </span>
-            <span className={cn("text-[var(--color-text-main)] opacity-50 font-bold tracking-[0.3em] uppercase transition-all duration-500", scrolled ? "text-[8px] lg:text-[9px] mt-0.5" : "text-[10px] lg:text-[11px] mt-1")}>
+            <span className={cn("text-[var(--color-text-main)] opacity-50 font-bold tracking-[0.3em] uppercase transition-all duration-500", scrolled ? "text-[6px] lg:text-[7px] mt-0.5" : "text-[8px] lg:text-[9px] mt-1")}>
               Innovate. Create. <span className="text-[var(--color-electric)]">Elevate.</span>
             </span>
           </div>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-10 lg:gap-14">
+        <div className="hidden md:flex items-center gap-6 lg:gap-10">
           {navLinks.map((link) => (
             <div 
               key={link.name} 
@@ -103,12 +103,12 @@ export default function Navbar() {
                 onClick={(e) => handleLinkClick(link, e)}
                 className={cn(
                   "font-bold transition-all hover:text-[var(--color-electric)] flex items-center gap-1 tracking-wide cursor-pointer",
-                  scrolled ? "text-xs py-0.5" : "text-sm py-1.5",
+                  scrolled ? "text-xs py-1" : "text-sm py-2",
                   (pathname === link.href || activeSubmenu === link.name) ? "text-[var(--color-electric)]" : "text-[var(--color-text-main)] opacity-70 hover:opacity-100"
                 )}
               >
                 {link.name}
-                {link.submenu && <ChevronDown size={12} className={cn("transition-transform duration-300", activeSubmenu === link.name && "rotate-180")} />}
+                {link.submenu && <ChevronDown size={14} className={cn("transition-transform duration-300", activeSubmenu === link.name && "rotate-180")} />}
               </Link>
               
               {link.submenu && (
@@ -139,7 +139,7 @@ export default function Navbar() {
               href="/contact"
               className={cn(
                 "bg-[var(--color-electric)] hover:brightness-110 text-white rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_var(--color-electric)] text-center",
-                scrolled ? "px-4 py-1 text-[10px]" : "px-5 py-1.5 text-xs"
+                scrolled ? "px-3 py-1 text-[10px]" : "px-5 py-2 text-xs"
               )}
             >
             Get a Quote
@@ -151,7 +151,7 @@ export default function Navbar() {
           className="md:hidden text-[var(--color-text-main)]"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
@@ -168,7 +168,7 @@ export default function Navbar() {
             <div className="p-6 flex flex-col h-full">
               <div className="flex justify-between items-center mb-16">
                 <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
-                  <Logo className="w-7 h-7" />
+                  <Logo className="w-8 h-8" />
                   <div className="flex flex-col leading-none">
                     <span className="text-xl font-bold tracking-tighter uppercase">
                       <span className="text-electric">Uma</span><span className="text-[var(--color-text-main)]">Techno</span>
