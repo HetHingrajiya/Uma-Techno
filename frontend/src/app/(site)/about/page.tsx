@@ -57,7 +57,7 @@ export default function AboutPage() {
           <h2 className="text-electric font-bold tracking-widest text-sm uppercase">About Uma Techno</h2>
           <h1 className="text-5xl lg:text-7xl font-bold font-outfit leading-tight">
             Crafting Digital <br />
-            <span className="text-gradient">Masterpieces</span> Since 2026
+            <span className="text-gradient">Masterpieces</span> Since 2016
           </h1>
           <p className="text-xl text-[var(--color-text-main)] opacity-70 leading-relaxed">
             Uma Techno is a premier digital agency dedicated to helping businesses navigate 
