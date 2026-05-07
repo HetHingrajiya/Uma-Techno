@@ -66,7 +66,7 @@ export default function Navbar() {
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6",
-        "py-3 backdrop-blur-lg border-b border-[var(--color-border)] shadow-sm"
+        "py-3 backdrop-blur-lg"
       )}
       style={{ backgroundColor: `rgba(var(--color-header-rgb, 255, 255, 255), 0.9)` }}
     >
