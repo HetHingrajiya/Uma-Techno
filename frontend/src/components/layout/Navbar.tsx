@@ -132,7 +132,7 @@ export default function Navbar() {
             <Link
               href="/contact"
               className={cn(
-                "bg-[var(--color-electric)] hover:brightness-110 text-white rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_var(--color-electric)] text-center",
+                "bg-[var(--color-electric)] hover:brightness-110 text-white rounded-full font-bold transition-all hover:scale-105 active:scale-95 text-center",
                 "px-5 py-2 text-sm"
               )}
             >
