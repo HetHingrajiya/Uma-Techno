@@ -26,11 +26,7 @@ export default function Hero() {
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)] via-transparent to-[var(--background)]" />
         </div>
       )}
-      {/* Background Animated Elements (Light Theme) */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-gradient-glow opacity-20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[10%] right-[-5%] w-[50%] h-[50%] bg-gradient-glow opacity-10 rounded-full blur-[140px] animate-pulse delay-700" />
-      </div>
+
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
@@ -56,7 +52,7 @@ export default function Hero() {
                 <div className="flex flex-col sm:flex-row gap-4 pt-2">
                   <Link
                     href="/contact"
-                    className="group relative px-8 py-4 text-white rounded-xl font-bold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-[var(--color-electric)]/30 text-center flex justify-center items-center gap-2 bg-gradient-premium"
+                    className="group relative px-8 py-4 text-white rounded-xl font-bold text-lg transition-all hover:scale-105 text-center flex justify-center items-center gap-2 bg-gradient-premium"
                   >
                     Get Free Quote <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                   </Link>
