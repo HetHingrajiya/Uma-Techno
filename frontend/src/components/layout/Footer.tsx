@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import Logo from "../ui/Logo";
 
 const Facebook = (props: any) => (
@@ -18,41 +18,20 @@ const Linkedin = (props: any) => (
 
 export default function Footer() {
   return (
-    <footer className="relative pt-32 pb-12 overflow-hidden bg-[var(--color-navy)]" style={{ backgroundColor: 'var(--color-footer)' }}>
-      {/* Dynamic Grid Background */}
-      <div className="absolute inset-0 bg-matrix opacity-20 pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--color-electric)] to-transparent opacity-50" />
-      <div className="absolute -top-[20%] left-1/2 -translate-x-1/2 w-[60%] h-[400px] bg-[var(--color-electric)]/20 blur-[150px] pointer-events-none rounded-full" />
-
-      {/* Massive CTA Section */}
-      <div className="max-w-7xl mx-auto px-6 mb-24 relative z-10">
-        <div className="bg-gradient-to-br from-[var(--color-card)]/10 to-transparent border border-white/10 rounded-[3rem] p-12 lg:p-20 text-center backdrop-blur-xl relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--color-electric)]/10 blur-[120px] rounded-full -mr-64 -mt-64 pointer-events-none" />
-          <h2 className="text-4xl lg:text-6xl font-black font-outfit text-white mb-6 tracking-tight">
-            Ready to <span className="text-[var(--color-electric)]">Elevate</span> Your Brand?
-          </h2>
-          <p className="text-white/60 max-w-2xl mx-auto mb-10 text-lg">
-            Join visionary companies who trust Uma Techno to build their digital future. Let's engineer something extraordinary together.
-          </p>
-          <Link
-            href="/contact"
-            className="group inline-flex items-center gap-3 px-10 py-5 bg-[var(--color-electric)] text-white rounded-full font-bold text-lg hover:scale-105 transition-all shadow-[0_0_40px_-10px_var(--color-electric)] hover:shadow-[0_0_60px_-10px_var(--color-electric)]"
-          >
-            Start Your Journey <ArrowRight className="group-hover:translate-x-2 transition-transform" />
-          </Link>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 text-white relative z-10">
+    <footer className="relative pt-24 pb-12 overflow-hidden border-t border-white/5" style={{ backgroundColor: 'var(--color-footer)' }}>
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-white">
         {/* Company Info */}
-        <div className="lg:col-span-5 space-y-8 pr-0 lg:pr-12">
-          <Link href="/" className="flex items-center gap-3 group">
-            <Logo className="w-10 h-10 group-hover:rotate-12 transition-transform" />
-            <span className="text-2xl font-black tracking-tighter uppercase font-outfit">
+        <div className="space-y-6">
+          <Link href="/" className="flex items-center gap-3">
+            <Logo className="w-8 h-8" />
+            <span className="text-xl font-bold tracking-tighter uppercase">
               <span className="text-[var(--color-electric)]">Uma</span><span className="text-white">Techno</span>
             </span>
           </Link>
-          <p className="text-white/60 text-base leading-relaxed">
+          <p className="text-[10px] text-white opacity-40 font-bold tracking-[0.2em] uppercase mt-2">
+            Innovate. Create. <span className="text-[var(--color-electric)]">Elevate.</span>
+          </p>
+          <p className="text-white opacity-60 text-sm leading-relaxed">
             A premium digital agency dedicated to engineering high-performance websites, 
             mobile applications, and custom business software that drive real growth.
           </p>
@@ -68,26 +47,26 @@ export default function Footer() {
                 href={href}
                 target={href !== "#" ? "_blank" : undefined}
                 rel={href !== "#" ? "noopener noreferrer" : undefined}
-                className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:bg-[var(--color-electric)] hover:text-white hover:border-[var(--color-electric)] transition-all hover:-translate-y-1"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white opacity-40 hover:bg-[var(--color-electric)] hover:text-white transition-all shadow-sm hover:shadow-[var(--color-electric)]/20"
               >
-                <Icon size={20} />
+                <Icon size={18} />
               </a>
             ))}
           </div>
         </div>
 
         {/* Quick Links */}
-        <div className="lg:col-span-2">
-          <h4 className="text-white font-bold mb-8 text-lg uppercase tracking-widest text-[10px]">Company</h4>
+        <div>
+          <h4 className="text-white font-bold mb-6 text-lg">Quick Links</h4>
           <ul className="space-y-4">
             {[
               { name: "About Us", href: "/about" },
-              { name: "Our Work", href: "/portfolio" },
-              { name: "Careers", href: "/careers" },
-              { name: "Contact", href: "/contact" }
+              { name: "Our Services", href: "/services" },
+              { name: "Portfolio", href: "/portfolio" },
+              { name: "Contact Us", href: "/contact" }
             ].map((item) => (
               <li key={item.name}>
-                <Link href={item.href} className="text-white/60 hover:text-[var(--color-electric)] hover:translate-x-1 inline-block transition-all text-sm font-medium">
+                <Link href={item.href} className="text-white opacity-60 hover:text-[var(--color-electric)] transition-colors">
                   {item.name}
                 </Link>
               </li>
@@ -96,18 +75,18 @@ export default function Footer() {
         </div>
 
         {/* Services */}
-        <div className="lg:col-span-2">
-          <h4 className="text-white font-bold mb-8 text-lg uppercase tracking-widest text-[10px]">Expertise</h4>
+        <div>
+          <h4 className="text-white font-bold mb-6 text-lg">Services</h4>
           <ul className="space-y-4">
             {[
-              { name: "Web Engineering", href: "/services/web-development" },
-              { name: "SEO Mastery", href: "/services/seo-services" },
-              { name: "Digital Strategy", href: "/services/digital-marketing" },
-              { name: "App Innovation", href: "/services/app-development" },
-              { name: "UI/UX Design", href: "/services/ui-ux-design" },
+              { name: "Web Development", href: "/web-development" },
+              { name: "SEO Services", href: "/seo-services" },
+              { name: "Digital Marketing", href: "/digital-marketing" },
+              { name: "App Development", href: "/services/app-development" },
+              { name: "UI/UX Design", href: "/services/ui-ux" },
             ].map((item) => (
               <li key={item.name}>
-                <Link href={item.href} className="text-white/60 hover:text-[var(--color-electric)] hover:translate-x-1 inline-block transition-all text-sm font-medium">
+                <Link href={item.href} className="text-white opacity-60 hover:text-[var(--color-electric)] transition-colors">
                   {item.name}
                 </Link>
               </li>
@@ -116,40 +95,34 @@ export default function Footer() {
         </div>
 
         {/* Contact Info */}
-        <div className="lg:col-span-3">
-          <h4 className="text-white font-bold mb-8 text-lg uppercase tracking-widest text-[10px]">Get in Touch</h4>
-          <ul className="space-y-6">
-            <li className="flex gap-4 items-start group">
-              <div className="w-10 h-10 rounded-xl bg-[var(--color-electric)]/10 flex items-center justify-center text-[var(--color-electric)] shrink-0 group-hover:bg-[var(--color-electric)] group-hover:text-white transition-colors">
-                <MapPin size={18} />
-              </div>
-              <span className="text-white/60 text-sm leading-relaxed pt-2">Mavdi Main Road, Rajkot, Gujarat, India 360004</span>
+        <div>
+          <h4 className="text-white font-bold mb-6 text-lg">Contact Us</h4>
+          <ul className="space-y-4">
+            <li className="flex gap-3 text-white opacity-60">
+              <MapPin className="text-[var(--color-electric)] shrink-0" size={20} />
+              <span>Rajkot, Gujarat, India</span>
             </li>
-            <li className="flex gap-4 items-center group">
-              <div className="w-10 h-10 rounded-xl bg-[var(--color-electric)]/10 flex items-center justify-center text-[var(--color-electric)] shrink-0 group-hover:bg-[var(--color-electric)] group-hover:text-white transition-colors">
-                <Phone size={18} />
-              </div>
-              <span className="text-white/60 text-sm font-medium">+91 92743 50728</span>
+            <li className="flex gap-3 text-white opacity-60">
+              <Phone className="text-[var(--color-electric)] shrink-0" size={20} />
+              <span>+91 92743 50728</span>
             </li>
-            <li className="flex gap-4 items-center group">
-              <div className="w-10 h-10 rounded-xl bg-[var(--color-electric)]/10 flex items-center justify-center text-[var(--color-electric)] shrink-0 group-hover:bg-[var(--color-electric)] group-hover:text-white transition-colors">
-                <Mail size={18} />
-              </div>
-              <span className="text-white/60 text-sm font-medium">uma.techno585@gmail.com</span>
+            <li className="flex gap-3 text-white opacity-60">
+              <Mail className="text-[var(--color-electric)] shrink-0" size={20} />
+              <span>uma.techno585@gmail.com</span>
             </li>
           </ul>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
-        <p className="text-white/40 text-sm font-medium">
+      <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p className="text-white opacity-40 text-sm">
           © {new Date().getFullYear()} Uma Techno. All rights reserved.
         </p>
         <div className="flex gap-8 text-sm">
-          <Link href="/privacy-policy" className="text-white/40 hover:text-white transition-colors">
+          <Link href="/privacy-policy" className="text-white opacity-40 hover:text-[var(--color-electric)] transition-colors">
             Privacy Policy
           </Link>
-          <Link href="/terms" className="text-white/40 hover:text-white transition-colors">
+          <Link href="/terms" className="text-white opacity-40 hover:text-[var(--color-electric)] transition-colors">
             Terms of Service
           </Link>
         </div>

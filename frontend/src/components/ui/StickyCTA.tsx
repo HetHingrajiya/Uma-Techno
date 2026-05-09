@@ -31,17 +31,13 @@ export default function StickyCTA() {
           exit={{ y: 100, opacity: 0 }}
           className="fixed bottom-6 left-6 z-[900] md:hidden cursor-move"
         >
-          <div className="relative group">
-            <div className="absolute inset-0 bg-[var(--color-electric)] blur-xl opacity-30 rounded-full group-active:opacity-60 transition-opacity" />
-            <Link
-              href="/contact"
-              className="relative bg-gradient-premium text-white px-6 py-4 rounded-full font-black text-sm flex items-center justify-center gap-3 shadow-2xl active:scale-95 transition-transform border border-white/20 uppercase tracking-widest whitespace-nowrap overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-active:animate-[shimmer_1s_infinite]" />
-              <Send size={18} className="animate-pulse" />
-              GET STARTED
-            </Link>
-          </div>
+          <Link
+            href="/contact"
+            className="bg-[var(--color-electric)] text-white px-6 py-4 rounded-full font-black text-sm flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(var(--color-header-rgb),0.3)] active:scale-95 transition-all border border-white/20 uppercase tracking-widest whitespace-nowrap"
+          >
+            <Send size={18} />
+            GET STARTED TODAY
+          </Link>
         </motion.div>
       )}
     </AnimatePresence>
