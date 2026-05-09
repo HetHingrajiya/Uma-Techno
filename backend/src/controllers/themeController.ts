@@ -6,16 +6,31 @@ export const getTheme = async (req: Request, res: Response): Promise<void> => {
     let theme = await prisma.themeSetting.findFirst();
     if (!theme) {
       theme = await prisma.themeSetting.create({
-        data: {} // Uses defaults from schema
+        data: {
+          primaryColor: "#3B82F6",
+          secondaryColor: "#60A5FA",
+          accentColor: "#10B981",
+          backgroundColor: "#F8FAFC",
+          cardColor: "#FFFFFF",
+          textColor: "#0F172A",
+          themeMode: "light"
+        }
       });
     }
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
     res.json(theme);
   } catch (error) {
     console.error('Error fetching theme:', error);
-    res.status(500).json({ error: 'Failed to fetch theme settings' });
+    // Return a safe default instead of a 500 error
+    res.json({
+      primaryColor: "#3B82F6",
+      secondaryColor: "#60A5FA",
+      accentColor: "#10B981",
+      backgroundColor: "#F8FAFC",
+      cardColor: "#FFFFFF",
+      textColor: "#0F172A",
+      themeMode: "light"
+    });
   }
 };
 

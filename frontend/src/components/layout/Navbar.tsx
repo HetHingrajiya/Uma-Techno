@@ -177,10 +177,10 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-y-0 left-0 w-[85%] max-w-[320px] z-[1100] md:hidden flex flex-col shadow-[20px_0_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden"
-              style={{ backgroundColor: "#FFFFFF" }}
+              className="fixed inset-y-0 left-0 w-[85%] max-w-[320px] z-[1100] md:hidden flex flex-col shadow-[20px_0_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden bg-white"
+              style={{ backgroundColor: "#FFFFFF", opacity: 1 }}
             >
-              <div className="flex flex-col h-full" style={{ backgroundColor: "#FFFFFF" }}>
+              <div className="flex flex-col h-full bg-white" style={{ backgroundColor: "#FFFFFF" }}>
                 {/* Drawer Header */}
                 <div className="p-6 flex justify-between items-center border-b border-gray-100">
                   <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
@@ -211,8 +211,9 @@ export default function Navbar() {
                           href={link.href}
                           className={cn(
                             "text-lg font-bold font-outfit py-2 block transition-colors",
-                            pathname === link.href ? "text-[var(--color-electric)]" : "text-gray-900"
+                            pathname === link.href ? "text-[var(--color-electric)]" : "text-[#0F172A]"
                           )}
+                          style={{ color: pathname === link.href ? "var(--color-electric)" : "#0F172A" }}
                           onClick={() => !link.submenu && setIsOpen(false)}
                         >
                           {link.name}
@@ -240,7 +241,8 @@ export default function Navbar() {
                             <Link
                               key={sub.name}
                               href={sub.href}
-                              className="text-gray-500 py-1 text-sm font-bold hover:text-[var(--color-electric)] transition-colors"
+                              className="py-1 text-sm font-bold hover:text-[var(--color-electric)] transition-colors"
+                              style={{ color: "#64748B" }}
                               onClick={() => setIsOpen(false)}
                             >
                               {sub.name}

@@ -177,3 +177,34 @@ body {
   background-color: var(--scrollbar-thumb-color, #06B6D4);
   border-radius: 20px;
 }
+
+/* ==========================================================================
+   MOBILE MENU / DRAWER FIX
+   Forces solid backgrounds and readable text for all mobile navigation.
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Force Drawer Background to be Solid White */
+  .fixed.inset-y-0.left-0 {
+    background-color: #FFFFFF !important;
+    background: #FFFFFF !important;
+    opacity: 1 !important;
+    z-index: 9999 !important;
+  }
+
+  /* Force Drawer Links to be High-Contrast */
+  .fixed.inset-y-0.left-0 a {
+    color: #0F172A !important;
+    opacity: 1 !important;
+  }
+
+  .fixed.inset-y-0.left-0 span {
+    color: #0F172A !important;
+  }
+
+  /* Fix Backdrop Blur */
+  .fixed.inset-0.bg-black\/60 {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+}
