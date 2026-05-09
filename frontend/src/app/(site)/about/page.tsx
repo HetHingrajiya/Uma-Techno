@@ -5,6 +5,7 @@ import Link from "next/link";
 import Logo from "@/components/ui/Logo";
 import Image from "next/image";
 import { useTheme } from "@/components/ThemeProvider";
+import { useState, useEffect } from "react";
 
 const values = [
   { name: "Innovation", icon: Target, description: "We push boundaries and explore new technologies." },
