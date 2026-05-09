@@ -28,11 +28,12 @@ export default function Hero() {
       {theme.heroImageUrl && (
         <div className="absolute inset-0 z-0">
           <Image 
-            src={theme.heroImageUrl} 
+            src={theme.heroImageUrl ? `${theme.heroImageUrl}?t=${Date.now()}` : ""} 
             alt="Hero Background" 
             fill 
             className="object-cover opacity-10"
             priority
+            unoptimized
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)] via-transparent to-[var(--background)]" />
         </div>
@@ -101,6 +102,7 @@ export default function Hero() {
                    alt="Portfolio Showcase - Web Development Rajkot" 
                    fill
                    priority
+                   unoptimized
                    className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-700"
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)]/80 via-transparent to-transparent pointer-events-none" />
