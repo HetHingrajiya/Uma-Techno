@@ -172,21 +172,25 @@ export default function Navbar() {
             />
             
             {/* Drawer */}
+            {/* Drawer */}
             <motion.div
               initial={{ x: "-100%" }}
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-y-0 left-0 w-[85%] max-w-[320px] z-[1100] md:hidden flex flex-col shadow-[20px_0_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden bg-white"
-              style={{ backgroundColor: "#FFFFFF", opacity: 1 }}
+              transition={{ type: "tween", duration: 0.3 }}
+              className="fixed inset-y-0 left-0 w-[85%] max-w-[320px] z-[2000] md:hidden flex flex-col shadow-2xl"
+              style={{ background: "#FFFFFF", backgroundColor: "#FFFFFF" }}
             >
-              <div className="flex flex-col h-full bg-white" style={{ backgroundColor: "#FFFFFF" }}>
+              {/* Force a solid white background layer */}
+              <div className="absolute inset-0 bg-white -z-10" style={{ backgroundColor: "#FFFFFF" }} />
+
+              <div className="flex flex-col h-full relative z-10">
                 {/* Drawer Header */}
-                <div className="p-6 flex justify-between items-center border-b border-gray-100">
+                <div className="p-6 flex justify-between items-center border-b border-gray-100 bg-white">
                   <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
                     <Logo className="w-8 h-8" />
                     <div className="flex flex-col leading-none">
-                      <span className="text-xl font-bold tracking-tighter uppercase text-[#0F172A]">
+                      <span className="text-xl font-bold tracking-tighter uppercase text-[#0F172A]" style={{ color: "#0F172A" }}>
                         <span className="text-[var(--color-electric)]">Uma</span>Techno
                       </span>
                       <span className="text-[7px] text-gray-400 font-bold tracking-[0.2em] uppercase mt-0.5">
@@ -203,16 +207,13 @@ export default function Navbar() {
                 </div>
 
                 {/* Nav Links Container */}
-                <div className="flex-1 overflow-y-auto px-6 py-8 space-y-2">
+                <div className="flex-1 overflow-y-auto px-6 py-8 space-y-4 bg-white">
                   {navLinks.map((link) => (
-                    <div key={link.name} className="border-b border-gray-50 last:border-0 pb-2 mb-2">
+                    <div key={link.name} className="border-b border-gray-50 last:border-0 pb-4">
                       <div className="flex items-center justify-between">
                         <Link
                           href={link.href}
-                          className={cn(
-                            "text-lg font-bold font-outfit py-2 block transition-colors",
-                            pathname === link.href ? "text-[var(--color-electric)]" : "text-[#0F172A]"
-                          )}
+                          className="text-xl font-bold font-outfit block"
                           style={{ color: pathname === link.href ? "var(--color-electric)" : "#0F172A" }}
                           onClick={() => !link.submenu && setIsOpen(false)}
                         >
@@ -226,29 +227,25 @@ export default function Navbar() {
                             }}
                             className="p-2 text-gray-400"
                           >
-                            <ChevronDown size={20} className={cn("transition-transform duration-300", activeSubmenu === link.name && "rotate-180")} />
+                            <ChevronDown size={24} className={cn("transition-transform duration-300", activeSubmenu === link.name && "rotate-180")} />
                           </button>
                         )}
                       </div>
                       
                       {link.submenu && activeSubmenu === link.name && (
-                        <motion.div 
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          className="pl-4 mt-2 flex flex-col gap-3 border-l-2 border-[var(--color-electric)]/20 mb-4"
-                        >
+                        <div className="pl-4 mt-4 flex flex-col gap-4 border-l-2 border-[var(--color-electric)]/20">
                           {link.submenu.map((sub) => (
                             <Link
                               key={sub.name}
                               href={sub.href}
-                              className="py-1 text-sm font-bold hover:text-[var(--color-electric)] transition-colors"
+                              className="text-lg font-bold"
                               style={{ color: "#64748B" }}
                               onClick={() => setIsOpen(false)}
                             >
                               {sub.name}
                             </Link>
                           ))}
-                        </motion.div>
+                        </div>
                       )}
                     </div>
                   ))}
