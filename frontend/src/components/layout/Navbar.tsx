@@ -40,6 +40,18 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Disable scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   // Close drawer on route change
   useEffect(() => {
     setIsOpen(false);
@@ -137,7 +149,7 @@ export default function Navbar() {
               exit={{ x: "-100%" }}
               transition={{ type: "tween", duration: 0.4, ease: "circOut" }}
               className="fixed inset-0 w-full h-full z-[9999] md:hidden flex flex-col shadow-2xl bg-white"
-              style={{ backgroundColor: "#FFFFFF" }}
+              style={{ backgroundColor: "#FFFFFF", opacity: 1 }}
             >
               <div className="flex flex-col h-full bg-white relative">
                 {/* Drawer Header */}
