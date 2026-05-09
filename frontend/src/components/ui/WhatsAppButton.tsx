@@ -12,7 +12,7 @@ export default function WhatsAppButton() {
       href="https://wa.me/919274350728?text=Hi%20Uma%20Techno,%20I'm%20interested%20in%20your%20services." 
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-[999] bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center animate-bounce-slight cursor-move"
+      className="fixed bottom-24 lg:bottom-6 right-6 z-[999] bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center animate-bounce-slight cursor-move"
       aria-label="Chat on WhatsApp"
     >
       <MessageCircle size={28} />
