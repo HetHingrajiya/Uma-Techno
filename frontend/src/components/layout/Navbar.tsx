@@ -74,7 +74,7 @@ export default function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6",
+        "fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 px-6",
         "py-3 backdrop-blur-lg"
       )}
       style={{ backgroundColor: `rgba(var(--color-header-rgb, 255, 255, 255), 0.9)` }}
@@ -168,7 +168,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[999] md:hidden"
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[1050] md:hidden"
             />
             
             {/* Drawer */}
@@ -177,7 +177,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-y-0 left-0 w-[85%] max-w-[320px] bg-white z-[1001] md:hidden flex flex-col shadow-[20px_0_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden"
+              className="fixed inset-y-0 left-0 w-[85%] max-w-[320px] bg-white z-[1100] md:hidden flex flex-col shadow-[20px_0_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden"
             >
               <div className="flex flex-col h-full bg-white">
                 {/* Drawer Header */}
