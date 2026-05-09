@@ -112,7 +112,7 @@ export default function SEODashboard() {
       </div>
 
       <div className="bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl overflow-hidden shadow-sm">
-        <div className="p-4 border-b border-[var(--color-border)] flex gap-4 bg-[var(--color-navy)]/30">
+        <div className="p-4 border-b border-[var(--color-border)] flex gap-4 bg-white">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
             <input
@@ -131,7 +131,7 @@ export default function SEODashboard() {
             </div>
           ) : seoPages.length === 0 ? (
             <div className="p-20 text-center flex flex-col items-center justify-center">
-              <div className="w-20 h-20 bg-[var(--color-navy)] rounded-3xl flex items-center justify-center mb-6 border border-[var(--color-border)]">
+              <div className="w-20 h-20 bg-[var(--color-navy-light)] rounded-3xl flex items-center justify-center mb-6 border border-[var(--color-border)]">
                 <Globe size={32} className="text-[var(--color-text-main)] opacity-20" />
               </div>
               <h4 className="text-xl font-bold text-[var(--color-text-main)] mb-2">No SEO records</h4>
@@ -147,7 +147,7 @@ export default function SEODashboard() {
             <div className="min-w-[800px]">
               <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-[var(--color-navy)]/30 border-b border-[var(--color-border)]">
+                <tr className="bg-[var(--color-navy-light)] border-b border-[var(--color-border)]">
                   <th className="p-6 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-widest opacity-40">Route Path</th>
                   <th className="p-6 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-widest opacity-40">Meta Title</th>
                   <th className="p-6 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-widest opacity-40">Description Preview</th>
@@ -158,7 +158,7 @@ export default function SEODashboard() {
                 {seoPages.map((page) => (
                   <tr key={page.id} className="border-b border-[var(--color-border)] hover:bg-[var(--color-navy)]/40 transition-colors group">
                     <td className="p-6">
-                      <span className="bg-[var(--color-navy)] px-3 py-1.5 rounded-lg border border-[var(--color-border)] text-xs font-mono font-bold text-electric">
+                      <span className="bg-[var(--color-navy-light)] px-3 py-1.5 rounded-lg border border-[var(--color-border)] text-xs font-mono font-bold text-electric">
                         {page.pagePath}
                       </span>
                     </td>
@@ -172,14 +172,14 @@ export default function SEODashboard() {
                       <div className="flex justify-end gap-3">
                         <button 
                           onClick={() => handleOpenModal(page)}
-                          className="w-10 h-10 rounded-xl bg-[var(--color-navy)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-main)] hover:text-electric transition-all"
+                          className="w-10 h-10 rounded-xl bg-white border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-main)] hover:text-electric transition-all"
                           title="Edit SEO"
                         >
                           <Edit2 size={16} />
                         </button>
                         <button 
                           onClick={() => handleDelete(page.id)}
-                          className="w-10 h-10 rounded-xl bg-[var(--color-navy)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-main)] hover:text-red-500 transition-all"
+                          className="w-10 h-10 rounded-xl bg-white border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-main)] hover:text-red-500 transition-all"
                           title="Delete SEO"
                         >
                           <Trash2 size={16} />

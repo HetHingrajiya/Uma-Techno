@@ -150,7 +150,7 @@ export default function PortfolioManager() {
             </div>
           ) : projects.length === 0 ? (
             <div className="p-20 text-center flex flex-col items-center justify-center">
-              <div className="w-20 h-20 bg-[var(--color-navy)] rounded-3xl flex items-center justify-center mb-6 border border-[var(--color-border)]">
+              <div className="w-20 h-20 bg-[var(--color-navy-light)] rounded-3xl flex items-center justify-center mb-6 border border-[var(--color-border)]">
                 <Briefcase size={32} className="text-[var(--color-text-main)] opacity-20" />
               </div>
               <h4 className="text-xl font-bold text-[var(--color-text-main)] mb-2">No projects yet</h4>
@@ -166,7 +166,7 @@ export default function PortfolioManager() {
             <div className="min-w-[800px]">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-[var(--color-navy)]/30 border-b border-[var(--color-border)]">
+                  <tr className="bg-[var(--color-navy-light)] border-b border-[var(--color-border)]">
                     <th className="p-6 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-widest opacity-40">Project Info</th>
                     <th className="p-6 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-widest opacity-40">Category</th>
                     <th className="p-6 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-widest opacity-40">Client</th>
@@ -201,14 +201,14 @@ export default function PortfolioManager() {
                         <div className="flex justify-end gap-3">
                           <button 
                             onClick={() => handleOpenModal(project)}
-                            className="w-10 h-10 rounded-xl bg-[var(--color-navy)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-main)] hover:text-electric transition-all"
+                            className="w-10 h-10 rounded-xl bg-white border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-main)] hover:text-electric transition-all"
                             title="Edit Project"
                           >
                             <Edit2 size={16} />
                           </button>
                           <button 
                             onClick={() => handleDelete(project.id)}
-                            className="w-10 h-10 rounded-xl bg-[var(--color-navy)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-main)] hover:text-red-500 transition-all"
+                            className="w-10 h-10 rounded-xl bg-white border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-main)] hover:text-red-500 transition-all"
                             title="Delete Project"
                           >
                             <Trash2 size={16} />

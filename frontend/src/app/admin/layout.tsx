@@ -18,6 +18,7 @@ import {
   Globe
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Logo from "@/components/ui/Logo";
 
 /**
  * Sidebar navigation configuration for the Admin Panel.
@@ -82,9 +83,7 @@ export default function AdminLayout({
       */}
       <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[var(--color-navy-light)] border-b border-[var(--color-border)] flex items-center justify-between px-4 z-50">
         <Link href="/admin/dashboard" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-electric text-white rounded-2xl flex items-center justify-center font-black shadow-lg shadow-electric/20">
-            U
-          </div>
+          <Logo className="w-10 h-10" />
           <span className="text-lg font-black tracking-tight text-[var(--color-text-main)] uppercase">
             Uma<span className="text-electric">Admin</span>
           </span>
@@ -115,9 +114,7 @@ export default function AdminLayout({
       )}>
         <div className="p-6 flex items-center justify-between">
           <Link href="/admin/dashboard" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-electric text-white rounded-2xl flex items-center justify-center font-black shadow-lg shadow-electric/20">
-              U
-            </div>
+            <Logo className="w-10 h-10" />
             <span className="text-lg font-black tracking-tight text-[var(--color-text-main)] uppercase">
               Uma<span className="text-electric">Admin</span>
             </span>

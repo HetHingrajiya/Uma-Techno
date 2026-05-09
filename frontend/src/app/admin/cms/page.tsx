@@ -59,7 +59,7 @@ export default function CMSDashboard() {
               <div className="w-12 h-12 rounded-xl bg-electric/10 text-electric flex items-center justify-center group-hover:scale-110 transition-transform">
                 <section.icon size={24} />
               </div>
-              <div className="text-sm font-medium bg-[var(--color-navy)] px-3 py-1 rounded-full text-[var(--color-text-main)] opacity-70 border border-[var(--color-border)]">
+              <div className="text-sm font-medium bg-white px-3 py-1 rounded-full text-[var(--color-text-main)] opacity-70 border border-[var(--color-border)]">
                 {section.count} Total
               </div>
             </div>
@@ -70,7 +70,7 @@ export default function CMSDashboard() {
             <div className="flex gap-3">
               <Link 
                 href={section.href}
-                className="flex-1 bg-[var(--color-navy)] border border-[var(--color-border)] hover:border-electric text-[var(--color-text-main)] py-2 rounded-lg flex items-center justify-center gap-2 text-sm font-medium transition-colors"
+                className="flex-1 bg-white border border-[var(--color-border)] hover:border-electric text-[var(--color-text-main)] py-2 rounded-lg flex items-center justify-center gap-2 text-sm font-medium transition-colors"
               >
                 Manage <ArrowRight size={16} className="hover-arrow" />
               </Link>

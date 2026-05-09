@@ -176,40 +176,41 @@ export default function Navbar() {
               initial={{ x: "-100%" }}
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
-              transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="fixed inset-y-0 left-0 w-[85%] max-w-[320px] bg-[var(--color-card)] z-[1000] md:hidden flex flex-col shadow-2xl overflow-hidden"
-              style={{ backgroundColor: "var(--color-card)" }} // Explicitly ensure background
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed inset-y-0 left-0 w-[85%] max-w-[320px] bg-white z-[1001] md:hidden flex flex-col shadow-[20px_0_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden"
             >
-              <div className="p-6 flex flex-col h-full bg-[var(--color-card)]">
-                <div className="flex justify-between items-center mb-10">
+              <div className="flex flex-col h-full bg-white">
+                {/* Drawer Header */}
+                <div className="p-6 flex justify-between items-center border-b border-gray-100">
                   <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
                     <Logo className="w-8 h-8" />
                     <div className="flex flex-col leading-none">
-                      <span className="text-xl font-bold tracking-tighter uppercase">
-                        <span className="text-[var(--color-electric)]">Uma</span><span className="text-[var(--color-text-main)]">Techno</span>
+                      <span className="text-xl font-bold tracking-tighter uppercase text-[#0F172A]">
+                        <span className="text-[var(--color-electric)]">Uma</span>Techno
                       </span>
-                      <span className="text-[7px] text-gray-500 font-bold tracking-[0.2em] uppercase mt-0.5">
-                        Innovate. Create. <span className="text-[var(--color-electric)]">Elevate.</span>
+                      <span className="text-[7px] text-gray-400 font-bold tracking-[0.2em] uppercase mt-0.5">
+                        Innovate. Create. Elevate.
                       </span>
                     </div>
                   </Link>
                   <button 
                     onClick={() => setIsOpen(false)} 
-                    className="w-10 h-10 rounded-full bg-[var(--color-navy-light)] flex items-center justify-center text-[var(--color-text-main)] border border-[var(--color-border)] shadow-sm"
+                    className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-900 border border-gray-200"
                   >
                     <X size={20} />
                   </button>
                 </div>
 
-                <div className="flex flex-col gap-1 overflow-y-auto flex-1 pb-10 scrollbar-hide">
+                {/* Nav Links Container */}
+                <div className="flex-1 overflow-y-auto px-6 py-8 space-y-2">
                   {navLinks.map((link) => (
-                    <div key={link.name} className="space-y-1">
+                    <div key={link.name} className="border-b border-gray-50 last:border-0 pb-2 mb-2">
                       <div className="flex items-center justify-between">
                         <Link
                           href={link.href}
                           className={cn(
-                            "text-xl font-bold font-outfit py-3 block transition-colors",
-                            pathname === link.href ? "text-[var(--color-electric)]" : "text-[var(--color-text-main)]"
+                            "text-lg font-bold font-outfit py-2 block transition-colors",
+                            pathname === link.href ? "text-[var(--color-electric)]" : "text-gray-900"
                           )}
                           onClick={() => !link.submenu && setIsOpen(false)}
                         >
@@ -221,7 +222,7 @@ export default function Navbar() {
                               e.preventDefault();
                               setActiveSubmenu(activeSubmenu === link.name ? null : link.name);
                             }}
-                            className="p-2 text-[var(--color-text-main)] opacity-50"
+                            className="p-2 text-gray-400"
                           >
                             <ChevronDown size={20} className={cn("transition-transform duration-300", activeSubmenu === link.name && "rotate-180")} />
                           </button>
@@ -232,13 +233,13 @@ export default function Navbar() {
                         <motion.div 
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
-                          className="pl-4 flex flex-col gap-1 border-l-2 border-[var(--color-electric)]/20 mb-4"
+                          className="pl-4 mt-2 flex flex-col gap-3 border-l-2 border-[var(--color-electric)]/20 mb-4"
                         >
                           {link.submenu.map((sub) => (
                             <Link
                               key={sub.name}
                               href={sub.href}
-                              className="text-[var(--color-text-main)] opacity-60 py-2.5 text-sm font-bold hover:text-[var(--color-electric)] transition-colors"
+                              className="text-gray-500 py-1 text-sm font-bold hover:text-[var(--color-electric)] transition-colors"
                               onClick={() => setIsOpen(false)}
                             >
                               {sub.name}
@@ -250,15 +251,16 @@ export default function Navbar() {
                   ))}
                 </div>
 
-                <div className="pt-6 border-t border-[var(--color-border)] space-y-6">
+                {/* Drawer Footer */}
+                <div className="p-6 bg-gray-50 border-t border-gray-100 space-y-6">
                   <Link
                     href="/contact"
-                    className="block w-full bg-[var(--color-electric)] text-white text-center py-4 rounded-xl font-bold text-lg shadow-lg hover:brightness-110 active:scale-[0.98] transition-all"
+                    className="block w-full bg-[var(--color-electric)] text-white text-center py-4 rounded-xl font-bold text-lg shadow-lg shadow-blue-500/20 active:scale-[0.98] transition-all"
                     onClick={() => setIsOpen(false)}
                   >
                     Get a Quote
                   </Link>
-                  <div className="text-center text-[10px] text-gray-500 uppercase tracking-widest font-bold">
+                  <div className="text-center text-[10px] text-gray-400 uppercase tracking-widest font-bold">
                     © 2026 UMA TECHNO. <br /> SOLUTIONS FOR THE FUTURE.
                   </div>
                 </div>
