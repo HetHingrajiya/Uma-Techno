@@ -114,9 +114,10 @@ export const setActivePalette = async (req: Request, res: Response) => {
     };
 
     // Only update images if the palette explicitly provides them to avoid overwriting brand assets
-    if (activePalette.logoUrl) themeData.logoUrl = activePalette.logoUrl;
-    if (activePalette.heroImageUrl) themeData.heroImageUrl = activePalette.heroImageUrl;
-    if (activePalette.aboutImageUrl) themeData.aboutImageUrl = activePalette.aboutImageUrl;
+    const palette = activePalette as any;
+    if (palette.logoUrl) themeData.logoUrl = palette.logoUrl;
+    if (palette.heroImageUrl) themeData.heroImageUrl = palette.heroImageUrl;
+    if (palette.aboutImageUrl) themeData.aboutImageUrl = palette.aboutImageUrl;
 
     if (theme) {
       await prisma.themeSetting.update({
