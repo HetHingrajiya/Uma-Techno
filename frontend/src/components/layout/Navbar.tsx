@@ -152,79 +152,110 @@ export default function Navbar() {
       {/* Mobile Nav Overlay */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed inset-0 bg-[var(--color-card)] z-[100] md:hidden flex flex-col"
-          >
-            <div className="p-6 flex flex-col h-full">
-              <div className="flex justify-between items-center mb-16">
-                <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
-                  <Logo className="w-8 h-8" />
-                  <div className="flex flex-col leading-none">
-                    <span className="text-xl font-bold tracking-tighter uppercase">
-                      <span className="text-electric">Uma</span><span className="text-[var(--color-text-main)]">Techno</span>
-                    </span>
-                    <span className="text-[7px] text-gray-500 font-bold tracking-[0.2em] uppercase mt-0.5">
-                      Innovate. Create. <span className="text-[var(--color-electric)]">Elevate.</span>
-                    </span>
-                  </div>
-                </Link>
-                <button 
-                  onClick={() => setIsOpen(false)} 
-                  className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] flex items-center justify-center text-[var(--color-text-main)] border border-[var(--color-border)] shadow-sm"
-                >
-                  <X size={24} />
-                </button>
-              </div>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] md:hidden"
+            />
+            
+            {/* Drawer */}
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              className="fixed inset-y-0 left-0 w-[85%] max-w-[320px] bg-[var(--color-card)] z-[100] md:hidden flex flex-col shadow-2xl overflow-hidden"
+              style={{ backgroundColor: "var(--color-card)" }} // Explicitly ensure background
+            >
+              <div className="p-6 flex flex-col h-full bg-[var(--color-card)]">
+                <div className="flex justify-between items-center mb-10">
+                  <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
+                    <Logo className="w-8 h-8" />
+                    <div className="flex flex-col leading-none">
+                      <span className="text-xl font-bold tracking-tighter uppercase">
+                        <span className="text-[var(--color-electric)]">Uma</span><span className="text-[var(--color-text-main)]">Techno</span>
+                      </span>
+                      <span className="text-[7px] text-gray-500 font-bold tracking-[0.2em] uppercase mt-0.5">
+                        Innovate. Create. <span className="text-[var(--color-electric)]">Elevate.</span>
+                      </span>
+                    </div>
+                  </Link>
+                  <button 
+                    onClick={() => setIsOpen(false)} 
+                    className="w-10 h-10 rounded-full bg-[var(--color-navy-light)] flex items-center justify-center text-[var(--color-text-main)] border border-[var(--color-border)] shadow-sm"
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
 
-              <div className="flex flex-col gap-6 overflow-y-auto flex-1 pb-10">
-                {navLinks.map((link) => (
-                  <div key={link.name} className="space-y-4">
-                    <Link
-                      href={link.href}
-                      className={cn(
-                        "text-2xl font-bold font-outfit transition-colors",
-                        pathname === link.href ? "text-[var(--color-electric)]" : "text-[var(--color-text-main)]"
-                      )}
-                      onClick={() => !link.submenu && setIsOpen(false)}
-                    >
-                      {link.name}
-                    </Link>
-                    {link.submenu && (
-                      <div className="pl-4 flex flex-col gap-4 border-l border-[var(--color-electric)]/20">
-                        {link.submenu.map((sub) => (
-                          <Link
-                            key={sub.name}
-                            href={sub.href}
-                            className="text-[var(--color-text-main)] opacity-60 text-base font-medium hover:text-[var(--color-electric)] transition-colors"
-                            onClick={() => setIsOpen(false)}
+                <div className="flex flex-col gap-1 overflow-y-auto flex-1 pb-10 scrollbar-hide">
+                  {navLinks.map((link) => (
+                    <div key={link.name} className="space-y-1">
+                      <div className="flex items-center justify-between">
+                        <Link
+                          href={link.href}
+                          className={cn(
+                            "text-xl font-bold font-outfit py-3 block transition-colors",
+                            pathname === link.href ? "text-[var(--color-electric)]" : "text-[var(--color-text-main)]"
+                          )}
+                          onClick={() => !link.submenu && setIsOpen(false)}
+                        >
+                          {link.name}
+                        </Link>
+                        {link.submenu && (
+                          <button 
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setActiveSubmenu(activeSubmenu === link.name ? null : link.name);
+                            }}
+                            className="p-2 text-[var(--color-text-main)] opacity-50"
                           >
-                            {sub.name}
-                          </Link>
-                        ))}
+                            <ChevronDown size={20} className={cn("transition-transform duration-300", activeSubmenu === link.name && "rotate-180")} />
+                          </button>
+                        )}
                       </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+                      
+                      {link.submenu && activeSubmenu === link.name && (
+                        <motion.div 
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          className="pl-4 flex flex-col gap-1 border-l-2 border-[var(--color-electric)]/20 mb-4"
+                        >
+                          {link.submenu.map((sub) => (
+                            <Link
+                              key={sub.name}
+                              href={sub.href}
+                              className="text-[var(--color-text-main)] opacity-60 py-2.5 text-sm font-bold hover:text-[var(--color-electric)] transition-colors"
+                              onClick={() => setIsOpen(false)}
+                            >
+                              {sub.name}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </div>
+                  ))}
+                </div>
 
-              <div className="pt-8 border-t border-white/5 space-y-6">
-                <Link
-                  href="/contact"
-                  className="block w-full bg-electric text-navy text-center py-5 rounded-2xl font-bold text-xl shadow-[0_0_30px_rgba(212,175,55,0.3)]"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Get a Quote
-                </Link>
-                <div className="text-center text-[10px] text-gray-500 uppercase tracking-widest font-bold">
-                  © 2026 UMA TECHNO. SOLUTIONS FOR THE FUTURE.
+                <div className="pt-6 border-t border-[var(--color-border)] space-y-6">
+                  <Link
+                    href="/contact"
+                    className="block w-full bg-[var(--color-electric)] text-white text-center py-4 rounded-xl font-bold text-lg shadow-lg hover:brightness-110 active:scale-[0.98] transition-all"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Get a Quote
+                  </Link>
+                  <div className="text-center text-[10px] text-gray-500 uppercase tracking-widest font-bold">
+                    © 2026 UMA TECHNO. <br /> SOLUTIONS FOR THE FUTURE.
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>
