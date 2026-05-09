@@ -171,26 +171,23 @@ export default function Navbar() {
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[1050] md:hidden"
             />
             
-            {/* Drawer */}
+        
             {/* Drawer */}
             <motion.div
               initial={{ x: "-100%" }}
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "tween", duration: 0.3 }}
-              className="fixed inset-y-0 left-0 w-[85%] max-w-[320px] z-[2000] md:hidden flex flex-col shadow-2xl"
-              style={{ background: "#FFFFFF", backgroundColor: "#FFFFFF" }}
+              className="fixed inset-y-0 left-0 w-[85%] max-w-[320px] z-[3000] md:hidden flex flex-col shadow-2xl bg-white"
+              style={{ backgroundColor: "#FFFFFF", opacity: 1, visibility: "visible" }}
             >
-              {/* Force a solid white background layer */}
-              <div className="absolute inset-0 bg-white -z-10" style={{ backgroundColor: "#FFFFFF" }} />
-
-              <div className="flex flex-col h-full relative z-10">
+              <div className="flex flex-col h-full bg-white relative">
                 {/* Drawer Header */}
-                <div className="p-6 flex justify-between items-center border-b border-gray-100 bg-white">
+                <div className="p-6 flex justify-between items-center border-b border-gray-100 bg-white shrink-0">
                   <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
                     <Logo className="w-8 h-8" />
                     <div className="flex flex-col leading-none">
-                      <span className="text-xl font-bold tracking-tighter uppercase text-[#0F172A]" style={{ color: "#0F172A" }}>
+                      <span className="text-xl font-bold tracking-tighter uppercase text-[#0F172A]">
                         <span className="text-[var(--color-electric)]">Uma</span>Techno
                       </span>
                       <span className="text-[7px] text-gray-400 font-bold tracking-[0.2em] uppercase mt-0.5">
@@ -200,20 +197,20 @@ export default function Navbar() {
                   </Link>
                   <button 
                     onClick={() => setIsOpen(false)} 
-                    className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-900 border border-gray-200"
+                    className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-900 border border-gray-200"
                   >
                     <X size={20} />
                   </button>
                 </div>
 
-                {/* Nav Links Container */}
-                <div className="flex-1 overflow-y-auto px-6 py-8 space-y-4 bg-white">
+                {/* Nav Links Container - Removed overflow-y-auto to prevent clipping */}
+                <div className="flex-1 px-6 py-8 space-y-6 bg-white overflow-y-auto">
                   {navLinks.map((link) => (
-                    <div key={link.name} className="border-b border-gray-50 last:border-0 pb-4">
+                    <div key={link.name} className="space-y-4">
                       <div className="flex items-center justify-between">
                         <Link
                           href={link.href}
-                          className="text-xl font-bold font-outfit block"
+                          className="text-xl font-bold font-outfit"
                           style={{ color: pathname === link.href ? "var(--color-electric)" : "#0F172A" }}
                           onClick={() => !link.submenu && setIsOpen(false)}
                         >
@@ -233,7 +230,7 @@ export default function Navbar() {
                       </div>
                       
                       {link.submenu && activeSubmenu === link.name && (
-                        <div className="pl-4 mt-4 flex flex-col gap-4 border-l-2 border-[var(--color-electric)]/20">
+                        <div className="pl-4 flex flex-col gap-5 border-l-2 border-[var(--color-electric)]/20 mb-4">
                           {link.submenu.map((sub) => (
                             <Link
                               key={sub.name}
@@ -252,10 +249,10 @@ export default function Navbar() {
                 </div>
 
                 {/* Drawer Footer */}
-                <div className="p-6 bg-gray-50 border-t border-gray-100 space-y-6">
+                <div className="p-6 bg-gray-50 border-t border-gray-100 space-y-6 shrink-0 mt-auto">
                   <Link
                     href="/contact"
-                    className="block w-full bg-[var(--color-electric)] text-white text-center py-4 rounded-xl font-bold text-lg shadow-lg shadow-blue-500/20 active:scale-[0.98] transition-all"
+                    className="block w-full bg-[var(--color-electric)] text-white text-center py-4 rounded-xl font-bold text-lg shadow-lg"
                     onClick={() => setIsOpen(false)}
                   >
                     Get a Quote
