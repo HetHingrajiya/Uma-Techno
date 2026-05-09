@@ -18,7 +18,7 @@ export default function Hero() {
   const { theme } = useTheme();
 
   return (
-    <section className="relative min-h-[600px] lg:min-h-[800px] 2xl:min-h-screen flex items-center overflow-hidden pt-8 lg:pt-24 pb-24 bg-[var(--background)]">
+    <section className="relative min-h-[600px] lg:min-h-[800px] 2xl:min-h-screen flex items-center overflow-hidden pt-8 lg:pt-24 pb-12 lg:pb-16 bg-[var(--background)]">
       
       {/* 
           Dynamic Background:

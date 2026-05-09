@@ -182,7 +182,7 @@ export default function Home() {
   if (loading) return null;
 
   return (
-    <div className="flex flex-col gap-16 lg:gap-32 pb-20 lg:pb-32 bg-[var(--background)]">
+    <div className="flex flex-col gap-12 lg:gap-16 pb-20 lg:pb-32 bg-[var(--background)]">
       {/* 
           Hero Section:
           The main splash area with primary CTA.
@@ -279,8 +279,8 @@ export default function Home() {
               <div className="absolute -inset-10 bg-gradient-glow opacity-30 blur-[120px] group-hover:opacity-50 transition-all duration-700" />
               <div className="relative aspect-video bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2.5rem] overflow-hidden shadow-xl">
                 <img
-                  src="/images/templates.png"
-                  alt="Website Templates"
+                  src="/images/about.png"
+                  alt="About Us"
                   className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                 />
               </div>
