@@ -101,7 +101,7 @@ export const setActivePalette = async (req: Request, res: Response) => {
     
     // Sync with ThemeSetting for backward compatibility and direct use
     let theme = await prisma.themeSetting.findFirst();
-    const themeData = {
+    const themeData: any = {
       primaryColor: activePalette.primaryColor,
       secondaryColor: activePalette.secondaryColor,
       accentColor: activePalette.accentColor,
@@ -111,10 +111,12 @@ export const setActivePalette = async (req: Request, res: Response) => {
       borderColor: activePalette.borderColor,
       headerColor: activePalette.headerColor,
       footerColor: activePalette.footerColor,
-      logoUrl: activePalette.logoUrl,
-      heroImageUrl: activePalette.heroImageUrl,
-      aboutImageUrl: activePalette.aboutImageUrl
     };
+
+    // Only update images if the palette explicitly provides them to avoid overwriting brand assets
+    if (activePalette.logoUrl) themeData.logoUrl = activePalette.logoUrl;
+    if (activePalette.heroImageUrl) themeData.heroImageUrl = activePalette.heroImageUrl;
+    if (activePalette.aboutImageUrl) themeData.aboutImageUrl = activePalette.aboutImageUrl;
 
     if (theme) {
       await prisma.themeSetting.update({

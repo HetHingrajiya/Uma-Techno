@@ -209,10 +209,19 @@ export default function Home() {
             ))}
           </div>
           
-          <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16 mt-16 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
-            {["Retailers", "Real Estate", "Startups", "Enterprises", "Medical Centres"].map(brand => (
-              <span key={brand} className="text-xl lg:text-2xl font-bold font-outfit text-[var(--color-text-main)]">{brand}</span>
-            ))}
+          {/* Client Logos: Using newly added brand assets */}
+          <div className="flex flex-wrap justify-center items-center gap-12 lg:gap-24 mt-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+             {[1, 2, 3].map(i => (
+                <div key={i} className="relative h-12 w-36">
+                   <img 
+                     src={`/images/client-${i}.png`} 
+                     alt={`Trusted Client ${i}`} 
+                     className="w-full h-full object-contain"
+                   />
+                </div>
+             ))}
+             {/* Fallback text for variety if logos are similar */}
+             <span className="text-xl lg:text-2xl font-bold font-outfit text-[var(--color-text-main)]">Global Retailers</span>
           </div>
         </section>
       )}
