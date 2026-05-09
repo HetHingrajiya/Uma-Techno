@@ -4,11 +4,6 @@ import Logo from "@/components/ui/Logo";
 import { Metadata } from "next";
 import Image from "next/image";
 
-/**
- * AboutPage Metadata:
- * Optimized for SEO with localized keywords for Rajkot and Gujarat.
- * Includes OpenGraph configuration for social sharing consistency.
- */
 export const metadata: Metadata = {
   title: "About Us | Uma Techno - Premium IT Agency in Rajkot",
   description: "Learn about Uma Techno, the leading digital agency in Rajkot, Gujarat. We are a team of experts dedicated to building masterpieces in web development and SEO.",
@@ -22,24 +17,16 @@ export const metadata: Metadata = {
   },
 };
 
-/**
- * coreValues:
- * Defines the company's guiding principles used in the values section.
- */
 const values = [
-  { name: "Innovation", icon: Target, description: "We push boundaries and explore new technologies." },
-  { name: "Quality", icon: Award, description: "We never compromise on the quality of our code and design." },
-  { name: "Transparency", icon: Eye, description: "We believe in honest and clear communication with our clients." },
-  { name: "Passion", icon: Heart, description: "We love what we do and it shows in our work." },
-  { name: "Collaboration", icon: Users, description: "We work as a team to achieve the best results." },
-  { name: "Security", icon: Shield, description: "Your data and privacy are our top priorities." },
+  { name: "Innovation", icon: Target, description: "We push boundaries and explore new technologies to deliver cutting-edge solutions." },
+  { name: "Quality", icon: Award, description: "We never compromise on the quality of our code, design, and user experience." },
+  { name: "Transparency", icon: Eye, description: "We believe in honest and clear communication with our clients at every step." },
+  { name: "Passion", icon: Heart, description: "We love what we do and it shows in our dedication and final products." },
+  { name: "Collaboration", icon: Users, description: "We work as an extension of your team to achieve the best possible results." },
+  { name: "Security", icon: Shield, description: "Your data, privacy, and infrastructure security are our top priorities." },
 ];
 
 export default function AboutPage() {
-  /**
-   * breadcrumbLd:
-   * JSON-LD Structured Data for search engines to understand the page hierarchy.
-   */
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -60,107 +47,106 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="py-20 space-y-32 bg-[var(--background)]">
-      {/* Inject Structured Data for SEO */}
+    <div className="py-32 lg:py-40 space-y-32 bg-[var(--background)] overflow-hidden">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
       
-      {/* Hero Section: Company Overview and Stats */}
-      <section className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+      {/* Background Elements */}
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[var(--color-electric)]/5 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-[40%] left-0 w-[600px] h-[600px] bg-[var(--color-accent)]/5 blur-[150px] rounded-full pointer-events-none" />
+
+      {/* Hero Section */}
+      <section className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
         <div className="space-y-8">
-          <h2 className="text-electric font-bold tracking-widest text-sm uppercase">About Uma Techno</h2>
-          <h1 className="text-5xl lg:text-7xl font-bold font-outfit leading-tight">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
+            About Uma Techno
+          </div>
+          <h1 className="text-5xl lg:text-7xl font-black font-outfit leading-tight text-[var(--color-text-main)] tracking-tighter">
             Crafting Digital <br />
-            <span className="text-gradient">Masterpieces</span> Since 2026
+            <span className="text-gradient relative">
+              Masterpieces
+              <div className="absolute -bottom-2 left-0 w-full h-2 bg-[var(--color-electric)]/20 rounded-full" />
+            </span> Since 2026
           </h1>
-          <p className="text-xl text-[var(--color-text-main)] opacity-70 leading-relaxed">
+          <p className="text-lg lg:text-xl text-[var(--color-text-main)] opacity-70 leading-relaxed font-medium">
             Uma Techno is a premier digital agency dedicated to helping businesses navigate 
             the complex digital landscape. With a team of expert developers, creative designers, 
             and strategic thinkers, we transform ideas into powerful digital realities.
           </p>
-          <div className="grid grid-cols-2 gap-8 pt-4">
+          <div className="grid grid-cols-2 gap-8 pt-6 border-t border-[var(--color-border)]">
              <div>
-                <p className="text-4xl font-bold font-outfit text-[var(--color-text-main)]">10+</p>
-                <p className="text-[var(--color-text-main)] opacity-60">Years of Experience</p>
+                <p className="text-4xl lg:text-5xl font-black font-outfit text-[var(--color-text-main)] mb-1">10+</p>
+                <p className="text-[var(--color-text-main)] opacity-60 font-bold uppercase tracking-widest text-xs">Years of Experience</p>
              </div>
              <div>
-                <p className="text-4xl font-bold font-outfit text-[var(--color-text-main)]">200+</p>
-                <p className="text-[var(--color-text-main)] opacity-60">Projects Delivered</p>
+                <p className="text-4xl lg:text-5xl font-black font-outfit text-[var(--color-text-main)] mb-1">200+</p>
+                <p className="text-[var(--color-text-main)] opacity-60 font-bold uppercase tracking-widest text-xs">Projects Delivered</p>
              </div>
           </div>
         </div>
+
         <div className="relative group">
-           <div className="aspect-square glass-card rounded-[3rem] overflow-hidden rotate-3 relative z-10 border border-white/5">
-              <Image 
-                src="/images/about.png" 
-                alt="Digital Masterpiece - Uma Techno Rajkot Team" 
-                fill
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-40" />
+           <div className="aspect-square glass-card-premium rounded-[3rem] p-4 rotate-3 group-hover:rotate-0 relative z-10 border border-[var(--glass-border)] shadow-2xl transition-all duration-700">
+              <div className="w-full h-full rounded-[2.5rem] overflow-hidden relative">
+                <Image 
+                  src="/images/about.png" 
+                  alt="Digital Masterpiece - Uma Techno Rajkot Team" 
+                  fill
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 grayscale group-hover:grayscale-0"
+                />
+                <div className="absolute inset-0 bg-[var(--color-navy)]/40 group-hover:bg-transparent transition-colors duration-700" />
+              </div>
            </div>
-           <div className="absolute inset-0 bg-electric/20 rounded-[3rem] -rotate-3 z-0 blur-3xl scale-90" />
+           <div className="absolute inset-0 bg-[var(--color-electric)]/20 rounded-[3rem] -rotate-6 z-0 blur-2xl scale-95 transition-transform duration-700 group-hover:rotate-0 group-hover:scale-100" />
         </div>
       </section>
 
-      {/* Values Section: Core Principles Grid */}
-      <section className="max-w-7xl mx-auto px-6">
-        <div className="text-center space-y-4 mb-16">
-          <h3 className="text-4xl font-bold font-outfit">Our Core Values</h3>
-          <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto">
-            The principles that guide us in every project we undertake.
+      {/* Values Section */}
+      <section className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="text-center space-y-6 mb-20">
+          <h2 className="text-4xl lg:text-6xl font-black font-outfit text-[var(--color-text-main)] tracking-tighter">
+            Our <span className="text-gradient">Core Values</span>
+          </h2>
+          <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto text-lg">
+            The principles that guide us in every project we undertake, ensuring excellence and client satisfaction.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {values.map((value) => (
-            <div key={value.name} className="glass-card p-10 rounded-[2.5rem] border-[var(--color-border)] hover:bg-[var(--color-navy-light)] transition-all">
-              <div className="w-12 h-12 bg-[var(--color-electric)]/10 rounded-xl flex items-center justify-center text-[var(--color-electric)] mb-6">
-                <value.icon size={24} />
+          {values.map((value, index) => (
+            <div key={value.name} className="glass-card-premium p-10 rounded-[2.5rem] group hover:-translate-y-2 transition-all duration-500 overflow-hidden relative">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-electric)]/5 blur-3xl -mr-10 -mt-10 group-hover:bg-[var(--color-electric)]/20 transition-colors duration-700" />
+              <div className="w-14 h-14 bg-[var(--color-card)] rounded-2xl flex items-center justify-center text-[var(--color-electric)] mb-8 shadow-lg relative z-10 group-hover:scale-110 group-hover:-rotate-3 transition-transform">
+                <value.icon size={28} />
               </div>
-              <h4 className="text-2xl font-bold font-outfit mb-4 text-[var(--color-text-main)]">{value.name}</h4>
-              <p className="text-[var(--color-text-main)] opacity-70">{value.description}</p>
+              <h4 className="text-2xl font-black font-outfit mb-4 text-[var(--color-text-main)] relative z-10">{value.name}</h4>
+              <p className="text-[var(--color-text-main)] opacity-60 leading-relaxed relative z-10">{value.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Mission & Vision: Long-term Strategic Focus */}
-      <section className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8">
-         <div className="glass-card p-12 rounded-[3rem] bg-gradient-to-br from-[var(--color-electric)]/10 to-transparent border-[var(--color-border)]">
-            <h3 className="text-3xl font-bold font-outfit mb-6 text-[var(--color-text-main)]">Our Mission</h3>
-            <p className="text-lg text-[var(--color-text-main)] opacity-80 leading-relaxed">
+      {/* Mission & Vision Section */}
+      <section className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 relative z-10">
+         <div className="glass-card-premium p-12 lg:p-16 rounded-[3rem] relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-electric)]/10 to-transparent pointer-events-none" />
+            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-[var(--color-electric)]/20 blur-[100px] rounded-full group-hover:bg-[var(--color-electric)]/40 transition-colors duration-700" />
+            <h3 className="text-4xl font-black font-outfit mb-6 text-[var(--color-text-main)] relative z-10">Our Mission</h3>
+            <p className="text-lg text-[var(--color-text-main)] opacity-70 leading-relaxed relative z-10">
               To empower businesses by providing innovative and high-quality digital solutions that drive growth, 
-              enhance efficiency, and deliver exceptional user experiences.
+              enhance efficiency, and deliver exceptional user experiences. We build assets, not just code.
             </p>
          </div>
-         <div className="glass-card p-12 rounded-[3rem] bg-gradient-to-br from-[var(--color-accent)]/10 to-transparent border-[var(--color-border)]">
-            <h3 className="text-3xl font-bold font-outfit mb-6 text-[var(--color-text-main)]">Our Vision</h3>
-            <p className="text-lg text-[var(--color-text-main)] opacity-80 leading-relaxed">
+         <div className="glass-card-premium p-12 lg:p-16 rounded-[3rem] relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-accent)]/10 to-transparent pointer-events-none" />
+            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-[var(--color-accent)]/20 blur-[100px] rounded-full group-hover:bg-[var(--color-accent)]/40 transition-colors duration-700" />
+            <h3 className="text-4xl font-black font-outfit mb-6 text-[var(--color-text-main)] relative z-10">Our Vision</h3>
+            <p className="text-lg text-[var(--color-text-main)] opacity-70 leading-relaxed relative z-10">
               To be a global leader in digital transformation, recognized for our creative excellence, 
-              technical expertise, and unwavering commitment to client success.
+              technical expertise, and unwavering commitment to client success. Setting new industry standards.
             </p>
-         </div>
-      </section>
-
-      {/* Call to Action: Conversion Point */}
-      <section className="max-w-7xl mx-auto px-6 text-center">
-         <div className="space-y-8">
-            <h2 className="text-4xl font-bold font-outfit text-[var(--color-text-main)]">Want to work with us?</h2>
-            <p className="text-[var(--color-text-main)] opacity-70 max-w-xl mx-auto">
-               We are always looking for new challenges and exciting projects. 
-               Let&apos;s build something great together.
-            </p>
-            <div className="flex justify-center gap-4">
-               <Link href="/contact" className="px-8 py-4 bg-[var(--color-electric)] text-white rounded-xl font-bold transition-all hover:brightness-110 shadow-[0_0_20px_var(--color-electric)]">
-                 Contact Us
-               </Link>
-               <Link href="/careers" className="px-8 py-4 bg-transparent text-[var(--color-text-main)] rounded-xl font-bold border border-[var(--color-border)] hover:bg-[var(--color-navy-light)] transition-all">
-                 Join Our Team
-               </Link>
-            </div>
          </div>
       </section>
     </div>

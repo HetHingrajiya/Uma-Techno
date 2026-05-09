@@ -3,7 +3,7 @@
 import Hero from "@/components/ui/Hero";
 import {
   Code, Globe, Smartphone, BarChart, Palette, Megaphone,
-  Rocket, Shield, Zap, Users, Star, ArrowRight, CheckCircle
+  Rocket, Shield, Zap, Users, Star, ArrowRight, CheckCircle, Sparkles
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -182,58 +182,75 @@ export default function Home() {
   if (loading) return null;
 
   return (
-    <div className="flex flex-col gap-16 lg:gap-32 pb-20 lg:pb-32 bg-[var(--background)]">
-      {/* 
-          Hero Section:
-          The main splash area with primary CTA.
-      */}
+    <div className="flex flex-col gap-24 lg:gap-40 pb-0 bg-[var(--background)]">
+      {/* Hero Section */}
       {isEnabled('hero') && <Hero />}
 
-      {/* 
-          Trust & Stats Section:
-          Displays quantitative metrics and client industries to build authority.
-      */}
+      {/* Trust & Stats Section - Bento Grid */}
       {isEnabled('stats') && (
-        <section className="max-w-7xl mx-auto px-6 w-full -mt-8 lg:-mt-16 relative z-20 bg-gradient-soft/50 rounded-[3rem] py-12 lg:py-20 border border-[var(--color-border)]">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
+        <section className="max-w-7xl mx-auto px-6 w-full -mt-20 relative z-20">
+          <div className="bento-grid">
             {stats.map((stat, i) => (
-              <div key={i} className="card-premium p-6 lg:p-8 text-center flex flex-col items-center gap-4 bg-[var(--color-card)]/80 backdrop-blur-xl">
-                <div className="w-12 h-12 rounded-2xl bg-[var(--color-electric)]/10 text-[var(--color-electric)] flex items-center justify-center">
-                  <stat.icon size={24} />
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className={cn(
+                  "bento-item group flex flex-col justify-between min-h-[200px]",
+                  i === 0 ? "md:col-span-2 bg-gradient-premium border-none" : ""
+                )}
+              >
+                {i === 0 && <div className="absolute inset-0 bg-matrix opacity-20" />}
+                <div className={cn(
+                  "w-14 h-14 rounded-2xl flex items-center justify-center mb-6 relative z-10",
+                  i === 0 ? "bg-white/20 text-white" : "bg-[var(--color-electric)]/10 text-[var(--color-electric)] group-hover:scale-110 transition-transform"
+                )}>
+                  <stat.icon size={28} />
                 </div>
-                <div>
-                  <div className="text-3xl lg:text-4xl font-black font-outfit text-[var(--color-text-main)] tracking-tight">{stat.value}</div>
-                  <div className="text-xs lg:text-sm font-bold text-[var(--color-text-main)] opacity-50 uppercase tracking-widest mt-1">{stat.label}</div>
+                <div className="relative z-10 mt-auto">
+                  <div className={cn(
+                    "text-4xl lg:text-5xl font-black font-outfit tracking-tighter mb-2",
+                    i === 0 ? "text-white" : "text-[var(--color-text-main)]"
+                  )}>{stat.value}</div>
+                  <div className={cn(
+                    "text-sm font-bold uppercase tracking-widest",
+                    i === 0 ? "text-white/80" : "text-[var(--color-text-main)] opacity-50"
+                  )}>{stat.label}</div>
                 </div>
-              </div>
+                {i !== 0 && <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-[var(--color-electric)]/5 rounded-full blur-2xl group-hover:bg-[var(--color-electric)]/20 transition-all duration-500" />}
+              </motion.div>
             ))}
           </div>
           
-          <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16 mt-16 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
+          <div className="flex flex-wrap justify-center items-center gap-10 lg:gap-20 mt-20 opacity-30 grayscale hover:grayscale-0 transition-all duration-700">
             {["Retailers", "Real Estate", "Startups", "Enterprises", "Medical Centres"].map(brand => (
-              <span key={brand} className="text-xl lg:text-2xl font-bold font-outfit text-[var(--color-text-main)]">{brand}</span>
+              <span key={brand} className="text-xl lg:text-3xl font-black font-outfit text-[var(--color-text-main)]">{brand}</span>
             ))}
           </div>
         </section>
       )}
 
-      {/* 
-          Services Grid:
-          Detailed breakdown of what Uma Techno offers with deep links to service pages.
-      */}
+      {/* Services Grid */}
       {isEnabled('services') && (
-        <section className="max-w-7xl mx-auto px-6 w-full bg-gradient-soft/30 rounded-[3rem] py-20 lg:py-32 border border-[var(--color-border)]/50">
-          <div className="text-center space-y-4 mb-20">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
-              Premium Solutions
+        <section className="max-w-7xl mx-auto px-6 w-full relative">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--color-electric)]/5 blur-[150px] rounded-full pointer-events-none" />
+          
+          <div className="text-center space-y-6 mb-24 relative z-10">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-border)] bg-[var(--color-card)]/50 backdrop-blur-sm">
+              <Sparkles size={14} className="text-[var(--color-electric)]" />
+              <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-main)]">Elite Capabilities</span>
             </div>
-            <h2 className="text-3xl lg:text-5xl 2xl:text-6xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Business Engines Built <br /> <span className="text-gradient">For Growth</span></h2>
-            <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto 2xl:text-lg">
-              We don&apos;t just build websites. We engineer high-performance digital systems that capture leads, automate operations, and scale revenue in Rajkot.
+            <h2 className="text-4xl lg:text-6xl font-black font-outfit tracking-tighter text-[var(--color-text-main)]">
+              Engineered For <br /> <span className="text-gradient">Domination</span>
+            </h2>
+            <p className="text-[var(--color-text-main)] opacity-60 max-w-2xl mx-auto text-lg">
+              We don't just build websites. We create high-performance digital engines designed to capture leads and scale revenue rapidly.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 relative z-10">
             {services.map((service, index) => {
               const isLarge = index === 0 || index === 3;
               return (
@@ -241,25 +258,28 @@ export default function Home() {
                   key={service.slug}
                   href={service.slug.startsWith('/') ? service.slug : `/${service.slug}`}
                   className={cn(
-                    "group bg-[var(--color-card)] border border-[var(--color-border)] p-10 rounded-[2.5rem] flex flex-col justify-between relative overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500",
-                    isLarge ? "lg:col-span-2 min-h-[400px]" : "min-h-[400px]"
+                    "group glass-card-premium p-10 rounded-[2.5rem] flex flex-col justify-between relative overflow-hidden",
+                    isLarge ? "lg:col-span-2 min-h-[450px]" : "min-h-[450px]"
                   )}
                 >
-                  <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-glow -mr-32 -mt-32 group-hover:scale-110 transition-all duration-700" />
-                  <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-glow -ml-32 -mb-32 group-hover:scale-110 transition-all duration-700 opacity-20" />
-                  <div className="space-y-6 relative z-10">
-                    <div className="w-16 h-16 bg-gradient-premium rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                  <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-electric)]/5 blur-[100px] -mr-32 -mt-32 group-hover:bg-[var(--color-electric)]/20 transition-colors duration-700 pointer-events-none" />
+                  
+                  <div className="space-y-8 relative z-10">
+                    <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-white shadow-lg bg-[var(--color-navy)] group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500">
                       {getIcon(service.icon || 'Globe')}
                     </div>
-                    <h4 className="text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] uppercase tracking-tighter">
-                      {service.title}
-                    </h4>
-                    <p className="text-[var(--color-text-main)] opacity-70 leading-relaxed max-w-sm">
-                      {service.description}
-                    </p>
+                    <div>
+                      <h4 className="text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] uppercase tracking-tighter mb-4">
+                        {service.title}
+                      </h4>
+                      <p className="text-[var(--color-text-main)] opacity-60 leading-relaxed text-base">
+                        {service.description}
+                      </p>
+                    </div>
                   </div>
-                  <div className="mt-8 flex items-center gap-4 text-sm font-black tracking-widest text-[var(--color-electric)] uppercase group-hover:gap-6 transition-all">
-                    EXPLORE SOLUTIONS <ArrowRight size={20} />
+                  
+                  <div className="mt-8 flex items-center gap-4 text-sm font-black tracking-widest text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] uppercase transition-colors relative z-10">
+                    Explore <ArrowRight size={20} className="group-hover:translate-x-3 transition-transform duration-500" />
                   </div>
                 </Link>
               );
@@ -268,56 +288,70 @@ export default function Home() {
         </section>
       )}
 
-      {/* 
-          Differentiators Section (Why Choose Us):
-          Highlights the unique value proposition (Business-first engineering).
-      */}
+      {/* Differentiators Section */}
       {isEnabled('why-choose-us') && (
-        <section className="max-w-7xl mx-auto px-6 w-full">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <section className="max-w-7xl mx-auto px-6 w-full py-12">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <div className="relative group order-2 lg:order-1">
-              <div className="absolute -inset-10 bg-gradient-glow opacity-30 blur-[120px] group-hover:opacity-50 transition-all duration-700" />
-              <div className="relative aspect-video bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2.5rem] overflow-hidden shadow-xl">
+              <div className="absolute -inset-10 bg-gradient-glow opacity-30 blur-[120px] group-hover:opacity-50 transition-all duration-700 pointer-events-none" />
+              <div className="relative aspect-[4/5] lg:aspect-[3/4] bg-[var(--color-card)] border border-[var(--color-border)] rounded-[3rem] overflow-hidden shadow-2xl">
                 <img
                   src="/images/templates.png"
-                  alt="Website Templates"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
+                  alt="Engineering Excellence"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 opacity-90"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)]/80 via-transparent to-transparent" />
               </div>
               <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 6, repeat: Infinity }}
-                className="absolute -top-6 -right-6 lg:-top-8 lg:-right-8 bg-[var(--color-card)] border border-[var(--color-border)] p-4 lg:p-6 rounded-xl lg:rounded-2xl shadow-2xl backdrop-blur-xl"
+                animate={{ y: [0, -20, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-10 -right-10 lg:-right-20 glass-card-premium p-6 rounded-3xl shadow-2xl border border-[var(--glass-border)] z-20"
               >
-                <div className="text-[var(--color-electric)] font-black text-lg lg:text-xl tracking-tighter">Business First</div>
-                <div className="text-[10px] text-[var(--color-text-main)] opacity-60 font-bold uppercase tracking-widest mt-1">Our Core Mindset</div>
+                <div className="flex items-center gap-4 mb-2">
+                  <div className="w-12 h-12 rounded-full bg-[#10B981]/20 flex items-center justify-center text-[#10B981]">
+                    <BarChart size={24} />
+                  </div>
+                  <div>
+                    <div className="text-2xl font-black text-[var(--color-text-main)]">3x</div>
+                    <div className="text-[10px] text-[var(--color-text-main)] opacity-60 font-bold uppercase tracking-widest">Revenue Growth</div>
+                  </div>
+                </div>
               </motion.div>
             </div>
 
-            <div className="space-y-6 lg:space-y-10 order-1 lg:order-2">
-              <div className="space-y-4 lg:space-y-6">
-                <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-bold font-outfit text-[var(--color-text-main)]">Your Partner in <br /><span className="text-gradient">Business Dominance</span></h2>
-                <p className="text-[var(--color-text-main)] opacity-70 leading-relaxed text-sm lg:text-base 2xl:text-lg">
-                  We bridge the gap between complex technology and business growth. Our solutions are engineered to be assets, not just expenses.
+            <div className="space-y-12 order-1 lg:order-2">
+              <div className="space-y-6">
+                <h2 className="text-4xl lg:text-6xl font-black font-outfit text-[var(--color-text-main)] leading-[1.1] tracking-tighter">
+                  Not Just A Website.<br />
+                  <span className="text-gradient">An Asset.</span>
+                </h2>
+                <p className="text-[var(--color-text-main)] opacity-60 leading-relaxed text-lg">
+                  We bridge the gap between complex technology and pure business growth. Every line of code we write is an investment engineered to generate returns.
                 </p>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4 lg:gap-6">
+              <div className="grid gap-6">
                 {[
-                  { title: "Revenue-first approach", desc: "Code designed to maximize return on investment." },
-                  { title: "Elite UI/UX Mastery", desc: "Premium design standards that command authority." },
-                  { title: "Technical SEO Core", desc: "Built-in optimization for organic growth." },
-                  { title: "Agile Rapid Delivery", desc: "Efficient workflows to market faster." },
+                  { title: "Revenue-First Engineering", desc: "Built to maximize conversion rates from day one." },
+                  { title: "Elite UI/UX Mastery", desc: "Award-winning aesthetics that command instant trust." },
+                  { title: "Technical SEO Core", desc: "Deep architectural optimization for organic dominance." },
                 ].map((benefit, i) => (
-                  <div key={i} className="flex gap-3 lg:gap-4 group">
-                    <div className="w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-[var(--color-electric)]/20 flex items-center justify-center text-[var(--color-electric)] group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all mt-1 shrink-0">
-                      <CheckCircle size={12} />
+                  <motion.div 
+                    key={i}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.15 }}
+                    className="flex gap-6 group glass-card-premium p-6 rounded-3xl"
+                  >
+                    <div className="w-14 h-14 rounded-2xl bg-[var(--color-electric)]/10 flex items-center justify-center text-[var(--color-electric)] group-hover:bg-[var(--color-electric)] group-hover:text-white transition-colors shrink-0">
+                      <CheckCircle size={24} />
                     </div>
                     <div>
-                      <h4 className="text-base font-bold text-[var(--color-text-main)]">{benefit.title}</h4>
-                      <p className="text-[var(--color-text-main)] opacity-60 text-xs mt-1">{benefit.desc}</p>
+                      <h4 className="text-xl font-bold text-[var(--color-text-main)] mb-2 font-outfit">{benefit.title}</h4>
+                      <p className="text-[var(--color-text-main)] opacity-60 text-sm leading-relaxed">{benefit.desc}</p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -325,74 +359,94 @@ export default function Home() {
         </section>
       )}
 
-      {/* 
-          Portfolio Showcase:
-          Selected high-impact case studies from the portfolio module.
-      */}
+      {/* Portfolio Showcase */}
       {isEnabled('portfolio') && (
         <section className="max-w-7xl mx-auto px-6 w-full">
-          <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-20">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
-                Selected Work
-              </div>
-              <h2 className="text-3xl lg:text-5xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Our <span className="text-gradient">Portfolio</span></h2>
-              <p className="text-[var(--color-text-main)] opacity-70 max-w-xl">
-                Showcasing our best work in branding, development, and strategic digital solutions.
+              <h2 className="text-4xl lg:text-6xl font-black font-outfit tracking-tighter text-[var(--color-text-main)]">
+                Featured <span className="text-gradient">Work</span>
+              </h2>
+              <p className="text-[var(--color-text-main)] opacity-60 max-w-xl text-lg">
+                Explore our recent digital transformations and see how we elevate brands to the next level.
               </p>
             </div>
             <Link
               href="/portfolio"
-              className="group flex items-center gap-3 text-[var(--color-text-main)] font-bold tracking-widest text-sm hover:text-[var(--color-electric)] transition-colors"
+              className="group flex items-center gap-3 px-6 py-3 rounded-full border border-[var(--color-border)] hover:bg-[var(--color-card)] transition-colors text-[var(--color-text-main)] font-bold tracking-widest text-xs uppercase"
             >
-              VIEW ALL PROJECTS <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+              View Archive <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.slice(0, 3).map((project, i) => (
-              <div key={i} className="card-premium group overflow-hidden flex flex-col h-full bg-[var(--color-card)]">
-                <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
-                  <img
-                    src={project.featuredImage || '/images/project-1.png'}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-glow opacity-0 group-hover:opacity-20 transition-opacity duration-700" />
-                  <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-gradient-glow group-hover:scale-150 transition-all duration-700" />
-                  <div className="absolute top-6 left-6 flex flex-col gap-2 z-10">
-                    <span className="px-4 py-2 bg-[var(--color-card)]/90 backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-border)] text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
+              <Link 
+                key={i}
+                href={`/portfolio/${project.slug || project.title.toLowerCase().replace(/ /g, '-')}`}
+                className={cn(
+                  "group relative overflow-hidden rounded-[2.5rem] bg-[var(--color-card)] border border-[var(--color-border)] block",
+                  i === 0 ? "md:col-span-2 lg:col-span-2 lg:row-span-2 aspect-square lg:aspect-auto" : "aspect-square"
+                )}
+              >
+                <img
+                  src={project.featuredImage || '/images/project-1.png'}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)]/90 via-[var(--color-navy)]/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="absolute inset-0 p-8 lg:p-12 flex flex-col justify-end transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                  <div className="flex gap-2 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                    <span className="px-3 py-1 bg-[var(--color-electric)] text-white text-[10px] font-black uppercase tracking-widest rounded-full">
                       {project.category}
                     </span>
-                    {project.industry && (
-                      <span className="px-4 py-2 bg-slate-900/90 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
-                        {project.industry}
-                      </span>
-                    )}
+                  </div>
+                  <h4 className="text-3xl lg:text-4xl font-black font-outfit text-white mb-2 leading-tight">
+                    {project.title}
+                  </h4>
+                  <p className="text-white/60 text-sm line-clamp-2 mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                    {project.challenge || project.description}
+                  </p>
+                  <div className="inline-flex items-center gap-2 text-[var(--color-electric)] font-bold text-xs tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-300">
+                    Case Study <ArrowRight size={16} />
                   </div>
                 </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
-                <div className="p-8 lg:p-10 space-y-6 flex-1 flex flex-col justify-between">
-                  <div className="space-y-4">
-                    <h4 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors line-clamp-2">{project.title}</h4>
-                    <p className="text-[var(--color-text-main)] opacity-60 text-sm leading-relaxed line-clamp-3">
-                      {project.challenge || project.description}
-                    </p>
-                    
-                    {project.result && (
-                      <div className="pt-4 border-t border-[var(--color-border)]">
-                        <div className="text-[10px] uppercase font-bold text-[var(--color-electric)] tracking-tighter mb-1">Result</div>
-                        <div className="text-lg font-black text-[var(--color-text-main)]">{project.result}</div>
-                      </div>
-                    )}
+      {/* Testimonials */}
+      {isEnabled('testimonials') && (
+        <section className="max-w-7xl mx-auto px-6 w-full relative pt-20">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--color-electric)]/5 blur-[150px] rounded-full pointer-events-none" />
+          
+          <div className="text-center space-y-6 mb-20 relative z-10">
+            <h2 className="text-4xl lg:text-6xl font-black font-outfit text-[var(--color-text-main)] tracking-tighter">
+              Client <span className="text-gradient">Feedback</span>
+            </h2>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 relative z-10">
+            {(testimonials.length > 0 ? testimonials.slice(0,3) : [1, 2, 3]).map((t: any, i) => (
+              <div key={i} className="glass-card-premium p-10 rounded-[2.5rem] relative group hover:-translate-y-2 transition-all duration-500">
+                <div className="absolute -top-6 -left-2 text-[120px] text-[var(--color-electric)] opacity-10 font-serif leading-none rotate-12 group-hover:rotate-0 transition-transform duration-500">"</div>
+                <div className="flex gap-1 text-[#F59E0B] mb-8 relative z-10">
+                  {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" />)}
+                </div>
+                <p className="text-[var(--color-text-main)] opacity-70 mb-10 text-lg leading-relaxed relative z-10">
+                  {t.content || "Uma Techno delivered exactly what we needed. Their attention to detail and premium design aesthetic helped us increase our conversions by over 300% within the first month."}
+                </p>
+                <div className="flex items-center gap-4 relative z-10 pt-6 border-t border-[var(--color-border)]">
+                  <div className="w-14 h-14 rounded-full bg-[var(--color-navy-light)] overflow-hidden border-2 border-[var(--color-border)] group-hover:border-[var(--color-electric)] transition-colors">
+                    <img src={t.image || `/images/client-${i+1}.png`} alt={t.name || "Client"} className="w-full h-full object-cover" onError={(e: any) => e.target.src = `https://i.pravatar.cc/100?u=${i}`} />
                   </div>
-
-                  <Link
-                    href={`/portfolio/${project.slug || project.title.toLowerCase().replace(/ /g, '-')}`}
-                    className="flex items-center gap-2 text-[var(--color-electric)] font-bold text-sm tracking-widest uppercase mt-6 group/link"
-                  >
-                    View Case Study <ArrowRight size={16} className="group-hover/link:translate-x-2 transition-transform" />
-                  </Link>
+                  <div>
+                    <h4 className="font-bold text-[var(--color-text-main)] text-lg">{t.name || `Client ${i+1}`}</h4>
+                    <p className="text-xs text-[var(--color-text-main)] opacity-50 font-bold uppercase tracking-widest">{t.role || "CEO"}, {t.company || "Tech Corp"}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -400,152 +454,10 @@ export default function Home() {
         </section>
       )}
 
-      {/* 
-          Social Proof (Testimonials):
-          Feedback from actual clients, either from the DB or using high-end placeholders.
-      */}
-      {isEnabled('testimonials') && (
-        <section className="max-w-7xl mx-auto px-6 w-full py-24 relative">
-          <div className="absolute inset-0 bg-gradient-glow scale-75 opacity-10 pointer-events-none" />
-          <div className="bg-gradient-soft rounded-[4rem] p-12 md:p-20 border border-[var(--color-border)]/30 shadow-2xl relative z-10">
-            <div className="text-center space-y-4 mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">What Our Clients <span className="text-gradient">Say</span></h2>
-              <p className="text-[var(--color-text-main)] opacity-60 max-w-xl mx-auto">See why businesses trust Uma Techno for their digital growth.</p>
-              <div className="pt-4">
-                 <button className="px-6 py-2 border border-[var(--color-electric)] text-[var(--color-electric)] rounded-full text-xs font-bold uppercase tracking-widest hover:bg-[var(--color-electric)] hover:text-white transition-all">
-                   Share Your Experience
-                 </button>
-              </div>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.length > 0 ? (
-              testimonials.map((t, i) => (
-                <div key={i} className="bg-[var(--color-card)] border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all">
-                  <div className="flex gap-1 text-[#F59E0B] mb-6">
-                    {Array.from({ length: t.rating || 5 }).map((_, star) => (
-                      <Star key={star} size={16} fill="currentColor" />
-                    ))}
-                  </div>
-                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic">"{t.content}"</p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] overflow-hidden">
-                      <img src={t.image || `https://i.pravatar.cc/100?u=${t.id}`} alt={t.name} className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-[var(--color-text-main)]">{t.name}</h4>
-                      <p className="text-xs text-[var(--color-text-main)] opacity-50">{t.role}{t.company ? `, ${t.company}` : ''}</p>
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              [1, 2, 3].map((i) => (
-                <div key={i} className="glass-card p-8 rounded-[var(--radius)] border border-[var(--color-border)] hover:shadow-xl transition-all group">
-                  <div className="flex gap-1 text-[#F59E0B] mb-6">
-                    {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" />)}
-                  </div>
-                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic">"Uma Techno delivered exactly what we needed. Their attention to detail and premium design aesthetic helped us increase our conversions by over 300% within the first month."</p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] border border-[var(--color-border)] overflow-hidden">
-                      <img src={`/images/client-${i}.png`} alt="Client" className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">John Doe {i}</h4>
-                      <p className="text-xs text-[var(--color-text-main)] opacity-50">CEO, Tech Innovators</p>
-                    </div>
-                  </div>
-                </div>
-              ))
-            )}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* 
-          Our Methodology:
-          Visualizes the roadmap of working with the agency.
-      */}
-      {isEnabled('process') && (
-        <section className="max-w-7xl mx-auto px-6 w-full">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6">
-              <h2 className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">How We Turn Ideas Into <span className="text-gradient">Reality</span></h2>
-              <p className="text-[var(--color-text-main)] opacity-70 leading-relaxed">
-                Our proven development methodology ensures your project is delivered on time, within budget, and to the highest quality standards.
-              </p>
-              <div className="space-y-4">
-                {processSteps.map((item, i) => (
-                  <div key={i} className="flex gap-4 group">
-                    <div className="w-10 h-10 rounded-xl bg-[var(--color-card)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-electric)] font-bold text-lg group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all shadow-sm">
-                      {i + 1}
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-bold text-[var(--color-text-main)] mb-1">{item.title}</h4>
-                      <p className="text-sm text-[var(--color-text-main)] opacity-60">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative group">
-              <div className="aspect-square bg-[var(--color-card)] rounded-[var(--radius)] overflow-hidden relative group shadow-xl">
-                <img
-                  src="/images/process-visual.png"
-                  alt="Process"
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
-                />
-                <div className="relative z-10 w-full h-full bg-[var(--color-card)]/30 backdrop-blur-md flex items-center justify-center p-12">
-                  <div className="text-center space-y-4 bg-[var(--color-card)]/80 p-8 rounded-3xl shadow-2xl backdrop-blur-xl">
-                    <Zap size={48} className="text-[var(--color-electric)] mx-auto animate-float" />
-                    <div className="text-3xl font-bold font-outfit text-[var(--color-text-main)]">Rapid Execution</div>
-                    <p className="text-[var(--color-text-main)] opacity-70">Turning complex ideas into scalable reality.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* 
-          Final Conversion Area (CTA):
-          Primary driver for new client inquiries.
-      */}
-      {isEnabled('cta') && (
-        <section className="max-w-7xl mx-auto px-6 w-full pb-20">
-          <div className="bg-gradient-soft border border-[var(--color-border)] rounded-[3rem] p-10 lg:p-24 text-center space-y-10 relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--color-electric)]/10 blur-[150px] -mr-64 -mt-64" />
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[var(--color-accent)]/10 blur-[150px] -ml-64 -mb-64" />
-
-            <h2 className="text-3xl lg:text-5xl font-bold font-outfit max-w-3xl mx-auto leading-tight text-[var(--color-text-main)]">
-              Ready to Accelerate Your <span className="text-gradient">Business Growth</span>?
-            </h2>
-            <p className="text-[var(--color-text-main)] opacity-70 max-w-xl mx-auto leading-relaxed">
-              Stop settling for mediocre digital presence. Partner with Uma Techno to build a premium solution that commands authority and delivers results.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4 relative z-10">
-              <Link
-                href="/contact"
-                className="px-8 py-4 text-white rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl bg-gradient-premium text-center"
-              >
-                Get Free Consultation
-              </Link>
-              <Link
-                href="/portfolio"
-                className="px-8 py-4 bg-transparent border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-[var(--color-navy-light)] rounded-xl font-bold text-base transition-all text-center"
-              >
-                View Our Work
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Sticky Bottom Mobile CTA for conversion on smaller screens */}
-      <div className="fixed bottom-0 left-0 w-full p-4 bg-[var(--background)]/90 backdrop-blur-md border-t border-[var(--color-border)] z-40 lg:hidden flex justify-center shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
-        <Link href="/contact" className="w-full max-w-md py-4 bg-gradient-premium text-white font-bold rounded-xl text-center shadow-lg">
-          Get Started Today
+      {/* Sticky Bottom Mobile CTA */}
+      <div className="fixed bottom-0 left-0 w-full p-4 bg-[var(--background)]/90 backdrop-blur-xl border-t border-[var(--color-border)] z-40 lg:hidden flex justify-center shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+        <Link href="/contact" className="w-full max-w-md py-4 bg-gradient-premium text-white font-bold rounded-[2rem] text-center shadow-lg uppercase tracking-widest text-sm flex justify-center items-center gap-2">
+          <Sparkles size={16} /> Get Started
         </Link>
       </div>
     </div>
