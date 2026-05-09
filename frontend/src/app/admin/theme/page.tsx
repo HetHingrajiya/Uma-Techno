@@ -2,16 +2,16 @@
 
 import React, { useState, useEffect } from "react";
 import ImageUploader from "@/components/admin/ImageUploader";
-import { 
-  Palette, 
-  Save, 
-  Plus, 
-  Trash2, 
-  Check, 
-  RotateCcw, 
-  Search, 
-  Filter, 
-  Eye, 
+import {
+  Palette,
+  Save,
+  Plus,
+  Trash2,
+  Check,
+  RotateCcw,
+  Search,
+  Filter,
+  Eye,
   Layout,
   MousePointer2,
   Heart,
@@ -31,7 +31,7 @@ interface PaletteType {
   accentColor: string;
   backgroundColor: string;
   textColor: string;
-   cardColor: string;
+  cardColor: string;
   borderColor: string;
   headerColor?: string;
   footerColor?: string;
@@ -157,15 +157,15 @@ export default function ThemeSettingsPage() {
         const found = savedPalettes.find(p => p.name === palette.name);
         if (found) realId = found.id;
         else {
-           const createRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`, {
-             method: "POST",
-             headers: { "Content-Type": "application/json" },
-             body: JSON.stringify(palette)
-           });
-           if (createRes.ok) {
-             const newP = await createRes.json();
-             realId = newP.id;
-           }
+          const createRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(palette)
+          });
+          if (createRes.ok) {
+            const newP = await createRes.json();
+            realId = newP.id;
+          }
         }
       }
 
@@ -208,7 +208,7 @@ export default function ThemeSettingsPage() {
 
   const applyThemeLocally = (p: PaletteType) => {
     const root = document.documentElement;
-    
+
     // Core Colors
     root.style.setProperty('--color-electric', p.primaryColor);
     root.style.setProperty('--color-secondary', p.secondaryColor || p.primaryColor);
@@ -221,7 +221,7 @@ export default function ThemeSettingsPage() {
     root.style.setProperty('--color-header', p.headerColor || p.cardColor);
     root.style.setProperty('--color-footer', p.footerColor || p.backgroundColor);
     root.style.setProperty('--color-blue-glow', p.primaryColor + '25');
-    
+
     const hexToRgbStr = (hex: string) => {
       try {
         const h = hex.startsWith('#') ? hex : '#FFFFFF';
@@ -234,7 +234,7 @@ export default function ThemeSettingsPage() {
 
     root.style.setProperty('--color-header-rgb', hexToRgbStr(p.headerColor || p.cardColor));
     root.style.setProperty('--color-footer-rgb', hexToRgbStr(p.footerColor || p.backgroundColor));
-    
+
     // Luminance detection
     const hexToRgb = (hex: string) => {
       const r = parseInt(hex.slice(1, 3), 16);
@@ -301,16 +301,16 @@ export default function ThemeSettingsPage() {
     setSaving(true);
     try {
       const isEditing = !!editingPaletteId;
-      const url = isEditing 
+      const url = isEditing
         ? `${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes/${editingPaletteId}`
         : `${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`;
-        
+
       const res = await fetch(url, {
         method: isEditing ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(customPalette)
       });
-      
+
       if (res.ok) {
         alert(isEditing ? "Palette updated successfully!" : "Custom palette created and saved successfully!");
         setShowCustomBuilder(false);
@@ -328,17 +328,17 @@ export default function ThemeSettingsPage() {
     }
   };
 
-  const filteredPalettes = PALETTE_PACKS.flatMap(pack => 
+  const filteredPalettes = PALETTE_PACKS.flatMap(pack =>
     pack.palettes.map(p => ({ ...p, category: pack.category, id: `prebuilt-${p.name}` } as PaletteType))
   ).concat(savedPalettes.map(p => ({ ...p, isCustom: true })))
-  .filter((p, index, self) => 
-    index === self.findIndex((t) => t.name === p.name)
-  )
-  .filter(p => {
-    const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = activeCategory === "All" || p.category === activeCategory;
-    return matchesSearch && matchesCategory;
-  });
+    .filter((p, index, self) =>
+      index === self.findIndex((t) => t.name === p.name)
+    )
+    .filter(p => {
+      const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesCategory = activeCategory === "All" || p.category === activeCategory;
+      return matchesSearch && matchesCategory;
+    });
 
   return (
     <div className="space-y-8 pb-20">
@@ -352,7 +352,7 @@ export default function ThemeSettingsPage() {
             Choose a professional color palette or build your own custom brand identity. Changes apply instantly across the whole website.
           </p>
         </div>
-        <button 
+        <button
           onClick={() => {
             setEditingPaletteId(null);
             setCustomPalette({
@@ -384,7 +384,7 @@ export default function ThemeSettingsPage() {
       <div className="flex flex-col md:flex-row gap-4 items-center">
         <div className="relative flex-1 w-full">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-text-main)] opacity-30" size={18} />
-          <input 
+          <input
             type="text"
             placeholder="Search palettes..."
             value={searchQuery}
@@ -397,11 +397,10 @@ export default function ThemeSettingsPage() {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-4 md:px-6 py-2 md:py-4 rounded-xl md:rounded-2xl font-bold text-xs md:text-sm whitespace-nowrap transition-all ${
-                activeCategory === cat 
-                ? "bg-electric text-white shadow-lg" 
-                : "bg-[var(--color-navy-light)] text-[var(--color-text-main)] opacity-60 hover:opacity-100 border border-[var(--color-border)]"
-              }`}
+              className={`px-4 md:px-6 py-2 md:py-4 rounded-xl md:rounded-2xl font-bold text-xs md:text-sm whitespace-nowrap transition-all ${activeCategory === cat
+                  ? "bg-electric text-white shadow-lg"
+                  : "bg-[var(--color-navy-light)] text-[var(--color-text-main)] opacity-60 hover:opacity-100 border border-[var(--color-border)]"
+                }`}
             >
               {cat}
             </button>
@@ -416,11 +415,10 @@ export default function ThemeSettingsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
             key={palette.id || palette.name}
-            className={`group card-premium overflow-hidden border-2 transition-all cursor-pointer relative bg-[var(--color-card)] ${
-              (previewPalette?.name === palette.name || (!previewPalette && activePalette?.name === palette.name))
-              ? "border-electric ring-4 ring-electric/10" 
-              : "border-[var(--color-border)] hover:border-electric/30"
-            }`}
+            className={`group card-premium overflow-hidden border-2 transition-all cursor-pointer relative bg-[var(--color-card)] ${(previewPalette?.name === palette.name || (!previewPalette && activePalette?.name === palette.name))
+                ? "border-electric ring-4 ring-electric/10"
+                : "border-[var(--color-border)] hover:border-electric/30"
+              }`}
           >
             {/* Palette Preview */}
             <div className="h-40 flex flex-col">
@@ -443,41 +441,39 @@ export default function ThemeSettingsPage() {
                   <span className="text-[10px] uppercase font-black tracking-widest text-[var(--color-text-main)] opacity-40">{palette.category}</span>
                 </div>
                 <div className="flex gap-2">
-                   <button className="text-[var(--color-text-main)] opacity-30 hover:opacity-100 transition-opacity">
-                      <Heart size={16} />
-                   </button>
-                    <button className="text-[var(--color-text-main)] opacity-30 hover:opacity-100 transition-opacity">
-                       <Copy size={16} />
-                    </button>
-                    <button 
-                      onClick={(e) => { e.stopPropagation(); handleEdit(palette); }}
-                      className="text-[var(--color-text-main)] opacity-30 hover:opacity-100 transition-opacity"
-                    >
-                       <Edit3 size={16} />
-                    </button>
+                  <button className="text-[var(--color-text-main)] opacity-30 hover:opacity-100 transition-opacity">
+                    <Heart size={16} />
+                  </button>
+                  <button className="text-[var(--color-text-main)] opacity-30 hover:opacity-100 transition-opacity">
+                    <Copy size={16} />
+                  </button>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); handleEdit(palette); }}
+                    className="text-[var(--color-text-main)] opacity-30 hover:opacity-100 transition-opacity"
+                  >
+                    <Edit3 size={16} />
+                  </button>
                 </div>
               </div>
 
               <div className="flex gap-3">
-                <button 
+                <button
                   onClick={() => handleApply(palette)}
                   disabled={saving}
-                  className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 ${
-                    activePalette?.name === palette.name
-                    ? "bg-green-500 text-white"
-                    : "bg-electric text-white hover:brightness-110"
-                  }`}
+                  className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 ${activePalette?.name === palette.name
+                      ? "bg-green-500 text-white"
+                      : "bg-electric text-white hover:brightness-110"
+                    }`}
                 >
                   {saving && activePalette?.name === palette.name ? <Loader2 size={16} className="animate-spin" /> : activePalette?.name === palette.name ? <Check size={16} /> : <MousePointer2 size={16} />}
                   {activePalette?.name === palette.name ? "Active" : "Apply Theme"}
                 </button>
-                <button 
+                <button
                   onClick={() => handlePreview(palette)}
-                  className={`w-12 border rounded-xl flex items-center justify-center transition-all ${
-                    previewPalette?.name === palette.name
-                    ? "bg-electric border-electric text-white"
-                    : "bg-[var(--color-navy-light)] border-[var(--color-border)] text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:border-electric"
-                  }`}
+                  className={`w-12 border rounded-xl flex items-center justify-center transition-all ${previewPalette?.name === palette.name
+                      ? "bg-electric border-electric text-white"
+                      : "bg-[var(--color-navy-light)] border-[var(--color-border)] text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:border-electric"
+                    }`}
                 >
                   <Eye size={18} />
                 </button>
@@ -490,7 +486,7 @@ export default function ThemeSettingsPage() {
       {/* Live Preview Bar */}
       <AnimatePresence>
         {previewPalette && (
-          <motion.div 
+          <motion.div
             initial={{ y: 100 }}
             animate={{ y: 0 }}
             exit={{ y: 100 }}
@@ -509,13 +505,13 @@ export default function ThemeSettingsPage() {
                 </div>
               </div>
               <div className="flex items-center gap-2 md:gap-3 pr-0 md:pr-2 w-full md:w-auto">
-                <button 
+                <button
                   onClick={handleDiscard}
                   className="flex-1 md:flex-none px-4 md:px-6 py-2 md:py-3 text-white/70 hover:text-white font-bold text-xs md:text-sm"
                 >
                   Discard
                 </button>
-                <button 
+                <button
                   onClick={() => handleApply(previewPalette)}
                   disabled={saving}
                   className="flex-[2] md:flex-none bg-[var(--color-card)] text-[var(--color-text-main)] px-4 md:px-8 py-2 md:py-3 rounded-xl md:rounded-2xl font-black text-[10px] md:text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-xl disabled:opacity-50"
@@ -532,14 +528,14 @@ export default function ThemeSettingsPage() {
       <AnimatePresence>
         {showCustomBuilder && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowCustomBuilder(false)}
               className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
             />
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
@@ -554,78 +550,78 @@ export default function ThemeSettingsPage() {
                 </div>
 
                 <div className="space-y-6">
-                   <div className="space-y-2">
-                      <label className="text-xs font-bold text-[var(--color-text-main)] opacity-60 uppercase tracking-widest">Palette Name</label>
-                      <input 
-                        type="text" 
-                        value={customPalette.name}
-                        onChange={(e) => setCustomPalette({...customPalette, name: e.target.value})}
-                        className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 focus:outline-none focus:border-electric font-bold text-[var(--color-text-main)]"
-                      />
-                   </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-[var(--color-text-main)] opacity-60 uppercase tracking-widest">Palette Name</label>
+                    <input
+                      type="text"
+                      value={customPalette.name}
+                      onChange={(e) => setCustomPalette({ ...customPalette, name: e.target.value })}
+                      className="w-full bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 focus:outline-none focus:border-electric font-bold text-[var(--color-text-main)]"
+                    />
+                  </div>
 
-                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                      {[
-                        { label: "Primary", key: "primaryColor" },
-                        { label: "Secondary", key: "secondaryColor" },
-                        { label: "Accent", key: "accentColor" },
-                        { label: "Background", key: "backgroundColor" },
-                        { label: "Text", key: "textColor" },
-                        { label: "Card", key: "cardColor" },
-                        { label: "Border", key: "borderColor" },
-                        { label: "Header", key: "headerColor" },
-                        { label: "Footer", key: "footerColor" }
-                      ].map(item => (
-                        <div key={item.key} className="space-y-2">
-                           <label className="text-[10px] font-black text-slate-400 uppercase tracking-tighter">{item.label}</label>
-                           <div className="relative">
-                              <input 
-                                type="color" 
-                                value={(customPalette as any)[item.key]}
-                                onChange={(e) => setCustomPalette({...customPalette, [item.key]: e.target.value})}
-                                className="w-full h-10 md:h-12 rounded-xl cursor-pointer border-none p-0"
-                              />
-                              <div className="absolute inset-0 pointer-events-none rounded-xl border border-[var(--color-border)] ring-1 ring-inset ring-white/10" />
-                           </div>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                    {[
+                      { label: "Primary", key: "primaryColor" },
+                      { label: "Secondary", key: "secondaryColor" },
+                      { label: "Accent", key: "accentColor" },
+                      { label: "Background", key: "backgroundColor" },
+                      { label: "Text", key: "textColor" },
+                      { label: "Card", key: "cardColor" },
+                      { label: "Border", key: "borderColor" },
+                      { label: "Header", key: "headerColor" },
+                      { label: "Footer", key: "footerColor" }
+                    ].map(item => (
+                      <div key={item.key} className="space-y-2">
+                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-tighter">{item.label}</label>
+                        <div className="relative">
+                          <input
+                            type="color"
+                            value={(customPalette as any)[item.key]}
+                            onChange={(e) => setCustomPalette({ ...customPalette, [item.key]: e.target.value })}
+                            className="w-full h-10 md:h-12 rounded-xl cursor-pointer border-none p-0"
+                          />
+                          <div className="absolute inset-0 pointer-events-none rounded-xl border border-[var(--color-border)] ring-1 ring-inset ring-white/10" />
                         </div>
-                      ))}
-                   </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="space-y-6 pt-6 border-t border-[var(--color-border)]">
-                   <h3 className="text-lg font-bold text-[var(--color-text-main)] flex items-center gap-2">
-                      <Layout size={20} className="text-electric" /> Brand Assets
-                   </h3>
-                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      <ImageUploader 
-                        label="Official Logo" 
-                        currentImage={customPalette.logoUrl} 
-                        onUpload={(url) => setCustomPalette({...customPalette, logoUrl: url})}
-                        aspectRatio="aspect-square"
-                      />
-                      <ImageUploader 
-                        label="Hero Background" 
-                        currentImage={customPalette.heroImageUrl} 
-                        onUpload={(url) => setCustomPalette({...customPalette, heroImageUrl: url})}
-                        aspectRatio="aspect-video"
-                      />
-                      <ImageUploader 
-                        label="About Section" 
-                        currentImage={customPalette.aboutImageUrl} 
-                        onUpload={(url) => setCustomPalette({...customPalette, aboutImageUrl: url})}
-                        aspectRatio="aspect-video"
-                      />
-                   </div>
+                  <h3 className="text-lg font-bold text-[var(--color-text-main)] flex items-center gap-2">
+                    <Layout size={20} className="text-electric" /> Brand Assets
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <ImageUploader
+                      label="Official Logo"
+                      currentImage={customPalette.logoUrl}
+                      onUpload={(url) => setCustomPalette({ ...customPalette, logoUrl: url })}
+                      aspectRatio="aspect-square"
+                    />
+                    <ImageUploader
+                      label="Hero Background"
+                      currentImage={customPalette.heroImageUrl}
+                      onUpload={(url) => setCustomPalette({ ...customPalette, heroImageUrl: url })}
+                      aspectRatio="aspect-video"
+                    />
+                    <ImageUploader
+                      label="About Section"
+                      currentImage={customPalette.aboutImageUrl}
+                      onUpload={(url) => setCustomPalette({ ...customPalette, aboutImageUrl: url })}
+                      aspectRatio="aspect-video"
+                    />
+                  </div>
                 </div>
 
                 <div className="pt-4 md:pt-8 flex gap-4">
-                  <button 
+                  <button
                     onClick={() => setShowCustomBuilder(false)}
                     className="flex-1 py-3 md:py-4 text-[var(--color-text-main)] opacity-60 font-bold hover:text-[var(--color-text-main)] transition-colors text-sm"
                   >
                     Cancel
                   </button>
-                  <button 
+                  <button
                     onClick={handleCreateCustom}
                     disabled={saving}
                     className="flex-[2] bg-electric hover:bg-electric/90 text-white py-3 md:py-4 rounded-xl md:rounded-2xl font-black uppercase tracking-widest shadow-xl hover:shadow-electric/30 transition-all flex items-center justify-center gap-2 text-xs md:text-sm"

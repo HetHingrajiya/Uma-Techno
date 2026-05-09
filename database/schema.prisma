@@ -202,9 +202,6 @@ model ThemePalette {
   footerColor     String   @default("#0F172A")
   isDefault       Boolean  @default(false)
   isActive        Boolean  @default(false)
-  logoUrl             String?
-  heroImageUrl        String?
-  aboutImageUrl       String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }

@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient() as any;
+import prisma from '../lib/prisma';
 
 export const getTheme = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -11,17 +9,10 @@ export const getTheme = async (req: Request, res: Response): Promise<void> => {
         data: {} // Uses defaults from schema
       });
     }
-    // Ensure we don't return broken URLs if they are empty strings
-    const cleanTheme = {
-      ...theme,
-      logoUrl: theme.logoUrl || null,
-      heroImageUrl: theme.heroImageUrl || null,
-      aboutImageUrl: theme.aboutImageUrl || null,
-    };
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
     res.setHeader('Pragma', 'no-cache');
     res.setHeader('Expires', '0');
-    res.json(cleanTheme);
+    res.json(theme);
   } catch (error) {
     console.error('Error fetching theme:', error);
     res.status(500).json({ error: 'Failed to fetch theme settings' });
@@ -108,7 +99,7 @@ export const setActivePalette = async (req: Request, res: Response) => {
     
     // Sync with ThemeSetting for backward compatibility and direct use
     let theme = await prisma.themeSetting.findFirst();
-    const themeData: any = {
+    const themeData = {
       primaryColor: activePalette.primaryColor,
       secondaryColor: activePalette.secondaryColor,
       accentColor: activePalette.accentColor,
@@ -118,13 +109,8 @@ export const setActivePalette = async (req: Request, res: Response) => {
       borderColor: activePalette.borderColor,
       headerColor: activePalette.headerColor,
       footerColor: activePalette.footerColor,
+      // logoUrl, heroImageUrl, and aboutImageUrl are kept from existing theme settings
     };
-
-    // Only update images if the palette explicitly provides them to avoid overwriting brand assets
-    const palette = activePalette as any;
-    if (palette.logoUrl) themeData.logoUrl = palette.logoUrl;
-    if (palette.heroImageUrl) themeData.heroImageUrl = palette.heroImageUrl;
-    if (palette.aboutImageUrl) themeData.aboutImageUrl = palette.aboutImageUrl;
 
     if (theme) {
       await prisma.themeSetting.update({

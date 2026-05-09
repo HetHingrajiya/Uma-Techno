@@ -27,16 +27,28 @@ import {
   ResponsiveContainer 
 } from 'recharts';
 
+/**
+ * DashboardDashboard:
+ * The primary administrative landing page.
+ * Orchestrates real-time analytics fetching, lead monitoring, and system status tracking.
+ */
 export default function DashboardDashboard() {
+  // State for raw statistical data from the backend
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
 
+  // Initialization: Sets hydration safety and triggers the first data pull
   useEffect(() => {
     setMounted(true);
     fetchStats();
   }, []);
 
+  /**
+   * fetchStats:
+   * Communicates with the CMS backend to retrieve lead counts, visit trends, 
+   * and recent activity.
+   */
   const fetchStats = async () => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/dashboard/stats`);
@@ -51,6 +63,7 @@ export default function DashboardDashboard() {
     }
   };
 
+  // Full-screen loader for the initial authentication and data handshake
   if (loading) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
@@ -60,12 +73,14 @@ export default function DashboardDashboard() {
     );
   }
 
+  // Fallback stats structure in case the API is unreachable
   const stats = data?.stats || [
     { name: "Total Leads", value: "0", change: "0%", trendingUp: true, icon: MessageSquare },
     { name: "Active Projects", value: "0", change: "0%", trendingUp: true, icon: TrendingUp },
     { name: "Total Services", value: "0", change: "0%", trendingUp: true, icon: Layers },
   ];
 
+  // Utility to map dynamic stat names to their corresponding Lucide icons
   const getIcon = (name: string) => {
     const n = name || "";
     if (n.includes("Leads")) return <MessageSquare size={24} />;
@@ -76,7 +91,7 @@ export default function DashboardDashboard() {
 
   return (
     <div className="space-y-6 md:space-y-8">
-      {/* Header */}
+      {/* Header Section: Date display and manual refresh control */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
            <h1 className="text-xl md:text-2xl font-bold font-outfit text-[var(--color-text-main)]">Dashboard Overview</h1>
@@ -95,7 +110,7 @@ export default function DashboardDashboard() {
         </button>
       </div>
 
-      {/* Stats Grid */}
+      {/* Primary KPI Cards: Displays Leads, Projects, and Service counts */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {stats.length > 0 ? stats.map((stat: any) => (
           <div key={stat.name} className="glass-card p-6 rounded-2xl border border-[var(--color-border)] shadow-sm hover:shadow-xl transition-all">
@@ -120,7 +135,7 @@ export default function DashboardDashboard() {
         )}
       </div>
 
-      {/* Main Analytics Graph */}
+      {/* Analytics Visualization: Lead and Visit trends over time using Recharts */}
       <div className="glass-card p-6 md:p-10 rounded-[2.5rem] border border-[var(--color-border)] shadow-sm overflow-hidden relative group">
         <div className="absolute top-0 right-0 w-64 h-64 bg-electric/5 blur-[100px] -mr-32 -mt-32 pointer-events-none" />
         
@@ -199,7 +214,7 @@ export default function DashboardDashboard() {
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-        {/* Recent Leads */}
+        {/* Recent Inquiries: List of the latest submissions from the contact form */}
         <div className="glass-card p-6 md:p-10 rounded-[2.5rem] border border-[var(--color-border)] shadow-sm">
           <div className="flex justify-between items-center mb-8">
             <h3 className="text-xl font-bold font-outfit text-[var(--color-text-main)] flex items-center gap-2">
@@ -240,7 +255,7 @@ export default function DashboardDashboard() {
           </div>
         </div>
 
-        {/* System Health / Quick Actions */}
+        {/* System Health Section: Diagnostic cards for performance and latency */}
         <div className="glass-card p-6 md:p-10 rounded-[2.5rem] border border-[var(--color-border)] shadow-sm">
           <div className="flex justify-between items-center mb-8">
             <h3 className="text-xl font-bold font-outfit text-[var(--color-text-main)]">System Health</h3>

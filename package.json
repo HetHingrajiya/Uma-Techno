@@ -6,6 +6,7 @@
     "dev:backend": "cd backend && npm run dev",
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     "build": "npm run build --prefix backend && npm run build --prefix frontend",
+    "vercel-build": "npm run prisma:generate && npm run build",
     "prisma:generate": "npm run prisma:generate --prefix backend",
     "prisma:migrate": "npm run prisma:migrate --prefix backend"
   },

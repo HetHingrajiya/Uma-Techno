@@ -28,11 +28,8 @@ interface ThemeSettings {
   aboutImageUrl: string | null;
 }
 
-// React Context to provide theme data and a cache-busting timestamp to any component
-const ThemeContext = createContext<{ 
-  theme: ThemeSettings; 
-  cacheBuster: number; 
-} | undefined>(undefined);
+// React Context to provide theme data to any component in the tree
+const ThemeContext = createContext<{ theme: ThemeSettings } | undefined>(undefined);
 
 // Fallback theme used during initial load or if the API is unavailable
 const defaultTheme: ThemeSettings = {
@@ -58,7 +55,7 @@ const defaultTheme: ThemeSettings = {
 };
 
 /**
- * Hook to access the current theme settings and cache buster from any functional component.
+ * Hook to access the current theme settings from any functional component.
  */
 export function useTheme() {
   const context = useContext(ThemeContext);
@@ -74,7 +71,6 @@ export function useTheme() {
  */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<ThemeSettings>(defaultTheme);
-  const [cacheBuster, setCacheBuster] = useState(Date.now());
 
   useEffect(() => {
     /**
@@ -83,9 +79,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
      */
     const fetchTheme = async () => {
       try {
-        // Update cache buster to force re-rendering of images with the same URL
-        setCacheBuster(Date.now());
-
         // First check if there is a preview theme in localStorage (active during theme editing)
         const previewData = localStorage.getItem('preview-theme');
         if (previewData) {
@@ -241,7 +234,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
         }
       `}} />
-      <ThemeContext.Provider value={{ theme, cacheBuster }}>
+      <ThemeContext.Provider value={{ theme }}>
         {children}
       </ThemeContext.Provider>
     </>

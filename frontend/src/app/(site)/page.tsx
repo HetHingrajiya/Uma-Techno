@@ -209,19 +209,10 @@ export default function Home() {
             ))}
           </div>
           
-          {/* Client Logos: Using newly added brand assets */}
-          <div className="flex flex-wrap justify-center items-center gap-12 lg:gap-24 mt-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-             {[1, 2, 3].map(i => (
-                <div key={i} className="relative h-12 w-36">
-                   <img 
-                     src={`/images/client-${i}.png`} 
-                     alt={`Trusted Client ${i}`} 
-                     className="w-full h-full object-contain"
-                   />
-                </div>
-             ))}
-             {/* Fallback text for variety if logos are similar */}
-             <span className="text-xl lg:text-2xl font-bold font-outfit text-[var(--color-text-main)]">Global Retailers</span>
+          <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16 mt-16 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
+            {["Retailers", "Real Estate", "Startups", "Enterprises", "Medical Centres"].map(brand => (
+              <span key={brand} className="text-xl lg:text-2xl font-bold font-outfit text-[var(--color-text-main)]">{brand}</span>
+            ))}
           </div>
         </section>
       )}
@@ -504,7 +495,7 @@ export default function Home() {
                   alt="Process"
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                 />
-                <div className="relative z-10 w-full h-full flex items-center justify-center p-12">
+                <div className="relative z-10 w-full h-full bg-[var(--color-card)]/30 backdrop-blur-md flex items-center justify-center p-12">
                   <div className="text-center space-y-4 bg-[var(--color-card)]/80 p-8 rounded-3xl shadow-2xl backdrop-blur-xl">
                     <Zap size={48} className="text-[var(--color-electric)] mx-auto animate-float" />
                     <div className="text-3xl font-bold font-outfit text-[var(--color-text-main)]">Rapid Execution</div>

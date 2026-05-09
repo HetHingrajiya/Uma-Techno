@@ -1,12 +1,31 @@
-"use client";
-
 import { Target, Eye, Heart, Users, Award, Shield } from "lucide-react";
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
+import { Metadata } from "next";
 import Image from "next/image";
-import { useTheme } from "@/components/ThemeProvider";
-import { useState, useEffect } from "react";
 
+/**
+ * AboutPage Metadata:
+ * Optimized for SEO with localized keywords for Rajkot and Gujarat.
+ * Includes OpenGraph configuration for social sharing consistency.
+ */
+export const metadata: Metadata = {
+  title: "About Us | Uma Techno - Premium IT Agency in Rajkot",
+  description: "Learn about Uma Techno, the leading digital agency in Rajkot, Gujarat. We are a team of experts dedicated to building masterpieces in web development and SEO.",
+  alternates: {
+    canonical: "https://umatechno.in/about",
+  },
+  openGraph: {
+    title: "About Uma Techno | Premium Agency in Rajkot",
+    description: "Learn about our mission, vision, and the team behind the most innovative digital agency in Gujarat.",
+    images: ["/images/about.png"],
+  },
+};
+
+/**
+ * coreValues:
+ * Defines the company's guiding principles used in the values section.
+ */
 const values = [
   { name: "Innovation", icon: Target, description: "We push boundaries and explore new technologies." },
   { name: "Quality", icon: Award, description: "We never compromise on the quality of our code and design." },
@@ -17,19 +36,38 @@ const values = [
 ];
 
 export default function AboutPage() {
-  const { theme, cacheBuster } = useTheme();
-  const [imgError, setImgError] = useState(false);
-
-  useEffect(() => {
-    setImgError(false);
-  }, [theme.aboutImageUrl]);
-
-  const aboutSrc = (theme.aboutImageUrl && !imgError)
-    ? `${theme.aboutImageUrl}?v=${cacheBuster}`
-    : "/images/about.png";
+  /**
+   * breadcrumbLd:
+   * JSON-LD Structured Data for search engines to understand the page hierarchy.
+   */
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://umatechno.in"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "About",
+        "item": "https://umatechno.in/about"
+      }
+    ]
+  };
 
   return (
     <div className="py-20 space-y-32 bg-[var(--background)]">
+      {/* Inject Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      
+      {/* Hero Section: Company Overview and Stats */}
       <section className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         <div className="space-y-8">
           <h2 className="text-electric font-bold tracking-widest text-sm uppercase">About Uma Techno</h2>
@@ -55,11 +93,11 @@ export default function AboutPage() {
         </div>
         <div className="relative group">
            <div className="aspect-square glass-card rounded-[3rem] overflow-hidden rotate-3 relative z-10 border border-white/5">
-              <img 
-                src={aboutSrc} 
+              <Image 
+                src="/images/about.png" 
                 alt="Digital Masterpiece - Uma Techno Rajkot Team" 
+                fill
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
-                onError={() => setImgError(true)}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-40" />
            </div>
@@ -67,7 +105,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values */}
+      {/* Values Section: Core Principles Grid */}
       <section className="max-w-7xl mx-auto px-6">
         <div className="text-center space-y-4 mb-16">
           <h3 className="text-4xl font-bold font-outfit">Our Core Values</h3>
@@ -89,7 +127,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Mission Vision */}
+      {/* Mission & Vision: Long-term Strategic Focus */}
       <section className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8">
          <div className="glass-card p-12 rounded-[3rem] bg-gradient-to-br from-[var(--color-electric)]/10 to-transparent border-[var(--color-border)]">
             <h3 className="text-3xl font-bold font-outfit mb-6 text-[var(--color-text-main)]">Our Mission</h3>
@@ -107,7 +145,7 @@ export default function AboutPage() {
          </div>
       </section>
 
-      {/* CTA */}
+      {/* Call to Action: Conversion Point */}
       <section className="max-w-7xl mx-auto px-6 text-center">
          <div className="space-y-8">
             <h2 className="text-4xl font-bold font-outfit text-[var(--color-text-main)]">Want to work with us?</h2>
