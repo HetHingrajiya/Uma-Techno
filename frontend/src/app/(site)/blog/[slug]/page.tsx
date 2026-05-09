@@ -12,7 +12,7 @@ const blogData: Record<string, any> = {
     date: "May 5, 2026",
     author: "Uma Team",
     readTime: "8 min read",
-    image: "/images/blog-1.png",
+    image: "/images/blog-1-v2.png",
     content: `
       <p>Choosing the <strong>best web development company in Rajkot</strong> is a critical decision that can define your business's trajectory in the digital world. With hundreds of agencies claiming to be the best, how do you filter through the noise?</p>
       
@@ -35,7 +35,7 @@ const blogData: Record<string, any> = {
     date: "May 3, 2026",
     author: "SEO Expert",
     readTime: "12 min read",
-    image: "/images/blog-2.png",
+    image: "/images/blog-2-v2.png",
     content: `
       <p>If your business is based in <strong>Rajkot</strong>, local SEO is your most powerful growth tool. When someone searches for "services near me," you need to be the first name they see.</p>
       
@@ -55,7 +55,7 @@ const blogData: Record<string, any> = {
     date: "April 28, 2026",
     author: "Uma Team",
     readTime: "10 min read",
-    image: "/images/blog-3.png",
+    image: "/images/blog-3-v2.png",
     content: `
       <p>One of the most frequent questions we get at Uma Techno is: "What is the <strong>website cost in India</strong> for 2026?" The answer depends on your goals, but here is a realistic breakdown.</p>
       
@@ -75,7 +75,7 @@ const blogData: Record<string, any> = {
     date: "April 25, 2026",
     author: "Tech Analyst",
     readTime: "7 min read",
-    image: "/images/blog-4.png",
+    image: "/images/blog-4-v2.png",
     content: `
       <p>With the rise of social media and AI, some might ask if a website is still necessary in 2026. The answer is a resounding YES. Here is why.</p>
       
@@ -92,7 +92,7 @@ const blogData: Record<string, any> = {
     date: "April 20, 2026",
     author: "Marketing Strategist",
     readTime: "15 min read",
-    image: "/images/blog-5.png",
+    image: "/images/blog-5-v2.png",
     content: `
       <p>Digital marketing in 2026 is about personalization and technical excellence. As a leading <strong>digital marketing agency in Rajkot</strong>, we see these trends dominating the market.</p>
       

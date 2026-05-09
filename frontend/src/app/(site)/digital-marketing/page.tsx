@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Digital Marketing Agency in Rajkot | Uma Techno",
     description: "Scale your revenue with data-driven PPC, Social Media, and growth strategies in Rajkot.",
-    images: ["/images/blog-5.png"],
+    images: ["/images/blog-5-v2-v2.png"],
   },
 };
 

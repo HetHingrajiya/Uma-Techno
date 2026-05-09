@@ -70,7 +70,7 @@ export default function Home() {
           solution: "Built a custom Next.js storefront with high-fidelity visuals and 3D product previews.",
           result: "+450% Conversion Increase",
           tech: ["Next.js", "Three.js", "Prisma"],
-          featuredImage: "/images/project-1.png", 
+          featuredImage: "/images/project-1-v2-v2.png", 
           slug: "jewelry-ecommerce" 
         },
         { 
@@ -81,7 +81,7 @@ export default function Home() {
           solution: "Automated booking system with real-time slot management and SMS notifications.",
           result: "Zero Manual Overhead",
           tech: ["React", "Node.js", "PostgreSQL"],
-          featuredImage: "/images/project-2.png", 
+          featuredImage: "/images/project-2-v2-v2.png", 
           slug: "booking-platform" 
         },
         { 
@@ -92,7 +92,7 @@ export default function Home() {
           solution: "End-to-end encrypted dashboard with real-time data visualization.",
           result: "99.9% System Uptime",
           tech: ["TypeScript", "D3.js", "Azure"],
-          featuredImage: "/images/project-3.png", 
+          featuredImage: "/images/project-3-v2-v2.png", 
           slug: "fintech-dashboard" 
         }
       ];
@@ -279,7 +279,7 @@ export default function Home() {
               <div className="absolute -inset-10 bg-gradient-glow opacity-30 blur-[120px] group-hover:opacity-50 transition-all duration-700" />
               <div className="relative aspect-video bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2.5rem] overflow-hidden shadow-xl">
                 <img
-                  src="/images/about.png"
+                  src="/images/about-v2-v2.png"
                   alt="About Us"
                   className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                 />
@@ -354,7 +354,7 @@ export default function Home() {
               <div key={i} className="card-premium group overflow-hidden flex flex-col h-full bg-[var(--color-card)]">
                 <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
                   <img
-                    src={project.featuredImage || '/images/project-1.png'}
+                    src={project.featuredImage || '/images/project-1-v2-v2.png'}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
@@ -447,7 +447,7 @@ export default function Home() {
                   <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic">"Uma Techno delivered exactly what we needed. Their attention to detail and premium design aesthetic helped us increase our conversions by over 300% within the first month."</p>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] border border-[var(--color-border)] overflow-hidden">
-                      <img src={`/images/client-${i}.png`} alt="Client" className="w-full h-full object-cover" />
+                      <img src={`/images/client-${i}-v2-v2.png`} alt="Client" className="w-full h-full object-cover" />
                     </div>
                     <div>
                       <h4 className="font-bold text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">John Doe {i}</h4>
@@ -491,7 +491,7 @@ export default function Home() {
             <div className="relative group">
               <div className="aspect-square bg-[var(--color-card)] rounded-[var(--radius)] overflow-hidden relative group shadow-xl">
                 <img
-                  src="/images/process-visual.png"
+                  src="/images/process-visual-v2-v2.png"
                   alt="Process"
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                 />

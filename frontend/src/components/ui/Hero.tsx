@@ -28,12 +28,11 @@ export default function Hero() {
       {theme.heroImageUrl && (
         <div className="absolute inset-0 z-0">
           <Image 
-            src={theme.heroImageUrl ? `${theme.heroImageUrl}?t=${Date.now()}` : ""} 
+            src={theme.heroImageUrl} 
             alt="Hero Background" 
             fill 
             className="object-cover opacity-10"
             priority
-            unoptimized
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)] via-transparent to-[var(--background)]" />
         </div>
@@ -98,11 +97,10 @@ export default function Hero() {
             <div className="animate-float-complex max-w-md mx-auto lg:max-w-none">
               <div className="bg-[var(--color-card)] rounded-[2.5rem] lg:rounded-[3rem] p-2 aspect-[4/5] lg:aspect-square relative overflow-hidden group border border-[var(--color-border)] shadow-2xl">
                  <Image 
-                   src={theme.heroImageUrl ? `${theme.heroImageUrl}?t=${Date.now()}` : "/images/portfolio-showcase.png"} 
+                   src={theme.heroImageUrl || "/images/portfolio-showcase-v2-v2.png"} 
                    alt="Portfolio Showcase - Web Development Rajkot" 
                    fill
                    priority
-                   unoptimized
                    className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-700"
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)]/80 via-transparent to-transparent pointer-events-none" />
