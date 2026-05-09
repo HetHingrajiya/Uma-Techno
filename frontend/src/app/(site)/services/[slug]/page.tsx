@@ -1,4 +1,4 @@
-import { Globe, Rocket, Smartphone, Code, BarChart, CheckCircle, ArrowRight } from "lucide-react";
+import { Globe, Rocket, Smartphone, Code, BarChart, CheckCircle, ArrowRight, Palette } from "lucide-react";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
@@ -23,8 +23,16 @@ const serviceData: Record<string, any> = {
     title: "Premium UI/UX Design",
     tagline: "Human-centric designs that drive engagement and conversion.",
     description: "Our design process focuses on user psychology and brand aesthetics to create interfaces that are beautiful and functional.",
-    icon: Code,
+    icon: Palette,
     features: ["User Research & Strategy", "Wireframing & Prototyping", "Visual Identity Design", "Interactive Mockups", "Usability Testing"],
+    seoFocus: "Global Reach"
+  },
+  "custom-software": {
+    title: "Custom Software Development",
+    tagline: "Scalable software solutions tailored to your business needs.",
+    description: "We build robust custom software, enterprise applications, and cloud-native solutions to solve complex business challenges.",
+    icon: Code,
+    features: ["SaaS Development", "API Integration", "Cloud Solutions", "Legacy Migration", "Enterprise Software"],
     seoFocus: "Global Reach"
   },
   "seo": {

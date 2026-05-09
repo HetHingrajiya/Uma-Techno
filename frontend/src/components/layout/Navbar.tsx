@@ -17,10 +17,10 @@ const navLinks = [
     submenu: [
       { name: 'Web Development', href: '/services/web-development' },
       { name: 'Mobile App Development', href: '/services/app-development' },
-      { name: 'UI/UX Design', href: '/services/ui-ux-design' },
-      { name: 'SEO Services', href: '/services/seo-services' },
+      { name: 'UI/UX Design', href: '/services/ui-ux' },
+      { name: 'SEO Services', href: '/services/seo' },
       { name: 'Custom Software', href: '/services/custom-software' },
-      { name: 'Digital Branding', href: '/services/digital-branding' },
+      { name: 'Digital Branding', href: '/services/branding' },
     ]
   },
   { name: 'Portfolio', href: '/portfolio' },
@@ -77,8 +77,8 @@ export default function Navbar() {
             )}>
               <span className="text-[var(--color-electric)]">Uma</span>Techno
             </span>
-            <span className="text-[8px] text-[var(--color-electric)] font-bold tracking-[0.3em] uppercase mt-0.5">
-              Innovate. Create. Elevate.
+            <span className="text-[8px] font-bold tracking-[0.3em] uppercase mt-0.5">
+              <span className="text-black">Innovate. Create. </span><span className="text-[var(--color-electric)]">Elevate.</span>
             </span>
           </div>
         </Link>
@@ -144,13 +144,23 @@ export default function Navbar() {
         {isOpen && (
           <>
             
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9998] md:hidden"
+              onClick={() => setIsOpen(false)}
+            />
+            
             {/* Drawer */}
             <motion.div
               initial={{ x: "-100%" }}
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "tween", duration: 0.4, ease: "circOut" }}
-              className="fixed inset-0 w-full h-full z-[9999] md:hidden flex flex-col shadow-2xl bg-white"
+              className="fixed inset-y-0 left-0 w-[85%] max-w-[360px] h-full z-[9999] md:hidden flex flex-col shadow-2xl bg-white"
               style={{ backgroundColor: "#FFFFFF", opacity: 1 }}
             >
               <div className="flex flex-col h-full bg-white relative">
@@ -162,8 +172,8 @@ export default function Navbar() {
                       <span className="text-xl font-bold tracking-tighter uppercase text-[#0F172A]">
                         <span className="text-[var(--color-electric)]">Uma</span>Techno
                       </span>
-                      <span className="text-[7px] text-gray-400 font-bold tracking-[0.2em] uppercase mt-0.5">
-                        Innovate. Create. Elevate.
+                      <span className="text-[7px] font-bold tracking-[0.2em] uppercase mt-0.5">
+                        <span className="text-black">Innovate. Create. </span><span className="text-[var(--color-electric)]">Elevate.</span>
                       </span>
                     </div>
                   </Link>
@@ -179,11 +189,13 @@ export default function Navbar() {
                 <div className="flex-1 px-6 py-8 space-y-6 bg-white overflow-y-auto">
                   {navLinks.map((link) => (
                     <div key={link.name} className="space-y-4">
-                      <div className="flex items-center justify-between">
+                      <div className={cn(
+                        "flex items-center justify-between px-4 py-3 rounded-xl transition-all",
+                        pathname === link.href ? "bg-[var(--color-electric)] text-white shadow-md shadow-[var(--color-electric)]/20" : "hover:bg-gray-50 text-[#0F172A]"
+                      )}>
                         <Link
                           href={link.href}
-                          className="text-xl font-bold font-outfit"
-                          style={{ color: pathname === link.href ? "var(--color-electric)" : "#0F172A" }}
+                          className="text-lg font-bold font-outfit flex-1"
                           onClick={() => !link.submenu && setIsOpen(false)}
                         >
                           {link.name}
@@ -194,9 +206,9 @@ export default function Navbar() {
                               e.preventDefault();
                               setActiveSubmenu(activeSubmenu === link.name ? null : link.name);
                             }}
-                            className="p-2 text-gray-400"
+                            className={cn("p-1", pathname === link.href ? "text-white" : "text-gray-400")}
                           >
-                            <ChevronDown size={24} className={cn("transition-transform duration-300", activeSubmenu === link.name && "rotate-180")} />
+                            <ChevronDown size={20} className={cn("transition-transform duration-300", activeSubmenu === link.name && "rotate-180")} />
                           </button>
                         )}
                       </div>
