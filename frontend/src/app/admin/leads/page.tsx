@@ -62,7 +62,7 @@ export default function LeadsDashboard() {
       </div>
 
       <div className="bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl overflow-hidden">
-        <div className="p-4 border-b border-[var(--color-border)] flex gap-4 bg-[var(--color-navy)]">
+        <div className="p-4 border-b border-[var(--color-border)] flex gap-4 bg-white">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
             <input
@@ -78,7 +78,7 @@ export default function LeadsDashboard() {
             <div className="p-8 text-center text-[var(--color-text-main)] opacity-50">Loading leads...</div>
           ) : leads.length === 0 ? (
             <div className="p-12 text-center flex flex-col items-center justify-center">
-              <div className="w-16 h-16 bg-[var(--color-navy)] rounded-full flex items-center justify-center mb-4">
+              <div className="w-16 h-16 bg-[var(--color-navy-light)] rounded-full flex items-center justify-center mb-4">
                 <Mail size={24} className="text-[var(--color-text-main)] opacity-30" />
               </div>
               <h4 className="text-lg font-bold text-[var(--color-text-main)] mb-2">No leads yet</h4>
@@ -88,7 +88,7 @@ export default function LeadsDashboard() {
             <div className="min-w-[800px]">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-[var(--color-navy)] border-b border-[var(--color-border)]">
+                  <tr className="bg-[var(--color-navy-light)] border-b border-[var(--color-border)]">
                     <th className="p-4 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-wider opacity-60">Client Details</th>
                     <th className="p-4 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-wider opacity-60">Interested In</th>
                     <th className="p-4 text-xs font-bold text-[var(--color-text-main)] uppercase tracking-wider opacity-60">Message</th>

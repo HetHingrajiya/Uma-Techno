@@ -279,7 +279,7 @@ export default function DashboardDashboard() {
           </div>
           
           <div className="mt-8 space-y-4">
-             <button className="w-full py-4 bg-[var(--color-navy)] border border-[var(--color-border)] rounded-2xl font-bold text-sm text-[var(--color-text-main)] hover:bg-electric/5 hover:border-electric transition-all flex items-center justify-center gap-3">
+             <button className="w-full py-4 bg-white border border-[var(--color-border)] rounded-2xl font-bold text-sm text-[var(--color-text-main)] hover:bg-electric/5 hover:border-electric transition-all flex items-center justify-center gap-3">
                 <RotateCcw size={16} className="text-electric" /> Run System Audit
              </button>
              <button className="w-full py-4 bg-gradient-premium text-white rounded-2xl font-bold text-sm shadow-xl hover:scale-[1.02] transition-all">

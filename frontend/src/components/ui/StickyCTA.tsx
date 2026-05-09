@@ -29,7 +29,7 @@ export default function StickyCTA() {
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
-          className="fixed bottom-6 left-6 z-[998] md:hidden cursor-move"
+          className="fixed bottom-6 left-6 z-[900] md:hidden cursor-move"
         >
           <Link
             href="/contact"
