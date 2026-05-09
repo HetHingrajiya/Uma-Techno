@@ -4,7 +4,12 @@ import React, { useState } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 
+/**
+ * ContactPage: 
+ * Handles user inquiries through a validated form and displays agency contact details.
+ */
 export default function ContactPage() {
+  // State for tracking form input values
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -12,9 +17,16 @@ export default function ContactPage() {
     service: "Web Development",
     message: ""
   });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
+  // State for submission lifecycle (idle -> loading -> success/error)
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+
+  /**
+   * handleSubmit:
+   * Validates and sends the form data to the backend API.
+   * On success, shows a confirmation message. On failure, displays specific errors.
+   */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
@@ -26,7 +38,7 @@ export default function ContactPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          subject: formData.service // Map service to subject for backend
+          subject: formData.service // Maps the selected service to the email subject
         })
       });
 
@@ -34,9 +46,11 @@ export default function ContactPage() {
 
       if (res.ok) {
         setStatus("success");
+        // Reset form after successful submission
         setFormData({ name: "", email: "", phone: "", service: "Web Development", message: "" });
       } else {
         setStatus("error");
+        // Handle validation errors from the server (e.g., Prisma/Express errors)
         if (result.errors) {
           const messages = result.errors.map((err: any) => err.message).join(", ");
           setErrorMsg(messages);
@@ -53,6 +67,7 @@ export default function ContactPage() {
   return (
     <div className="pt-32 pb-20 lg:pt-40 lg:pb-32 bg-[var(--background)] min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
+        {/* Header Section */}
         <div className="text-center space-y-6 mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
             Let's Talk
@@ -66,6 +81,10 @@ export default function ContactPage() {
         </div>
 
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-8 items-start">
+          {/* 
+              Contact Sidebar:
+              Contains direct contact methods and a localized Google Map.
+          */}
           <div className="lg:col-span-2 space-y-8">
             <div className="bg-[var(--color-card)] border border-[var(--color-border)] p-8 rounded-3xl shadow-lg space-y-8">
               <h3 className="text-2xl font-bold font-outfit text-[var(--color-text-main)]">Contact Information</h3>
@@ -102,6 +121,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
+              {/* Localized Map Embed */}
               <div className="pt-8">
                  <div className="rounded-2xl overflow-hidden h-64 w-full border border-[var(--color-border)] grayscale hover:grayscale-0 transition-all duration-700">
                     <iframe 
@@ -118,6 +138,10 @@ export default function ContactPage() {
             </div>
           </div>
 
+          {/* 
+              Message Form Area:
+              Handles the inquiry submission with success/error states.
+          */}
           <div className="lg:col-span-3 bg-[var(--color-card)] border border-[var(--color-border)] p-8 lg:p-12 rounded-3xl shadow-xl">
             {status === "success" ? (
               <motion.div

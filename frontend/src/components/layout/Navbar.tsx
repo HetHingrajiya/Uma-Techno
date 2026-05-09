@@ -8,6 +8,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Logo from "../ui/Logo";
 
+// Navigation menu configuration with support for submenus
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
@@ -28,10 +29,16 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  // State for mobile menu open/closed status
   const [isOpen, setIsOpen] = useState(false);
+  
+  // State for tracking which dropdown submenu is currently active (hovered or clicked)
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  
+  // Current URL path to highlight the active link
   const pathname = usePathname();
 
+  // Close submenus when clicking anywhere else on the screen
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (!(e.target as HTMLElement).closest('.nav-item-container')) {
@@ -44,6 +51,7 @@ export default function Navbar() {
     };
   }, []);
 
+  // Prevent body scroll when the mobile mobile drawer is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -55,6 +63,7 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
+  // Handles link behavior: toggles submenus instead of navigating if a submenu exists
   const handleLinkClick = (link: any, e: React.MouseEvent) => {
     if (link.submenu) {
       e.preventDefault();
@@ -66,25 +75,25 @@ export default function Navbar() {
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6",
-        "py-3 backdrop-blur-lg"
+        "py-4 lg:py-5 backdrop-blur-lg"
       )}
       style={{ backgroundColor: `rgba(var(--color-header-rgb, 255, 255, 255), 0.9)` }}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
-          <Logo className="transition-all duration-500 w-12 h-12 lg:w-14 lg:h-14" />
+          <Logo className="transition-all duration-500 w-12 h-12 lg:w-16 lg:h-16" />
           <div className="flex flex-col leading-none">
             <span className="font-bold tracking-tighter uppercase transition-all duration-500 text-xl lg:text-2xl">
               <span className="text-[var(--color-electric)]">Uma</span><span className="text-[var(--color-text-main)]">Techno</span>
             </span>
-            <span className="text-[var(--color-text-main)] opacity-50 font-bold tracking-[0.3em] uppercase transition-all duration-500 text-[8px] lg:text-[9px] mt-0.5">
+            <span className="text-[var(--color-text-main)] opacity-50 font-bold tracking-[0.3em] uppercase transition-all duration-500 text-[8px] lg:text-[9px] mt-1">
               Innovate. Create. <span className="text-[var(--color-electric)]">Elevate.</span>
             </span>
           </div>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-10 lg:gap-14">
+        <div className="hidden md:flex items-center gap-10 lg:gap-16">
           {navLinks.map((link) => (
             <div 
               key={link.name} 
@@ -97,7 +106,7 @@ export default function Navbar() {
                 onClick={(e) => handleLinkClick(link, e)}
                 className={cn(
                   "font-bold transition-all hover:text-[var(--color-electric)] flex items-center gap-1 tracking-wide cursor-pointer",
-                  "text-sm py-1.5",
+                  "text-[15px] py-2",
                   (pathname === link.href || activeSubmenu === link.name) ? "text-[var(--color-electric)]" : "text-[var(--color-text-main)] opacity-70 hover:opacity-100"
                 )}
               >
@@ -108,7 +117,7 @@ export default function Navbar() {
               {link.submenu && (
                 <div 
                   className={cn(
-                    "absolute top-full left-0 mt-2 w-56 bg-[var(--color-card)] border border-[var(--color-border)] rounded-2xl overflow-hidden transition-all duration-300 shadow-2xl z-[60]",
+                    "absolute top-full left-0 mt-3 w-56 bg-[var(--color-card)] border border-[var(--color-border)] rounded-2xl overflow-hidden transition-all duration-300 shadow-2xl z-[60]",
                     activeSubmenu === link.name 
                       ? "opacity-100 visible translate-y-0" 
                       : "opacity-0 invisible translate-y-2"
@@ -119,7 +128,7 @@ export default function Navbar() {
                       key={sub.name}
                       href={sub.href}
                       onClick={() => setActiveSubmenu(null)}
-                      className="block px-6 py-4 text-sm font-bold text-[var(--color-text-main)] opacity-70 hover:opacity-100 hover:bg-[var(--color-electric)]/10 hover:text-[var(--color-electric)] transition-all flex items-center gap-2 group/sub"
+                      className="block px-6 py-4 text-[13px] font-bold text-[var(--color-text-main)] opacity-70 hover:opacity-100 hover:bg-[var(--color-electric)]/10 hover:text-[var(--color-electric)] transition-all flex items-center gap-2 group/sub"
                     >
                       <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-electric)] opacity-0 group-hover/sub:opacity-100 transition-opacity" />
                       {sub.name}
@@ -133,7 +142,7 @@ export default function Navbar() {
               href="/contact"
               className={cn(
                 "bg-[var(--color-electric)] hover:brightness-110 text-white rounded-full font-bold transition-all hover:scale-105 active:scale-95 text-center",
-                "px-5 py-2 text-sm"
+                "px-7 py-3 text-sm tracking-wider"
               )}
             >
             Get a Quote

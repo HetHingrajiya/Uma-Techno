@@ -2,6 +2,10 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
+/**
+ * Interface defining all configurable visual tokens for the application's theme system.
+ * These are mapped to CSS variables in the DOM root.
+ */
 interface ThemeSettings {
   primaryColor: string;
   secondaryColor: string;
@@ -24,8 +28,13 @@ interface ThemeSettings {
   aboutImageUrl: string | null;
 }
 
-const ThemeContext = createContext<{ theme: ThemeSettings } | undefined>(undefined);
+// React Context to provide theme data and a cache-busting timestamp to any component
+const ThemeContext = createContext<{ 
+  theme: ThemeSettings; 
+  cacheBuster: number; 
+} | undefined>(undefined);
 
+// Fallback theme used during initial load or if the API is unavailable
 const defaultTheme: ThemeSettings = {
   primaryColor: "#06B6D4",
   secondaryColor: "#0EA5E9",
@@ -48,6 +57,9 @@ const defaultTheme: ThemeSettings = {
   aboutImageUrl: null,
 };
 
+/**
+ * Hook to access the current theme settings and cache buster from any functional component.
+ */
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (context === undefined) {
@@ -56,13 +68,25 @@ export function useTheme() {
   return context;
 }
 
+/**
+ * ThemeProvider component that manages global theme state, fetches updates from the backend,
+ * and injects dynamic CSS variables into the document head.
+ */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<ThemeSettings>(defaultTheme);
+  const [cacheBuster, setCacheBuster] = useState(Date.now());
 
   useEffect(() => {
+    /**
+     * Fetches the latest theme configuration from the API or local storage.
+     * Prioritizes 'preview-theme' from local storage if it exists (used by Admin Panel).
+     */
     const fetchTheme = async () => {
       try {
-        // First check if there is a preview theme in localStorage
+        // Update cache buster to force re-rendering of images with the same URL
+        setCacheBuster(Date.now());
+
+        // First check if there is a preview theme in localStorage (active during theme editing)
         const previewData = localStorage.getItem('preview-theme');
         if (previewData) {
           const p = JSON.parse(previewData);
@@ -77,6 +101,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           return;
         }
 
+        // Fetch the production theme from the backend API
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme?t=${Date.now()}`);
         if (res.ok) {
           const data = await res.json();
@@ -96,7 +121,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     fetchTheme();
     
-    // Listen for theme changes from other tabs/admin
+    // Synchronize theme across different tabs/windows when localStorage changes
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === 'theme-updated' || e.key === 'preview-theme') {
         fetchTheme();
@@ -104,7 +129,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     };
     window.addEventListener('storage', handleStorageChange);
     
-    // Also listen for custom events in the same tab
+    // Custom event listener for immediate updates within the same tab
     const handleCustomEvent = () => fetchTheme();
     window.addEventListener('theme-change', handleCustomEvent);
 
@@ -116,6 +141,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      {/* 
+          Global Style Injection:
+          Converts the theme state into CSS custom properties (--var) applied to :root.
+          This ensures that Tailwind and standard CSS can react to theme changes instantly.
+      */}
       <style dangerouslySetInnerHTML={{
         __html: `
         :root {
@@ -129,6 +159,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           --color-footer: ${theme.footerColor};
           
           ${(() => {
+            // Helper to convert hex colors to RGB strings for use in rgba() functions
             const hexToRgb = (hex: string) => {
               try {
                 const h = hex.startsWith('#') ? hex : '#FFFFFF';
@@ -150,7 +181,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           --background: ${theme.backgroundColor};
           --foreground: ${theme.textColor};
           
-          /* Dynamic Semantic Colors */
+          /* 
+             Dynamic Semantic Colors:
+             Calculates contrast and luminance to adjust functional colors (shadows, glass effects)
+             automatically based on whether the background is light or dark.
+          */
           ${(() => {
             const hexToRgb = (hex: string) => {
               const r = parseInt(hex.slice(1, 3), 16);
@@ -206,7 +241,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
         }
       `}} />
-      <ThemeContext.Provider value={{ theme }}>
+      <ThemeContext.Provider value={{ theme, cacheBuster }}>
         {children}
       </ThemeContext.Provider>
     </>

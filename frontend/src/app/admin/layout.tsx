@@ -19,6 +19,9 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/**
+ * Sidebar navigation configuration for the Admin Panel.
+ */
 const sidebarLinks = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { name: "Leads", href: "/admin/leads", icon: MessageSquare },
@@ -30,6 +33,10 @@ const sidebarLinks = [
   { name: "Theme Settings", href: "/admin/theme", icon: Settings },
 ];
 
+/**
+ * AdminLayout provides the persistent sidebar, header, and authentication wrapper 
+ * for all administrative pages.
+ */
 export default function AdminLayout({
   children,
 }: {
@@ -41,13 +48,17 @@ export default function AdminLayout({
   const [clearingCache, setClearingCache] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // Close sidebar on route change
+  // Automatically close the mobile sidebar whenever the user navigates to a new page
   useEffect(() => {
     setIsSidebarOpen(false);
   }, [pathname]);
 
+  /**
+   * Authentication Check:
+   * Verifies the presence of an 'admin_token' in localStorage.
+   * If missing and not on the login page, redirects to login.
+   */
   useEffect(() => {
-    // Basic auth check
     const token = localStorage.getItem("admin_token");
     if (!token && !pathname.includes("/admin/login")) {
       router.push("/admin/login");
@@ -56,6 +67,7 @@ export default function AdminLayout({
     }
   }, [pathname, router]);
 
+  // Bypass the layout for the login page
   if (pathname.includes("/admin/login")) {
     return <>{children}</>;
   }
@@ -64,7 +76,10 @@ export default function AdminLayout({
 
   return (
     <div className="flex min-h-screen bg-[var(--background)] text-[var(--color-text-main)] transition-colors duration-300">
-      {/* Mobile Header */}
+      {/* 
+          Mobile Header:
+          Only visible on small screens. Contains the branding and hamburger toggle.
+      */}
       <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[var(--color-navy-light)] border-b border-[var(--color-border)] flex items-center justify-between px-4 z-50">
         <Link href="/admin/dashboard" className="flex items-center gap-3">
           <div className="w-10 h-10 bg-electric text-white rounded-2xl flex items-center justify-center font-black shadow-lg shadow-electric/20">
@@ -82,7 +97,7 @@ export default function AdminLayout({
         </button>
       </header>
 
-      {/* Sidebar Overlay (Mobile) */}
+      {/* Backdrop for mobile sidebar */}
       {isSidebarOpen && (
         <div 
           className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
@@ -90,7 +105,10 @@ export default function AdminLayout({
         />
       )}
 
-      {/* Sidebar */}
+      {/* 
+          Main Sidebar:
+          Static on desktop (lg), slide-in drawer on mobile.
+      */}
       <aside className={cn(
         "w-64 bg-[var(--color-navy-light)] border-r border-[var(--color-border)] flex flex-col fixed inset-y-0 left-0 z-50 transition-transform duration-300 lg:translate-x-0",
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -112,6 +130,7 @@ export default function AdminLayout({
           </button>
         </div>
 
+        {/* Navigation Links */}
         <nav className="flex-grow px-4 space-y-2 mt-4 overflow-y-auto">
           {sidebarLinks.map((link) => (
             <Link
@@ -130,11 +149,16 @@ export default function AdminLayout({
           ))}
         </nav>
 
+        {/* 
+            Bottom Actions:
+            Includes Logout and Cache Clearing tools.
+        */}
         <div className="p-4 border-t border-[var(--color-border)] space-y-2">
           <button
             onClick={async () => {
               setClearingCache(true);
               try {
+                // Triggers server-side cache invalidation for updated theme/content
                 await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/clear-cache`, { method: 'POST' });
                 alert('Cache cleared successfully!');
               } catch (e) {
@@ -162,7 +186,10 @@ export default function AdminLayout({
         </div>
       </aside>
 
-      {/* Main Content */}
+      {/* 
+          Main Content Area:
+          Adjusts padding based on sidebar presence.
+      */}
       <main className="flex-grow lg:ml-64 px-4 md:px-8 py-6 md:py-10 mt-16 lg:mt-0 transition-all duration-300 w-full overflow-x-hidden">
         <header className="flex flex-col md:flex-row md:justify-between md:items-start lg:items-center mb-6 md:mb-10 gap-4">
           <div>
@@ -182,6 +209,7 @@ export default function AdminLayout({
           </div>
         </header>
 
+        {/* Page content with entrance animation */}
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
           {children}
         </div>

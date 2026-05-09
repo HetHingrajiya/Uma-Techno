@@ -4,6 +4,10 @@ import Image from "next/image";
 import { Metadata } from "next";
 import { ArrowRight, Calendar, User, Clock } from "lucide-react";
 
+/**
+ * SEO Metadata: 
+ * Ensures the blog page is correctly indexed with descriptive titles and canonical links.
+ */
 export const metadata: Metadata = {
   title: "Insights & Tech Blog | Uma Techno Rajkot",
   description: "Explore the latest trends in web development, SEO, and digital marketing. Stay ahead of the competition with insights from Uma Techno, Rajkot.",
@@ -12,6 +16,11 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Blog Post Data:
+ * Static collection of articles. In a production environment, this would 
+ * typically be fetched from a headless CMS or database.
+ */
 const posts = [
   {
     title: "Best Web Development Company in Rajkot: How to Choose?",
@@ -60,10 +69,15 @@ const posts = [
   }
 ];
 
+/**
+ * BlogPage Component:
+ * Displays a grid of insights and technical articles for local businesses in Gujarat.
+ */
 export default function BlogPage() {
   return (
     <div className="pt-32 lg:pt-48 pb-32 bg-[var(--background)] min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
+        {/* Header section with page title and description */}
         <div className="text-center space-y-6 mb-20">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
             Our Insights
@@ -76,6 +90,10 @@ export default function BlogPage() {
           </p>
         </div>
 
+        {/* 
+            Post Grid:
+            Maps through the posts array to display interactive blog cards.
+        */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post, i) => (
             <Link 
@@ -83,6 +101,7 @@ export default function BlogPage() {
               href={`/blog/${post.slug}`}
               className="group flex flex-col bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2rem] overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2"
             >
+              {/* Thumbnail Area with hover zoom effect */}
               <div className="aspect-[16/10] relative overflow-hidden">
                 <div className="absolute inset-0 bg-[var(--color-electric)]/20 group-hover:bg-transparent transition-colors z-10" />
                 <Image 
@@ -92,6 +111,8 @@ export default function BlogPage() {
                   className="object-cover group-hover:scale-110 transition-all duration-700" 
                 />
               </div>
+              
+              {/* Content Area */}
               <div className="p-8 flex-1 flex flex-col justify-between space-y-6">
                 <div className="space-y-4">
                   <div className="flex items-center gap-4 text-[10px] font-bold text-[var(--color-text-main)] opacity-50 uppercase tracking-widest">

@@ -8,16 +8,27 @@ import Image from "next/image";
 import Logo from "./Logo";
 import { useTheme } from "@/components/ThemeProvider";
 
+/**
+ * Hero Component:
+ * The primary visual centerpiece of the landing page.
+ * Features theme-aware background rendering and complex scroll/entrance animations.
+ */
 export default function Hero() {
-  const { theme } = useTheme();
+  // Pulls the current theme (specifically heroImageUrl) from the global context
+  const { theme, cacheBuster } = useTheme();
 
   return (
     <section className="relative min-h-[600px] lg:min-h-[800px] 2xl:min-h-screen flex items-center overflow-hidden pt-24 pb-24 bg-[var(--background)]">
-      {/* Dynamic Background Image */}
+      
+      {/* 
+          Dynamic Background:
+          If a custom hero image is uploaded via the Admin Panel, it is rendered here 
+          with a subtle opacity and gradient mask to maintain text readability.
+      */}
       {theme.heroImageUrl && (
         <div className="absolute inset-0 z-0">
           <Image 
-            src={theme.heroImageUrl} 
+            src={`${theme.heroImageUrl}?v=${cacheBuster}`} 
             alt="Hero Background" 
             fill 
             className="object-cover opacity-10"
@@ -30,6 +41,11 @@ export default function Hero() {
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
+          
+          {/* 
+              Left Column: Value Proposition & CTAs
+              Uses Framer Motion for a smooth upward entrance animation.
+          */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -67,7 +83,11 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Interactive Visual Element (Light Theme) */}
+          {/* 
+              Right Column: Interactive Visual Element
+              Displays a "floating" showcase card with glassmorphism effects and 
+              dynamic performance badges.
+          */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, rotate: 2 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -77,7 +97,7 @@ export default function Hero() {
             <div className="animate-float-complex max-w-md mx-auto lg:max-w-none">
               <div className="bg-[var(--color-card)] rounded-[2.5rem] lg:rounded-[3rem] p-2 aspect-[4/5] lg:aspect-square relative overflow-hidden group border border-[var(--color-border)] shadow-2xl">
                  <Image 
-                   src={theme.heroImageUrl || "/images/portfolio-showcase.png"} 
+                   src={`${theme.heroImageUrl || "/images/portfolio-showcase.png"}?v=${cacheBuster}`} 
                    alt="Portfolio Showcase - Web Development Rajkot" 
                    fill
                    priority
@@ -85,6 +105,7 @@ export default function Hero() {
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)]/80 via-transparent to-transparent pointer-events-none" />
                  
+                 {/* Glassmorphic Project Info Card */}
                  <div className="absolute bottom-6 left-6 right-6 z-10 bg-[var(--color-card)]/90 backdrop-blur-xl rounded-[var(--radius)] p-6 border border-white/10 shadow-xl">
                     <div className="flex justify-between items-start mb-4">
                        <div>
@@ -102,7 +123,10 @@ export default function Hero() {
                     </div>
                  </div>
                  
-                  {/* Floating Badge */}
+                  {/* 
+                      Floating Performance Badge:
+                      Uses CSS animations to gently hover, adding depth to the UI.
+                  */}
                   <div className="absolute top-8 right-[-20px] bg-[var(--color-card)] border border-[var(--color-border)] rounded-[var(--radius)] p-4 shadow-xl flex items-center gap-3 animate-float delay-500 hover:scale-105 transition-transform cursor-default">
                      <div className="w-10 h-10 bg-[#10B981]/10 rounded-full flex items-center justify-center text-[#10B981]">
                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>

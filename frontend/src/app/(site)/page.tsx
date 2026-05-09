@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
+// Static data for trust metrics and growth indicators
 const stats = [
   { label: "Successful Projects", value: "12+", icon: Rocket },
   { label: "Growth Delivered", value: "3x", icon: Zap },
@@ -17,6 +18,7 @@ const stats = [
   { label: "Support Coverage", value: "24/7", icon: Shield },
 ];
 
+// Step-by-step methodology shown in the Process section
 const processSteps = [
   { title: "Discovery & Strategy", desc: "We deep-dive into your business model to align our solution with your revenue goals." },
   { title: "Prototyping", desc: "Creating high-fidelity wireframes and interactive prototypes for your review." },
@@ -25,6 +27,10 @@ const processSteps = [
   { title: "Launch & Support", desc: "Deployment to production followed by 24/7 monitoring and long-term scaling." },
 ];
 
+/**
+ * Home component: The primary landing page for Uma Techno.
+ * Features dynamic data fetching for CMS content and a widget-based layout control.
+ */
 export default function Home() {
   const [widgets, setWidgets] = useState<any[]>([]);
   const [services, setServices] = useState<any[]>([]);
@@ -33,7 +39,12 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    /**
+     * Primary data orchestrator: Fetches all dynamic content from the backend.
+     * Implements fallback data to ensure the site remains functional even if the API is down.
+     */
     const fetchData = async () => {
+      // Local fallbacks used for development or if the server fails
       const fallbackWidgets = [
         { name: 'hero', enabled: true }, { name: 'trusted', enabled: true },
         { name: 'services', enabled: true }, { name: 'why-choose-us', enabled: true },
@@ -86,6 +97,7 @@ export default function Home() {
         }
       ];
 
+      // Quick return for local development to avoid network lag
       if (process.env.NODE_ENV === 'development') {
         setWidgets(fallbackWidgets);
         setServices(fallbackServices);
@@ -97,6 +109,7 @@ export default function Home() {
       try {
         const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app';
 
+        // Parallel fetch for core page components
         const [wRes, sRes, pRes] = await Promise.all([
           fetch(`${baseUrl}/api/v1/widgets`),
           fetch(`${baseUrl}/api/v1/services`),
@@ -118,6 +131,7 @@ export default function Home() {
           setProjects(data.length > 0 ? data : fallbackProjects);
         }
 
+        // Sequential fetch for non-critical assets (testimonials)
         try {
           const tRes = await fetch(`${baseUrl}/api/v1/testimonials`);
           if (tRes.ok) {
@@ -140,11 +154,19 @@ export default function Home() {
     fetchData();
   }, []);
 
+  /**
+   * Layout Control:
+   * Checks if a specific section (widget) is enabled in the Admin Panel.
+   */
   const isEnabled = (name: string) => {
     const w = widgets.find(w => w.name === name);
     return w ? w.enabled : true;
   };
 
+  /**
+   * Dynamic Icon Mapping:
+   * Converts string-based icon names from the database into Lucide React components.
+   */
   const getIcon = (iconName: string) => {
     switch (iconName) {
       case 'Globe': return <Globe size={32} />;
@@ -161,9 +183,16 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-16 lg:gap-32 pb-20 lg:pb-32 bg-[var(--background)]">
+      {/* 
+          Hero Section:
+          The main splash area with primary CTA.
+      */}
       {isEnabled('hero') && <Hero />}
 
-      {/* Trust & Stats Section */}
+      {/* 
+          Trust & Stats Section:
+          Displays quantitative metrics and client industries to build authority.
+      */}
       {isEnabled('stats') && (
         <section className="max-w-7xl mx-auto px-6 w-full -mt-8 lg:-mt-16 relative z-20 bg-gradient-soft/50 rounded-[3rem] py-12 lg:py-20 border border-[var(--color-border)]">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
@@ -188,7 +217,10 @@ export default function Home() {
         </section>
       )}
 
-      {/* Services Section */}
+      {/* 
+          Services Grid:
+          Detailed breakdown of what Uma Techno offers with deep links to service pages.
+      */}
       {isEnabled('services') && (
         <section className="max-w-7xl mx-auto px-6 w-full bg-gradient-soft/30 rounded-[3rem] py-20 lg:py-32 border border-[var(--color-border)]/50">
           <div className="text-center space-y-4 mb-20">
@@ -236,7 +268,10 @@ export default function Home() {
         </section>
       )}
 
-      {/* Why Choose Us Section */}
+      {/* 
+          Differentiators Section (Why Choose Us):
+          Highlights the unique value proposition (Business-first engineering).
+      */}
       {isEnabled('why-choose-us') && (
         <section className="max-w-7xl mx-auto px-6 w-full">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -290,7 +325,10 @@ export default function Home() {
         </section>
       )}
 
-      {/* Portfolio Section */}
+      {/* 
+          Portfolio Showcase:
+          Selected high-impact case studies from the portfolio module.
+      */}
       {isEnabled('portfolio') && (
         <section className="max-w-7xl mx-auto px-6 w-full">
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
@@ -362,7 +400,10 @@ export default function Home() {
         </section>
       )}
 
-      {/* Testimonials Section */}
+      {/* 
+          Social Proof (Testimonials):
+          Feedback from actual clients, either from the DB or using high-end placeholders.
+      */}
       {isEnabled('testimonials') && (
         <section className="max-w-7xl mx-auto px-6 w-full py-24 relative">
           <div className="absolute inset-0 bg-gradient-glow scale-75 opacity-10 pointer-events-none" />
@@ -421,7 +462,10 @@ export default function Home() {
         </section>
       )}
 
-      {/* Process Section */}
+      {/* 
+          Our Methodology:
+          Visualizes the roadmap of working with the agency.
+      */}
       {isEnabled('process') && (
         <section className="max-w-7xl mx-auto px-6 w-full">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -464,7 +508,10 @@ export default function Home() {
         </section>
       )}
 
-      {/* CTA Section */}
+      {/* 
+          Final Conversion Area (CTA):
+          Primary driver for new client inquiries.
+      */}
       {isEnabled('cta') && (
         <section className="max-w-7xl mx-auto px-6 w-full pb-20">
           <div className="bg-gradient-soft border border-[var(--color-border)] rounded-[3rem] p-10 lg:p-24 text-center space-y-10 relative overflow-hidden shadow-2xl">
@@ -495,7 +542,7 @@ export default function Home() {
         </section>
       )}
 
-      {/* Sticky Bottom Mobile CTA */}
+      {/* Sticky Bottom Mobile CTA for conversion on smaller screens */}
       <div className="fixed bottom-0 left-0 w-full p-4 bg-[var(--background)]/90 backdrop-blur-md border-t border-[var(--color-border)] z-40 lg:hidden flex justify-center shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
         <Link href="/contact" className="w-full max-w-md py-4 bg-gradient-premium text-white font-bold rounded-xl text-center shadow-lg">
           Get Started Today
