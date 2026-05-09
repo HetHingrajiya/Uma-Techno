@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Web Development Company in Rajkot | Uma Techno",
     description: "High-performance websites and web applications built for business growth in Rajkot.",
-    images: ["/images/blog-1-v2-v2.png"],
+    images: ["/images/blog-1-v2.png"],
   },
 };
 

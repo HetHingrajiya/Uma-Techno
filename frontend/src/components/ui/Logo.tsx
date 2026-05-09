@@ -18,7 +18,7 @@ export default function Logo({ className = "w-10 h-10" }: { className?: string }
     <div className={`relative flex items-center justify-center shrink-0 ${className}`}>
       {!error ? (
         <Image
-          src={theme.logoUrl ? `${theme.logoUrl}?t=${Date.now()}` : "/logo.png"}
+          src={theme.logoUrl || "/logo-v2.png"}
           alt="Uma Techno Logo"
           width={100}
           height={100}

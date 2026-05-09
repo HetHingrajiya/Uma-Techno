@@ -97,7 +97,7 @@ export default function Hero() {
             <div className="animate-float-complex max-w-md mx-auto lg:max-w-none">
               <div className="bg-[var(--color-card)] rounded-[2.5rem] lg:rounded-[3rem] p-2 aspect-[4/5] lg:aspect-square relative overflow-hidden group border border-[var(--color-border)] shadow-2xl">
                  <Image 
-                   src={theme.heroImageUrl || "/images/portfolio-showcase-v2-v2.png"} 
+                   src={theme.heroImageUrl || "/images/portfolio-showcase-v2.png"} 
                    alt="Portfolio Showcase - Web Development Rajkot" 
                    fill
                    priority

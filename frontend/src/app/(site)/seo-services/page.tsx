@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SEO Services in Rajkot | Uma Techno",
     description: "Dominate Google search results with our technical and local SEO strategies in Rajkot.",
-    images: ["/images/blog-2-v2-v2.png"],
+    images: ["/images/blog-2.png"],
   },
 };
 
