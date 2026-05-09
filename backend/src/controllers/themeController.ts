@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient() as any;
 
 export const getTheme = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -11,10 +11,17 @@ export const getTheme = async (req: Request, res: Response): Promise<void> => {
         data: {} // Uses defaults from schema
       });
     }
+    // Ensure we don't return broken URLs if they are empty strings
+    const cleanTheme = {
+      ...theme,
+      logoUrl: theme.logoUrl || null,
+      heroImageUrl: theme.heroImageUrl || null,
+      aboutImageUrl: theme.aboutImageUrl || null,
+    };
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
     res.setHeader('Pragma', 'no-cache');
     res.setHeader('Expires', '0');
-    res.json(theme);
+    res.json(cleanTheme);
   } catch (error) {
     console.error('Error fetching theme:', error);
     res.status(500).json({ error: 'Failed to fetch theme settings' });

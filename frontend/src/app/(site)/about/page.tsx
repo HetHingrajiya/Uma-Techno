@@ -17,6 +17,15 @@ const values = [
 
 export default function AboutPage() {
   const { theme, cacheBuster } = useTheme();
+  const [imgError, setImgError] = useState(false);
+
+  useEffect(() => {
+    setImgError(false);
+  }, [theme.aboutImageUrl]);
+
+  const aboutSrc = (theme.aboutImageUrl && !imgError)
+    ? `${theme.aboutImageUrl}?v=${cacheBuster}`
+    : "/images/about.png";
 
   return (
     <div className="py-20 space-y-32 bg-[var(--background)]">
@@ -45,11 +54,11 @@ export default function AboutPage() {
         </div>
         <div className="relative group">
            <div className="aspect-square glass-card rounded-[3rem] overflow-hidden rotate-3 relative z-10 border border-white/5">
-              <Image 
-                src={`${theme.aboutImageUrl || "/images/about.png"}?v=${cacheBuster}`} 
+              <img 
+                src={aboutSrc} 
                 alt="Digital Masterpiece - Uma Techno Rajkot Team" 
-                fill
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
+                onError={() => setImgError(true)}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-40" />
            </div>

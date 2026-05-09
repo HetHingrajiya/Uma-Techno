@@ -16,6 +16,21 @@ import { useTheme } from "@/components/ThemeProvider";
 export default function Hero() {
   // Pulls the current theme (specifically heroImageUrl) from the global context
   const { theme, cacheBuster } = useTheme();
+  const [bgError, setBgError] = React.useState(false);
+  const [showcaseError, setShowcaseError] = React.useState(false);
+
+  React.useEffect(() => {
+    setBgError(false);
+    setShowcaseError(false);
+  }, [theme.heroImageUrl]);
+
+  const bgSrc = (theme.heroImageUrl && !bgError) 
+    ? `${theme.heroImageUrl}?v=${cacheBuster}` 
+    : null;
+
+  const showcaseSrc = (theme.heroImageUrl && !showcaseError)
+    ? `${theme.heroImageUrl}?v=${cacheBuster}`
+    : "/images/portfolio-showcase.png";
 
   return (
     <section className="relative min-h-[600px] lg:min-h-[800px] 2xl:min-h-screen flex items-center overflow-hidden pt-24 pb-24 bg-[var(--background)]">
@@ -25,14 +40,13 @@ export default function Hero() {
           If a custom hero image is uploaded via the Admin Panel, it is rendered here 
           with a subtle opacity and gradient mask to maintain text readability.
       */}
-      {theme.heroImageUrl && (
+      {bgSrc && (
         <div className="absolute inset-0 z-0">
-          <Image 
-            src={`${theme.heroImageUrl}?v=${cacheBuster}`} 
+          <img 
+            src={bgSrc} 
             alt="Hero Background" 
-            fill 
-            className="object-cover opacity-10"
-            priority
+            className="w-full h-full object-cover opacity-10"
+            onError={() => setBgError(true)}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)] via-transparent to-[var(--background)]" />
         </div>
@@ -42,10 +56,7 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
           
-          {/* 
-              Left Column: Value Proposition & CTAs
-              Uses Framer Motion for a smooth upward entrance animation.
-          */}
+          {/* Left Column: Value Proposition & CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -83,11 +94,7 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* 
-              Right Column: Interactive Visual Element
-              Displays a "floating" showcase card with glassmorphism effects and 
-              dynamic performance badges.
-          */}
+          {/* Right Column: Interactive Visual Element */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, rotate: 2 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -96,12 +103,11 @@ export default function Hero() {
           >
             <div className="animate-float-complex max-w-md mx-auto lg:max-w-none">
               <div className="bg-[var(--color-card)] rounded-[2.5rem] lg:rounded-[3rem] p-2 aspect-[4/5] lg:aspect-square relative overflow-hidden group border border-[var(--color-border)] shadow-2xl">
-                 <Image 
-                   src={`${theme.heroImageUrl || "/images/portfolio-showcase.png"}?v=${cacheBuster}`} 
+                 <img 
+                   src={showcaseSrc} 
                    alt="Portfolio Showcase - Web Development Rajkot" 
-                   fill
-                   priority
                    className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-700"
+                   onError={() => setShowcaseError(true)}
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)]/80 via-transparent to-transparent pointer-events-none" />
                  
@@ -123,10 +129,7 @@ export default function Hero() {
                     </div>
                  </div>
                  
-                  {/* 
-                      Floating Performance Badge:
-                      Uses CSS animations to gently hover, adding depth to the UI.
-                  */}
+                  {/* Floating Performance Badge */}
                   <div className="absolute top-8 right-[-20px] bg-[var(--color-card)] border border-[var(--color-border)] rounded-[var(--radius)] p-4 shadow-xl flex items-center gap-3 animate-float delay-500 hover:scale-105 transition-transform cursor-default">
                      <div className="w-10 h-10 bg-[#10B981]/10 rounded-full flex items-center justify-center text-[#10B981]">
                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
