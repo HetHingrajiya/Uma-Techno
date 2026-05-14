@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import { MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -23,3 +21,4 @@ export default function WhatsAppButton() {
     </motion.a>
   );
 }
+

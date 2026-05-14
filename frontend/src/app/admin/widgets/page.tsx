@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import { Loader2, Save, Layout, GripVertical, Eye, EyeOff, ChevronUp, ChevronDown } from "lucide-react";
 
@@ -25,7 +23,7 @@ export default function WidgetControlPage() {
     ];
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/widgets`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/widgets`);
       if (res.ok) {
         const data = await res.json();
         if (data.length === 0) {
@@ -53,7 +51,7 @@ export default function WidgetControlPage() {
     setSaving(true);
     try {
       // Typically we'd save order and status to backend
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/widgets/reorder`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/widgets/reorder`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ widgets }),
@@ -166,3 +164,4 @@ export default function WidgetControlPage() {
     </div>
   );
 }
+

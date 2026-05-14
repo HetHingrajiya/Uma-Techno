@@ -1,7 +1,6 @@
 import React from "react";
-import { notFound } from "next/navigation";
-import { ArrowRight, CheckCircle, Globe, Layout, Smartphone, Zap } from "lucide-react";
-import Link from "next/link";
+import { ArrowRight, CheckCircle, Zap } from "lucide-react";
+import { Link, useParams } from "react-router-dom";
 
 const fallbackProjects: Record<string, any> = {
   "jewelry-ecommerce": {
@@ -39,27 +38,13 @@ const fallbackProjects: Record<string, any> = {
   }
 };
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const project = fallbackProjects[slug];
-  
-  return {
-    title: project ? `${project.title} | Portfolio` : "Project Details",
-    description: project ? project.challenge : "Case study details for our premium digital projects.",
-  };
-}
-
-export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  
-  // In a real app, you would fetch from API here
-  // const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/projects/${slug}`);
-  // const project = res.ok ? await res.json() : fallbackProjects[slug];
-  
-  const project = fallbackProjects[slug];
+export default function ProjectPage() {
+  const { slug } = useParams();
+  const paramsSlug = slug || "";
+  const project = fallbackProjects[paramsSlug];
 
   if (!project) {
-    notFound();
+    return <div className="pt-40 text-center text-white">Project not found</div>;
   }
 
   return (
@@ -117,10 +102,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               </p>
               <div className="grid sm:grid-cols-2 gap-4 pt-4">
                 {[
-                  "Performance Optimized",
-                  "SEO Integrated",
-                  "Fully Responsive Design",
-                  "Secure Architecture"
+                   "Performance Optimized",
+                   "SEO Integrated",
+                   "Fully Responsive Design",
+                   "Secure Architecture"
                 ].map((check) => (
                   <div key={check} className="flex items-center gap-3 text-[var(--color-text-main)] font-medium">
                     <CheckCircle className="text-[var(--color-electric)]" size={20} />
@@ -148,7 +133,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               <h3 className="text-xl font-bold">Interested in a similar solution?</h3>
               <p className="opacity-80 text-sm">Let&apos;s build something high-performance for your business.</p>
               <Link 
-                href="/contact" 
+                to="/contact" 
                 className="inline-flex items-center gap-2 bg-white text-[var(--color-electric)] px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all"
               >
                 Get Started <ArrowRight size={16} />
@@ -159,11 +144,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
         {/* Footer Navigation */}
         <div className="mt-32 pt-16 border-t border-[var(--color-border)] flex justify-between items-center">
-          <Link href="/portfolio" className="text-[var(--color-text-main)] opacity-50 hover:opacity-100 font-bold flex items-center gap-2 transition-all">
+          <Link to="/portfolio" className="text-[var(--color-text-main)] opacity-50 hover:opacity-100 font-bold flex items-center gap-2 transition-all">
             &larr; Back to Portfolio
           </Link>
           <div className="flex gap-4">
-             <Link href="/contact" className="text-[var(--color-electric)] font-bold uppercase tracking-widest text-xs hover:underline">
+             <Link to="/contact" className="text-[var(--color-electric)] font-bold uppercase tracking-widest text-xs hover:underline">
                Discuss Your Project
              </Link>
           </div>

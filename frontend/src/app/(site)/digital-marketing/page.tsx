@@ -1,21 +1,6 @@
 import { Megaphone, Users, Share2, Mail, Layout, TrendingUp, CheckCircle, ArrowRight, MousePointer2, Smartphone } from "lucide-react";
-import Link from "next/link";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Digital Marketing Agency in Rajkot | Growth Marketing Experts",
-  description: "Accelerate your business growth with the best digital marketing agency in Rajkot. We specialize in PPC, Social Media, and Lead Generation strategies.",
-  keywords: ["Digital Marketing in Rajkot", "Digital Marketing Agency Gujarat", "Social Media Marketing Rajkot", "Lead Generation Rajkot"],
-  alternates: {
-    canonical: "https://umatechno.in/digital-marketing",
-  },
-  openGraph: {
-    title: "Digital Marketing Agency in Rajkot | Uma Techno",
-    description: "Scale your revenue with data-driven PPC, Social Media, and growth strategies in Rajkot.",
-    images: ["/images/blog-5.png"],
-  },
-};
-
+import { Link } from "react-router-dom";
+// // 
 const marketingFeatures = [
   { title: "Social Media Marketing", desc: "Building a powerful brand presence across Instagram, Facebook, and LinkedIn to engage your target audience in Rajkot.", icon: Share2 },
   { title: "Pay-Per-Click (PPC)", desc: "High-ROI Google Ads and Meta Ads campaigns designed to generate instant leads and sales for your business.", icon: MousePointer2 },
@@ -115,10 +100,10 @@ export default function DigitalMarketingPage() {
               We combine creative storytelling with data-driven strategy to build brands that dominate their markets. Scale your revenue with the most innovative agency in Rajkot.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link href="/contact" className="px-8 py-4 bg-gradient-premium text-white rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl">
+              <Link to="/contact" className="px-8 py-4 bg-gradient-premium text-white rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl">
                 Get a Strategy Session
               </Link>
-              <Link href="/portfolio" className="px-8 py-4 bg-transparent border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-[var(--color-navy-light)] rounded-xl font-bold text-base transition-all">
+              <Link to="/portfolio" className="px-8 py-4 bg-transparent border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-[var(--color-navy-light)] rounded-xl font-bold text-base transition-all">
                 View Marketing Results
               </Link>
             </div>
@@ -140,7 +125,7 @@ export default function DigitalMarketingPage() {
             <h2 className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">Beyond Just Likes and Shares: Marketing for ROI</h2>
             <div className="prose prose-invert max-w-none text-[var(--color-text-main)] opacity-80 space-y-6 leading-relaxed">
               <p>
-                Many agencies focus on "vanity metrics" like followers and likes. At Uma Techno, the premier <strong>Digital Marketing Agency in Rajkot</strong>, we focus on what really matters: your bottom line. We believe that digital marketing should be a predictable revenue generator for your business, not just an expense. Our strategy is deeply integrated with our <Link href="/seo-services" className="text-[var(--color-electric)] hover:underline font-bold">SEO expertise</Link> to provide a holistic growth plan.
+                Many agencies focus on "vanity metrics" like followers and likes. At Uma Techno, the premier <strong>Digital Marketing Agency in Rajkot</strong>, we focus on what really matters: your bottom line. We believe that digital marketing should be a predictable revenue generator for your business, not just an expense. Our strategy is deeply integrated with our <Link to="/seo-services" className="text-[var(--color-electric)] hover:underline font-bold">SEO expertise</Link> to provide a holistic growth plan.
               </p>
               <p>
                 Our team in Gujarat stays on the cutting edge of digital trends, from the latest Meta Ads algorithm shifts to the rise of AI-driven marketing automation. We use these tools to give your business a competitive edge in the local and national markets.
@@ -191,7 +176,7 @@ export default function DigitalMarketingPage() {
             <p className="opacity-90 mb-8 text-sm leading-relaxed">
               Let&apos;s build a custom growth roadmap for your business. Book your free strategy call today.
             </p>
-            <Link href="/contact" className="w-full py-4 bg-white text-[var(--color-electric)] rounded-xl font-bold text-center block hover:scale-105 transition-all">
+            <Link to="/contact" className="w-full py-4 bg-white text-[var(--color-electric)] rounded-xl font-bold text-center block hover:scale-105 transition-all">
               Book Strategy Call
             </Link>
           </div>
@@ -228,7 +213,7 @@ export default function DigitalMarketingPage() {
           <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto leading-relaxed">
             Stop settling for mediocre marketing. Partner with the experts and watch your business reach new heights in the digital age.
           </p>
-          <Link href="/contact" className="inline-flex items-center gap-2 px-10 py-5 bg-gradient-premium text-white rounded-2xl font-bold text-lg hover:scale-105 transition-all shadow-2xl">
+          <Link to="/contact" className="inline-flex items-center gap-2 px-10 py-5 bg-gradient-premium text-white rounded-2xl font-bold text-lg hover:scale-105 transition-all shadow-2xl">
             Let&apos;s Scale Together <ArrowRight size={24} />
           </Link>
         </div>
@@ -236,3 +221,4 @@ export default function DigitalMarketingPage() {
     </div>
   );
 }
+

@@ -1,27 +1,14 @@
 import { Target, Eye, Heart, Users, Award, Shield } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import Logo from "@/components/ui/Logo";
-import { Metadata } from "next";
-import Image from "next/image";
+;
 
 /**
  * AboutPage Metadata:
  * Optimized for SEO with localized keywords for Rajkot and Gujarat.
  * Includes OpenGraph configuration for social sharing consistency.
  */
-export const metadata: Metadata = {
-  title: "About Us | Uma Techno - Premium IT Agency in Rajkot",
-  description: "Learn about Uma Techno, the leading digital agency in Rajkot, Gujarat. We are a team of experts dedicated to building masterpieces in web development and SEO.",
-  alternates: {
-    canonical: "https://umatechno.in/about",
-  },
-  openGraph: {
-    title: "About Uma Techno | Premium Agency in Rajkot",
-    description: "Learn about our mission, vision, and the team behind the most innovative digital agency in Gujarat.",
-    images: ["/images/about-v2.png"],
-  },
-};
-
+// // 
 /**
  * coreValues:
  * Defines the company's guiding principles used in the values section.
@@ -93,10 +80,9 @@ export default function AboutPage() {
         </div>
         <div className="relative group">
            <div className="aspect-square glass-card rounded-[3rem] overflow-hidden rotate-3 relative z-10 border border-white/5">
-              <Image 
+              <img 
                 src="/images/about-v2.png" 
-                alt="Digital Masterpiece - Uma Techno Rajkot Team" 
-                fill
+                alt="Digital Masterpiece - Uma Techno Rajkot Team"
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-40" />
@@ -154,10 +140,10 @@ export default function AboutPage() {
                Let&apos;s build something great together.
             </p>
             <div className="flex justify-center gap-4">
-               <Link href="/contact" className="px-8 py-4 bg-[var(--color-electric)] text-white rounded-xl font-bold transition-all hover:brightness-110 shadow-[0_0_20px_var(--color-electric)]">
+               <Link to="/contact" className="px-8 py-4 bg-[var(--color-electric)] text-white rounded-xl font-bold transition-all hover:brightness-110 shadow-[0_0_20px_var(--color-electric)]">
                  Contact Us
                </Link>
-               <Link href="/careers" className="px-8 py-4 bg-transparent text-[var(--color-text-main)] rounded-xl font-bold border border-[var(--color-border)] hover:bg-[var(--color-navy-light)] transition-all">
+               <Link to="/careers" className="px-8 py-4 bg-transparent text-[var(--color-text-main)] rounded-xl font-bold border border-[var(--color-border)] hover:bg-[var(--color-navy-light)] transition-all">
                  Join Our Team
                </Link>
             </div>
@@ -166,3 +152,4 @@ export default function AboutPage() {
     </div>
   );
 }
+

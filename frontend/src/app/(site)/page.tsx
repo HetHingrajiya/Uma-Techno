@@ -1,11 +1,9 @@
-"use client";
-
 import Hero from "@/components/ui/Hero";
 import {
   Code, Globe, Smartphone, BarChart, Palette, Megaphone,
   Rocket, Shield, Zap, Users, Star, ArrowRight, CheckCircle
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -107,7 +105,7 @@ export default function Home() {
       }
 
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app';
+        const baseUrl = import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app';
 
         // Parallel fetch for core page components
         const [wRes, sRes, pRes] = await Promise.all([
@@ -239,7 +237,7 @@ export default function Home() {
               return (
                 <Link
                   key={service.slug}
-                  href={service.slug.startsWith('/') ? service.slug : `/${service.slug}`}
+                  to={service.slug.startsWith('/') ? service.slug : `/${service.slug}`}
                   className={cn(
                     "group bg-[var(--color-card)] border border-[var(--color-border)] p-10 rounded-[2.5rem] flex flex-col justify-between relative overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500",
                     isLarge ? "lg:col-span-2 min-h-[400px]" : "min-h-[400px]"
@@ -342,7 +340,7 @@ export default function Home() {
               </p>
             </div>
             <Link
-              href="/portfolio"
+              to="/portfolio"
               className="group flex items-center gap-3 text-[var(--color-text-main)] font-bold tracking-widest text-sm hover:text-[var(--color-electric)] transition-colors"
             >
               VIEW ALL PROJECTS <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
@@ -388,7 +386,7 @@ export default function Home() {
                   </div>
 
                   <Link
-                    href={`/portfolio/${project.slug || project.title.toLowerCase().replace(/ /g, '-')}`}
+                    to={`/portfolio/${project.slug || project.title.toLowerCase().replace(/ /g, '-')}`}
                     className="flex items-center gap-2 text-[var(--color-electric)] font-bold text-sm tracking-widest uppercase mt-6 group/link"
                   >
                     View Case Study <ArrowRight size={16} className="group-hover/link:translate-x-2 transition-transform" />
@@ -447,7 +445,7 @@ export default function Home() {
                   <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic">"Uma Techno delivered exactly what we needed. Their attention to detail and premium design aesthetic helped us increase our conversions by over 300% within the first month."</p>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] border border-[var(--color-border)] overflow-hidden">
-                      <img src={`/images/client-${i}.png`} alt="Client" className="w-full h-full object-cover" />
+                      <img src={`/images/client-${i}-v2.png`} alt="Client" className="w-full h-full object-cover" />
                     </div>
                     <div>
                       <h4 className="font-bold text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">John Doe {i}</h4>
@@ -526,13 +524,13 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4 relative z-10">
               <Link
-                href="/contact"
+                to="/contact"
                 className="px-8 py-4 text-white rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl bg-gradient-premium text-center"
               >
                 Get Free Consultation
               </Link>
               <Link
-                href="/portfolio"
+                to="/portfolio"
                 className="px-8 py-4 bg-transparent border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-[var(--color-navy-light)] rounded-xl font-bold text-base transition-all text-center"
               >
                 View Our Work
@@ -544,10 +542,11 @@ export default function Home() {
 
       {/* Sticky Bottom Mobile CTA for conversion on smaller screens */}
       <div className="fixed bottom-0 left-0 w-full p-4 bg-[var(--background)]/90 backdrop-blur-md border-t border-[var(--color-border)] z-40 lg:hidden flex justify-center shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
-        <Link href="/contact" className="w-full max-w-md py-4 bg-gradient-premium text-white font-bold rounded-xl text-center shadow-lg">
+        <Link to="/contact" className="w-full max-w-md py-4 bg-gradient-premium text-white font-bold rounded-xl text-center shadow-lg">
           Get Started Today
         </Link>
       </div>
     </div>
   );
 }
+

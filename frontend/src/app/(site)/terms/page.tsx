@@ -1,11 +1,5 @@
 import { Scale, FileCheck, AlertCircle, Gavel } from "lucide-react";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Terms & Conditions | Uma Techno",
-  description: "Review the terms of service and legal agreement for using Uma Techno's digital services and website.",
-};
-
+// // 
 export default function TermsPage() {
   const sections = [
     {
@@ -66,3 +60,4 @@ export default function TermsPage() {
     </div>
   );
 }
+

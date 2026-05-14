@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useRef } from 'react';
 import { Upload, X, ImageIcon, Loader2 } from 'lucide-react';
 
@@ -29,7 +27,7 @@ export default function ImageUploader({ label, currentImage, onUpload, aspectRat
       const reader = new FileReader();
       reader.onloadend = async () => {
         const base64 = reader.result as string;
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/upload`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/upload`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -86,3 +84,4 @@ export default function ImageUploader({ label, currentImage, onUpload, aspectRat
     </div>
   );
 }
+

@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -33,7 +31,7 @@ export default function ContactPage() {
     setErrorMsg("");
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/contacts`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/contacts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -252,3 +250,4 @@ export default function ContactPage() {
     </div>
   );
 }
+

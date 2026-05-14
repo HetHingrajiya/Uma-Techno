@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app/api/v1';
+const API_URL = import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app/api/v1';
 
 export const apiFetch = async (endpoint: string, options: RequestInit = {}) => {
   const response = await fetch(`${API_URL}${endpoint}`, {

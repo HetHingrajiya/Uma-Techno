@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import ImageUploader from "@/components/admin/ImageUploader";
 import {
@@ -129,7 +127,7 @@ export default function ThemeSettingsPage() {
 
   const fetchPalettes = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`);
       if (res.ok) {
         const data = await res.json();
         setSavedPalettes(data);
@@ -157,7 +155,7 @@ export default function ThemeSettingsPage() {
         const found = savedPalettes.find(p => p.name === palette.name);
         if (found) realId = found.id;
         else {
-          const createRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`, {
+          const createRes = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(palette)
@@ -169,7 +167,7 @@ export default function ThemeSettingsPage() {
         }
       }
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes/${realId}/activate`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes/${realId}/activate`, {
         method: "PUT"
       });
       if (res.ok) {
@@ -302,8 +300,8 @@ export default function ThemeSettingsPage() {
     try {
       const isEditing = !!editingPaletteId;
       const url = isEditing
-        ? `${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes/${editingPaletteId}`
-        : `${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`;
+        ? `${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes/${editingPaletteId}`
+        : `${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme/palettes`;
 
       const res = await fetch(url, {
         method: isEditing ? "PUT" : "POST",
@@ -637,3 +635,4 @@ export default function ThemeSettingsPage() {
     </div>
   );
 }
+

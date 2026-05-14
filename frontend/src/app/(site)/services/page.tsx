@@ -1,6 +1,6 @@
 import React from "react";
 import { Globe, Smartphone, BarChart, Palette, Code, Megaphone, CheckCircle } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 const services = [
   {
@@ -47,11 +47,7 @@ const services = [
   }
 ];
 
-export const metadata = {
-  title: "Our Services | Digital Solutions for Modern Businesses",
-  description: "Explore our range of digital services including Web Development, App Development, UI/UX Design, and SEO.",
-};
-
+// // 
 export default function ServicesPage() {
   return (
     <div className="py-20 space-y-32">
@@ -85,7 +81,7 @@ export default function ServicesPage() {
             </ul>
 
             <Link 
-              href={`/services/${service.slug}`}
+              to={`/services/${service.slug}`}
               className="w-full py-4 bg-white/5 hover:bg-electric text-white text-center rounded-2xl font-bold transition-all"
             >
               Learn More
@@ -96,3 +92,4 @@ export default function ServicesPage() {
     </div>
   );
 }
+

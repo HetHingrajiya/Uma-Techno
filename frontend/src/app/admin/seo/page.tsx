@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import { Search, Globe, Plus, Edit2, Trash2, X, Loader2, Check, Layout, Tag, FileText, ImageIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -23,7 +22,7 @@ export default function SEODashboard() {
 
   const fetchSEO = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/seo`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/seo`);
       if (res.ok) {
         const data = await res.json();
         setSeoPages(Array.isArray(data) ? data : data.data || []);
@@ -62,7 +61,7 @@ export default function SEODashboard() {
     e.preventDefault();
     setIsProcessing(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/seo`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/seo`, {
         method: "POST", // Controller handles upsert
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -85,7 +84,7 @@ export default function SEODashboard() {
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this SEO configuration?")) return;
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/seo/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/seo/${id}`, {
         method: "DELETE"
       });
       if (res.ok) {
@@ -310,3 +309,4 @@ export default function SEODashboard() {
     </div>
   );
 }
+

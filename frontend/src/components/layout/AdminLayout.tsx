@@ -1,8 +1,5 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
-import Link from "next/link";
+import { useNavigate, useLocation, Link, Outlet } from "react-router-dom";
 import { 
   LayoutDashboard, 
   Users, 
@@ -20,9 +17,6 @@ import {
 import { cn } from "@/lib/utils";
 import Logo from "@/components/ui/Logo";
 
-/**
- * Sidebar navigation configuration for the Admin Panel.
- */
 const sidebarLinks = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { name: "Leads", href: "/admin/leads", icon: MessageSquare },
@@ -34,55 +28,37 @@ const sidebarLinks = [
   { name: "Theme Settings", href: "/admin/theme", icon: Settings },
 ];
 
-/**
- * AdminLayout provides the persistent sidebar, header, and authentication wrapper 
- * for all administrative pages.
- */
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const router = useRouter();
-  const pathname = usePathname();
+export default function AdminLayout() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const pathname = location.pathname;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [clearingCache, setClearingCache] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // Automatically close the mobile sidebar whenever the user navigates to a new page
   useEffect(() => {
     setIsSidebarOpen(false);
   }, [pathname]);
 
-  /**
-   * Authentication Check:
-   * Verifies the presence of an 'admin_token' in localStorage.
-   * If missing and not on the login page, redirects to login.
-   */
   useEffect(() => {
     const token = localStorage.getItem("admin_token");
     if (!token && !pathname.includes("/admin/login")) {
-      router.push("/admin/login");
+      navigate("/admin/login");
     } else {
       setIsLoggedIn(true);
     }
-  }, [pathname, router]);
+  }, [pathname, navigate]);
 
-  // Bypass the layout for the login page
   if (pathname.includes("/admin/login")) {
-    return <>{children}</>;
+    return <Outlet />;
   }
 
   if (!isLoggedIn) return null;
 
   return (
     <div className="flex min-h-screen bg-[var(--background)] text-[var(--color-text-main)] transition-colors duration-300">
-      {/* 
-          Mobile Header:
-          Only visible on small screens. Contains the branding and hamburger toggle.
-      */}
       <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[var(--color-navy-light)] border-b border-[var(--color-border)] flex items-center justify-between px-4 z-50">
-        <Link href="/admin/dashboard" className="flex items-center gap-3">
+        <Link to="/admin/dashboard" className="flex items-center gap-3">
           <Logo className="w-10 h-10" />
           <span className="text-lg font-black tracking-tight text-[var(--color-text-main)] uppercase">
             Uma<span className="text-electric">Admin</span>
@@ -96,7 +72,6 @@ export default function AdminLayout({
         </button>
       </header>
 
-      {/* Backdrop for mobile sidebar */}
       {isSidebarOpen && (
         <div 
           className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
@@ -104,16 +79,12 @@ export default function AdminLayout({
         />
       )}
 
-      {/* 
-          Main Sidebar:
-          Static on desktop (lg), slide-in drawer on mobile.
-      */}
       <aside className={cn(
         "w-64 bg-[var(--color-navy-light)] border-r border-[var(--color-border)] flex flex-col fixed inset-y-0 left-0 z-50 transition-transform duration-300 lg:translate-x-0",
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="p-6 flex items-center justify-between">
-          <Link href="/admin/dashboard" className="flex items-center gap-3">
+          <Link to="/admin/dashboard" className="flex items-center gap-3">
             <Logo className="w-10 h-10" />
             <span className="text-lg font-black tracking-tight text-[var(--color-text-main)] uppercase">
               Uma<span className="text-electric">Admin</span>
@@ -127,12 +98,11 @@ export default function AdminLayout({
           </button>
         </div>
 
-        {/* Navigation Links */}
         <nav className="flex-grow px-4 space-y-2 mt-4 overflow-y-auto">
           {sidebarLinks.map((link) => (
             <Link
               key={link.name}
-              href={link.href}
+              to={link.href}
               className={cn(
                 "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200",
                 pathname === link.href 
@@ -146,17 +116,13 @@ export default function AdminLayout({
           ))}
         </nav>
 
-        {/* 
-            Bottom Actions:
-            Includes Logout and Cache Clearing tools.
-        */}
         <div className="p-4 border-t border-[var(--color-border)] space-y-2">
           <button
             onClick={async () => {
               setClearingCache(true);
               try {
-                // Triggers server-side cache invalidation for updated theme/content
-                await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/clear-cache`, { method: 'POST' });
+                const baseUrl = import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app';
+                await fetch(`${baseUrl}/api/v1/clear-cache`, { method: 'POST' });
                 alert('Cache cleared successfully!');
               } catch (e) {
                 alert('Failed to clear cache');
@@ -173,7 +139,7 @@ export default function AdminLayout({
           <button
             onClick={() => {
               localStorage.removeItem("admin_token");
-              router.push("/admin/login");
+              navigate("/admin/login");
             }}
             className="flex items-center gap-3 px-4 py-3 w-full rounded-xl text-gray-400 hover:bg-red-500/10 hover:text-red-400 transition-all"
           >
@@ -183,10 +149,6 @@ export default function AdminLayout({
         </div>
       </aside>
 
-      {/* 
-          Main Content Area:
-          Adjusts padding based on sidebar presence.
-      */}
       <main className="flex-grow lg:ml-64 px-4 md:px-8 py-6 md:py-10 mt-16 lg:mt-0 transition-all duration-300 w-full overflow-x-hidden">
         <header className="flex flex-col md:flex-row md:justify-between md:items-start lg:items-center mb-6 md:mb-10 gap-4">
           <div>
@@ -206,9 +168,8 @@ export default function AdminLayout({
           </div>
         </header>
 
-        {/* Page content with entrance animation */}
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-          {children}
+          <Outlet />
         </div>
       </main>
     </div>

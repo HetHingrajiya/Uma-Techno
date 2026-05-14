@@ -1,7 +1,5 @@
-"use client";
-
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { Link } from "react-router-dom";
 import { Send, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -32,7 +30,7 @@ export default function StickyCTA() {
           className="fixed bottom-6 left-6 z-[900] md:hidden cursor-move"
         >
           <Link
-            href="/contact"
+            to="/contact"
             className="bg-[var(--color-electric)] text-white px-6 py-4 rounded-full font-black text-sm flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(var(--color-header-rgb),0.3)] active:scale-95 transition-all border border-white/20 uppercase tracking-widest whitespace-nowrap"
           >
             <Send size={18} />
@@ -43,3 +41,4 @@ export default function StickyCTA() {
     </AnimatePresence>
   );
 }
+

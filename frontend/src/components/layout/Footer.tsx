@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
 import Logo from "../ui/Logo";
 
@@ -22,7 +22,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-white">
         {/* Company Info */}
         <div className="space-y-6">
-          <Link href="/" className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <Logo className="w-8 h-8" />
             <span className="text-xl font-bold tracking-tighter uppercase">
               <span className="text-[var(--color-electric)]">Uma</span><span className="text-white">Techno</span>
@@ -44,7 +44,7 @@ export default function Footer() {
             ].map(({ Icon, href }, i) => (
               <a
                 key={i}
-                href={href}
+                to={href}
                 target={href !== "#" ? "_blank" : undefined}
                 rel={href !== "#" ? "noopener noreferrer" : undefined}
                 className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white opacity-40 hover:bg-[var(--color-electric)] hover:text-white transition-all shadow-sm hover:shadow-[var(--color-electric)]/20"
@@ -66,7 +66,7 @@ export default function Footer() {
               { name: "Contact Us", href: "/contact" }
             ].map((item) => (
               <li key={item.name}>
-                <Link href={item.href} className="text-white opacity-60 hover:text-[var(--color-electric)] transition-colors">
+                <Link to={item.href} className="text-white opacity-60 hover:text-[var(--color-electric)] transition-colors">
                   {item.name}
                 </Link>
               </li>
@@ -86,7 +86,7 @@ export default function Footer() {
               { name: "UI/UX Design", href: "/services/ui-ux" },
             ].map((item) => (
               <li key={item.name}>
-                <Link href={item.href} className="text-white opacity-60 hover:text-[var(--color-electric)] transition-colors">
+                <Link to={item.href} className="text-white opacity-60 hover:text-[var(--color-electric)] transition-colors">
                   {item.name}
                 </Link>
               </li>
@@ -119,10 +119,10 @@ export default function Footer() {
           © {new Date().getFullYear()} Uma Techno. All rights reserved.
         </p>
         <div className="flex gap-8 text-sm">
-          <Link href="/privacy-policy" className="text-white opacity-40 hover:text-[var(--color-electric)] transition-colors">
+          <Link to="/privacy-policy" className="text-white opacity-40 hover:text-[var(--color-electric)] transition-colors">
             Privacy Policy
           </Link>
-          <Link href="/terms" className="text-white opacity-40 hover:text-[var(--color-electric)] transition-colors">
+          <Link to="/terms" className="text-white opacity-40 hover:text-[var(--color-electric)] transition-colors">
             Terms of Service
           </Link>
         </div>
@@ -130,3 +130,4 @@ export default function Footer() {
     </footer>
   );
 }
+

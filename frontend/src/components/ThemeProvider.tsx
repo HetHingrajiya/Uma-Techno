@@ -1,5 +1,3 @@
-"use client";
-
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 /**
@@ -95,7 +93,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         }
 
         // Fetch the production theme from the backend API
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme?t=${Date.now()}`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/theme?t=${Date.now()}`);
         if (res.ok) {
           const data = await res.json();
           if (data && data.primaryColor) {
@@ -240,3 +238,4 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     </>
   );
 }
+

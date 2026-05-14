@@ -1,10 +1,8 @@
-"use client";
-
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle, Star } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
+import { Link } from "react-router-dom";
+;
 import Logo from "./Logo";
 import { useTheme } from "@/components/ThemeProvider";
 
@@ -27,12 +25,10 @@ export default function Hero() {
       */}
       {theme.heroImageUrl && (
         <div className="absolute inset-0 z-0">
-          <Image 
+          <img 
             src={theme.heroImageUrl} 
             alt="Hero Background" 
-            fill 
-            className="object-cover opacity-10"
-            priority
+            className="object-cover opacity-10" loading="eager"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)] via-transparent to-[var(--background)]" />
         </div>
@@ -67,13 +63,13 @@ export default function Hero() {
                 
                 <div className="flex flex-col sm:flex-row gap-4 pt-2">
                   <Link
-                    href="/contact"
+                    to="/contact"
                     className="group relative px-8 py-4 text-white rounded-xl font-bold text-lg transition-all hover:scale-105 text-center flex justify-center items-center gap-2 bg-gradient-premium"
                   >
                     Get Free Quote <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                   </Link>
                   <Link
-                    href="/portfolio"
+                    to="/portfolio"
                     className="group px-8 py-4 bg-[var(--color-card)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-xl font-bold text-lg transition-all hover:bg-[var(--color-navy-light)] text-center shadow-sm"
                   >
                     View Portfolio
@@ -96,11 +92,9 @@ export default function Hero() {
           >
             <div className="animate-float-complex max-w-md mx-auto lg:max-w-none">
               <div className="bg-[var(--color-card)] rounded-[2.5rem] lg:rounded-[3rem] p-2 aspect-[4/5] lg:aspect-square relative overflow-hidden group border border-[var(--color-border)] shadow-2xl">
-                 <Image 
+                 <img 
                    src={theme.heroImageUrl || "/images/portfolio-showcase-v2.png"} 
-                   alt="Portfolio Showcase - Web Development Rajkot" 
-                   fill
-                   priority
+                   alt="Portfolio Showcase - Web Development Rajkot" loading="eager"
                    className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-700"
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)]/80 via-transparent to-transparent pointer-events-none" />
@@ -144,3 +138,4 @@ export default function Hero() {
     </section>
   );
 }
+

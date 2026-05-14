@@ -1,7 +1,5 @@
-"use client";
-
 import React, { useState } from "react";
-import Image from "next/image";
+;
 import { useTheme } from "@/components/ThemeProvider";
 
 /**
@@ -17,12 +15,11 @@ export default function Logo({ className = "w-10 h-10" }: { className?: string }
   return (
     <div className={`relative flex items-center justify-center shrink-0 ${className}`}>
       {!error ? (
-        <Image
+        <img
           src={theme.logoUrl || "/logo-v2.png"}
           alt="Uma Techno Logo"
           width={100}
-          height={100}
-          priority
+          height={100} loading="eager"
           className="w-full h-full object-contain transition-opacity duration-300"
           onError={() => setError(true)}
         />
@@ -35,3 +32,4 @@ export default function Logo({ className = "w-10 h-10" }: { className?: string }
     </div>
   );
 }
+

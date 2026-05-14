@@ -1,38 +1,12 @@
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Hero from "@/components/ui/Hero";
+import React from "react";
+import { Link, useParams } from "react-router-dom";
 import { CheckCircle } from "lucide-react";
-import Link from "next/link";
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-   try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/seo/path?pagePath=/${params.slug}`);
-      if (res.ok) {
-         const data = await res.json();
-         return {
-            title: data.title,
-            description: data.description,
-            keywords: data.keywords || [],
-            openGraph: {
-               title: data.title,
-               description: data.description,
-               url: `https://umatechno.in/${params.slug}`,
-               images: data.ogImage ? [{ url: data.ogImage }] : undefined,
-            }
-         };
-      }
-   } catch (err) { }
-
-   // Default fallback for dynamic SEO pages
-   return {
-      title: `${params.slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} | Uma Techno`,
-      description: `Professional IT services and solutions in Rajkot. Discover our ${params.slug.replace(/-/g, ' ')} offerings.`,
-   };
-}
-
-export default function SEOLandingPage({ params }: { params: { slug: string } }) {
-   const isCitySpecific = params.slug.includes('-rajkot') || params.slug.includes('-gujarat');
-   const serviceName = params.slug.replace(/-rajkot|-gujarat/g, '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+export default function SEOLandingPage() {
+   const { slug } = useParams();
+   const paramsSlug = slug || "";
+   const isCitySpecific = paramsSlug.includes('-rajkot') || paramsSlug.includes('-gujarat');
+   const serviceName = paramsSlug.replace(/-rajkot|-gujarat/g, '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 
    return (
       <div className="flex flex-col gap-16 lg:gap-32 pb-20 lg:pb-32 bg-[var(--background)] min-h-screen pt-32">
@@ -56,7 +30,7 @@ export default function SEOLandingPage({ params }: { params: { slug: string } })
             </p>
             <div className="pt-8">
                <Link
-                  href="/contact"
+                  to="/contact"
                   className="px-8 py-4 text-white rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl btn-premium inline-block"
                   style={{ backgroundColor: "var(--color-electric)" }}
                >
@@ -91,7 +65,7 @@ export default function SEOLandingPage({ params }: { params: { slug: string } })
                      <div className="text-[var(--color-electric)] font-bold tracking-widest text-sm uppercase">Limited Availability</div>
                      <h3 className="text-2xl font-bold text-[var(--color-text-main)]">Ready to scale your digital presence?</h3>
                      <p className="text-[var(--color-text-main)] opacity-70 text-sm">Our engineering calendar fills up quickly. Contact us today to secure your project slot.</p>
-                     <Link href="/contact" className="mt-4 text-[var(--color-electric)] font-bold uppercase tracking-wider hover:underline">
+                     <Link to="/contact" className="mt-4 text-[var(--color-electric)] font-bold uppercase tracking-wider hover:underline">
                         Schedule Consultation &rarr;
                      </Link>
                   </div>

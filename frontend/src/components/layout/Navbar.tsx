@@ -1,8 +1,5 @@
-"use client";
-
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -32,7 +29,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
-  const pathname = usePathname();
+  const pathname = useLocation().pathname;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,7 +65,7 @@ export default function Navbar() {
     )}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
+        <Link to="/" className="flex items-center gap-2 group">
           <Logo className="w-10 h-10 transition-transform group-hover:scale-110" />
           <div className="flex flex-col leading-none">
             <span className={cn(
@@ -88,7 +85,7 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <div key={link.name} className="relative group">
               <Link
-                href={link.href}
+                to={link.href}
                 className={cn(
                   "text-sm font-bold uppercase tracking-widest transition-colors hover:text-[var(--color-electric)]",
                   pathname === link.href ? "text-[var(--color-electric)]" : "text-[var(--color-text-main)]"
@@ -102,7 +99,7 @@ export default function Navbar() {
                     {link.submenu.map((sub) => (
                       <Link
                         key={sub.name}
-                        href={sub.href}
+                        to={sub.href}
                         className="p-3 rounded-xl hover:bg-gray-50 text-sm font-bold text-gray-600 hover:text-[var(--color-electric)] transition-all flex items-center justify-between group/sub"
                       >
                         {sub.name}
@@ -122,7 +119,7 @@ export default function Navbar() {
           ))}
           
           <Link
-            href="/contact"
+            to="/contact"
             className="px-6 py-2.5 bg-gradient-premium text-white rounded-full text-xs font-bold uppercase tracking-widest shadow-lg shadow-blue-500/20 hover:scale-105 transition-all"
           >
             Get a Quote
@@ -166,7 +163,7 @@ export default function Navbar() {
               <div className="flex flex-col h-full bg-white relative">
                 {/* Drawer Header */}
                 <div className="p-6 flex justify-between items-center border-b border-gray-100 bg-white shrink-0">
-                  <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
+                  <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
                     <Logo className="w-8 h-8" />
                     <div className="flex flex-col leading-none">
                       <span className="text-xl font-bold tracking-tighter uppercase text-[#0F172A]">
@@ -194,7 +191,7 @@ export default function Navbar() {
                         pathname === link.href ? "bg-[var(--color-electric)] text-white shadow-md shadow-[var(--color-electric)]/20" : "hover:bg-gray-50 text-[#0F172A]"
                       )}>
                         <Link
-                          href={link.href}
+                          to={link.href}
                           className="text-lg font-bold font-outfit flex-1"
                           onClick={() => !link.submenu && setIsOpen(false)}
                         >
@@ -218,7 +215,7 @@ export default function Navbar() {
                           {link.submenu.map((sub) => (
                             <Link
                               key={sub.name}
-                              href={sub.href}
+                              to={sub.href}
                               className="text-lg font-bold"
                               style={{ color: "#64748B" }}
                               onClick={() => setIsOpen(false)}
@@ -235,7 +232,7 @@ export default function Navbar() {
                 {/* Drawer Footer */}
                 <div className="p-6 bg-gray-50 border-t border-gray-100 space-y-6 shrink-0 mt-auto">
                   <Link
-                    href="/contact"
+                    to="/contact"
                     className="block w-full bg-[var(--color-electric)] text-white text-center py-4 rounded-xl font-bold text-lg shadow-lg"
                     onClick={() => setIsOpen(false)}
                   >
@@ -253,3 +250,4 @@ export default function Navbar() {
     </nav>
   );
 }
+

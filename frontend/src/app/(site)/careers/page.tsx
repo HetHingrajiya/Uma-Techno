@@ -1,6 +1,6 @@
 import React from "react";
 import { Briefcase, MapPin, Clock, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 const jobs = [
   {
@@ -49,7 +49,7 @@ export default function CareersPage() {
                    <div className="flex items-center gap-1"><Briefcase size={14} /> {job.salary}</div>
                 </div>
              </div>
-             <Link href="/contact" className="px-8 py-3 bg-[var(--color-electric)]/10 hover:bg-[var(--color-electric)] text-[var(--color-electric)] hover:text-white font-bold rounded-xl transition-all flex items-center gap-2 border border-[var(--color-electric)]/20 shadow-sm">
+             <Link to="/contact" className="px-8 py-3 bg-[var(--color-electric)]/10 hover:bg-[var(--color-electric)] text-[var(--color-electric)] hover:text-white font-bold rounded-xl transition-all flex items-center gap-2 border border-[var(--color-electric)]/20 shadow-sm">
                 Apply Now <ArrowRight size={18} />
              </Link>
           </div>
@@ -76,3 +76,4 @@ export default function CareersPage() {
     </div>
   );
 }
+

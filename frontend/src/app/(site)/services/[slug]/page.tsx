@@ -1,6 +1,6 @@
+import React, { useEffect } from "react";
 import { Globe, Rocket, Smartphone, Code, BarChart, CheckCircle, ArrowRight, Palette } from "lucide-react";
-import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 const serviceData: Record<string, any> = {
   "web-development": {
@@ -53,29 +53,22 @@ const serviceData: Record<string, any> = {
   }
 };
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const service = serviceData[slug];
-  if (!service) return {};
+export default function ServicePage() {
+  const { slug } = useParams();
+  const navigate = useNavigate();
+  const paramsSlug = slug || "";
+  const service = serviceData[paramsSlug];
 
-  return {
-    title: service.title,
-    description: service.description,
-  };
-}
-
-export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const service = serviceData[slug];
+  useEffect(() => {
+    // Redirect to new root-level SEO pages for specific services
+    if (paramsSlug === 'web-development') navigate('/web-development', { replace: true });
+    if (paramsSlug === 'seo') navigate('/seo-services', { replace: true });
+    if (paramsSlug === 'digital-marketing') navigate('/digital-marketing', { replace: true });
+  }, [paramsSlug, navigate]);
 
   if (!service) {
-    notFound();
+    return <div className="pt-40 text-center text-white">Service not found</div>;
   }
-
-  // Redirect to new root-level SEO pages for specific services
-  if (slug === 'web-development') redirect('/web-development');
-  if (slug === 'seo') redirect('/seo-services');
-  if (slug === 'digital-marketing') redirect('/digital-marketing');
 
   const Icon = service.icon;
 
@@ -120,7 +113,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
           <div className="pt-6">
             <Link 
-              href="/contact" 
+              to="/contact" 
               className="px-8 py-4 text-white hover:brightness-110 rounded-xl font-bold text-base transition-all hover:scale-105 shadow-[0_0_20px_var(--color-electric)] inline-flex items-center gap-2"
               style={{ backgroundColor: "var(--color-electric)" }}
             >

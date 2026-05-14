@@ -1,7 +1,5 @@
-"use client";
-
 import React from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { FileText, Layers, Briefcase, MessageSquare, Plus, ArrowRight, Star } from "lucide-react";
 
 export default function CMSDashboard() {
@@ -69,7 +67,7 @@ export default function CMSDashboard() {
             
             <div className="flex gap-3">
               <Link 
-                href={section.href}
+                to={section.href}
                 className="flex-1 bg-white border border-[var(--color-border)] hover:border-electric text-[var(--color-text-main)] py-2 rounded-lg flex items-center justify-center gap-2 text-sm font-medium transition-colors"
               >
                 Manage <ArrowRight size={16} className="hover-arrow" />
@@ -84,3 +82,4 @@ export default function CMSDashboard() {
     </div>
   );
 }
+

@@ -1,20 +1,6 @@
 import { Globe, Code, Zap, Shield, Rocket, CheckCircle, ArrowRight, Smartphone, Layout, Database } from "lucide-react";
-import Link from "next/link";
-import { Metadata } from "next";
+import { Link } from "react-router-dom";
 
-export const metadata: Metadata = {
-  title: "Web Development Company in Rajkot | Premium Web Solutions",
-  description: "Uma Techno is the leading web development company in Rajkot. We build high-performance, SEO-optimized, and scalable websites tailored for business growth.",
-  keywords: ["Web Development Company in Rajkot", "Website Design Rajkot", "E-commerce Website Rajkot", "Next.js Development Gujarat"],
-  alternates: {
-    canonical: "https://umatechno.in/web-development",
-  },
-  openGraph: {
-    title: "Web Development Company in Rajkot | Uma Techno",
-    description: "High-performance websites and web applications built for business growth in Rajkot.",
-    images: ["/images/blog-1-v2.png"],
-  },
-};
 
 const features = [
   { title: "Next.js & React Expertise", desc: "Building lightning-fast, SEO-friendly applications using the latest web technologies.", icon: Zap },
@@ -126,10 +112,10 @@ export default function WebDevelopmentPage() {
               We engineer high-performance digital platforms that don&apos;t just look beautiful but drive real business results. Partner with the top-rated website development agency in Gujarat.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link href="/contact" className="px-8 py-4 bg-gradient-premium text-white rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl">
+              <Link to="/contact" className="px-8 py-4 bg-gradient-premium text-white rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl">
                 Start Your Project
               </Link>
-              <Link href="/portfolio" className="px-8 py-4 bg-transparent border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-[var(--color-navy-light)] rounded-xl font-bold text-base transition-all">
+              <Link to="/portfolio" className="px-8 py-4 bg-transparent border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-[var(--color-navy-light)] rounded-xl font-bold text-base transition-all">
                 View Our Work
               </Link>
             </div>
@@ -154,7 +140,7 @@ export default function WebDevelopmentPage() {
                 In today&apos;s digital-first world, your website is often the first point of contact between your brand and potential customers. As a premier <strong>Web Development Company in Rajkot</strong>, Uma Techno understands that a website needs to be more than just a digital brochure. It needs to be a powerful sales engine, a lead generation machine, and a symbol of your brand&apos;s authority.
               </p>
               <p>
-                Our team of expert developers in Rajkot specializes in creating custom web solutions that are tailored to the unique needs of businesses in Gujarat. Whether you are a startup looking for your first MVP or an established enterprise needing a complex system overhaul, we provide the technical expertise and creative vision to bring your ideas to life. You can also explore our <Link href="/seo-services" className="text-[var(--color-electric)] hover:underline font-bold">SEO services in Rajkot</Link> to ensure your site reaches the right audience.
+                Our team of expert developers in Rajkot specializes in creating custom web solutions that are tailored to the unique needs of businesses in Gujarat. Whether you are a startup looking for your first MVP or an established enterprise needing a complex system overhaul, we provide the technical expertise and creative vision to bring your ideas to life. You can also explore our <Link to="/seo-services" className="text-[var(--color-electric)] hover:underline font-bold">SEO services in Rajkot</Link> to ensure your site reaches the right audience.
               </p>
               <h3 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] mt-8">Why Web Development Matters for Your Business Growth</h3>
               <p>
@@ -202,7 +188,7 @@ export default function WebDevelopmentPage() {
             <p className="opacity-90 mb-8 text-sm leading-relaxed">
               Get a free consultation and a detailed project estimate for your web development needs in Rajkot.
             </p>
-            <Link href="/contact" className="w-full py-4 bg-white text-[var(--color-electric)] rounded-xl font-bold text-center block hover:scale-105 transition-all">
+            <Link to="/contact" className="w-full py-4 bg-white text-[var(--color-electric)] rounded-xl font-bold text-center block hover:scale-105 transition-all">
               Request Free Audit
             </Link>
           </div>
@@ -239,7 +225,7 @@ export default function WebDevelopmentPage() {
           <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto leading-relaxed">
             Join 100+ businesses who have scaled their operations with our premium web development services in Rajkot, Gujarat.
           </p>
-          <Link href="/contact" className="inline-flex items-center gap-2 px-10 py-5 bg-gradient-premium text-white rounded-2xl font-bold text-lg hover:scale-105 transition-all shadow-2xl">
+          <Link to="/contact" className="inline-flex items-center gap-2 px-10 py-5 bg-gradient-premium text-white rounded-2xl font-bold text-lg hover:scale-105 transition-all shadow-2xl">
             Get Started Now <ArrowRight size={24} />
           </Link>
         </div>
@@ -247,3 +233,4 @@ export default function WebDevelopmentPage() {
     </div>
   );
 }
+

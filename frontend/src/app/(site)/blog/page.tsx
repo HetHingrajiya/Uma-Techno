@@ -1,21 +1,13 @@
 import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { Metadata } from "next";
+import { Link } from "react-router-dom";
+;
 import { ArrowRight, Calendar, User, Clock } from "lucide-react";
 
 /**
  * SEO Metadata: 
  * Ensures the blog page is correctly indexed with descriptive titles and canonical links.
  */
-export const metadata: Metadata = {
-  title: "Insights & Tech Blog | Uma Techno Rajkot",
-  description: "Explore the latest trends in web development, SEO, and digital marketing. Stay ahead of the competition with insights from Uma Techno, Rajkot.",
-  alternates: {
-    canonical: "https://umatechno.in/blog",
-  },
-};
-
+// // 
 /**
  * Blog Post Data:
  * Static collection of articles. In a production environment, this would 
@@ -98,16 +90,15 @@ export default function BlogPage() {
           {posts.map((post, i) => (
             <Link 
               key={i} 
-              href={`/blog/${post.slug}`}
+              to={`/blog/${post.slug}`}
               className="group flex flex-col bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2rem] overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2"
             >
               {/* Thumbnail Area with hover zoom effect */}
               <div className="aspect-[16/10] relative overflow-hidden">
                 <div className="absolute inset-0 bg-[var(--color-electric)]/20 group-hover:bg-transparent transition-colors z-10" />
-                <Image 
+                <img 
                   src={post.image} 
                   alt={post.title} 
-                  fill 
                   className="object-cover group-hover:scale-110 transition-all duration-700" 
                 />
               </div>
@@ -137,3 +128,4 @@ export default function BlogPage() {
     </div>
   );
 }
+

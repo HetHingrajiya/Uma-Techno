@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import { Download, Search, Mail, Phone, Calendar } from "lucide-react";
 
@@ -10,7 +8,7 @@ export default function LeadsDashboard() {
   useEffect(() => {
     const fetchLeads = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/contacts`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/contacts`);
         if (res.ok) {
           const result = await res.json();
           // The API returns { success: true, data: [...] }
@@ -127,3 +125,4 @@ export default function LeadsDashboard() {
     </div>
   );
 }
+

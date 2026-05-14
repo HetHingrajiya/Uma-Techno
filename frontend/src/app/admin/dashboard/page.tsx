@@ -1,7 +1,5 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { 
   Users, 
   MessageSquare, 
@@ -51,7 +49,7 @@ export default function DashboardDashboard() {
    */
   const fetchStats = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/dashboard/stats`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/dashboard/stats`);
       if (res.ok) {
         const json = await res.json();
         setData(json);
@@ -220,7 +218,7 @@ export default function DashboardDashboard() {
             <h3 className="text-xl font-bold font-outfit text-[var(--color-text-main)] flex items-center gap-2">
                <CheckCircle size={20} className="text-electric" /> Recent Inquiries
             </h3>
-            <Link href="/admin/leads" className="text-electric text-sm font-bold hover:underline bg-electric/5 px-4 py-2 rounded-xl transition-all flex items-center gap-1 group">
+            <Link to="/admin/leads" className="text-electric text-sm font-bold hover:underline bg-electric/5 px-4 py-2 rounded-xl transition-all flex items-center gap-1 group">
               View All <ArrowRight size={14} className="hover-arrow" />
             </Link>
           </div>
@@ -291,3 +289,4 @@ export default function DashboardDashboard() {
     </div>
   );
 }
+

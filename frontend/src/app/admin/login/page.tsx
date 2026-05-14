@@ -1,7 +1,5 @@
-"use client";
-
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router-dom";
 import { Lock, Mail, Loader2 } from "lucide-react";
 
 export default function AdminLogin() {
@@ -9,7 +7,7 @@ export default function AdminLogin() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +18,7 @@ export default function AdminLogin() {
       // For now, mock login. Later connect to backend.
       if (email === "admin@umatechno.com" && password === "admin123") {
         localStorage.setItem("admin_token", "mock_token");
-        router.push("/admin/dashboard");
+        navigate("/admin/dashboard");
       } else {
         setError("Invalid credentials. Please try again.");
       }
@@ -99,3 +97,4 @@ export default function AdminLogin() {
     </div>
   );
 }
+

@@ -1,8 +1,6 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import { ArrowRight, Filter } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function PortfolioPage() {
@@ -13,7 +11,7 @@ export default function PortfolioPage() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app';
+        const baseUrl = import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app';
         const res = await fetch(`${baseUrl}/api/v1/projects`);
 
         if (res.ok) {
@@ -145,7 +143,7 @@ export default function PortfolioPage() {
                   </div>
 
                   <Link
-                    href={`/portfolio/${project.slug || project.title.toLowerCase().replace(/ /g, '-')}`}
+                    to={`/portfolio/${project.slug || project.title.toLowerCase().replace(/ /g, '-')}`}
                     className="flex items-center gap-2 text-[var(--color-electric)] font-bold text-sm tracking-widest uppercase mt-8 group/link"
                   >
                     View Case Study <ArrowRight size={20} className="group-hover/link:translate-x-2 transition-transform" />
@@ -165,3 +163,4 @@ export default function PortfolioPage() {
     </div>
   );
 }
+

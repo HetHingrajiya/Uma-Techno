@@ -1,11 +1,5 @@
 import { Shield, Lock, Eye, FileText } from "lucide-react";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Privacy Policy | Uma Techno",
-  description: "Learn how Uma Techno collects, uses, and protects your personal data in compliance with digital privacy standards.",
-};
-
+// // 
 export default function PrivacyPolicyPage() {
   const sections = [
     {
@@ -70,3 +64,4 @@ export default function PrivacyPolicyPage() {
     </div>
   );
 }
+

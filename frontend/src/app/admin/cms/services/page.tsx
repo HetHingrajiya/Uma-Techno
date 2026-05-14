@@ -1,7 +1,6 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import { Plus, Edit2, Trash2, ArrowLeft, X, Loader2, Check, AlertCircle, Layout, Hash, Type, FileText } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ServicesManager() {
@@ -27,7 +26,7 @@ export default function ServicesManager() {
 
   const fetchServices = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/services`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/services`);
       if (res.ok) {
         const result = await res.json();
         setServices(result.success ? result.data : result);
@@ -79,8 +78,8 @@ export default function ServicesManager() {
     setIsProcessing(true);
     try {
       const url = currentService 
-        ? `${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/services/${currentService.id}`
-        : `${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/services`;
+        ? `${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/services/${currentService.id}`
+        : `${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/services`;
       
       const res = await fetch(url, {
         method: currentService ? "PUT" : "POST",
@@ -105,7 +104,7 @@ export default function ServicesManager() {
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this service?")) return;
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/services/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/services/${id}`, {
         method: "DELETE"
       });
       if (res.ok) {
@@ -119,7 +118,7 @@ export default function ServicesManager() {
   return (
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
-        <Link href="/admin/cms" className="w-10 h-10 bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-xl flex items-center justify-center text-[var(--color-text-main)] hover:text-electric transition-colors shrink-0">
+        <Link to="/admin/cms" className="w-10 h-10 bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-xl flex items-center justify-center text-[var(--color-text-main)] hover:text-electric transition-colors shrink-0">
           <ArrowLeft size={20} />
         </Link>
         <div>
@@ -366,3 +365,4 @@ export default function ServicesManager() {
     </div>
   );
 }
+

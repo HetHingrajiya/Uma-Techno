@@ -1,21 +1,6 @@
 import { BarChart, Search, Target, TrendingUp, Globe, CheckCircle, ArrowRight, MousePointer2, Megaphone } from "lucide-react";
-import Link from "next/link";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "SEO Services in Rajkot | Best SEO Agency in Gujarat",
-  description: "Boost your search rankings with the top SEO services in Rajkot. Uma Techno offers technical SEO, content strategy, and local SEO to dominate Google search results.",
-  keywords: ["SEO Services in Rajkot", "SEO Agency Rajkot", "Search Engine Optimization Gujarat", "Local SEO Rajkot"],
-  alternates: {
-    canonical: "https://umatechno.in/seo-services",
-  },
-  openGraph: {
-    title: "SEO Services in Rajkot | Uma Techno",
-    description: "Dominate Google search results with our technical and local SEO strategies in Rajkot.",
-    images: ["/images/blog-2.png"],
-  },
-};
-
+import { Link } from "react-router-dom";
+// // 
 const seoFeatures = [
   { title: "Technical SEO Audit", desc: "In-depth analysis of your website's architecture, speed, and mobile-friendliness to ensure search engines can crawl and index your site effectively.", icon: Search },
   { title: "Keyword Strategy", desc: "Finding the most profitable keywords for your business and mapping them to high-converting landing pages.", icon: Target },
@@ -115,10 +100,10 @@ export default function SeoServicesPage() {
               Stop hiding on the second page of Google. Our expert SEO strategies are designed to skyrocket your organic traffic and turn searchers into loyal customers.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link href="/contact" className="px-8 py-4 bg-gradient-premium text-white rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl">
+              <Link to="/contact" className="px-8 py-4 bg-gradient-premium text-white rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl">
                 Get Your Free SEO Audit
               </Link>
-              <Link href="/portfolio" className="px-8 py-4 bg-transparent border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-[var(--color-navy-light)] rounded-xl font-bold text-base transition-all">
+              <Link to="/portfolio" className="px-8 py-4 bg-transparent border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-[var(--color-navy-light)] rounded-xl font-bold text-base transition-all">
                 Our Success Stories
               </Link>
             </div>
@@ -143,7 +128,7 @@ export default function SeoServicesPage() {
                 In the competitive business landscape of <strong>Rajkot</strong>, being visible where your customers are searching is critical. Every day, thousands of people in Gujarat use Google to find products and services just like yours. If your business isn&apos;t appearing at the top of these search results, you are essentially handing your leads over to your competitors.
               </p>
               <p>
-                Uma Techno is more than just an <strong>SEO Agency in Rajkot</strong>. We are your partners in growth. Our approach to Search Engine Optimization is data-driven, transparent, and focused on ROI. We don&apos;t just chase rankings; we chase traffic that converts. If you don't have a high-performance site yet, check our <Link href="/web-development" className="text-[var(--color-electric)] hover:underline font-bold">Web Development services</Link>.
+                Uma Techno is more than just an <strong>SEO Agency in Rajkot</strong>. We are your partners in growth. Our approach to Search Engine Optimization is data-driven, transparent, and focused on ROI. We don&apos;t just chase rankings; we chase traffic that converts. If you don't have a high-performance site yet, check our <Link to="/web-development" className="text-[var(--color-electric)] hover:underline font-bold">Web Development services</Link>.
               </p>
               <h3 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] mt-8">Our Comprehensive SEO Methodology</h3>
               <p>
@@ -191,7 +176,7 @@ export default function SeoServicesPage() {
             <p className="opacity-90 mb-8 text-sm leading-relaxed">
               Get a comprehensive SEO audit of your website worth $299 for free. No obligations.
             </p>
-            <Link href="/contact" className="w-full py-4 bg-white text-[var(--color-electric)] rounded-xl font-bold text-center block hover:scale-105 transition-all">
+            <Link to="/contact" className="w-full py-4 bg-white text-[var(--color-electric)] rounded-xl font-bold text-center block hover:scale-105 transition-all">
               Claim Free Audit
             </Link>
           </div>
@@ -228,7 +213,7 @@ export default function SeoServicesPage() {
           <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto leading-relaxed">
             Partner with the most trusted SEO agency in Rajkot and start outranking your competitors today.
           </p>
-          <Link href="/contact" className="inline-flex items-center gap-2 px-10 py-5 bg-gradient-premium text-white rounded-2xl font-bold text-lg hover:scale-105 transition-all shadow-2xl">
+          <Link to="/contact" className="inline-flex items-center gap-2 px-10 py-5 bg-gradient-premium text-white rounded-2xl font-bold text-lg hover:scale-105 transition-all shadow-2xl">
             Skyrocket My Traffic <ArrowRight size={24} />
           </Link>
         </div>
@@ -236,3 +221,4 @@ export default function SeoServicesPage() {
     </div>
   );
 }
+

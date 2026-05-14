@@ -1,7 +1,6 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import { Plus, Edit2, Trash2, ArrowLeft, X, Loader2, Check, ExternalLink, Image as ImageIcon, Briefcase, Globe, User } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function PortfolioManager() {
@@ -28,7 +27,7 @@ export default function PortfolioManager() {
 
   const fetchProjects = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/projects`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/projects`);
       if (res.ok) {
         const result = await res.json();
         setProjects(result.success ? result.data : result);
@@ -82,8 +81,8 @@ export default function PortfolioManager() {
     setIsProcessing(true);
     try {
       const url = currentProject 
-        ? `${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/projects/${currentProject.id}`
-        : `${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/projects`;
+        ? `${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/projects/${currentProject.id}`
+        : `${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/projects`;
       
       const res = await fetch(url, {
         method: currentProject ? "PUT" : "POST",
@@ -108,7 +107,7 @@ export default function PortfolioManager() {
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this project?")) return;
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/projects/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app'}/api/v1/projects/${id}`, {
         method: "DELETE"
       });
       if (res.ok) {
@@ -122,7 +121,7 @@ export default function PortfolioManager() {
   return (
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
-        <Link href="/admin/cms" className="w-10 h-10 bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-xl flex items-center justify-center text-[var(--color-text-main)] hover:text-electric transition-colors shrink-0">
+        <Link to="/admin/cms" className="w-10 h-10 bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-xl flex items-center justify-center text-[var(--color-text-main)] hover:text-electric transition-colors shrink-0">
           <ArrowLeft size={20} />
         </Link>
         <div>
@@ -386,3 +385,4 @@ export default function PortfolioManager() {
     </div>
   );
 }
+
