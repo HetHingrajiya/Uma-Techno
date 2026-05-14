@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Loader2, Save, Layout, GripVertical, Eye, EyeOff, ChevronUp, ChevronDown } from "lucide-react";
 
 export default function WidgetControlPage() {

@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FileText, Layers, Briefcase, MessageSquare, Plus, ArrowRight, Star } from "lucide-react";
 

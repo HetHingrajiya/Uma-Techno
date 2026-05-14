@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function PrivacyPage() {
   return (
     <div className="py-20 max-w-4xl mx-auto px-6 space-y-8">

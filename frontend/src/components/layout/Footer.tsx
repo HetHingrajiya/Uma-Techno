@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
 import Logo from "../ui/Logo";
@@ -44,7 +43,7 @@ export default function Footer() {
             ].map(({ Icon, href }, i) => (
               <a
                 key={i}
-                to={href}
+                href={href}
                 target={href !== "#" ? "_blank" : undefined}
                 rel={href !== "#" ? "noopener noreferrer" : undefined}
                 className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white opacity-40 hover:bg-[var(--color-electric)] hover:text-white transition-all shadow-sm hover:shadow-[var(--color-electric)]/20"
