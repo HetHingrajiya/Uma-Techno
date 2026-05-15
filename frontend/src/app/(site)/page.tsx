@@ -67,11 +67,11 @@ export default function Home() {
       ];
       
       const fallbackServices = [
-        { title: "Web Engineering", description: "Scalable, secure, and conversion-optimized web platforms for growing businesses in Rajkot.", icon: "Globe", slug: "web-development" },
-        { title: "SEO Mastery", description: "Technical SEO and digital strategy to dominate search results and drive local leads in Gujarat.", icon: "BarChart", slug: "seo-services" },
-        { title: "Digital Marketing", description: "Full-stack marketing solutions focused on ROI and lead generation for local brands.", icon: "Megaphone", slug: "digital-marketing" },
+        { title: "Web Development in Rajkot", description: "Scalable, secure, and conversion-optimized web platforms for growing businesses in Rajkot.", icon: "Globe", slug: "web-development" },
+        { title: "SEO Services in Rajkot", description: "Technical SEO and digital strategy to dominate search results and drive local leads in Gujarat.", icon: "BarChart", slug: "seo-services" },
+        { title: "Digital Marketing Rajkot", description: "Full-stack marketing solutions focused on ROI and lead generation for local brands in Rajkot.", icon: "Megaphone", slug: "digital-marketing" },
         { title: "E-commerce Growth", description: "End-to-end online stores with advanced payment integrations and marketing focus.", icon: "Rocket", slug: "ecommerce" },
-        { title: "Mobile Innovation", description: "Native-quality iOS and Android applications that deliver exceptional user experiences.", icon: "Smartphone", slug: "app-development" },
+        { title: "App Development in Rajkot", description: "Native-quality iOS and Android applications that deliver exceptional user experiences for Rajkot startups.", icon: "Smartphone", slug: "app-development" },
       ];
 
       const fallbackProjects = [
@@ -83,7 +83,7 @@ export default function Home() {
           solution: "Built a custom Next.js storefront with high-fidelity visuals and 3D product previews.",
           result: "+450% Conversion Increase",
           tech: ["Next.js", "Three.js", "Prisma"],
-          featuredImage: "/images/project-1.png", 
+          featuredImage: "/images/jewelry-ecommerce.png", 
           slug: "jewelry-ecommerce" 
         },
         { 
@@ -94,19 +94,19 @@ export default function Home() {
           solution: "Automated booking system with real-time slot management and SMS notifications.",
           result: "Zero Manual Overhead",
           tech: ["React", "Node.js", "PostgreSQL"],
-          featuredImage: "/images/project-2.png", 
+          featuredImage: "/images/health-booking.png", 
           slug: "booking-platform" 
         },
         { 
-          title: "Corporate Fintech Dashboard", 
-          category: "Software", 
+          title: "Fintech Growth Dashboard", 
+          category: "SaaS", 
           industry: "Finance",
-          challenge: "Legacy systems were slow and insecure for handling sensitive transaction data.",
-          solution: "End-to-end encrypted dashboard with real-time data visualization.",
-          result: "99.9% System Uptime",
-          tech: ["TypeScript", "D3.js", "Azure"],
-          featuredImage: "/images/project-3.png", 
-          slug: "fintech-dashboard" 
+          challenge: "Users found financial data overwhelming and difficult to track on mobile.",
+          solution: "Clean, minimalist dashboard with AI-driven insights and interactive charting.",
+          result: "85% User Retention",
+          tech: ["TypeScript", "D3.js", "AWS"],
+          featuredImage: "/images/fintech-dashboard.png", 
+          slug: "fintech-saas" 
         }
       ];
 
@@ -240,9 +240,9 @@ export default function Home() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
               Premium Solutions
             </div>
-            <h2 className="text-3xl lg:text-5xl 2xl:text-6xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Business Engines Built <br /> <span className="text-gradient">For Growth</span></h2>
+            <h2 className="text-3xl lg:text-5xl 2xl:text-6xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Leading Web, App & <br /> <span className="text-gradient">SEO in Rajkot</span></h2>
             <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto 2xl:text-lg">
-              We don&apos;t just build websites. We engineer high-performance digital systems that capture leads, automate operations, and scale revenue in Rajkot.
+              We engineer high-performance digital systems that capture leads, automate operations, and scale revenue for businesses in Rajkot and across Gujarat.
             </p>
           </div>
 
@@ -292,7 +292,7 @@ export default function Home() {
               <div className="absolute -inset-10 bg-gradient-glow opacity-30 blur-[120px] group-hover:opacity-50 transition-all duration-700" />
               <div className="relative aspect-video bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2.5rem] overflow-hidden shadow-xl">
                 <img
-                  src="/images/about-v2.png"
+                  src="/images/about-agency.png"
                   alt="About Us"
                   className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                 />
@@ -367,7 +367,7 @@ export default function Home() {
               <div key={i} className="card-premium group overflow-hidden flex flex-col h-full bg-[var(--color-card)]">
                 <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
                   <img
-                    src={project.featuredImage || `/images/project-${(i % 3) + 1}.png`}
+                    src={project.featuredImage || (i === 0 ? "/images/jewelry-ecommerce.png" : i === 1 ? "/images/health-booking.png" : "/images/fintech-dashboard.png")}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
@@ -504,7 +504,7 @@ export default function Home() {
             <div className="relative group">
               <div className="aspect-square bg-[var(--color-card)] rounded-[var(--radius)] overflow-hidden relative group shadow-xl">
                 <img
-                  src="/images/process-visual.png"
+                  src="/images/agile-process.png"
                   alt="Process"
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
                 />

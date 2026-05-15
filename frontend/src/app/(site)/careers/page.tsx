@@ -55,12 +55,30 @@ export default function CareersPage() {
         ))}
       </section>
 
+      <section className="max-w-5xl mx-auto px-6 py-20">
+          <div className="bg-gradient-premium rounded-[3rem] p-12 md:p-16 text-white space-y-8 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-[100px] -mr-32 -mt-32" />
+            <div className="relative z-10 space-y-6">
+              <h3 className="text-3xl lg:text-4xl font-bold font-outfit">Looking for an IT Company in Rajkot for Internship?</h3>
+              <p className="text-lg opacity-90 max-w-2xl leading-relaxed">
+                At Uma Techno, we believe in nurturing the next generation of tech talent. If you are a student looking for a premium <span className="font-bold">IT internship in Rajkot</span>, we offer hands-on training in Web Development, App Development, and Digital Marketing.
+              </p>
+              <Link 
+                to="/contact" 
+                className="inline-flex items-center gap-2 bg-white text-[var(--color-electric)] px-8 py-4 rounded-xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-xl"
+              >
+                Apply for Internship <ArrowRight size={18} />
+              </Link>
+            </div>
+          </div>
+      </section>
+
       <section className="max-w-7xl mx-auto px-6 py-20 text-center">
           <div className="card-premium p-12 rounded-[3rem] border border-[var(--color-border)] space-y-8 bg-[var(--color-card)]">
             <h3 className="text-3xl font-bold font-outfit text-[var(--color-text-main)]">Why Work at Uma Techno?</h3>
             <div className="grid md:grid-cols-3 gap-8">
                {[
-                 { t: "Remote Work", d: "Work from anywhere in the world." },
+                 { t: "Modern Tech Stack", d: "Master the latest industry-leading technologies." },
                  { t: "Growth Opportunity", d: "Constant learning and career advancement." },
                  { t: "Premium Culture", d: "Collaborative and supportive environment." }
                ].map(item => (

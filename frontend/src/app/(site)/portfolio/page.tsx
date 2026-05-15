@@ -24,33 +24,33 @@ export default function PortfolioPage() {
                 title: "Premium Jewelry E-commerce", 
                 category: "E-commerce", 
                 description: "Luxury digital presence for a high-end jewelry showroom.", 
-                featuredImage: "/images/project-1-v2.png", 
+                featuredImage: "/images/jewelry-ecommerce.png", 
                 slug: "jewelry-ecommerce" 
               },
               { 
                 title: "Healthcare Booking System", 
                 category: "Web App", 
                 description: "Automated real-time slot management for multi-location clinics.", 
-                featuredImage: "/images/project-2-v2.png", 
+                featuredImage: "/images/health-booking.png", 
                 slug: "booking-platform" 
               },
               { 
-                title: "Corporate Fintech Dashboard", 
-                category: "Software", 
+                title: "Fintech Growth Dashboard", 
+                category: "SaaS", 
                 description: "Secure data visualization for enterprise financial tracking.", 
-                featuredImage: "/images/project-3-v2.png", 
-                slug: "fintech-dashboard" 
+                featuredImage: "/images/fintech-dashboard.png", 
+                slug: "fintech-saas" 
               },
               { 
-                title: "Global Real Estate Portal", 
-                category: "Web App", 
+                title: "E-commerce Templates", 
+                category: "UI Kit", 
                 description: "Interactive property listing platform with map-based search.", 
-                featuredImage: "/images/templates-v2.png", 
-                slug: "real-estate-portal" 
+                featuredImage: "/images/jewelry-ecommerce.png", 
+                slug: "ui-templates" 
               },
               { 
-                title: "Educational LMS Platform", 
-                category: "Web App", 
+                title: "Premium Real Estate", 
+                category: "Web Design", 
                 description: "Video-based learning management system with course progress tracking.", 
                 featuredImage: "/images/project-1-v2.png", 
                 slug: "educational-lms" 
@@ -125,7 +125,7 @@ export default function PortfolioPage() {
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
                   <img
-                    src={project.featuredImage || '/images/project-1-v2.png'}
+                    src={project.featuredImage || '/images/jewelry-ecommerce.png'}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />

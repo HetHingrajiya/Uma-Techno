@@ -19,7 +19,7 @@ const posts = [
     date: "May 12, 2026",
     author: "Uma Team",
     readTime: "8 min read",
-    image: "/images/blog-1.png",
+    image: "/images/web-dev-rajkot.png",
     slug: "best-web-development-company-rajkot"
   },
   {
@@ -28,7 +28,7 @@ const posts = [
     date: "May 9, 2026",
     author: "SEO Expert",
     readTime: "12 min read",
-    image: "/images/blog-2.png",
+    image: "/images/seo-gujarat.png",
     slug: "seo-services-guide-local-business"
   },
   {
@@ -37,7 +37,7 @@ const posts = [
     date: "May 5, 2026",
     author: "Uma Team",
     readTime: "10 min read",
-    image: "/images/blog-3.png",
+    image: "/images/website-cost.png",
     slug: "website-cost-india-2026"
   },
   {
@@ -46,7 +46,7 @@ const posts = [
     date: "April 28, 2026",
     author: "Tech Analyst",
     readTime: "7 min read",
-    image: "/images/blog-4.png",
+    image: "/images/ai-business.png",
     slug: "why-business-needs-website"
   },
   {
@@ -55,7 +55,7 @@ const posts = [
     date: "April 22, 2026",
     author: "Marketing Strategist",
     readTime: "15 min read",
-    image: "/images/blog-5.png",
+    image: "/images/marketing-trends.png",
     slug: "digital-marketing-tips-2026"
   }
 ];

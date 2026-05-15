@@ -47,17 +47,20 @@ export default function Hero() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <div className="space-y-10">
-
-              <h1 className="text-4xl xs:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black font-outfit leading-[1.1] tracking-tight text-[var(--color-text-main)]">
-                <span className="block">Build Smart</span>
-                <span className="block text-gradient">Digital Solutions</span>
-                <span className="block">That Grow Businesses</span>
-              </h1>
+              <div className="space-y-4">
+                <span className="inline-block px-4 py-1.5 bg-[var(--color-electric)]/10 text-[var(--color-electric)] text-xs font-black uppercase tracking-[0.3em] rounded-full">
+                  Best SEO & Web Development Agency in Rajkot
+                </span>
+                <h1 className="text-4xl xs:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black font-outfit leading-[1.1] tracking-tight text-[var(--color-text-main)]">
+                  <span className="block">Build Smart</span>
+                  <span className="block text-gradient">Digital Solutions</span>
+                  <span className="block">That Scale Businesses</span>
+                </h1>
+              </div>
 
               <div className="max-w-lg space-y-8">
                 <p className="text-lg lg:text-xl text-[var(--color-text-main)] opacity-70 leading-relaxed font-medium">
-                  We create websites, mobile apps, branding, and custom systems that help companies scale faster.
+                  Uma Techno is your partner for expert <span className="text-[var(--color-text-main)] font-bold">web development, app development, and SEO in Rajkot</span>. We engineer high-performance platforms that drive real growth.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
@@ -92,7 +95,7 @@ export default function Hero() {
             <div className="animate-float-complex max-w-md mx-auto lg:max-w-none">
               <div className="bg-[var(--color-card)] rounded-[2.5rem] lg:rounded-[3rem] p-2 aspect-[4/5] lg:aspect-square relative overflow-hidden group border border-[var(--color-border)] shadow-2xl">
                  <img 
-                   src={theme.heroImageUrl || "/images/portfolio-showcase-v2.png"} 
+                   src={theme.heroImageUrl || "/images/hero-showcase.png"} 
                    alt="Portfolio Showcase - Web Development Rajkot" loading="eager"
                    className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-700"
                  />

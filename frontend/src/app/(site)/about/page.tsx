@@ -63,9 +63,7 @@ export default function AboutPage() {
             <span className="text-gradient">Masterpieces</span> Since 2026
           </h1>
           <p className="text-xl text-[var(--color-text-main)] opacity-70 leading-relaxed">
-            Uma Techno is a premier digital agency dedicated to helping businesses navigate 
-            the complex digital landscape. With a team of expert developers, creative designers, 
-            and strategic thinkers, we transform ideas into powerful digital realities.
+            Uma Techno is a premier <span className="font-bold text-[var(--color-text-main)]">web development company, digital marketing company, and app development company in Rajkot</span>. We are dedicated to helping businesses navigate the complex digital landscape with high-end, scalable solutions.
           </p>
           <div className="grid grid-cols-2 gap-8 pt-4">
              <div>
@@ -81,7 +79,7 @@ export default function AboutPage() {
         <div className="relative group">
            <div className="aspect-square glass-card rounded-[3rem] overflow-hidden rotate-3 relative z-10 border border-white/5">
               <img 
-                src="/images/about-v2.png" 
+                src="/images/about-agency.png" 
                 alt="Digital Masterpiece - Uma Techno Rajkot Team"
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
               />

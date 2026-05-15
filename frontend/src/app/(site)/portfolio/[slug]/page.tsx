@@ -11,7 +11,7 @@ const fallbackProjects: Record<string, any> = {
     solution: "Built a custom Next.js storefront with high-fidelity visuals and 3D product previews.",
     result: "+450% Conversion Increase",
     tech: ["Next.js", "Three.js", "Prisma", "Tailwind CSS"],
-    featuredImage: "/images/project-1-v2.png",
+    featuredImage: "/images/jewelry-ecommerce.png",
     fullDescription: "The challenge was to create an online experience that felt as high-end as walking into a physical jewelry boutique. We focused on massive high-resolution imagery, smooth transitions, and a conversion-optimized checkout flow that reduced friction for high-ticket items."
   },
   "booking-platform": {
@@ -22,7 +22,7 @@ const fallbackProjects: Record<string, any> = {
     solution: "Automated booking system with real-time slot management and SMS notifications.",
     result: "Zero Manual Overhead",
     tech: ["React", "Node.js", "PostgreSQL", "Twilio"],
-    featuredImage: "/images/project-2-v2.png",
+    featuredImage: "/images/health-booking.png",
     fullDescription: "We engineered a robust scheduling engine that handles complex multi-practitioner calendars. The system features automated reminders which decreased no-shows by 65% and integrated a secure patient portal for record management."
   },
   "fintech-dashboard": {
@@ -33,7 +33,7 @@ const fallbackProjects: Record<string, any> = {
     solution: "End-to-end encrypted dashboard with real-time data visualization.",
     result: "99.9% System Uptime",
     tech: ["TypeScript", "D3.js", "Azure", "WebSockets"],
-    featuredImage: "/images/project-3-v2.png",
+    featuredImage: "/images/fintech-dashboard.png",
     fullDescription: "This enterprise-level dashboard provides real-time insights into global financial transactions. We utilized WebSockets for live data streaming and implemented a rigorous security architecture including multi-factor authentication and role-based access control."
   }
 };
