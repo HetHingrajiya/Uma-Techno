@@ -237,7 +237,7 @@ export default function Home() {
       {isEnabled('services') && (
         <section className="max-w-7xl mx-auto px-6 w-full py-20 lg:py-32">
           <div className="text-center space-y-4 mb-20">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-transparent border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
               Premium Solutions
             </div>
             <h2 className="text-3xl lg:text-5xl 2xl:text-6xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Leading Web, App & <br /> <span className="text-gradient">SEO in Rajkot</span></h2>
@@ -346,7 +346,7 @@ export default function Home() {
         <section className="max-w-7xl mx-auto px-6 w-full">
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider mb-6">
                 Selected Work
               </div>
               <h2 className="text-3xl lg:text-5xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Our <span className="text-gradient">Portfolio</span></h2>

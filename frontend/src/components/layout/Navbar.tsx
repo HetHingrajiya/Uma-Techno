@@ -60,8 +60,9 @@ export default function Navbar() {
     <>
       <nav className={cn(
         "fixed top-0 left-0 w-full z-[1000] transition-all duration-500",
-        "bg-[var(--color-header)]/90 backdrop-blur-md shadow-sm",
-        scrolled ? "py-4" : "py-6"
+        scrolled 
+          ? "bg-[var(--color-header)]/80 backdrop-blur-md py-4 shadow-sm" 
+          : "bg-transparent py-6"
       )}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
@@ -70,7 +71,7 @@ export default function Navbar() {
             <div className="flex flex-col leading-none">
               <span className={cn(
                 "text-2xl font-black tracking-tighter uppercase transition-colors",
-                "text-[var(--color-nav-text)]"
+                scrolled ? "text-[var(--color-nav-text)]" : "text-[var(--color-text-main)]"
               )}>
                 <span className="text-[var(--color-electric)]">Uma</span> Techno
               </span>
@@ -87,7 +88,8 @@ export default function Navbar() {
                 <Link
                   to={link.href}
                   className={cn(
-                    "text-sm font-bold uppercase tracking-widest transition-colors hover:text-[var(--color-electric)] text-[var(--color-nav-text)]",
+                    "text-sm font-bold uppercase tracking-widest transition-colors hover:text-[var(--color-electric)]",
+                    scrolled ? "text-[var(--color-nav-text)]" : "text-[var(--color-text-main)]",
                     pathname === link.href ? "text-[var(--color-electric)]" : ""
                   )}
                 >
