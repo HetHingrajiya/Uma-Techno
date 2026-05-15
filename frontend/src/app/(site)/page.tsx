@@ -207,10 +207,10 @@ export default function Home() {
           Displays quantitative metrics and client industries to build authority.
       */}
       {isEnabled('stats') && (
-        <section className="max-w-7xl mx-auto px-6 w-full -mt-8 lg:-mt-16 relative z-20 bg-gradient-soft/50 rounded-[3rem] py-12 lg:py-20 border border-[var(--color-border)]">
+        <section className="max-w-7xl mx-auto px-6 w-full -mt-8 lg:-mt-16 relative z-20 py-12 lg:py-20">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
             {stats.map((stat, i) => (
-              <div key={i} className="card-premium p-6 lg:p-8 text-center flex flex-col items-center gap-4 bg-[var(--color-card)]/80 backdrop-blur-xl">
+              <div key={i} className="card-premium p-6 lg:p-8 text-center flex flex-col items-center gap-4 bg-transparent backdrop-blur-xl">
                 <div className="w-12 h-12 rounded-2xl bg-[var(--color-electric)]/10 text-[var(--color-electric)] flex items-center justify-center">
                   <stat.icon size={24} />
                 </div>
@@ -235,7 +235,7 @@ export default function Home() {
           Detailed breakdown of what Uma Techno offers with deep links to service pages.
       */}
       {isEnabled('services') && (
-        <section className="max-w-7xl mx-auto px-6 w-full bg-gradient-soft/30 rounded-[3rem] py-20 lg:py-32 border border-[var(--color-border)]/50">
+        <section className="max-w-7xl mx-auto px-6 w-full py-20 lg:py-32">
           <div className="text-center space-y-4 mb-20">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
               Premium Solutions
@@ -290,7 +290,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="relative group order-2 lg:order-1">
               <div className="absolute -inset-10 bg-gradient-glow opacity-30 blur-[120px] group-hover:opacity-50 transition-all duration-700" />
-              <div className="relative aspect-video bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2.5rem] overflow-hidden shadow-xl">
+              <div className="relative aspect-video border border-[var(--color-border)] rounded-[2.5rem] overflow-hidden shadow-xl">
                 <img
                   src="/images/about-agency.png"
                   alt="About Us"
@@ -364,7 +364,7 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.slice(0, 3).map((project, i) => (
-              <div key={i} className="card-premium group overflow-hidden flex flex-col h-full">
+              <div key={i} className="card-premium group overflow-hidden flex flex-col h-full bg-transparent">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <img
                     src={project.featuredImage || (i === 0 ? "/images/jewelry-ecommerce.png" : i === 1 ? "/images/health-booking.png" : "/images/fintech-dashboard.png")}
@@ -420,7 +420,7 @@ export default function Home() {
       {isEnabled('testimonials') && (
         <section className="max-w-7xl mx-auto px-6 w-full py-24 relative">
           <div className="absolute inset-0 bg-gradient-glow scale-75 opacity-10 pointer-events-none" />
-          <div className="bg-gradient-soft rounded-[4rem] p-12 md:p-20 border border-[var(--color-border)]/30 shadow-2xl relative z-10">
+          <div className="py-12 md:p-20 relative z-10">
             <div className="text-center space-y-4 mb-16">
               <h2 className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">What Our Clients <span className="text-gradient">Say</span></h2>
               <p className="text-[var(--color-text-main)] opacity-60 max-w-xl mx-auto">See why businesses trust Uma Techno for their digital growth.</p>
@@ -433,7 +433,7 @@ export default function Home() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.length > 0 ? (
               testimonials.map((t, i) => (
-                <div key={i} className="border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all">
+                <div key={i} className="border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all bg-transparent">
                   <div className="flex gap-1 text-[#F59E0B] mb-6">
                     {Array.from({ length: t.rating || 5 }).map((_, star) => (
                       <Star key={star} size={16} fill="currentColor" />
