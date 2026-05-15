@@ -133,7 +133,12 @@ export default function Navbar() {
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden text-[var(--color-nav-text)] p-2 bg-[var(--color-header)]/20 backdrop-blur-md rounded-xl shadow-sm border border-[var(--color-nav-text)]/10"
+            className={cn(
+              "md:hidden p-2 backdrop-blur-md rounded-xl shadow-sm border transition-colors",
+              scrolled 
+                ? "text-[var(--color-nav-text)] bg-[var(--color-header)]/20 border-[var(--color-nav-text)]/10" 
+                : "text-[var(--color-text-main)] bg-[var(--color-card)]/40 border-[var(--color-border)]"
+            )}
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle Menu"
           >
