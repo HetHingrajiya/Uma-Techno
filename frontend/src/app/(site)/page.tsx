@@ -370,8 +370,6 @@ export default function Home() {
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-glow opacity-0 group-hover:opacity-20 transition-opacity duration-700" />
-                  <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-gradient-glow group-hover:scale-150 transition-all duration-700" />
                   <div className="absolute top-6 left-6 flex flex-col gap-2 z-10">
                     <span className="px-4 py-2 bg-transparent backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-electric)]/20 text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
                       {project.category}
