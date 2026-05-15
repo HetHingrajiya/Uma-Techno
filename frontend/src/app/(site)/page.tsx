@@ -259,7 +259,6 @@ export default function Home() {
                   )}
                 >
                   <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-glow -mr-32 -mt-32 group-hover:scale-110 transition-all duration-700" />
-                  <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-glow -ml-32 -mb-32 group-hover:scale-110 transition-all duration-700 opacity-20" />
                   <div className="space-y-6 relative z-10">
                     <div className="w-16 h-16 bg-gradient-premium rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
                       {getIcon(service.icon || 'Globe')}
