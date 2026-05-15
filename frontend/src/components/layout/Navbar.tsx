@@ -61,7 +61,7 @@ export default function Navbar() {
       <nav className={cn(
         "fixed top-0 left-0 w-full z-[1000] transition-all duration-500",
         scrolled 
-          ? "bg-[var(--color-header)]/80 backdrop-blur-md py-4 shadow-sm" 
+          ? "bg-[rgba(var(--color-header-rgb),0.9)] backdrop-blur-md py-4 shadow-sm" 
           : "bg-transparent py-6"
       )}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
@@ -75,8 +75,11 @@ export default function Navbar() {
               )}>
                 <span className="text-[var(--color-electric)]">Uma</span> Techno
               </span>
-              <span className="text-[8px] font-bold tracking-[0.3em] uppercase mt-0.5">
-                <span className="text-black">Innovate. Create. </span><span className="text-[var(--color-electric)]">Elevate.</span>
+              <span className={cn(
+                "text-[8px] font-bold tracking-[0.3em] uppercase mt-0.5 transition-colors",
+                scrolled ? "text-[var(--color-nav-text)]/70" : "text-[var(--color-text-main)]/50"
+              )}>
+                Innovate. Create. <span className="text-[var(--color-electric)]">Elevate.</span>
               </span>
             </div>
           </Link>
