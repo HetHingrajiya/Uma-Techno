@@ -419,7 +419,6 @@ export default function Home() {
       */}
       {isEnabled('testimonials') && (
         <section className="max-w-7xl mx-auto px-6 w-full py-24 relative">
-          <div className="absolute inset-0 bg-gradient-glow scale-75 opacity-10 pointer-events-none" />
           <div className="py-12 md:p-20 relative z-10">
             <div className="text-center space-y-4 mb-16">
               <h2 className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">What Our Clients <span className="text-gradient">Say</span></h2>
@@ -441,7 +440,7 @@ export default function Home() {
                   </div>
                   <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic">"{t.content}"</p>
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] overflow-hidden">
+                    <div className="w-12 h-12 rounded-full bg-transparent overflow-hidden">
                       <img src={t.image || `https://i.pravatar.cc/100?u=${t.id}`} alt={t.name} className="w-full h-full object-cover" />
                     </div>
                     <div>
