@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useNavigate, useLocation, Link, Outlet } from "react-router-dom";
 import { 
   LayoutDashboard, 
@@ -175,7 +175,14 @@ export default function AdminLayout() {
         </header>
 
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <Outlet />
+          <Suspense fallback={
+            <div className="min-h-[400px] flex flex-col items-center justify-center opacity-50">
+              <RefreshCw className="animate-spin text-electric mb-4" size={32} />
+              <p className="font-bold text-sm uppercase tracking-widest">Loading Module...</p>
+            </div>
+          }>
+            <Outlet />
+          </Suspense>
         </div>
       </main>
     </div>

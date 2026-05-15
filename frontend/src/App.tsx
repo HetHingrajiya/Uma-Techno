@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import SiteLayout from './components/layout/SiteLayout';
 import AdminLayout from './components/layout/AdminLayout';
+import { ThemeProvider } from './components/ThemeProvider';
 
 // Lazy load components
 const HomePage = lazy(() => import('./app/(site)/page'));
@@ -19,16 +20,16 @@ const WebDevelopmentPage = lazy(() => import('./app/(site)/web-development/page'
 const DigitalMarketingPage = lazy(() => import('./app/(site)/digital-marketing/page'));
 const SEOServicesPage = lazy(() => import('./app/(site)/seo-services/page'));
 
-// Admin Pages
-const AdminLoginPage = lazy(() => import('./app/admin/login/page'));
-const AdminDashboard = lazy(() => import('./app/admin/dashboard/page'));
-const AdminLeads = lazy(() => import('./app/admin/leads/page'));
-const AdminServices = lazy(() => import('./app/admin/cms/services/page'));
-const AdminPortfolio = lazy(() => import('./app/admin/cms/portfolio/page'));
-const AdminTestimonials = lazy(() => import('./app/admin/cms/testimonials/page'));
-const AdminSEO = lazy(() => import('./app/admin/seo/page'));
-const AdminWidgets = lazy(() => import('./app/admin/widgets/page'));
-const AdminTheme = lazy(() => import('./app/admin/theme/page'));
+// Admin Pages (Directly imported for stability)
+import AdminLoginPage from './app/admin/login/page';
+import AdminDashboard from './app/admin/dashboard/page';
+import AdminLeads from './app/admin/leads/page';
+import AdminServices from './app/admin/cms/services/page';
+import AdminPortfolio from './app/admin/cms/portfolio/page';
+import AdminTestimonials from './app/admin/cms/testimonials/page';
+import AdminSEO from './app/admin/seo/page';
+import AdminWidgets from './app/admin/widgets/page';
+import AdminTheme from './app/admin/theme/page';
 
 // Dynamic Routes
 const PortfolioDetail = lazy(() => import('./app/(site)/portfolio/[slug]/page'));
@@ -52,50 +53,52 @@ const Loading = () => (
 function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<Loading />}>
-        <Routes>
-          {/* Public Site Routes */}
-          <Route element={<SiteLayout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/portfolio" element={<PortfolioPage />} />
-            <Route path="/portfolio/:slug" element={<PortfolioDetail />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog/:slug" element={<BlogDetail />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/services/:slug" element={<ServiceDetail />} />
-            <Route path="/careers" element={<CareersPage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/terms" element={<TermsPage />} />
-            
-            {/* Specific SEO Pages */}
-            <Route path="/web-development" element={<WebDevelopmentPage />} />
-            <Route path="/digital-marketing" element={<DigitalMarketingPage />} />
-            <Route path="/seo-services" element={<SEOServicesPage />} />
-            
-            {/* Root-level Dynamic Slugs (SEO Landing Pages) */}
-            <Route path="/:slug" element={<SEOLandingDetail />} />
-          </Route>
+      <ThemeProvider>
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            {/* Public Site Routes */}
+            <Route element={<SiteLayout />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/portfolio" element={<PortfolioPage />} />
+              <Route path="/portfolio/:slug" element={<PortfolioDetail />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/blog/:slug" element={<BlogDetail />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/services/:slug" element={<ServiceDetail />} />
+              <Route path="/careers" element={<CareersPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
+              <Route path="/terms" element={<TermsPage />} />
+              
+              {/* Specific SEO Pages */}
+              <Route path="/web-development" element={<WebDevelopmentPage />} />
+              <Route path="/digital-marketing" element={<DigitalMarketingPage />} />
+              <Route path="/seo-services" element={<SEOServicesPage />} />
+              
+              {/* Root-level Dynamic Slugs (SEO Landing Pages) */}
+              <Route path="/:slug" element={<SEOLandingDetail />} />
+            </Route>
 
-          {/* Admin Routes */}
-          <Route path="/admin/login" element={<AdminLoginPage />} />
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<Navigate to="/admin/dashboard" replace />} />
-            <Route path="dashboard" element={<AdminDashboard />} />
-            <Route path="leads" element={<AdminLeads />} />
-            <Route path="cms/services" element={<AdminServices />} />
-            <Route path="cms/portfolio" element={<AdminPortfolio />} />
-            <Route path="cms/testimonials" element={<AdminTestimonials />} />
-            <Route path="seo" element={<AdminSEO />} />
-            <Route path="widgets" element={<AdminWidgets />} />
-            <Route path="theme" element={<AdminTheme />} />
-          </Route>
+            {/* Admin Routes */}
+            <Route path="/admin/login" element={<AdminLoginPage />} />
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<Navigate to="/admin/dashboard" replace />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="leads" element={<AdminLeads />} />
+              <Route path="cms/services" element={<AdminServices />} />
+              <Route path="cms/portfolio" element={<AdminPortfolio />} />
+              <Route path="cms/testimonials" element={<AdminTestimonials />} />
+              <Route path="seo" element={<AdminSEO />} />
+              <Route path="widgets" element={<AdminWidgets />} />
+              <Route path="theme" element={<AdminTheme />} />
+            </Route>
 
-          {/* Catch-all - redirect to home or 404 */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Suspense>
+            {/* Catch-all - redirect to home or 404 */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }
