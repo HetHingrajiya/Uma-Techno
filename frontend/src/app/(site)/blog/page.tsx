@@ -15,17 +15,17 @@ import { ArrowRight, Calendar, User, Clock } from "lucide-react";
 const posts = [
   {
     title: "Best Web Development Company in Rajkot: How to Choose?",
-    excerpt: "Discover what makes a web development company stand out in Rajkot and how to choose the right partner for your digital success.",
-    date: "May 5, 2026",
+    excerpt: "Expert insights into selecting the right technology partner for your digital transformation. Learn what sets apart elite web engineering firms in Rajkot.",
+    date: "May 12, 2026",
     author: "Uma Team",
     readTime: "8 min read",
-    image: "/images/blog-1-v2.png",
+    image: "/images/blog-1.png",
     slug: "best-web-development-company-rajkot"
   },
   {
     title: "SEO Services Guide for Local Businesses in Gujarat",
-    excerpt: "Learn the secrets of local SEO and how to dominate search results in Rajkot, Ahmedabad, and beyond.",
-    date: "May 3, 2026",
+    excerpt: "Master the art of local search visibility. Our comprehensive guide helps Gujarat-based businesses dominate search results and capture high-intent leads.",
+    date: "May 9, 2026",
     author: "SEO Expert",
     readTime: "12 min read",
     image: "/images/blog-2.png",
@@ -33,8 +33,8 @@ const posts = [
   },
   {
     title: "Website Cost in India 2026: A Comprehensive Breakdown",
-    excerpt: "How much does a website really cost in 2026? We break down the pricing for startups, SMEs, and enterprises.",
-    date: "April 28, 2026",
+    excerpt: "Navigating the investment landscape for digital platforms. We provide a transparent breakdown of development costs for startups and enterprises in 2026.",
+    date: "May 5, 2026",
     author: "Uma Team",
     readTime: "10 min read",
     image: "/images/blog-3.png",
@@ -42,8 +42,8 @@ const posts = [
   },
   {
     title: "Why Your Business Needs a Website in the AI Era",
-    excerpt: "In 2026, a website is more than just a digital brochure. Discover why your business needs a robust digital presence now more than ever.",
-    date: "April 25, 2026",
+    excerpt: "Discover how a robust digital presence serves as the foundation for AI-driven growth. In 2026, your website is your most powerful business asset.",
+    date: "April 28, 2026",
     author: "Tech Analyst",
     readTime: "7 min read",
     image: "/images/blog-4.png",
@@ -51,8 +51,8 @@ const posts = [
   },
   {
     title: "Digital Marketing Tips for 2026: Gujarat Market Trends",
-    excerpt: "Stay ahead with these digital marketing strategies specifically tailored for the unique business landscape of Gujarat.",
-    date: "April 20, 2026",
+    excerpt: "Stay ahead of the curve with data-driven marketing strategies tailored for the unique and evolving business landscape of the Gujarat market.",
+    date: "April 22, 2026",
     author: "Marketing Strategist",
     readTime: "15 min read",
     image: "/images/blog-5.png",

@@ -35,6 +35,21 @@ export default function Home() {
   const [projects, setProjects] = useState<any[]>([]);
   const [testimonials, setTestimonials] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showStickyCta, setShowStickyCta] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show sticky CTA after scrolling 500px
+      if (window.scrollY > 500) {
+        setShowStickyCta(true);
+      } else {
+        setShowStickyCta(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     /**
@@ -68,7 +83,7 @@ export default function Home() {
           solution: "Built a custom Next.js storefront with high-fidelity visuals and 3D product previews.",
           result: "+450% Conversion Increase",
           tech: ["Next.js", "Three.js", "Prisma"],
-          featuredImage: "/images/project-1-v2.png", 
+          featuredImage: "/images/project-1.png", 
           slug: "jewelry-ecommerce" 
         },
         { 
@@ -79,7 +94,7 @@ export default function Home() {
           solution: "Automated booking system with real-time slot management and SMS notifications.",
           result: "Zero Manual Overhead",
           tech: ["React", "Node.js", "PostgreSQL"],
-          featuredImage: "/images/project-2-v2.png", 
+          featuredImage: "/images/project-2.png", 
           slug: "booking-platform" 
         },
         { 
@@ -90,7 +105,7 @@ export default function Home() {
           solution: "End-to-end encrypted dashboard with real-time data visualization.",
           result: "99.9% System Uptime",
           tech: ["TypeScript", "D3.js", "Azure"],
-          featuredImage: "/images/project-3-v2.png", 
+          featuredImage: "/images/project-3.png", 
           slug: "fintech-dashboard" 
         }
       ];
@@ -239,8 +254,8 @@ export default function Home() {
                   key={service.slug}
                   to={service.slug.startsWith('/') ? service.slug : `/${service.slug}`}
                   className={cn(
-                    "group bg-[var(--color-card)] border border-[var(--color-border)] p-10 rounded-[2.5rem] flex flex-col justify-between relative overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500",
-                    isLarge ? "lg:col-span-2 min-h-[400px]" : "min-h-[400px]"
+                    "group bg-[var(--color-card)] border border-[var(--color-border)] p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] flex flex-col justify-between relative overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500",
+                    isLarge ? "lg:col-span-2 min-h-[350px] md:min-h-[400px]" : "min-h-[350px] md:min-h-[400px]"
                   )}
                 >
                   <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-glow -mr-32 -mt-32 group-hover:scale-110 transition-all duration-700" />
@@ -540,9 +555,12 @@ export default function Home() {
         </section>
       )}
 
-      {/* Sticky Bottom Mobile CTA for conversion on smaller screens */}
-      <div className="fixed bottom-0 left-0 w-full p-4 bg-[var(--background)]/90 backdrop-blur-md border-t border-[var(--color-border)] z-40 lg:hidden flex justify-center shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
-        <Link to="/contact" className="w-full max-w-md py-4 bg-gradient-premium text-white font-bold rounded-xl text-center shadow-lg">
+      {/* Sticky Bottom Mobile CTA for conversion on smaller screens - Only shown after scroll */}
+      <div className={cn(
+        "fixed bottom-0 left-0 w-full p-4 bg-[var(--background)]/80 backdrop-blur-2xl border-t border-[var(--color-border)]/50 z-40 lg:hidden flex justify-center shadow-[0_-10px_40px_rgba(0,0,0,0.1)] transition-all duration-500 transform",
+        showStickyCta ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+      )}>
+        <Link to="/contact" className="w-full max-w-md py-3.5 bg-gradient-premium text-white font-bold rounded-2xl text-center shadow-lg hover:shadow-2xl transition-all active:scale-95 text-sm uppercase tracking-wider">
           Get Started Today
         </Link>
       </div>

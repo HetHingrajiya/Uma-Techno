@@ -17,7 +17,7 @@ const Linkedin = (props: any) => (
 
 export default function Footer() {
   return (
-    <footer className="relative pt-24 pb-12 overflow-hidden border-t border-white/5" style={{ backgroundColor: 'var(--color-footer)' }}>
+    <footer className="relative pt-24 pb-24 lg:pb-12 overflow-hidden border-t border-white/5" style={{ backgroundColor: 'var(--color-footer)' }}>
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-white">
         {/* Company Info */}
         <div className="space-y-6">

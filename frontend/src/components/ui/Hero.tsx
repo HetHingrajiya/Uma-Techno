@@ -49,7 +49,7 @@ export default function Hero() {
           >
             <div className="space-y-10">
 
-              <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black font-outfit leading-[1.1] tracking-tight text-[var(--color-text-main)]">
+              <h1 className="text-4xl xs:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black font-outfit leading-[1.1] tracking-tight text-[var(--color-text-main)]">
                 <span className="block">Build Smart</span>
                 <span className="block text-gradient">Digital Solutions</span>
                 <span className="block">That Grow Businesses</span>
@@ -60,16 +60,16 @@ export default function Hero() {
                   We create websites, mobile apps, branding, and custom systems that help companies scale faster.
                 </p>
                 
-                <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <Link
                     to="/contact"
-                    className="group relative px-8 py-4 text-white rounded-xl font-bold text-lg transition-all hover:scale-105 text-center flex justify-center items-center gap-2 bg-gradient-premium"
+                    className="group relative px-6 py-3.5 lg:px-8 lg:py-4 text-white rounded-xl font-bold text-base lg:text-lg transition-all hover:scale-105 text-center flex justify-center items-center gap-2 bg-gradient-premium"
                   >
-                    Get Free Quote <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                    Get Free Quote <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </Link>
                   <Link
                     to="/portfolio"
-                    className="group px-8 py-4 bg-[var(--color-card)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-xl font-bold text-lg transition-all hover:bg-[var(--color-navy-light)] text-center shadow-sm"
+                    className="group px-6 py-3.5 lg:px-8 lg:py-4 bg-[var(--color-card)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-xl font-bold text-base lg:text-lg transition-all hover:bg-[var(--color-navy-light)] text-center shadow-sm"
                   >
                     View Portfolio
                   </Link>
