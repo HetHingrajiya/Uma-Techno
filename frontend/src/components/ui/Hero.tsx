@@ -48,9 +48,6 @@ export default function Hero() {
             className="relative"
           >
               <div className="space-y-4">
-                <span className="inline-block px-4 py-1.5 bg-transparent border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-black uppercase tracking-[0.3em] rounded-full">
-                  Best SEO & Web Development Agency in Rajkot
-                </span>
                 <h1 className="text-4xl xs:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black font-outfit leading-[1.1] tracking-tight text-[var(--color-text-main)]">
                   <span className="block">Build Smart</span>
                   <span className="block text-gradient">Digital Solutions</span>
