@@ -24,7 +24,7 @@ export default function Footer() {
           <Link to="/" className="flex items-center gap-3">
             <Logo className="w-8 h-8" />
             <span className="text-xl font-bold tracking-tighter uppercase">
-              <span className="text-[var(--color-electric)]">Uma</span><span className="text-white">Techno</span>
+              <span className="text-[var(--color-electric)]">Uma</span> <span className="text-white">Techno</span>
             </span>
           </Link>
           <p className="text-[10px] text-white opacity-40 font-bold tracking-[0.2em] uppercase mt-2">

@@ -264,7 +264,7 @@ export default function Home() {
                     <div className="w-16 h-16 bg-gradient-premium rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
                       {getIcon(service.icon || 'Globe')}
                     </div>
-                    <h4 className="text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] uppercase tracking-tighter">
+                    <h4 className="text-2xl lg:text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] tracking-tighter">
                       {service.title}
                     </h4>
                     <p className="text-[var(--color-text-main)] opacity-70 leading-relaxed max-w-sm">

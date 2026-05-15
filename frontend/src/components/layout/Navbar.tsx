@@ -73,7 +73,7 @@ export default function Navbar() {
                 "text-2xl font-black tracking-tighter uppercase transition-colors",
                 scrolled ? "text-[var(--color-navy)]" : "text-[var(--color-text-main)]"
               )}>
-                <span className="text-[var(--color-electric)]">Uma</span>Techno
+                <span className="text-[var(--color-electric)]">Uma</span> Techno
               </span>
               <span className="text-[8px] font-bold tracking-[0.3em] uppercase mt-0.5">
                 <span className="text-black">Innovate. Create. </span><span className="text-[var(--color-electric)]">Elevate.</span>
@@ -166,8 +166,8 @@ export default function Navbar() {
                   <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
                     <Logo className="w-8 h-8" />
                     <div className="flex flex-col leading-none">
-                      <span className="text-xl font-bold tracking-tighter uppercase text-[#0F172A]">
-                        <span className="text-[var(--color-electric)]">Uma</span>Techno
+                      <span className="text-2xl font-black tracking-tighter uppercase text-gray-900">
+                        <span className="text-[var(--color-electric)]">Uma</span> Techno
                       </span>
                       <span className="text-[7px] font-bold tracking-[0.2em] uppercase mt-0.5">
                         <span className="text-black">Innovate. Create. </span><span className="text-[var(--color-electric)]">Elevate.</span>
