@@ -145,8 +145,7 @@ export const setActivePalette = async (req: Request, res: Response) => {
 export const createPalette = async (req: Request, res: Response) => {
   try {
     const data = req.body;
-    // Ensure id is not passed if it's a new palette from custom builder
-    const { id, ...paletteData } = data;
+    const { id, logoUrl, heroImageUrl, aboutImageUrl, ...paletteData } = data;
     const palette = await prisma.themePalette.create({ 
       data: paletteData 
     });
@@ -160,10 +159,10 @@ export const createPalette = async (req: Request, res: Response) => {
 export const updatePalette = async (req: Request, res: Response) => {
   try {
     const id = req.params.id as string;
-    const data = req.body;
+    const { logoUrl, heroImageUrl, aboutImageUrl, ...updateData } = req.body;
     const palette = await prisma.themePalette.update({
       where: { id },
-      data
+      data: updateData
     });
     res.json(palette);
   } catch (error: any) {
