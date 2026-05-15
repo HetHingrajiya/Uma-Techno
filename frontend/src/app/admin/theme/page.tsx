@@ -33,9 +33,6 @@ interface PaletteType {
   borderColor: string;
   headerColor?: string;
   footerColor?: string;
-  logoUrl?: string | null;
-  heroImageUrl?: string | null;
-  aboutImageUrl?: string | null;
   isCustom?: boolean;
 }
 
@@ -114,9 +111,6 @@ export default function ThemeSettingsPage() {
     borderColor: "#E2E8F0",
     headerColor: "#FFFFFF",
     footerColor: "#0F172A",
-    logoUrl: null,
-    heroImageUrl: null,
-    aboutImageUrl: null,
     category: "Custom"
   });
   const [editingPaletteId, setEditingPaletteId] = useState<string | null>(null);
@@ -286,9 +280,7 @@ export default function ThemeSettingsPage() {
       borderColor: palette.borderColor,
       headerColor: palette.headerColor || palette.cardColor,
       footerColor: palette.footerColor || palette.backgroundColor,
-      logoUrl: palette.logoUrl || null,
-      heroImageUrl: palette.heroImageUrl || null,
-      aboutImageUrl: palette.aboutImageUrl || null,
+      footerColor: palette.footerColor || palette.backgroundColor,
       category: palette.category || "Custom"
     });
     setEditingPaletteId(palette.id.startsWith('prebuilt-') ? null : palette.id);
@@ -365,9 +357,6 @@ export default function ThemeSettingsPage() {
               borderColor: "#E2E8F0",
               headerColor: "#FFFFFF",
               footerColor: "#0F172A",
-              logoUrl: null,
-              heroImageUrl: null,
-              aboutImageUrl: null,
               category: "Custom"
             });
             setShowCustomBuilder(true);
@@ -586,31 +575,6 @@ export default function ThemeSettingsPage() {
                   </div>
                 </div>
 
-                <div className="space-y-6 pt-6 border-t border-[var(--color-border)]">
-                  <h3 className="text-lg font-bold text-[var(--color-text-main)] flex items-center gap-2">
-                    <Layout size={20} className="text-electric" /> Brand Assets
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <ImageUploader
-                      label="Official Logo"
-                      currentImage={customPalette.logoUrl}
-                      onUpload={(url) => setCustomPalette({ ...customPalette, logoUrl: url })}
-                      aspectRatio="aspect-square"
-                    />
-                    <ImageUploader
-                      label="Hero Background"
-                      currentImage={customPalette.heroImageUrl}
-                      onUpload={(url) => setCustomPalette({ ...customPalette, heroImageUrl: url })}
-                      aspectRatio="aspect-video"
-                    />
-                    <ImageUploader
-                      label="About Section"
-                      currentImage={customPalette.aboutImageUrl}
-                      onUpload={(url) => setCustomPalette({ ...customPalette, aboutImageUrl: url })}
-                      aspectRatio="aspect-video"
-                    />
-                  </div>
-                </div>
 
                 <div className="pt-4 md:pt-8 flex gap-4">
                   <button
