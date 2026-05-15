@@ -210,10 +210,6 @@ export default function ThemeSettingsPage() {
     root.style.setProperty('--background', p.backgroundColor);
     root.style.setProperty('--color-card', p.cardColor);
     root.style.setProperty('--color-border', p.borderColor);
-    root.style.setProperty('--color-header', p.headerColor || p.cardColor);
-    root.style.setProperty('--color-footer', p.footerColor || p.backgroundColor);
-    root.style.setProperty('--color-blue-glow', p.primaryColor + '25');
-
     const hexToRgbStr = (hex: string) => {
       try {
         const h = hex.startsWith('#') ? hex : '#FFFFFF';
@@ -224,16 +220,13 @@ export default function ThemeSettingsPage() {
       } catch (e) { return "255, 255, 255"; }
     };
 
-    root.style.setProperty('--color-header-rgb', hexToRgbStr(p.headerColor || p.cardColor));
-    root.style.setProperty('--color-footer-rgb', hexToRgbStr(p.footerColor || p.backgroundColor));
-
-    // Luminance detection
     const hexToRgb = (hex: string) => {
       const r = parseInt(hex.slice(1, 3), 16);
       const g = parseInt(hex.slice(3, 5), 16);
       const b = parseInt(hex.slice(5, 7), 16);
       return { r, g, b };
     };
+
     const getLuminance = (hex: string) => {
       try {
         const { r, g, b } = hexToRgb(hex);
@@ -242,6 +235,18 @@ export default function ThemeSettingsPage() {
     };
 
     const isDark = getLuminance(p.backgroundColor) < 0.5;
+    const navBg = isDark ? "#FFFFFF" : "#0F172A";
+    const footerBg = isDark ? "#F8FAFC" : "#0F172A";
+    const navText = isDark ? "#0F172A" : "#FFFFFF";
+    const footerText = isDark ? "#0F172A" : "#FFFFFF";
+
+    root.style.setProperty('--color-header', navBg);
+    root.style.setProperty('--color-footer', footerBg);
+    root.style.setProperty('--color-nav-text', navText);
+    root.style.setProperty('--color-footer-text', footerText);
+    root.style.setProperty('--color-header-rgb', hexToRgbStr(navBg));
+    root.style.setProperty('--color-footer-rgb', hexToRgbStr(footerBg));
+    root.style.setProperty('--color-blue-glow', p.primaryColor + '25');
 
     if (isDark) {
       root.style.setProperty('--color-navy', p.backgroundColor);

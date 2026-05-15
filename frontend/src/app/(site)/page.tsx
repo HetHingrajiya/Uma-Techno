@@ -290,7 +290,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="relative group order-2 lg:order-1">
               <div className="absolute -inset-10 bg-gradient-glow opacity-30 blur-[120px] group-hover:opacity-50 transition-all duration-700" />
-              <div className="relative aspect-video border border-[var(--color-border)] rounded-[2.5rem] overflow-hidden shadow-xl">
+              <div className="relative aspect-video bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2.5rem] overflow-hidden shadow-xl">
                 <img
                   src="/images/about-agency.png"
                   alt="About Us"
@@ -433,7 +433,7 @@ export default function Home() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.length > 0 ? (
               testimonials.map((t, i) => (
-                <div key={i} className="border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all bg-transparent">
+                <div key={i} className="bg-[var(--color-card)] border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all">
                   <div className="flex gap-1 text-[#F59E0B] mb-6">
                     {Array.from({ length: t.rating || 5 }).map((_, star) => (
                       <Star key={star} size={16} fill="currentColor" />
