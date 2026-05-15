@@ -260,7 +260,7 @@ export default function Home() {
                 >
                   <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-glow -mr-32 -mt-32 group-hover:scale-110 transition-all duration-700" />
                   <div className="space-y-6 relative z-10">
-                    <div className="w-16 h-16 bg-gradient-premium rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                    <div className="w-16 h-16 bg-transparent flex items-center text-[var(--color-electric)] group-hover:scale-110 transition-transform">
                       {getIcon(service.icon || 'Globe')}
                     </div>
                     <h4 className="text-2xl lg:text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] tracking-tighter">
@@ -289,7 +289,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="relative group order-2 lg:order-1">
               <div className="absolute -inset-10 bg-gradient-glow opacity-30 blur-[120px] group-hover:opacity-50 transition-all duration-700" />
-              <div className="relative aspect-video bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2.5rem] overflow-hidden shadow-xl">
+              <div className="relative aspect-video bg-transparent overflow-hidden">
                 <img
                   src="/images/about-agency.png"
                   alt="About Us"
