@@ -387,7 +387,7 @@ export default function Home() {
 
                 <div className="p-8 lg:p-10 space-y-6 flex-1 flex flex-col justify-between">
                   <div className="space-y-4">
-                    <h4 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">{project.title}</h4>
+                    <h4 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors break-words">{project.title}</h4>
                     <p className="text-[var(--color-text-main)] opacity-60 text-sm leading-relaxed line-clamp-3">
                       {project.challenge || project.description}
                     </p>
