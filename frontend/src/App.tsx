@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import SiteLayout from './components/layout/SiteLayout';
 import AdminLayout from './components/layout/AdminLayout';
 import { ThemeProvider } from './components/ThemeProvider';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
 // Lazy load components
 const HomePage = lazy(() => import('./app/(site)/page'));
@@ -82,7 +83,11 @@ function App() {
 
             {/* Admin Routes */}
             <Route path="/admin/login" element={<AdminLoginPage />} />
-            <Route path="/admin" element={<AdminLayout />}>
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }>
               <Route index element={<Navigate to="/admin/dashboard" replace />} />
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="leads" element={<AdminLeads />} />

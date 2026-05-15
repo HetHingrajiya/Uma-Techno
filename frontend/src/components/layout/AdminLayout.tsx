@@ -32,7 +32,6 @@ export default function AdminLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname;
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [clearingCache, setClearingCache] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -40,25 +39,8 @@ export default function AdminLayout() {
     setIsSidebarOpen(false);
   }, [pathname]);
 
-  useEffect(() => {
-    const token = localStorage.getItem("admin_token");
-    if (!token && !pathname.includes("/admin/login")) {
-      navigate("/admin/login");
-    } else {
-      setIsLoggedIn(true);
-    }
-  }, [pathname, navigate]);
-
   if (pathname.includes("/admin/login")) {
     return <Outlet />;
-  }
-
-  if (!isLoggedIn && !pathname.includes("/admin/login")) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[var(--background)]">
-        <RefreshCw className="animate-spin text-electric" size={40} />
-      </div>
-    );
   }
 
   return (

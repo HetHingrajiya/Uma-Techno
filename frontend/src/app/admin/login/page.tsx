@@ -9,6 +9,13 @@ export default function AdminLogin() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    const token = localStorage.getItem("admin_token");
+    if (token) {
+      navigate("/admin/dashboard");
+    }
+  }, [navigate]);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
