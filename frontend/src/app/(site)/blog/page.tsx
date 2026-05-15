@@ -94,7 +94,6 @@ export default function BlogPage() {
             >
               {/* Thumbnail Area with hover zoom effect */}
               <div className="aspect-[16/10] relative overflow-hidden">
-                <div className="absolute inset-0 bg-[var(--color-electric)]/20 group-hover:bg-transparent transition-colors z-10" />
                 <img 
                   src={post.image} 
                   alt={post.title} 

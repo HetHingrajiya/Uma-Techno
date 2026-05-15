@@ -3,22 +3,22 @@ import { Link } from "react-router-dom";
 
 const jobs = [
   {
-    title: "Senior Full Stack Developer",
+    title: "Full Stack Developer",
     location: "Remote / Rajkot",
     type: "Full-time",
-    salary: "$80k - $120k"
+    salary: "₹15k - ₹20k"
   },
   {
     title: "UI/UX Designer",
     location: "Remote",
     type: "Full-time",
-    salary: "$60k - $90k"
+    salary: "₹10k - ₹15k"
   },
   {
     title: "Digital Marketing Specialist",
     location: "Rajkot",
     type: "Contract",
-    salary: "$40k - $60k"
+    salary: "₹20k - ₹25k"
   }
 ];
 

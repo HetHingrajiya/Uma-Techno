@@ -72,7 +72,7 @@ export default function DashboardDashboard() {
   }
 
   // Fallback stats structure in case the API is unreachable
-  const stats = data?.stats || [
+  const stats = Array.isArray(data?.stats) ? data.stats : [
     { name: "Total Leads", value: "0", change: "0%", trendingUp: true, icon: MessageSquare },
     { name: "Active Projects", value: "0", change: "0%", trendingUp: true, icon: TrendingUp },
     { name: "Total Services", value: "0", change: "0%", trendingUp: true, icon: Layers },
@@ -228,7 +228,7 @@ export default function DashboardDashboard() {
                 <div key={lead.id} className="flex items-center justify-between p-5 rounded-2xl bg-[var(--color-navy-light)] border border-[var(--color-border)] hover:border-electric/30 transition-all cursor-pointer group shadow-sm hover:shadow-md">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-2xl bg-gradient-premium flex items-center justify-center font-black text-white text-xs shadow-lg group-hover:scale-110 transition-transform">
-                      {lead.name.split(' ').map((n: string) => n[0]).join('').toUpperCase().substring(0, 2)}
+                      {(lead.name || "UN").split(' ').filter(Boolean).map((n: string) => n[0]).join('').toUpperCase().substring(0, 2)}
                     </div>
                     <div>
                       <p className="font-bold text-[var(--color-text-main)] text-base">{lead.name}</p>

@@ -367,7 +367,7 @@ export default function Home() {
               <div key={i} className="card-premium group overflow-hidden flex flex-col h-full bg-[var(--color-card)]">
                 <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
                   <img
-                    src={project.featuredImage || '/images/project-1-v2.png'}
+                    src={project.featuredImage || `/images/project-${(i % 3) + 1}.png`}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
@@ -504,11 +504,11 @@ export default function Home() {
             <div className="relative group">
               <div className="aspect-square bg-[var(--color-card)] rounded-[var(--radius)] overflow-hidden relative group shadow-xl">
                 <img
-                  src="/images/process-visual-v2.png"
+                  src="/images/process-visual.png"
                   alt="Process"
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
                 />
-                <div className="relative z-10 w-full h-full bg-[var(--color-card)]/30 backdrop-blur-md flex items-center justify-center p-12">
+                <div className="relative z-10 w-full h-full bg-gradient-to-t from-[var(--color-navy)]/60 via-transparent to-transparent flex items-center justify-center p-12">
                   <div className="text-center space-y-4 bg-[var(--color-card)]/80 p-8 rounded-3xl shadow-2xl backdrop-blur-xl">
                     <Zap size={48} className="text-[var(--color-electric)] mx-auto animate-float" />
                     <div className="text-3xl font-bold font-outfit text-[var(--color-text-main)]">Rapid Execution</div>

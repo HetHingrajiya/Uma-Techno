@@ -53,7 +53,13 @@ export default function AdminLayout() {
     return <Outlet />;
   }
 
-  if (!isLoggedIn) return null;
+  if (!isLoggedIn && !pathname.includes("/admin/login")) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[var(--background)]">
+        <RefreshCw className="animate-spin text-electric" size={40} />
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen bg-[var(--background)] text-[var(--color-text-main)] transition-colors duration-300">

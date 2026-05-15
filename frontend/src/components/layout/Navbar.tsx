@@ -57,97 +57,98 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <nav className={cn(
-      "fixed top-0 left-0 w-full z-[1000] transition-all duration-500",
-      scrolled 
-        ? "bg-white/80 backdrop-blur-md py-4 shadow-sm" 
-        : "bg-transparent py-6"
-    )}>
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <Logo className="w-10 h-10 transition-transform group-hover:scale-110" />
-          <div className="flex flex-col leading-none">
-            <span className={cn(
-              "text-2xl font-black tracking-tighter uppercase transition-colors",
-              scrolled ? "text-[var(--color-navy)]" : "text-[var(--color-text-main)]"
-            )}>
-              <span className="text-[var(--color-electric)]">Uma</span>Techno
-            </span>
-            <span className="text-[8px] font-bold tracking-[0.3em] uppercase mt-0.5">
-              <span className="text-black">Innovate. Create. </span><span className="text-[var(--color-electric)]">Elevate.</span>
-            </span>
-          </div>
-        </Link>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-10">
-          {navLinks.map((link) => (
-            <div key={link.name} className="relative group">
-              <Link
-                to={link.href}
-                className={cn(
-                  "text-sm font-bold uppercase tracking-widest transition-colors hover:text-[var(--color-electric)]",
-                  pathname === link.href ? "text-[var(--color-electric)]" : "text-[var(--color-text-main)]"
-                )}
-              >
-                {link.name}
-              </Link>
-              {link.submenu && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                  <div className="bg-white border border-gray-100 shadow-2xl rounded-2xl p-4 min-w-[240px] grid gap-2">
-                    {link.submenu.map((sub) => (
-                      <Link
-                        key={sub.name}
-                        to={sub.href}
-                        className="p-3 rounded-xl hover:bg-gray-50 text-sm font-bold text-gray-600 hover:text-[var(--color-electric)] transition-all flex items-center justify-between group/sub"
-                      >
-                        {sub.name}
-                        <ArrowRight size={14} className="opacity-0 -translate-x-2 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all" />
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-              {pathname === link.href && (
-                <motion.div
-                  layoutId="nav-underline"
-                  className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--color-electric)]"
-                />
-              )}
+    <>
+      <nav className={cn(
+        "fixed top-0 left-0 w-full z-[1000] transition-all duration-500",
+        scrolled 
+          ? "bg-white/80 backdrop-blur-md py-4 shadow-sm" 
+          : "bg-transparent py-6"
+      )}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 group">
+            <Logo className="w-10 h-10 transition-transform group-hover:scale-110" />
+            <div className="flex flex-col leading-none">
+              <span className={cn(
+                "text-2xl font-black tracking-tighter uppercase transition-colors",
+                scrolled ? "text-[var(--color-navy)]" : "text-[var(--color-text-main)]"
+              )}>
+                <span className="text-[var(--color-electric)]">Uma</span>Techno
+              </span>
+              <span className="text-[8px] font-bold tracking-[0.3em] uppercase mt-0.5">
+                <span className="text-black">Innovate. Create. </span><span className="text-[var(--color-electric)]">Elevate.</span>
+              </span>
             </div>
-          ))}
-          
-          <Link
-            to="/contact"
-            className="px-6 py-2.5 bg-gradient-premium text-white rounded-full text-xs font-bold uppercase tracking-widest shadow-lg shadow-blue-500/20 hover:scale-105 transition-all"
-          >
-            Get a Quote
           </Link>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-10">
+            {navLinks.map((link) => (
+              <div key={link.name} className="relative group">
+                <Link
+                  to={link.href}
+                  className={cn(
+                    "text-sm font-bold uppercase tracking-widest transition-colors hover:text-[var(--color-electric)]",
+                    pathname === link.href ? "text-[var(--color-electric)]" : "text-[var(--color-text-main)]"
+                  )}
+                >
+                  {link.name}
+                </Link>
+                {link.submenu && (
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    <div className="bg-white border border-gray-100 shadow-2xl rounded-2xl p-4 min-w-[240px] grid gap-2">
+                      {link.submenu.map((sub) => (
+                        <Link
+                          key={sub.name}
+                          to={sub.href}
+                          className="p-3 rounded-xl hover:bg-gray-50 text-sm font-bold text-gray-600 hover:text-[var(--color-electric)] transition-all flex items-center justify-between group/sub"
+                        >
+                          {sub.name}
+                          <ArrowRight size={14} className="opacity-0 -translate-x-2 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all" />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {pathname === link.href && (
+                  <motion.div
+                    layoutId="nav-underline"
+                    className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--color-electric)]"
+                  />
+                )}
+              </div>
+            ))}
+            
+            <Link
+              to="/contact"
+              className="px-6 py-2.5 bg-gradient-premium text-white rounded-full text-xs font-bold uppercase tracking-widest shadow-lg shadow-blue-500/20 hover:scale-105 transition-all"
+            >
+              Get a Quote
+            </Link>
+          </div>
+
+          {/* Mobile Toggle */}
+          <button
+            className="md:hidden text-[var(--color-text-main)] p-2 bg-white/20 backdrop-blur-md rounded-xl shadow-sm border border-white/10"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle Menu"
+          >
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
+      </nav>
 
-        {/* Mobile Toggle */}
-        <button
-          className="md:hidden text-[var(--color-text-main)] p-2 bg-white/20 backdrop-blur-md rounded-xl shadow-sm border border-white/10"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle Menu"
-        >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
-
-      {/* Mobile Nav Overlay */}
+      {/* Mobile Nav Overlay - Moved outside nav to prevent inheritance issues */}
       <AnimatePresence>
         {isOpen && (
           <>
-            
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9998] md:hidden"
+              className="fixed inset-0 bg-black/60 backdrop-blur-md z-[9998] md:hidden"
               onClick={() => setIsOpen(false)}
             />
             
@@ -157,8 +158,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "tween", duration: 0.4, ease: "circOut" }}
-              className="fixed inset-y-0 left-0 w-[85%] max-w-[360px] h-full z-[9999] md:hidden flex flex-col shadow-2xl bg-white"
-              style={{ backgroundColor: "#FFFFFF", opacity: 1 }}
+              className="fixed inset-y-0 left-0 w-[85%] max-w-[320px] h-full z-[9999] md:hidden flex flex-col shadow-2xl bg-white overflow-hidden"
             >
               <div className="flex flex-col h-full bg-white relative">
                 {/* Drawer Header */}
@@ -183,9 +183,9 @@ export default function Navbar() {
                 </div>
 
                 {/* Nav Links Container */}
-                <div className="flex-1 px-6 py-8 space-y-6 bg-white overflow-y-auto">
+                <div className="flex-1 px-6 py-8 space-y-4 bg-white overflow-y-auto">
                   {navLinks.map((link) => (
-                    <div key={link.name} className="space-y-4">
+                    <div key={link.name} className="space-y-3">
                       <div className={cn(
                         "flex items-center justify-between px-4 py-3 rounded-xl transition-all",
                         pathname === link.href ? "bg-[var(--color-electric)] text-white shadow-md shadow-[var(--color-electric)]/20" : "hover:bg-gray-50 text-[#0F172A]"
@@ -211,12 +211,12 @@ export default function Navbar() {
                       </div>
                       
                       {link.submenu && activeSubmenu === link.name && (
-                        <div className="pl-4 flex flex-col gap-5 border-l-2 border-[var(--color-electric)]/20 mb-4">
+                        <div className="pl-4 flex flex-col gap-4 border-l-2 border-[var(--color-electric)]/20 mb-2">
                           {link.submenu.map((sub) => (
                             <Link
                               key={sub.name}
                               to={sub.href}
-                              className="text-lg font-bold"
+                              className="text-base font-bold"
                               style={{ color: "#64748B" }}
                               onClick={() => setIsOpen(false)}
                             >
@@ -247,7 +247,7 @@ export default function Navbar() {
           </>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 }
 
