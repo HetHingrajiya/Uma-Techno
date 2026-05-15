@@ -61,7 +61,7 @@ export default function Navbar() {
       <nav className={cn(
         "fixed top-0 left-0 w-full z-[1000] transition-all duration-500",
         scrolled 
-          ? "bg-white/80 backdrop-blur-md py-4 shadow-sm" 
+          ? "bg-[var(--color-header)]/80 backdrop-blur-md py-4 shadow-sm" 
           : "bg-transparent py-6"
       )}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
@@ -71,7 +71,7 @@ export default function Navbar() {
             <div className="flex flex-col leading-none">
               <span className={cn(
                 "text-2xl font-black tracking-tighter uppercase transition-colors",
-                scrolled ? "text-[var(--color-navy)]" : "text-[var(--color-text-main)]"
+                scrolled ? "text-[var(--color-nav-text)]" : "text-[var(--color-text-main)]"
               )}>
                 <span className="text-[var(--color-electric)]">Uma</span> Techno
               </span>
@@ -89,7 +89,7 @@ export default function Navbar() {
                   to={link.href}
                   className={cn(
                     "text-sm font-bold uppercase tracking-widest transition-colors hover:text-[var(--color-electric)]",
-                    pathname === link.href ? "text-[var(--color-electric)]" : "text-[var(--color-text-main)]"
+                    pathname === link.href ? "text-[var(--color-electric)]" : "text-[var(--color-nav-text)]"
                   )}
                 >
                   {link.name}
@@ -101,7 +101,7 @@ export default function Navbar() {
                         <Link
                           key={sub.name}
                           to={sub.href}
-                          className="p-3 rounded-xl hover:bg-gray-50 text-sm font-bold text-gray-600 hover:text-[var(--color-electric)] transition-all flex items-center justify-between group/sub"
+                          className="p-3 rounded-xl hover:bg-[var(--color-nav-text)]/5 text-sm font-bold text-[var(--color-nav-text)] opacity-70 hover:opacity-100 hover:text-[var(--color-electric)] transition-all flex items-center justify-between group/sub"
                         >
                           {sub.name}
                           <ArrowRight size={14} className="opacity-0 -translate-x-2 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all" />
@@ -129,7 +129,7 @@ export default function Navbar() {
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden text-[var(--color-text-main)] p-2 bg-white/20 backdrop-blur-md rounded-xl shadow-sm border border-white/10"
+            className="md:hidden text-[var(--color-nav-text)] p-2 bg-[var(--color-header)]/20 backdrop-blur-md rounded-xl shadow-sm border border-[var(--color-nav-text)]/10"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle Menu"
           >
@@ -158,25 +158,25 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "tween", duration: 0.4, ease: "circOut" }}
-              className="fixed inset-y-0 left-0 w-[85%] max-w-[320px] h-full z-[9999] md:hidden flex flex-col shadow-2xl bg-white overflow-hidden"
+              className="fixed inset-y-0 left-0 w-[85%] max-w-[320px] h-full z-[9999] md:hidden flex flex-col shadow-2xl bg-[var(--color-header)] overflow-hidden"
             >
-              <div className="flex flex-col h-full bg-white relative">
+              <div className="flex flex-col h-full bg-[var(--color-header)] relative">
                 {/* Drawer Header */}
-                <div className="p-6 flex justify-between items-center border-b border-gray-100 bg-white shrink-0">
+                <div className="p-6 flex justify-between items-center border-b border-[var(--color-nav-text)]/10 bg-[var(--color-header)] shrink-0">
                   <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
                     <Logo className="w-8 h-8" />
                     <div className="flex flex-col leading-none">
-                      <span className="text-2xl font-black tracking-tighter uppercase text-gray-900">
+                      <span className="text-2xl font-black tracking-tighter uppercase text-[var(--color-nav-text)]">
                         <span className="text-[var(--color-electric)]">Uma</span> Techno
                       </span>
                       <span className="text-[7px] font-bold tracking-[0.2em] uppercase mt-0.5">
-                        <span className="text-black">Innovate. Create. </span><span className="text-[var(--color-electric)]">Elevate.</span>
+                        <span className="text-[var(--color-nav-text)] opacity-60">Innovate. Create. </span><span className="text-[var(--color-electric)]">Elevate.</span>
                       </span>
                     </div>
                   </Link>
                   <button 
                     onClick={() => setIsOpen(false)} 
-                    className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-900 border border-gray-200"
+                    className="w-10 h-10 rounded-full bg-[var(--color-nav-text)]/5 flex items-center justify-center text-[var(--color-nav-text)] border border-[var(--color-nav-text)]/10"
                   >
                     <X size={20} />
                   </button>
@@ -188,7 +188,7 @@ export default function Navbar() {
                     <div key={link.name} className="space-y-3">
                       <div className={cn(
                         "flex items-center justify-between px-4 py-3 rounded-xl transition-all",
-                        pathname === link.href ? "bg-[var(--color-electric)] text-white shadow-md shadow-[var(--color-electric)]/20" : "hover:bg-gray-50 text-[#0F172A]"
+                        pathname === link.href ? "bg-[var(--color-electric)] text-white shadow-md shadow-[var(--color-electric)]/20" : "hover:bg-[var(--color-nav-text)]/5 text-[var(--color-nav-text)]"
                       )}>
                         <Link
                           to={link.href}
@@ -203,7 +203,7 @@ export default function Navbar() {
                               e.preventDefault();
                               setActiveSubmenu(activeSubmenu === link.name ? null : link.name);
                             }}
-                            className={cn("p-1", pathname === link.href ? "text-white" : "text-gray-400")}
+                            className={cn("p-1", pathname === link.href ? "text-white" : "text-[var(--color-nav-text)]/40")}
                           >
                             <ChevronDown size={20} className={cn("transition-transform duration-300", activeSubmenu === link.name && "rotate-180")} />
                           </button>
@@ -217,7 +217,7 @@ export default function Navbar() {
                               key={sub.name}
                               to={sub.href}
                               className="text-base font-bold"
-                              style={{ color: "#64748B" }}
+                              style={{ color: "var(--color-nav-text)", opacity: 0.6 }}
                               onClick={() => setIsOpen(false)}
                             >
                               {sub.name}
@@ -230,7 +230,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Drawer Footer */}
-                <div className="p-6 bg-gray-50 border-t border-gray-100 space-y-6 shrink-0 mt-auto">
+                <div className="p-6 bg-[var(--color-nav-text)]/5 border-t border-[var(--color-nav-text)]/10 space-y-6 shrink-0 mt-auto">
                   <Link
                     to="/contact"
                     className="block w-full bg-[var(--color-electric)] text-white text-center py-4 rounded-xl font-bold text-lg shadow-lg"
@@ -238,7 +238,7 @@ export default function Navbar() {
                   >
                     Get a Quote
                   </Link>
-                  <div className="text-center text-[10px] text-gray-400 uppercase tracking-widest font-bold">
+                  <div className="text-center text-[10px] text-[var(--color-nav-text)] opacity-40 uppercase tracking-widest font-bold">
                     © 2026 UMA TECHNO. <br /> SOLUTIONS FOR THE FUTURE.
                   </div>
                 </div>
