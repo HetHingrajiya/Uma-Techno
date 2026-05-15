@@ -192,7 +192,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Nav Links Container */}
-                <div className="flex-1 px-6 py-8 space-y-4 bg-white overflow-y-auto">
+                <div className="flex-1 px-6 py-8 space-y-4 bg-transparent overflow-y-auto">
                   {navLinks.map((link) => (
                     <div key={link.name} className="space-y-3">
                       <div className={cn(
