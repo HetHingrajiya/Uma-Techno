@@ -144,6 +144,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
                 --color-accent: ${theme.accentColor};
                 --color-text-main: ${theme.textColor};
                 --color-background: ${theme.backgroundColor};
+                --background: ${theme.backgroundColor};
+                --foreground: ${theme.textColor};
                 --color-border: ${theme.borderColor};
                 --color-card: ${theme.cardColor};
                 --font-sans: ${theme.fontFamily};
