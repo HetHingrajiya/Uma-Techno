@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import ImageUploader from "@/components/admin/ImageUploader";
 import {
   Palette,
   Save,
