@@ -365,7 +365,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.slice(0, 3).map((project, i) => (
               <div key={i} className="card-premium group overflow-hidden flex flex-col h-full">
-                <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
+                <div className="relative aspect-[4/3] overflow-hidden">
                   <img
                     src={project.featuredImage || (i === 0 ? "/images/jewelry-ecommerce.png" : i === 1 ? "/images/health-booking.png" : "/images/fintech-dashboard.png")}
                     alt={project.title}
@@ -374,11 +374,11 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-glow opacity-0 group-hover:opacity-20 transition-opacity duration-700" />
                   <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-gradient-glow group-hover:scale-150 transition-all duration-700" />
                   <div className="absolute top-6 left-6 flex flex-col gap-2 z-10">
-                    <span className="px-4 py-2 bg-[var(--color-card)]/90 backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-border)] text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
+                    <span className="px-4 py-2 bg-transparent backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-electric)]/20 text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
                       {project.category}
                     </span>
                     {project.industry && (
-                      <span className="px-4 py-2 bg-slate-900/90 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
+                      <span className="px-4 py-2 bg-transparent backdrop-blur-md text-[var(--color-text-main)] border border-[var(--color-text-main)]/20 text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
                         {project.industry}
                       </span>
                     )}
@@ -387,7 +387,7 @@ export default function Home() {
 
                 <div className="p-8 lg:p-10 space-y-6 flex-1 flex flex-col justify-between">
                   <div className="space-y-4">
-                    <h4 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors line-clamp-2">{project.title}</h4>
+                    <h4 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">{project.title}</h4>
                     <p className="text-[var(--color-text-main)] opacity-60 text-sm leading-relaxed line-clamp-3">
                       {project.challenge || project.description}
                     </p>

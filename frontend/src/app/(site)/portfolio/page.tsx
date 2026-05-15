@@ -123,14 +123,14 @@ export default function PortfolioPage() {
                 key={project.slug || i}
                 className="card-premium group overflow-hidden flex flex-col"
               >
-                <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
+                <div className="relative aspect-[4/3] overflow-hidden">
                   <img
                     src={project.featuredImage || '/images/jewelry-ecommerce.png'}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute top-8 left-8">
-                    <span className="px-4 py-2 bg-[var(--color-card)]/90 backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-border)] text-xs font-black uppercase tracking-widest rounded-full shadow-xl">
+                    <span className="px-4 py-2 bg-transparent backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-electric)]/20 text-xs font-black uppercase tracking-widest rounded-full shadow-xl">
                       {project.category}
                     </span>
                   </div>

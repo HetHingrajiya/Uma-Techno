@@ -48,7 +48,7 @@ export default function Hero() {
             className="relative"
           >
               <div className="space-y-4">
-                <span className="inline-block px-4 py-1.5 bg-[var(--color-electric)]/10 text-[var(--color-electric)] text-xs font-black uppercase tracking-[0.3em] rounded-full">
+                <span className="inline-block px-4 py-1.5 bg-transparent border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-black uppercase tracking-[0.3em] rounded-full">
                   Best SEO & Web Development Agency in Rajkot
                 </span>
                 <h1 className="text-4xl xs:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black font-outfit leading-[1.1] tracking-tight text-[var(--color-text-main)]">
@@ -72,7 +72,7 @@ export default function Hero() {
                   </Link>
                   <Link
                     to="/portfolio"
-                    className="group px-6 py-3.5 lg:px-8 lg:py-4 bg-[var(--color-card)] border border-[var(--color-border)] text-[var(--color-text-main)] rounded-xl font-bold text-base lg:text-lg transition-all hover:bg-[var(--color-navy-light)] text-center shadow-sm"
+                    className="group px-6 py-3.5 lg:px-8 lg:py-4 bg-transparent border border-[var(--color-border)] text-[var(--color-text-main)] rounded-xl font-bold text-base lg:text-lg transition-all hover:bg-[var(--color-navy-light)] text-center"
                   >
                     View Portfolio
                   </Link>

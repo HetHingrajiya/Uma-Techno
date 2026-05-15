@@ -17,6 +17,8 @@ interface ThemeSettings {
   footerColor: string;
   fontFamily: string;
   logoUrl: string | null;
+  heroImageUrl: string | null;
+  aboutImageUrl: string | null;
 }
 
 const defaultTheme: ThemeSettings = {
@@ -31,6 +33,8 @@ const defaultTheme: ThemeSettings = {
   footerColor: "#0F172A",
   fontFamily: "Inter, Outfit, sans-serif",
   logoUrl: null,
+  heroImageUrl: null,
+  aboutImageUrl: null,
 };
 
 const ThemeContext = createContext<{ theme: ThemeSettings } | undefined>(undefined);
