@@ -285,7 +285,6 @@ export default function ThemeSettingsPage() {
       borderColor: palette.borderColor,
       headerColor: palette.headerColor || palette.cardColor,
       footerColor: palette.footerColor || palette.backgroundColor,
-      footerColor: palette.footerColor || palette.backgroundColor,
       category: palette.category || "Custom"
     });
     setEditingPaletteId(palette.id.startsWith('prebuilt-') ? null : palette.id);
