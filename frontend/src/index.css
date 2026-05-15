@@ -61,7 +61,7 @@
 
   .card-premium {
     @apply border border-[var(--color-border)] rounded-[var(--radius)] transition-all duration-500;
-    background: var(--color-card);
+    background: transparent;
     box-shadow: 0 20px 50px -12px var(--shadow-color);
   }
 

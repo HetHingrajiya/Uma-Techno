@@ -254,7 +254,7 @@ export default function Home() {
                   key={service.slug}
                   to={service.slug.startsWith('/') ? service.slug : `/${service.slug}`}
                   className={cn(
-                    "group bg-[var(--color-card)] border border-[var(--color-border)] p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] flex flex-col justify-between relative overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500",
+                    "group border border-[var(--color-border)] p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] flex flex-col justify-between relative overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500",
                     isLarge ? "lg:col-span-2 min-h-[350px] md:min-h-[400px]" : "min-h-[350px] md:min-h-[400px]"
                   )}
                 >
@@ -364,7 +364,7 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.slice(0, 3).map((project, i) => (
-              <div key={i} className="card-premium group overflow-hidden flex flex-col h-full bg-[var(--color-card)]">
+              <div key={i} className="card-premium group overflow-hidden flex flex-col h-full">
                 <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-navy-light)]">
                   <img
                     src={project.featuredImage || (i === 0 ? "/images/jewelry-ecommerce.png" : i === 1 ? "/images/health-booking.png" : "/images/fintech-dashboard.png")}
@@ -433,7 +433,7 @@ export default function Home() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.length > 0 ? (
               testimonials.map((t, i) => (
-                <div key={i} className="bg-[var(--color-card)] border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all">
+                <div key={i} className="border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all">
                   <div className="flex gap-1 text-[#F59E0B] mb-6">
                     {Array.from({ length: t.rating || 5 }).map((_, star) => (
                       <Star key={star} size={16} fill="currentColor" />
