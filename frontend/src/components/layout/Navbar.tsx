@@ -99,8 +99,8 @@ export default function Navbar() {
                   {link.name}
                 </Link>
                 {link.submenu && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                    <div className="bg-white border border-gray-100 shadow-2xl rounded-2xl p-4 min-w-[240px] grid gap-2">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                    <div className="bg-[var(--color-header)] border border-[var(--color-border)]/50 shadow-2xl rounded-3xl p-4 min-w-[300px] grid gap-2">
                       {link.submenu.map((sub) => (
                         <Link
                           key={sub.name}

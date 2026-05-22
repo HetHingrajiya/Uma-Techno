@@ -12,8 +12,8 @@
   --glass-border: var(--glass-border, rgba(15, 23, 42, 0.05));
   --shadow-color: var(--shadow-color, rgba(15, 23, 42, 0.08));
   --shadow-glow: var(--shadow-glow, rgba(6, 182, 212, 0.15));
-  --font-sans: "Merriweather", serif;
-  --font-outfit: "Merriweather", serif;
+  --font-sans: "Inter", "Outfit", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
 }
 
 @layer base {

@@ -148,8 +148,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
                 --foreground: ${theme.textColor};
                 --color-border: ${theme.borderColor};
                 --color-card: ${theme.cardColor};
-                --font-sans: 'Merriweather', serif;
-                --font-outfit: 'Merriweather', serif;
+                --font-sans: ${theme.fontFamily || "'Inter', 'Outfit', sans-serif"};
+                --font-outfit: ${theme.fontFamily || "'Outfit', sans-serif"};
                 
                 --color-header: ${navBg};
                 --color-footer: ${footerBg};
