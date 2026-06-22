@@ -47,7 +47,7 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="py-20 space-y-32 bg-[var(--background)]">
+    <div className="pt-32 pb-20 lg:pt-48 space-y-32 bg-[var(--background)] min-h-screen">
       {/* Inject Structured Data for SEO */}
       <script
         type="application/ld+json"

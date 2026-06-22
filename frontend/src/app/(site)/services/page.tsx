@@ -50,7 +50,7 @@ const services = [
 // // 
 export default function ServicesPage() {
   return (
-    <div className="py-20 space-y-32">
+    <div className="pt-32 pb-20 lg:pt-48 space-y-32 min-h-screen">
       <section className="max-w-7xl mx-auto px-6 text-center space-y-6">
         <h1 className="text-5xl lg:text-7xl font-bold font-outfit">
           Empowering Your Business With <br />
