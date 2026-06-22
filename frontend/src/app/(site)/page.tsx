@@ -1,4 +1,7 @@
 import Hero from "@/components/ui/Hero";
+import ProjectEstimator from "@/components/ui/ProjectEstimator";
+import ProcessTimeline from "@/components/ui/ProcessTimeline";
+import FAQ from "@/components/ui/FAQ";
 import {
   Code, Globe, Smartphone, BarChart, Palette, Megaphone,
   Rocket, Shield, Zap, Users, Star, ArrowRight, CheckCircle
@@ -202,30 +205,45 @@ export default function Home() {
       */}
       {isEnabled('hero') && <Hero />}
 
+      {/* Interactive Project Estimator Widget */}
+      <ProjectEstimator />
+
       {/* 
           Trust & Stats Section:
           Displays quantitative metrics and client industries to build authority.
       */}
       {isEnabled('stats') && (
-        <section className="max-w-7xl mx-auto px-6 w-full -mt-8 lg:-mt-16 relative z-20 py-12 lg:py-20">
+        <section className="max-w-7xl mx-auto px-6 w-full relative z-20 py-12 lg:py-20">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
             {stats.map((stat, i) => (
-              <div key={i} className="card-premium p-6 lg:p-8 text-center flex flex-col items-center gap-4 bg-transparent backdrop-blur-xl">
-                <div className="w-12 h-12 rounded-2xl bg-[var(--color-electric)]/10 text-[var(--color-electric)] flex items-center justify-center">
+              <div key={i} className="glass-card p-6 lg:p-8 text-center flex flex-col items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-[var(--color-electric)]/10 text-[var(--color-electric)] flex items-center justify-center ring-1 ring-[var(--color-electric)]/20 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
                   <stat.icon size={24} />
                 </div>
                 <div>
-                  <div className="text-3xl lg:text-4xl font-black font-outfit text-[var(--color-text-main)] tracking-tight">{stat.value}</div>
-                  <div className="text-xs lg:text-sm font-bold text-[var(--color-text-main)] opacity-50 uppercase tracking-widest mt-1">{stat.label}</div>
+                  <div className="text-4xl lg:text-5xl font-black font-outfit text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-electric)] to-[var(--color-accent)] tracking-tight">{stat.value}</div>
+                  <div className="text-xs lg:text-sm font-bold text-[var(--color-text-main)] opacity-70 uppercase tracking-widest mt-2">{stat.label}</div>
                 </div>
               </div>
             ))}
           </div>
           
-          <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16 mt-16 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
-            {["Retailers", "Real Estate", "Startups", "Enterprises", "Medical Centres"].map(brand => (
-              <span key={brand} className="text-xl lg:text-2xl font-bold font-outfit text-[var(--color-text-main)]">{brand}</span>
-            ))}
+          {/* Marquee for Trusted By */}
+          <div className="mt-20 overflow-hidden relative w-full">
+             <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[var(--background)] to-transparent z-10" />
+             <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[var(--background)] to-transparent z-10" />
+             
+             <div className="flex space-x-16 w-max animate-marquee items-center opacity-40 hover:opacity-100 transition-opacity duration-500">
+               {[...Array(2)].map((_, i) => (
+                 <div key={i} className="flex space-x-16 items-center">
+                   {["Retailers", "Real Estate", "Startups", "Enterprises", "Medical Centres", "Fintech", "Agencies"].map(brand => (
+                     <span key={brand} className="text-2xl font-black font-outfit text-[var(--color-text-main)] whitespace-nowrap px-8">
+                       {brand}
+                     </span>
+                   ))}
+                 </div>
+               ))}
+             </div>
           </div>
         </section>
       )}
@@ -254,23 +272,23 @@ export default function Home() {
                   key={service.slug}
                   to={service.slug.startsWith('/') ? service.slug : `/${service.slug}`}
                   className={cn(
-                    "group border border-[var(--color-border)] p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] flex flex-col justify-between relative overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500",
+                    "glass-card group p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] flex flex-col justify-between relative overflow-hidden",
                     isLarge ? "lg:col-span-2 min-h-[350px] md:min-h-[400px]" : "min-h-[350px] md:min-h-[400px]"
                   )}
                 >
-                  <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-glow -mr-32 -mt-32 group-hover:scale-110 transition-all duration-700" />
+                  <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-electric)]/10 blur-3xl -mr-32 -mt-32 group-hover:scale-150 transition-transform duration-1000 ease-out" />
                   <div className="space-y-6 relative z-10">
-                    <div className="w-16 h-16 bg-gradient-premium rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                    <div className="w-16 h-16 bg-[var(--color-card)]/50 backdrop-blur-md border border-[var(--color-border)] rounded-2xl flex items-center justify-center text-[var(--color-electric)] shadow-xl group-hover:scale-110 group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all duration-500">
                       {getIcon(service.icon || 'Globe')}
                     </div>
-                    <h4 className="text-2xl lg:text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] tracking-tighter">
+                    <h4 className="text-2xl lg:text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] tracking-tighter group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[var(--color-electric)] group-hover:to-[var(--color-accent)] transition-all">
                       {service.title}
                     </h4>
-                    <p className="text-[var(--color-text-main)] opacity-70 leading-relaxed max-w-sm">
+                    <p className="text-[var(--color-text-main)] opacity-70 leading-relaxed max-w-sm group-hover:opacity-100 transition-opacity">
                       {service.description}
                     </p>
                   </div>
-                  <div className="mt-8 flex items-center gap-4 text-sm font-black tracking-widest text-[var(--color-electric)] uppercase group-hover:gap-6 transition-all">
+                  <div className="mt-8 flex items-center gap-4 text-sm font-black tracking-widest text-[var(--color-text-main)] opacity-50 uppercase group-hover:opacity-100 group-hover:text-[var(--color-electric)] group-hover:gap-6 transition-all relative z-10">
                     EXPLORE SOLUTIONS <ArrowRight size={20} />
                   </div>
                 </Link>
@@ -363,26 +381,27 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.slice(0, 3).map((project, i) => (
-              <div key={i} className="card-premium group overflow-hidden flex flex-col h-full bg-transparent">
+              <div key={i} className="glass-card group overflow-hidden flex flex-col h-full">
                 <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)] to-transparent z-10 opacity-60 group-hover:opacity-20 transition-opacity duration-500" />
                   <img
                     src={project.featuredImage || (i === 0 ? "/images/jewelry-ecommerce.png" : i === 1 ? "/images/health-booking.png" : "/images/fintech-dashboard.png")}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute top-6 left-6 flex flex-col gap-2 z-10">
-                    <span className="px-4 py-2 bg-transparent backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-electric)]/20 text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
+                  <div className="absolute top-6 left-6 flex flex-col gap-2 z-20">
+                    <span className="px-4 py-2 bg-[var(--color-card)]/80 backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-electric)]/20 text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
                       {project.category}
                     </span>
                     {project.industry && (
-                      <span className="px-4 py-2 bg-transparent backdrop-blur-md text-[var(--color-text-main)] border border-[var(--color-text-main)]/20 text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
+                      <span className="px-4 py-2 bg-[var(--color-card)]/80 backdrop-blur-md text-[var(--color-text-main)] border border-[var(--color-text-main)]/20 text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
                         {project.industry}
                       </span>
                     )}
                   </div>
                 </div>
 
-                <div className="p-8 lg:p-10 space-y-6 flex-1 flex flex-col justify-between">
+                <div className="p-8 lg:p-10 space-y-6 flex-1 flex flex-col justify-between relative z-20">
                   <div className="space-y-4">
                     <h4 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors break-words">{project.title}</h4>
                     <p className="text-[var(--color-text-main)] opacity-60 text-sm leading-relaxed line-clamp-3">
@@ -399,7 +418,7 @@ export default function Home() {
 
                   <Link
                     to={`/portfolio/${project.slug || project.title.toLowerCase().replace(/ /g, '-')}`}
-                    className="flex items-center gap-2 text-[var(--color-electric)] font-bold text-sm tracking-widest uppercase mt-6 group/link"
+                    className="flex items-center gap-2 text-[var(--color-text-main)] opacity-60 group-hover:opacity-100 group-hover:text-[var(--color-electric)] font-bold text-sm tracking-widest uppercase mt-6 group/link transition-all"
                   >
                     View Case Study <ArrowRight size={16} className="group-hover/link:translate-x-2 transition-transform" />
                   </Link>
@@ -429,19 +448,22 @@ export default function Home() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.length > 0 ? (
               testimonials.map((t, i) => (
-                <div key={i} className="bg-[var(--color-card)] border border-[var(--color-border)] p-8 rounded-[var(--radius)] shadow-sm hover:shadow-xl transition-all">
-                  <div className="flex gap-1 text-[#F59E0B] mb-6">
+                <div key={i} className="glass-card p-8 rounded-[var(--radius)] hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all group relative overflow-hidden">
+                  <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity text-[var(--color-electric)] pointer-events-none">
+                    <span className="text-8xl font-serif">"</span>
+                  </div>
+                  <div className="flex gap-1 text-[#F59E0B] mb-6 relative z-10">
                     {Array.from({ length: t.rating || 5 }).map((_, star) => (
                       <Star key={star} size={16} fill="currentColor" />
                     ))}
                   </div>
-                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic">"{t.content}"</p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-transparent overflow-hidden">
+                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic relative z-10">"{t.content}"</p>
+                  <div className="flex items-center gap-4 relative z-10">
+                    <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] border border-[var(--color-border)] overflow-hidden">
                       <img src={t.image || `https://i.pravatar.cc/100?u=${t.id}`} alt={t.name} className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-[var(--color-text-main)]">{t.name}</h4>
+                      <h4 className="font-bold text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">{t.name}</h4>
                       <p className="text-xs text-[var(--color-text-main)] opacity-50">{t.role}{t.company ? `, ${t.company}` : ''}</p>
                     </div>
                   </div>
@@ -449,12 +471,15 @@ export default function Home() {
               ))
             ) : (
               [1, 2, 3].map((i) => (
-                <div key={i} className="glass-card p-8 rounded-[var(--radius)] border border-[var(--color-border)] hover:shadow-xl transition-all group">
-                  <div className="flex gap-1 text-[#F59E0B] mb-6">
+                <div key={i} className="glass-card p-8 rounded-[var(--radius)] hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all group relative overflow-hidden">
+                  <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity text-[var(--color-electric)] pointer-events-none">
+                    <span className="text-8xl font-serif">"</span>
+                  </div>
+                  <div className="flex gap-1 text-[#F59E0B] mb-6 relative z-10">
                     {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" />)}
                   </div>
-                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic">"Uma Techno delivered exactly what we needed. Their attention to detail and premium design aesthetic helped us increase our conversions by over 300% within the first month."</p>
-                  <div className="flex items-center gap-4">
+                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic relative z-10">"Uma Techno delivered exactly what we needed. Their attention to detail and premium design aesthetic helped us increase our conversions by over 300% within the first month."</p>
+                  <div className="flex items-center gap-4 relative z-10">
                     <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] border border-[var(--color-border)] overflow-hidden">
                       <img src={`/images/client-${i}-v2.png`} alt="Client" className="w-full h-full object-cover" />
                     </div>
@@ -476,46 +501,11 @@ export default function Home() {
           Visualizes the roadmap of working with the agency.
       */}
       {isEnabled('process') && (
-        <section className="max-w-7xl mx-auto px-6 w-full">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6">
-              <h2 className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">How We Turn Ideas Into <span className="text-gradient">Reality</span></h2>
-              <p className="text-[var(--color-text-main)] opacity-70 leading-relaxed">
-                Our proven development methodology ensures your project is delivered on time, within budget, and to the highest quality standards.
-              </p>
-              <div className="space-y-4">
-                {processSteps.map((item, i) => (
-                  <div key={i} className="flex gap-4 group">
-                    <div className="w-10 h-10 rounded-xl bg-[var(--color-card)] border border-[var(--color-border)] flex items-center justify-center text-[var(--color-electric)] font-bold text-lg group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all shadow-sm">
-                      {i + 1}
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-bold text-[var(--color-text-main)] mb-1">{item.title}</h4>
-                      <p className="text-sm text-[var(--color-text-main)] opacity-60">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative group">
-              <div className="aspect-square bg-[var(--color-card)] rounded-[var(--radius)] overflow-hidden relative group shadow-xl">
-                <img
-                  src="/images/agile-process.png"
-                  alt="Process"
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
-                />
-                <div className="relative z-10 w-full h-full bg-gradient-to-t from-[var(--color-navy)]/60 via-transparent to-transparent flex items-center justify-center p-12">
-                  <div className="text-center space-y-4 bg-[var(--color-card)]/80 p-8 rounded-3xl shadow-2xl backdrop-blur-xl">
-                    <Zap size={48} className="text-[var(--color-electric)] mx-auto animate-float" />
-                    <div className="text-3xl font-bold font-outfit text-[var(--color-text-main)]">Rapid Execution</div>
-                    <p className="text-[var(--color-text-main)] opacity-70">Turning complex ideas into scalable reality.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <ProcessTimeline />
       )}
+
+      {/* FAQ Section */}
+      <FAQ />
 
       {/* 
           Final Conversion Area (CTA):
@@ -523,26 +513,26 @@ export default function Home() {
       */}
       {isEnabled('cta') && (
         <section className="max-w-7xl mx-auto px-6 w-full pb-20">
-          <div className="bg-gradient-soft border border-[var(--color-border)] rounded-[3rem] p-10 lg:p-24 text-center space-y-10 relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--color-electric)]/10 blur-[150px] -mr-64 -mt-64" />
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[var(--color-accent)]/10 blur-[150px] -ml-64 -mb-64" />
+          <div className="glass-card rounded-[3rem] p-10 lg:p-24 text-center space-y-10 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--color-electric)]/20 blur-[150px] -mr-64 -mt-64 group-hover:scale-150 transition-transform duration-1000" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[var(--color-accent)]/20 blur-[150px] -ml-64 -mb-64 group-hover:scale-150 transition-transform duration-1000" />
 
-            <h2 className="text-3xl lg:text-5xl font-bold font-outfit max-w-3xl mx-auto leading-tight text-[var(--color-text-main)]">
-              Ready to Accelerate Your <span className="text-gradient">Business Growth</span>?
+            <h2 className="text-4xl lg:text-6xl font-black font-outfit max-w-3xl mx-auto leading-[1.1] text-[var(--color-text-main)] tracking-tighter relative z-10">
+              Ready to Accelerate Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-electric)] to-[var(--color-accent)] animate-pulse">Business Growth</span>?
             </h2>
-            <p className="text-[var(--color-text-main)] opacity-70 max-w-xl mx-auto leading-relaxed">
+            <p className="text-[var(--color-text-main)] opacity-70 max-w-xl mx-auto leading-relaxed text-lg relative z-10">
               Stop settling for mediocre digital presence. Partner with Uma Techno to build a premium solution that commands authority and delivers results.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4 relative z-10">
               <Link
                 to="/contact"
-                className="px-8 py-4 text-white rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl bg-gradient-premium text-center"
+                className="px-8 py-4 text-white rounded-2xl font-bold text-lg transition-all hover:scale-105 shadow-[0_0_30px_-5px_var(--color-electric)] bg-gradient-to-r from-[var(--color-electric)] to-[var(--color-accent)] text-center hover:shadow-[0_0_50px_-5px_var(--color-electric)]"
               >
                 Get Free Consultation
               </Link>
               <Link
                 to="/portfolio"
-                className="px-8 py-4 bg-transparent border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-[var(--color-navy-light)] rounded-xl font-bold text-base transition-all text-center"
+                className="px-8 py-4 bg-[var(--color-card)]/50 backdrop-blur-md border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-[var(--color-navy-light)] hover:border-[var(--color-electric)]/50 rounded-2xl font-bold text-lg transition-all text-center"
               >
                 View Our Work
               </Link>

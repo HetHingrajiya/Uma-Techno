@@ -1,46 +1,36 @@
-import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle, Star } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Code, Zap, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
-;
-import Logo from "./Logo";
 import { useTheme } from "@/components/ThemeProvider";
+import { useState, useEffect } from "react";
 
-/**
- * Hero Component:
- * The primary visual centerpiece of the landing page.
- * Features theme-aware background rendering and complex scroll/entrance animations.
- */
+const rotatingWords = ["Excellence", "Innovation", "Experiences", "Solutions"];
+
 export default function Hero() {
-  // Pulls the current theme (specifically heroImageUrl) from the global context
   const { theme } = useTheme();
+  const [currentWord, setCurrentWord] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % rotatingWords.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section className="relative min-h-[600px] lg:min-h-[800px] 2xl:min-h-screen flex items-center overflow-hidden pt-8 lg:pt-24 pb-12 lg:pb-16 bg-[var(--background)]">
+    <section className="relative min-h-[600px] lg:min-h-[800px] 2xl:min-h-screen flex items-center overflow-hidden pt-16 lg:pt-24 pb-12 lg:pb-16 bg-[var(--background)]">
       
-      {/* 
-          Dynamic Background:
-          If a custom hero image is uploaded via the Admin Panel, it is rendered here 
-          with a subtle opacity and gradient mask to maintain text readability.
-      */}
-      {theme.heroImageUrl && (
-        <div className="absolute inset-0 z-0">
-          <img 
-            src={theme.heroImageUrl} 
-            alt="Hero Background" 
-            className="object-cover opacity-10" loading="eager"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)] via-transparent to-[var(--background)]" />
-        </div>
-      )}
-
+      {/* Dynamic Background Elements */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-[var(--color-electric)]/20 blur-[120px] rounded-full mix-blend-screen animate-pulse" />
+        <div className="absolute top-[40%] -right-[10%] w-[40%] h-[60%] bg-[var(--color-accent)]/20 blur-[150px] rounded-full mix-blend-screen animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+      </div>
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           
-          {/* 
-              Left Column: Value Proposition & CTAs
-              Uses Framer Motion for a smooth upward entrance animation.
-          */}
+          {/* Left Column: Value Proposition & CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -48,86 +38,86 @@ export default function Hero() {
             className="relative"
           >
               <div className="space-y-4">
-                <h1 className="text-4xl xs:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black font-outfit leading-[1.1] tracking-tight text-[var(--color-text-main)]">
-                  <span className="block">Build Smart</span>
-                  <span className="block text-gradient">Digital Solutions</span>
-                  <span className="block">That Scale Businesses</span>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-electric)]/30 bg-[var(--color-electric)]/10 text-[var(--color-electric)] text-sm font-bold uppercase tracking-widest backdrop-blur-md">
+                  <span className="w-2 h-2 rounded-full bg-[var(--color-electric)] animate-ping" />
+                  Engineering the Future
+                </div>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black font-outfit leading-[1.05] tracking-tighter text-[var(--color-text-main)]">
+                  <span className="block">Digital</span>
+                  <span className="block h-[1.2em] relative overflow-hidden">
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={currentWord}
+                        initial={{ y: 50, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: -50, opacity: 0 }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                        className="absolute text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-electric)] to-[var(--color-accent)]"
+                      >
+                        {rotatingWords[currentWord]}
+                      </motion.span>
+                    </AnimatePresence>
+                  </span>
+                  <span className="block">Delivered.</span>
                 </h1>
               </div>
 
-              <div className="max-w-lg space-y-8">
+              <div className="max-w-lg space-y-8 mt-8">
                 <p className="text-lg lg:text-xl text-[var(--color-text-main)] opacity-70 leading-relaxed font-medium">
-                  Uma Techno is your partner for expert <span className="text-[var(--color-text-main)] font-bold">web development, app development, and SEO in Rajkot</span>. We engineer high-performance platforms that drive real growth.
+                  We engineer premium web applications, scalable architectures, and growth-driven digital experiences that dominate the market.
                 </p>
                 
-                <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <div className="flex flex-col sm:flex-row gap-4 pt-4">
                   <Link
                     to="/contact"
-                    className="group relative px-6 py-3.5 lg:px-8 lg:py-4 text-white rounded-xl font-bold text-base lg:text-lg transition-all hover:scale-105 text-center flex justify-center items-center gap-2 bg-gradient-premium"
+                    className="group relative px-8 py-4 text-white rounded-2xl font-bold text-lg transition-all hover:scale-105 hover:shadow-[0_0_40px_-10px_var(--color-electric)] text-center flex justify-center items-center gap-2 bg-gradient-to-r from-[var(--color-electric)] to-[var(--color-accent)]"
                   >
-                    Get Free Quote <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    Start Project <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                   </Link>
                   <Link
                     to="/portfolio"
-                    className="group px-6 py-3.5 lg:px-8 lg:py-4 bg-transparent border border-[var(--color-border)] text-[var(--color-text-main)] rounded-xl font-bold text-base lg:text-lg transition-all hover:bg-[var(--color-navy-light)] text-center"
+                    className="group px-8 py-4 bg-[var(--color-card)]/50 backdrop-blur-md border border-[var(--color-border)] text-[var(--color-text-main)] rounded-2xl font-bold text-lg transition-all hover:bg-[var(--color-navy-light)] hover:border-[var(--color-electric)]/50 text-center"
                   >
-                    View Portfolio
+                    View Our Work
                   </Link>
                 </div>
               </div>
           </motion.div>
 
-          {/* 
-              Right Column: Interactive Visual Element
-              Displays a "floating" showcase card with glassmorphism effects and 
-              dynamic performance badges.
-          */}
+          {/* Right Column: Abstract Interactive UI */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, rotate: 2 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-            className="relative perspective-2000 block mt-12 lg:mt-0"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            className="relative hidden lg:block perspective-2000"
           >
-            <div className="animate-float-complex max-w-md mx-auto lg:max-w-none">
-              <div className="bg-[var(--color-card)] rounded-[2.5rem] lg:rounded-[3rem] p-2 aspect-[4/5] lg:aspect-square relative overflow-hidden group border border-[var(--color-border)] shadow-2xl">
-                 <img 
-                   src={theme.heroImageUrl || "/images/hero-showcase.png"} 
-                   alt="Portfolio Showcase - Web Development Rajkot" loading="eager"
-                   className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-all duration-700"
-                 />
-                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)]/80 via-transparent to-transparent pointer-events-none" />
-                 
-                 {/* Glassmorphic Project Info Card */}
-                 <div className="absolute bottom-6 left-6 right-6 z-10 bg-[var(--color-card)]/90 backdrop-blur-xl rounded-[var(--radius)] p-6 border border-white/10 shadow-xl">
-                    <div className="flex justify-between items-start mb-4">
-                       <div>
-                         <h3 className="text-xl font-bold font-outfit text-[var(--color-text-main)]">Premium E-commerce</h3>
-                         <p className="text-sm text-[var(--color-text-main)] opacity-60 font-medium">Conversion optimized storefront</p>
-                       </div>
-                       <div className="w-10 h-10 rounded-xl bg-[var(--color-electric)]/10 text-[var(--color-electric)] flex items-center justify-center">
-                          <CheckCircle size={20} />
-                       </div>
-                    </div>
-                    
-                    <div className="flex gap-2">
-                       <span className="px-3 py-1 bg-[var(--color-navy-light)] text-[var(--color-text-main)] text-xs font-bold rounded-full">Next.js 15</span>
-                       <span className="px-3 py-1 bg-[var(--color-navy-light)] text-[var(--color-text-main)] text-xs font-bold rounded-full">Tailwind V4</span>
-                    </div>
-                 </div>
-                 
-                  {/* 
-                      Floating Performance Badge:
-                      Uses CSS animations to gently hover, adding depth to the UI.
-                  */}
-                  <div className="absolute top-8 right-[-20px] bg-[var(--color-card)] border border-[var(--color-border)] rounded-[var(--radius)] p-4 shadow-xl flex items-center gap-3 animate-float delay-500 hover:scale-105 transition-transform cursor-default">
-                     <div className="w-10 h-10 bg-[#10B981]/10 rounded-full flex items-center justify-center text-[#10B981]">
-                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                     </div>
-                     <div>
-                       <div className="text-lg font-black text-[var(--color-text-main)]">+340%</div>
-                       <div className="text-[10px] uppercase font-bold text-[var(--color-text-main)] opacity-50">Conversion Lift</div>
-                     </div>
-                  </div>
+            <div className="animate-float-complex relative w-full aspect-square max-w-[500px] mx-auto">
+              {/* Central Glass Orb */}
+              <div className="absolute inset-10 bg-gradient-to-br from-[var(--color-electric)]/20 to-[var(--color-accent)]/20 rounded-full blur-3xl" />
+              
+              {/* Floating Cards */}
+              <div className="absolute top-[10%] left-[10%] w-48 h-48 bg-[var(--color-card)]/80 backdrop-blur-2xl rounded-3xl border border-[var(--color-border)] shadow-2xl p-6 flex flex-col justify-between hover:-translate-y-2 transition-transform duration-500 z-20">
+                <Code className="text-[var(--color-electric)] w-10 h-10" />
+                <div>
+                  <div className="text-2xl font-black text-[var(--color-text-main)]">Clean</div>
+                  <div className="text-xs text-[var(--color-text-main)] opacity-50 uppercase tracking-widest font-bold">Architecture</div>
+                </div>
+              </div>
+              
+              <div className="absolute bottom-[20%] left-[0%] w-56 h-40 bg-[var(--color-card)]/80 backdrop-blur-2xl rounded-3xl border border-[var(--color-border)] shadow-2xl p-6 flex flex-col justify-between hover:-translate-y-2 transition-transform duration-500 z-30">
+                <Zap className="text-[#F59E0B] w-10 h-10" />
+                <div>
+                  <div className="text-2xl font-black text-[var(--color-text-main)]">&lt; 100ms</div>
+                  <div className="text-xs text-[var(--color-text-main)] opacity-50 uppercase tracking-widest font-bold">Response Time</div>
+                </div>
+              </div>
+
+              <div className="absolute top-[30%] right-[5%] w-56 h-56 bg-[var(--color-card)]/80 backdrop-blur-2xl rounded-3xl border border-[var(--color-border)] shadow-2xl p-6 flex flex-col justify-between hover:-translate-y-2 transition-transform duration-500 z-10">
+                <Globe className="text-[var(--color-accent)] w-12 h-12" />
+                <div>
+                  <div className="text-3xl font-black text-[var(--color-text-main)]">Global</div>
+                  <div className="text-xs text-[var(--color-text-main)] opacity-50 uppercase tracking-widest font-bold">Edge Delivery</div>
+                </div>
               </div>
             </div>
           </motion.div>

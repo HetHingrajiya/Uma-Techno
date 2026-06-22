@@ -59,10 +59,10 @@ export default function Navbar() {
   return (
     <>
       <nav className={cn(
-        "fixed top-0 left-0 w-full z-[1000] transition-all duration-500",
+        "fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-7xl z-[1000] transition-all duration-500 rounded-full",
         scrolled 
-          ? "bg-[rgba(var(--color-header-rgb),0.9)] backdrop-blur-md py-4 shadow-sm" 
-          : "bg-transparent py-6"
+          ? "bg-[var(--color-header)]/80 backdrop-blur-xl py-3 shadow-2xl border border-[var(--color-border)]/50" 
+          : "bg-transparent py-4"
       )}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           {/* Logo */}

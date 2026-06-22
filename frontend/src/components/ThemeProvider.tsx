@@ -1,9 +1,8 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext } from 'react';
 
 /**
  * ThemeSettings Interface:
- * Defines the structure of the dynamic theme data.
- * These properties are controlled via the Admin Panel and stored in the DB.
+ * Defines the structure of the static theme data.
  */
 interface ThemeSettings {
   primaryColor: string;
@@ -23,12 +22,12 @@ interface ThemeSettings {
 
 const defaultTheme: ThemeSettings = {
   primaryColor: "#06B6D4",
-  secondaryColor: "#3B82F6",
-  accentColor: "#F43F5E",
+  secondaryColor: "#0891B2",
+  accentColor: "#22D3EE",
   textColor: "#0F172A",
-  backgroundColor: "#FFFFFF",
+  backgroundColor: "#F8FAFC",
   borderColor: "#E2E8F0",
-  cardColor: "#F8FAFC",
+  cardColor: "#FFFFFF",
   headerColor: "#FFFFFF",
   footerColor: "#0F172A",
   fontFamily: "Inter, Outfit, sans-serif",
@@ -41,66 +40,16 @@ const ThemeContext = createContext<{ theme: ThemeSettings } | undefined>(undefin
 
 /**
  * ThemeProvider:
- * The root-level context provider that handles dynamic CSS variable injection.
- * It fetches the current brand settings from the backend and updates the site's :root variables.
+ * The root-level context provider that handles static CSS variable injection.
  */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<ThemeSettings>(defaultTheme);
-
-  useEffect(() => {
-    /**
-     * Theme Synchronizer:
-     * Pulls the latest visual tokens from the API or local storage (for live preview).
-     */
-    const fetchTheme = async () => {
-      try {
-        // Check for preview data first (used in Admin Theme Editor)
-        const previewData = localStorage.getItem('preview-theme');
-        if (previewData) {
-          try {
-            const p = JSON.parse(previewData);
-            setTheme(p);
-            return;
-          } catch (e) {
-            console.error("Invalid preview theme data");
-          }
-        }
-
-        const baseUrl = import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app';
-        const res = await fetch(`${baseUrl}/api/v1/theme?t=${Date.now()}`);
-        if (res.ok) {
-          const data = await res.json();
-          if (data && data.primaryColor) {
-            setTheme({
-              ...defaultTheme,
-              ...data,
-            });
-          }
-        }
-      } catch (error) {
-        console.error("Failed to fetch theme:", error);
-      }
-    };
-
-    fetchTheme();
-
-    // Listen for storage events (allows live updates across tabs in the admin panel)
-    const handleStorage = (e: StorageEvent) => {
-      if (e.key === 'preview-theme' && e.newValue) {
-        setTheme(JSON.parse(e.newValue));
-      }
-    };
-    window.addEventListener('storage', handleStorage);
-    return () => window.removeEventListener('storage', handleStorage);
-  }, []);
+  const theme = defaultTheme;
 
   return (
     <ThemeContext.Provider value={{ theme }}>
       {/* 
-          Dynamic Style Injection:
+          Static Style Injection:
           This block converts the theme state into global CSS variables.
-          We use dangerouslySetInnerHTML to inject these directly into :root
-          for maximum performance and compatibility with Tailwind's var() syntax.
       */}
       <style dangerouslySetInnerHTML={{
         __html: `

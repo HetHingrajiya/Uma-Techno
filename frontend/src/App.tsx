@@ -30,7 +30,6 @@ import AdminPortfolio from './app/admin/cms/portfolio/page';
 import AdminTestimonials from './app/admin/cms/testimonials/page';
 import AdminSEO from './app/admin/seo/page';
 import AdminWidgets from './app/admin/widgets/page';
-import AdminTheme from './app/admin/theme/page';
 
 // Dynamic Routes
 const PortfolioDetail = lazy(() => import('./app/(site)/portfolio/[slug]/page'));
@@ -96,7 +95,6 @@ function App() {
               <Route path="cms/testimonials" element={<AdminTestimonials />} />
               <Route path="seo" element={<AdminSEO />} />
               <Route path="widgets" element={<AdminWidgets />} />
-              <Route path="theme" element={<AdminTheme />} />
             </Route>
 
             {/* Catch-all - redirect to home or 404 */}

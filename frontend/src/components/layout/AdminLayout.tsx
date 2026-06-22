@@ -25,7 +25,6 @@ const sidebarLinks = [
   { name: "Testimonials", href: "/admin/cms/testimonials", icon: Users },
   { name: "SEO Manager", href: "/admin/seo", icon: Globe },
   { name: "Widgets", href: "/admin/widgets", icon: Layers },
-  { name: "Theme Settings", href: "/admin/theme", icon: Settings },
 ];
 
 export default function AdminLayout() {
