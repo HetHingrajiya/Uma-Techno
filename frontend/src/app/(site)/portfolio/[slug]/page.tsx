@@ -3,6 +3,17 @@ import { ArrowRight, CheckCircle, Zap } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 
 const fallbackProjects: Record<string, any> = {
+  "docrx": {
+    title: "DocRx Health Platform",
+    category: "HealthTech",
+    industry: "Medical",
+    challenge: "Doctors needed a secure, compliant way to manage digital prescriptions and patient records.",
+    solution: "Developed a comprehensive digital health platform with encrypted document storage and e-prescription capabilities.",
+    result: "10,000+ Prescriptions Processed",
+    tech: ["Flutter", "ASP.Net", "MSSQL"],
+    featuredImage: "/images/health-booking.png",
+    fullDescription: "The challenge was to transition traditional clinics to a fully digital workflow while maintaining HIPAA compliance. We built a robust cross-platform mobile application for doctors to manage patients on the go, backed by a highly secure ASP.Net architecture and an optimized MSSQL database for fast, reliable data retrieval."
+  },
   "jewelry-ecommerce": {
     title: "Premium Jewelry E-commerce",
     category: "E-commerce",

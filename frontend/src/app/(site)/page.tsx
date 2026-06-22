@@ -155,7 +155,13 @@ export default function Home() {
 
         if (pRes.ok) {
           const data = await pRes.json();
-          setProjects(data.length > 0 ? data : fallbackProjects);
+          if (data.length > 0) {
+            const docRx = fallbackProjects.find(p => p.slug === 'docrx');
+            const merged = docRx ? [docRx, ...data.filter((p: any) => p.slug !== 'docrx')] : data;
+            setProjects(merged);
+          } else {
+            setProjects(fallbackProjects);
+          }
         }
 
         // Sequential fetch for non-critical assets (testimonials)

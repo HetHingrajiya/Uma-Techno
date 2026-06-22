@@ -16,8 +16,18 @@ export default function PortfolioPage() {
 
         if (res.ok) {
           const data = await res.json();
+          const docRx = { 
+            title: "DocRx Health Platform", 
+            category: "HealthTech", 
+            description: "Secure, HIPAA-compliant digital prescription and patient record management system.", 
+            featuredImage: "/images/health-booking.png", 
+            slug: "docrx",
+            tech: ["Flutter", "ASP.Net", "MSSQL"]
+          };
+          const mergedData = [docRx, ...(data.filter((p: any) => p.slug !== 'docrx'))];
+          
           if (data.length > 0) {
-            setProjects(data);
+            setProjects(mergedData);
           } else {
             setProjects([
               { 
@@ -25,7 +35,8 @@ export default function PortfolioPage() {
                 category: "HealthTech", 
                 description: "Secure, HIPAA-compliant digital prescription and patient record management system.", 
                 featuredImage: "/images/health-booking.png", 
-                slug: "docrx" 
+                slug: "docrx",
+                tech: ["Flutter", "ASP.Net", "MSSQL"]
               },
               { 
                 title: "Premium Jewelry E-commerce", 
