@@ -4,10 +4,10 @@ import { Monitor, Smartphone, Palette, Search, ArrowRight, Check } from 'lucide-
 import { Link } from 'react-router-dom';
 
 const projectTypes = [
-  { id: 'web', title: 'Web Development', icon: Monitor, basePrice: 160000 },
-  { id: 'app', title: 'Mobile App', icon: Smartphone, basePrice: 280000 },
-  { id: 'design', title: 'UI/UX Design', icon: Palette, basePrice: 120000 },
-  { id: 'seo', title: 'SEO & Marketing', icon: Search, basePrice: 80000 },
+  { id: 'web', title: 'Web Development', icon: Monitor, basePrice: 10000 },
+  { id: 'app', title: 'Mobile App', icon: Smartphone, basePrice: 80000 },
+  { id: 'design', title: 'UI/UX Design', icon: Palette, basePrice: 20000 },
+  { id: 'seo', title: 'SEO & Marketing', icon: Search, basePrice: 20000 },
 ];
 
 const featuresByType: Record<string, { id: string, title: string, price: number }[]> = {
