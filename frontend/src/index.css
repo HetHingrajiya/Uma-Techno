@@ -1,17 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy: var(--color-navy, #0F172A);
-  --color-navy-light: var(--color-navy-light, #F8FAFC);
-  --color-electric: var(--color-electric, #06B6D4);
-  --color-accent: var(--color-accent, #3B82F6);
-  --color-text-main: var(--color-text-main, #0F172A);
-  --color-border: var(--color-border, #E2E8F0);
-  --color-blue-glow: var(--color-blue-glow, rgba(6, 182, 212, 0.15));
-  --color-glass: var(--color-glass, rgba(255, 255, 255, 0.05));
-  --glass-border: var(--glass-border, rgba(15, 23, 42, 0.05));
-  --shadow-color: var(--shadow-color, rgba(15, 23, 42, 0.08));
-  --shadow-glow: var(--shadow-glow, rgba(6, 182, 212, 0.15));
+  --color-navy: #0F172A;
+  --color-navy-light: #F8FAFC;
+  --color-electric: #06B6D4;
+  --color-secondary: #0891B2;
+  --color-accent: #22D3EE;
+  --color-text-main: #0F172A;
+  --color-border: #E2E8F0;
+  --color-background: #F8FAFC;
+  --color-card: #FFFFFF;
+  --color-blue-glow: rgba(6, 182, 212, 0.15);
+  --color-glass: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(15, 23, 42, 0.05);
+  --shadow-color: rgba(15, 23, 42, 0.08);
+  --shadow-glow: rgba(6, 182, 212, 0.15);
   --font-sans: "Inter", "Outfit", sans-serif;
   --font-outfit: "Outfit", sans-serif;
 }
