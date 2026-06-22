@@ -1,4 +1,3 @@
-import { motion } from 'react-router-dom'; // wait, framer-motion!
 import { motion as fmotion } from 'framer-motion';
 import { Lightbulb, PenTool, Code2, Rocket } from 'lucide-react';
 

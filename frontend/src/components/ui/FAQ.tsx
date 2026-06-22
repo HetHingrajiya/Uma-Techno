@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion as fmotion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const faqs = [
