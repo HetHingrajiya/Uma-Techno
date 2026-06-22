@@ -43,9 +43,8 @@ export default function Hero() {
             className="relative"
           >
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-electric)]/30 bg-[var(--color-electric)]/10 text-[var(--color-electric)] text-sm font-bold uppercase tracking-widest backdrop-blur-md">
-                  <span className="w-2 h-2 rounded-full bg-[var(--color-electric)] animate-ping" />
-                  Engineering the Future
+                <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[var(--color-electric)]/40 bg-[var(--color-electric)]/10 text-[var(--color-electric)] text-sm font-black uppercase tracking-[0.15em] backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+                  ENGINEERING THE FUTURE
                 </div>
                 <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black font-outfit leading-[1.05] tracking-tighter text-[var(--color-text-main)]">
                   <span className="block">Digital</span>

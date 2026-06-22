@@ -15,9 +15,9 @@ export default function ProcessTimeline() {
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center space-y-4 mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-electric)]/30 bg-[var(--color-electric)]/10 text-[var(--color-electric)] text-sm font-bold uppercase tracking-widest">
-            <span className="w-2 h-2 rounded-full bg-[var(--color-electric)] animate-ping" />
-            Our Process
+          <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[var(--color-electric)]/40 bg-[var(--color-electric)]/10 text-[var(--color-electric)] text-sm font-black uppercase tracking-[0.15em] backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+            <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-electric)]" />
+            OUR PROCESS
           </div>
           <h2 className="text-4xl lg:text-6xl font-black font-outfit text-[var(--color-text-main)] tracking-tighter">
             From Idea To <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-electric)] to-[var(--color-accent)]">Impression.</span>

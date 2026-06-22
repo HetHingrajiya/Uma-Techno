@@ -21,15 +21,15 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-[var(--color-footer-text)]">
         {/* Company Info */}
         <div className="space-y-6">
-          <Link to="/" className="flex items-center gap-3">
-            <Logo className="w-8 h-8" />
-            <span className="text-xl font-bold tracking-tighter uppercase">
-              <span className="text-[var(--color-electric)]">Uma</span> <span className="text-[var(--color-footer-text)]">Techno</span>
+          <Link to="/" className="flex flex-col mb-2">
+            <span className="text-2xl font-black font-outfit tracking-tighter uppercase leading-none">
+              <span className="text-[var(--color-electric)]">UMA</span> <span className="text-white">TECHNO</span>
+            </span>
+            <span className="text-[8px] font-bold tracking-[0.2em] uppercase mt-1.5 leading-none">
+              <span className="text-white/60">INNOVATE. CREATE. </span>
+              <span className="text-[var(--color-electric)]">ELEVATE.</span>
             </span>
           </Link>
-          <p className="text-[10px] text-[var(--color-footer-text)] opacity-40 font-bold tracking-[0.2em] uppercase mt-2">
-            Innovate. Create. <span className="text-[var(--color-electric)]">Elevate.</span>
-          </p>
           <p className="text-[var(--color-footer-text)] opacity-60 text-sm leading-relaxed">
             A premium digital agency dedicated to engineering high-performance websites, 
             mobile applications, and custom business software that drive real growth.

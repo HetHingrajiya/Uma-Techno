@@ -255,10 +255,10 @@ export default function Home() {
       {isEnabled('services') && (
         <section className="max-w-7xl mx-auto px-6 w-full py-20 lg:py-32">
           <div className="text-center space-y-4 mb-20">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-transparent border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
-              Premium Solutions
+            <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[var(--color-electric)]/40 bg-[var(--color-electric)]/10 text-[var(--color-electric)] text-sm font-black uppercase tracking-[0.15em] backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+              PREMIUM SOLUTIONS
             </div>
-            <h2 className="text-3xl lg:text-5xl 2xl:text-6xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Leading Web, App & <br /> <span className="text-gradient">SEO in Rajkot</span></h2>
+            <h2 className="text-3xl lg:text-5xl 2xl:text-6xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Leading Web, App & <br /> <span className="text-gradient">SEO Services</span></h2>
             <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto 2xl:text-lg">
               We engineer high-performance digital systems that capture leads, automate operations, and scale revenue for businesses in Rajkot and across Gujarat.
             </p>
@@ -363,8 +363,8 @@ export default function Home() {
         <section className="max-w-7xl mx-auto px-6 w-full">
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider mb-6">
-                Selected Work
+              <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[var(--color-electric)]/40 bg-[var(--color-electric)]/10 text-[var(--color-electric)] text-sm font-black uppercase tracking-[0.15em] backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.15)] mb-6">
+                SELECTED WORK
               </div>
               <h2 className="text-3xl lg:text-5xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Our <span className="text-gradient">Portfolio</span></h2>
               <p className="text-[var(--color-text-main)] opacity-70 max-w-xl">
@@ -381,7 +381,7 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.slice(0, 3).map((project, i) => (
-              <div key={i} className="glass-card group overflow-hidden flex flex-col h-full">
+              <div key={i} className="glass-card group overflow-hidden flex flex-col h-full rounded-2xl">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)] to-transparent z-10 opacity-60 group-hover:opacity-20 transition-opacity duration-500" />
                   <img
