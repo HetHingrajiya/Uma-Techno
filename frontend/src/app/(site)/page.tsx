@@ -70,11 +70,11 @@ export default function Home() {
       ];
       
       const fallbackServices = [
-        { title: "Web Development in Rajkot", description: "Scalable, secure, and conversion-optimized web platforms for growing businesses in Rajkot.", icon: "Globe", slug: "web-development" },
-        { title: "SEO Services in Rajkot", description: "Technical SEO and digital strategy to dominate search results and drive local leads in Gujarat.", icon: "BarChart", slug: "seo-services" },
-        { title: "Digital Marketing Rajkot", description: "Full-stack marketing solutions focused on ROI and lead generation for local brands in Rajkot.", icon: "Megaphone", slug: "digital-marketing" },
+        { title: "Web Engineering", description: "Scalable, secure, and conversion-optimized web platforms for growing businesses in Rajkot.", icon: "Globe", slug: "web-development" },
+        { title: "SEO Mastery", description: "Technical SEO and digital strategy to dominate search results and drive local leads in Gujarat.", icon: "BarChart", slug: "seo-services" },
+        { title: "Digital Marketing", description: "Full-stack marketing solutions focused on ROI and lead generation for local brands.", icon: "Megaphone", slug: "digital-marketing" },
         { title: "E-commerce Growth", description: "End-to-end online stores with advanced payment integrations and marketing focus.", icon: "Rocket", slug: "ecommerce" },
-        { title: "App Development in Rajkot", description: "Native-quality iOS and Android applications that deliver exceptional user experiences for Rajkot startups.", icon: "Smartphone", slug: "app-development" },
+        { title: "Mobile Innovation", description: "Native-quality iOS and Android applications that deliver exceptional user experiences.", icon: "Smartphone", slug: "app-development" },
       ];
 
       const fallbackProjects = [
@@ -272,24 +272,24 @@ export default function Home() {
                   key={service.slug}
                   to={service.slug.startsWith('/') ? service.slug : `/${service.slug}`}
                   className={cn(
-                    "glass-card group p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] flex flex-col justify-between relative overflow-hidden",
+                    "bg-[var(--color-card)] border border-[var(--color-border)] group p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] flex flex-col justify-between relative overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-500",
                     isLarge ? "lg:col-span-2 min-h-[350px] md:min-h-[400px]" : "min-h-[350px] md:min-h-[400px]"
                   )}
                 >
-                  <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-electric)]/10 blur-3xl -mr-32 -mt-32 group-hover:scale-150 transition-transform duration-1000 ease-out" />
+                  <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[var(--color-electric)]/10 to-transparent blur-3xl -mr-32 -mt-32 transition-transform duration-1000 ease-out" />
                   <div className="space-y-6 relative z-10">
-                    <div className="w-16 h-16 bg-[var(--color-card)]/50 backdrop-blur-md border border-[var(--color-border)] rounded-2xl flex items-center justify-center text-[var(--color-electric)] shadow-xl group-hover:scale-110 group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all duration-500">
+                    <div className="w-14 h-14 bg-[var(--background)] border border-[var(--color-border)] rounded-2xl flex items-center justify-center text-[var(--color-electric)] shadow-sm group-hover:-translate-y-1 transition-transform duration-300">
                       {getIcon(service.icon || 'Globe')}
                     </div>
-                    <h4 className="text-2xl lg:text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] tracking-tighter group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[var(--color-electric)] group-hover:to-[var(--color-accent)] transition-all">
+                    <h4 className="text-2xl lg:text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] tracking-tighter">
                       {service.title}
                     </h4>
-                    <p className="text-[var(--color-text-main)] opacity-70 leading-relaxed max-w-sm group-hover:opacity-100 transition-opacity">
+                    <p className="text-[var(--color-text-main)] opacity-60 leading-relaxed max-w-sm text-sm">
                       {service.description}
                     </p>
                   </div>
-                  <div className="mt-8 flex items-center gap-4 text-sm font-black tracking-widest text-[var(--color-text-main)] opacity-50 uppercase group-hover:opacity-100 group-hover:text-[var(--color-electric)] group-hover:gap-6 transition-all relative z-10">
-                    EXPLORE SOLUTIONS <ArrowRight size={20} />
+                  <div className="mt-8 flex items-center gap-4 text-xs font-bold tracking-widest text-[var(--color-text-main)] opacity-50 uppercase group-hover:opacity-100 group-hover:text-[var(--color-electric)] transition-all relative z-10">
+                    EXPLORE SOLUTIONS <ArrowRight size={16} />
                   </div>
                 </Link>
               );
@@ -470,7 +470,26 @@ export default function Home() {
                 </div>
               ))
             ) : (
-              [1, 2, 3].map((i) => (
+              [
+                {
+                  name: "Rajesh Patel",
+                  role: "Founder, Heritage Jewellers",
+                  content: "Uma Techno transformed our physical jewelry business into a premium digital storefront. The seamless checkout experience helped us capture a younger demographic and doubled our online sales.",
+                  image: "/images/client-1-v2.png"
+                },
+                {
+                  name: "Priya Sharma",
+                  role: "Marketing Director, NextGen Health",
+                  content: "Their SEO mastery and beautifully designed appointment system were game-changers for our clinics. We saw a 300% increase in organic leads and our patients love how easy it is to book online.",
+                  image: "/images/client-2-v2.png"
+                },
+                {
+                  name: "Amit Desai",
+                  role: "CTO, FinServe Solutions",
+                  content: "The engineering team at Uma Techno delivered a robust, scalable SaaS dashboard ahead of schedule. The code quality, attention to UX, and clear communication made them the perfect technology partner.",
+                  image: "/images/client-3-v2.png"
+                }
+              ].map((t, i) => (
                 <div key={i} className="glass-card p-8 rounded-[var(--radius)] hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all group relative overflow-hidden">
                   <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity text-[var(--color-electric)] pointer-events-none">
                     <span className="text-8xl font-serif">"</span>
@@ -478,14 +497,14 @@ export default function Home() {
                   <div className="flex gap-1 text-[#F59E0B] mb-6 relative z-10">
                     {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" />)}
                   </div>
-                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic relative z-10">"Uma Techno delivered exactly what we needed. Their attention to detail and premium design aesthetic helped us increase our conversions by over 300% within the first month."</p>
+                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic relative z-10">"{t.content}"</p>
                   <div className="flex items-center gap-4 relative z-10">
                     <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] border border-[var(--color-border)] overflow-hidden">
-                      <img src={`/images/client-${i}-v2.png`} alt="Client" className="w-full h-full object-cover" />
+                      <img src={t.image} alt={t.name} className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">John Doe {i}</h4>
-                      <p className="text-xs text-[var(--color-text-main)] opacity-50">CEO, Tech Innovators</p>
+                      <h4 className="font-bold text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">{t.name}</h4>
+                      <p className="text-xs text-[var(--color-text-main)] opacity-50">{t.role}</p>
                     </div>
                   </div>
                 </div>
