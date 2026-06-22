@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Code, Zap, Globe } from "lucide-react";
+import { ArrowRight, Code, Zap, Globe, Cpu, Layers, Database } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTheme } from "@/components/ThemeProvider";
 import { useState, useEffect } from "react";
@@ -25,6 +25,11 @@ export default function Hero() {
         <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-[var(--color-electric)]/20 blur-[120px] rounded-full mix-blend-screen animate-pulse" />
         <div className="absolute top-[40%] -right-[10%] w-[40%] h-[60%] bg-[var(--color-accent)]/20 blur-[150px] rounded-full mix-blend-screen animate-pulse" style={{ animationDelay: '2s' }} />
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+        
+        {/* Smoke Effect Particles */}
+        <div className="absolute -bottom-20 left-1/4 w-64 h-64 bg-[var(--color-electric)]/20 blur-[80px] rounded-full animate-smoke" style={{ animationDelay: '0s' }} />
+        <div className="absolute -bottom-20 left-1/2 w-80 h-80 bg-[var(--color-accent)]/20 blur-[100px] rounded-full animate-smoke" style={{ animationDelay: '3s' }} />
+        <div className="absolute -bottom-20 right-1/4 w-72 h-72 bg-[var(--color-electric)]/20 blur-[90px] rounded-full animate-smoke" style={{ animationDelay: '6s' }} />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
@@ -84,41 +89,43 @@ export default function Hero() {
               </div>
           </motion.div>
 
-          {/* Right Column: Abstract Interactive UI */}
+          {/* Right Column: Tech Orbit Widget */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="relative hidden lg:block perspective-2000"
+            className="relative hidden lg:flex justify-center items-center h-[500px]"
           >
-            <div className="animate-float-complex relative w-full aspect-square max-w-[500px] mx-auto">
-              {/* Central Glass Orb */}
-              <div className="absolute inset-10 bg-gradient-to-br from-[var(--color-electric)]/20 to-[var(--color-accent)]/20 rounded-full blur-3xl" />
-              
-              {/* Floating Cards */}
-              <div className="absolute top-[10%] left-[10%] w-48 h-48 bg-[var(--color-card)]/80 backdrop-blur-2xl rounded-3xl border border-[var(--color-border)] shadow-2xl p-6 flex flex-col justify-between hover:-translate-y-2 transition-transform duration-500 z-20">
-                <Code className="text-[var(--color-electric)] w-10 h-10" />
-                <div>
-                  <div className="text-2xl font-black text-[var(--color-text-main)]">Clean</div>
-                  <div className="text-xs text-[var(--color-text-main)] opacity-50 uppercase tracking-widest font-bold">Architecture</div>
+            <div className="relative w-[400px] h-[400px] flex items-center justify-center">
+              {/* Central Core */}
+              <div className="absolute w-32 h-32 bg-gradient-to-br from-[var(--color-electric)] to-[var(--color-accent)] rounded-full blur-xl opacity-50 animate-pulse" />
+              <div className="relative z-10 w-24 h-24 glass-card rounded-full flex items-center justify-center border-2 border-[var(--color-electric)]/50 shadow-[0_0_50px_rgba(6,182,212,0.5)]">
+                <Cpu size={40} className="text-[var(--color-electric)]" />
+              </div>
+
+              {/* Orbiting Rings */}
+              <div className="absolute w-full h-full border border-[var(--color-border)] rounded-full opacity-30" />
+              <div className="absolute w-[250px] h-[250px] border border-[var(--color-electric)]/20 rounded-full border-dashed" />
+
+              {/* Orbiting Nodes */}
+              <div className="absolute inset-0 flex items-center justify-center animate-orbit">
+                <div className="w-16 h-16 glass-card rounded-2xl flex items-center justify-center text-[var(--color-text-main)] shadow-lg" style={{ animation: 'orbit 15s linear infinite reverse' }}>
+                  <Code size={24} />
                 </div>
               </div>
               
-              <div className="absolute bottom-[20%] left-[0%] w-56 h-40 bg-[var(--color-card)]/80 backdrop-blur-2xl rounded-3xl border border-[var(--color-border)] shadow-2xl p-6 flex flex-col justify-between hover:-translate-y-2 transition-transform duration-500 z-30">
-                <Zap className="text-[#F59E0B] w-10 h-10" />
-                <div>
-                  <div className="text-2xl font-black text-[var(--color-text-main)]">&lt; 100ms</div>
-                  <div className="text-xs text-[var(--color-text-main)] opacity-50 uppercase tracking-widest font-bold">Response Time</div>
+              <div className="absolute inset-0 flex items-center justify-center animate-orbit" style={{ animationDelay: '-5s' }}>
+                <div className="w-16 h-16 glass-card rounded-2xl flex items-center justify-center text-[#F59E0B] shadow-lg" style={{ animation: 'orbit 15s linear infinite reverse', animationDelay: '-5s' }}>
+                  <Database size={24} />
                 </div>
               </div>
 
-              <div className="absolute top-[30%] right-[5%] w-56 h-56 bg-[var(--color-card)]/80 backdrop-blur-2xl rounded-3xl border border-[var(--color-border)] shadow-2xl p-6 flex flex-col justify-between hover:-translate-y-2 transition-transform duration-500 z-10">
-                <Globe className="text-[var(--color-accent)] w-12 h-12" />
-                <div>
-                  <div className="text-3xl font-black text-[var(--color-text-main)]">Global</div>
-                  <div className="text-xs text-[var(--color-text-main)] opacity-50 uppercase tracking-widest font-bold">Edge Delivery</div>
+              <div className="absolute inset-0 flex items-center justify-center animate-orbit" style={{ animationDelay: '-10s' }}>
+                <div className="w-16 h-16 glass-card rounded-2xl flex items-center justify-center text-[var(--color-electric)] shadow-lg" style={{ animation: 'orbit 15s linear infinite reverse', animationDelay: '-10s' }}>
+                  <Layers size={24} />
                 </div>
               </div>
+              
             </div>
           </motion.div>
         </div>
