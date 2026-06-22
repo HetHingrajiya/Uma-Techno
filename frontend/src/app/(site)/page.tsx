@@ -79,6 +79,17 @@ export default function Home() {
 
       const fallbackProjects = [
         { 
+          title: "DocRx Health Platform", 
+          category: "HealthTech", 
+          industry: "Medical",
+          challenge: "Doctors needed a secure, compliant way to manage digital prescriptions and patient records.",
+          solution: "Developed a comprehensive digital health platform with encrypted document storage and e-prescription capabilities.",
+          result: "10,000+ Prescriptions Processed",
+          tech: ["Flutter", "ASP.Net", "MSSQL"],
+          featuredImage: "/images/health-booking.png", 
+          slug: "docrx" 
+        },
+        { 
           title: "Premium Jewelry E-commerce", 
           category: "E-commerce", 
           industry: "Fashion & Jewelry",

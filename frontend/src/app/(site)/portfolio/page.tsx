@@ -21,6 +21,13 @@ export default function PortfolioPage() {
           } else {
             setProjects([
               { 
+                title: "DocRx Health Platform", 
+                category: "HealthTech", 
+                description: "Secure, HIPAA-compliant digital prescription and patient record management system.", 
+                featuredImage: "/images/health-booking.png", 
+                slug: "docrx" 
+              },
+              { 
                 title: "Premium Jewelry E-commerce", 
                 category: "E-commerce", 
                 description: "Luxury digital presence for a high-end jewelry showroom.", 

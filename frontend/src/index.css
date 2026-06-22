@@ -48,6 +48,7 @@
 
 @layer utilities {
   .glass-card {
+    @apply rounded-[1.5rem];
     background: var(--color-glass);
     backdrop-filter: blur(12px) saturate(150%);
     border: 1px solid var(--glass-border);
@@ -67,7 +68,7 @@
   }
 
   .card-premium {
-    @apply border border-[var(--color-border)] rounded-[var(--radius)] transition-all duration-500;
+    @apply border border-[var(--color-border)] rounded-[1.5rem] transition-all duration-500;
     background: transparent !important;
     box-shadow: 0 20px 50px -12px var(--shadow-color);
   }

@@ -60,25 +60,17 @@ export default function Navbar() {
     <>
       <nav className={cn(
         "fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-7xl z-[1000] transition-all duration-500 rounded-full",
-        scrolled 
-          ? "bg-[var(--color-header)]/80 backdrop-blur-xl py-3 shadow-2xl border border-[var(--color-border)]/50" 
-          : "bg-transparent py-4"
+        "bg-[#0B1120]/95 backdrop-blur-xl py-3 shadow-2xl border border-[#1E293B]/50" 
       )}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <Logo className="w-10 h-10 transition-transform group-hover:scale-110" />
             <div className="flex flex-col leading-none">
-              <span className={cn(
-                "text-2xl font-black tracking-tighter uppercase transition-colors",
-                scrolled ? "text-[var(--color-nav-text)]" : "text-[var(--color-text-main)]"
-              )}>
+              <span className="text-2xl font-black tracking-tighter uppercase transition-colors text-white">
                 <span className="text-[var(--color-electric)]">Uma</span> Techno
               </span>
-              <span className={cn(
-                "text-[8px] font-bold tracking-[0.3em] uppercase mt-0.5 transition-colors",
-                scrolled ? "text-[var(--color-nav-text)]/70" : "text-[var(--color-text-main)]/50"
-              )}>
+              <span className="text-[8px] font-bold tracking-[0.3em] uppercase mt-0.5 transition-colors text-white/70">
                 Innovate. Create. <span className="text-[var(--color-electric)]">Elevate.</span>
               </span>
             </div>
@@ -92,8 +84,7 @@ export default function Navbar() {
                   to={link.href}
                   className={cn(
                     "text-sm font-bold uppercase tracking-widest transition-colors hover:text-[var(--color-electric)]",
-                    scrolled ? "text-[var(--color-nav-text)]" : "text-[var(--color-text-main)]",
-                    pathname === link.href ? "text-[var(--color-electric)]" : ""
+                    pathname === link.href ? "text-[var(--color-electric)]" : "text-white/90"
                   )}
                 >
                   {link.name}
@@ -133,12 +124,7 @@ export default function Navbar() {
 
           {/* Mobile Toggle */}
           <button
-            className={cn(
-              "md:hidden p-2 backdrop-blur-md rounded-xl shadow-sm border transition-colors",
-              scrolled 
-                ? "text-[var(--color-nav-text)] bg-[var(--color-header)]/20 border-[var(--color-nav-text)]/10" 
-                : "text-[var(--color-text-main)] bg-[var(--color-card)]/40 border-[var(--color-border)]"
-            )}
+            className="md:hidden p-2 backdrop-blur-md rounded-xl shadow-sm border transition-colors text-white bg-[#0B1120]/50 border-white/10"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle Menu"
           >
