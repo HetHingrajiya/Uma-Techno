@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-;
 import { ArrowRight, Calendar, User, Clock } from "lucide-react";
+import { Reveal } from "@/components/ui/Reveal";
 
 /**
  * SEO Metadata: 
@@ -68,17 +68,22 @@ export default function BlogPage() {
   return (
     <div className="pt-32 lg:pt-48 pb-32 bg-[var(--color-background)] min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Header section with page title and description */}
         <div className="text-center space-y-6 mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
-            Our Insights
-          </div>
-          <h1 className="text-4xl lg:text-7xl font-bold font-outfit text-[var(--color-text-main)]">
-            The <span className="text-gradient">Tech & Growth</span> Blog
-          </h1>
-          <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto text-lg">
-            Stay updated with the latest trends in web engineering, search algorithms, and conversion psychology.
-          </p>
+          <Reveal direction="down">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
+              Our Insights
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h1 className="text-4xl lg:text-7xl font-bold font-outfit text-[var(--color-text-main)]">
+              The <span className="text-gradient">Tech & Growth</span> Blog
+            </h1>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto text-lg">
+              Stay updated with the latest trends in web engineering, search algorithms, and conversion psychology.
+            </p>
+          </Reveal>
         </div>
 
         {/* 
@@ -87,39 +92,40 @@ export default function BlogPage() {
         */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post, i) => (
-            <Link 
-              key={i} 
-              to={`/blog/${post.slug}`}
-              className="group flex flex-col bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2rem] overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2"
-            >
-              {/* Thumbnail Area with hover zoom effect */}
-              <div className="aspect-[16/10] relative overflow-hidden">
-                <img 
-                  src={post.image} 
-                  alt={post.title} 
-                  className="object-cover group-hover:scale-110 transition-all duration-700" 
-                />
-              </div>
-              
-              {/* Content Area */}
-              <div className="p-8 flex-1 flex flex-col justify-between space-y-6">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4 text-[10px] font-bold text-[var(--color-text-main)] opacity-50 uppercase tracking-widest">
-                    <span className="flex items-center gap-1"><Calendar size={12} /> {post.date}</span>
-                    <span className="flex items-center gap-1"><Clock size={12} /> {post.readTime}</span>
+            <Reveal key={i} delay={0.3 + i * 0.1}>
+              <Link 
+                to={`/blog/${post.slug}`}
+                className="group h-full flex flex-col bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2rem] overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2"
+              >
+                {/* Thumbnail Area with hover zoom effect */}
+                <div className="aspect-[16/10] relative overflow-hidden">
+                  <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    className="object-cover group-hover:scale-110 transition-all duration-700" 
+                  />
+                </div>
+                
+                {/* Content Area */}
+                <div className="p-8 flex-1 flex flex-col justify-between space-y-6">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4 text-[10px] font-bold text-[var(--color-text-main)] opacity-50 uppercase tracking-widest">
+                      <span className="flex items-center gap-1"><Calendar size={12} /> {post.date}</span>
+                      <span className="flex items-center gap-1"><Clock size={12} /> {post.readTime}</span>
+                    </div>
+                    <h2 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors leading-tight">
+                      {post.title}
+                    </h2>
+                    <p className="text-sm text-[var(--color-text-main)] opacity-60 leading-relaxed">
+                      {post.excerpt}
+                    </p>
                   </div>
-                  <h2 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors leading-tight">
-                    {post.title}
-                  </h2>
-                  <p className="text-sm text-[var(--color-text-main)] opacity-60 leading-relaxed">
-                    {post.excerpt}
-                  </p>
+                  <div className="flex items-center gap-2 text-sm font-bold text-[var(--color-electric)] uppercase tracking-wider group-hover:gap-4 transition-all">
+                    Read Article <ArrowRight size={18} />
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 text-sm font-bold text-[var(--color-electric)] uppercase tracking-wider group-hover:gap-4 transition-all">
-                  Read Article <ArrowRight size={18} />
-                </div>
-              </div>
-            </Link>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </div>

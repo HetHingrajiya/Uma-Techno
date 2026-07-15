@@ -1,5 +1,7 @@
 import { Briefcase, MapPin, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Reveal } from "@/components/ui/Reveal";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 const jobs = [
   {
@@ -26,69 +28,89 @@ export default function CareersPage() {
   return (
     <div className="pt-32 pb-20 lg:pt-40 lg:pb-32 bg-[var(--color-background)] min-h-screen">
       <section className="max-w-7xl mx-auto px-6 text-center space-y-6">
-        <h2 className="text-electric font-bold tracking-widest text-sm uppercase">Join Our Team</h2>
-        <h1 className="text-5xl lg:text-7xl font-bold font-outfit">
-          Build the <span className="text-gradient">Future</span> With Us
-        </h1>
-        <p className="text-xl text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto leading-relaxed">
-          We are looking for passionate, creative, and talented individuals to join our growing team. 
-          Help us build world-class digital solutions.
-        </p>
+        <Reveal direction="down">
+          <h2 className="text-electric font-bold tracking-widest text-sm uppercase">Join Our Team</h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <h1 className="text-5xl lg:text-7xl font-bold font-outfit text-[var(--color-text-main)]">
+            Build the <span className="text-gradient">Future</span> With Us
+          </h1>
+        </Reveal>
+        <Reveal delay={0.2}>
+          <p className="text-xl text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto leading-relaxed">
+            We are looking for passionate, creative, and talented individuals to join our growing team. 
+            Help us build world-class digital solutions.
+          </p>
+        </Reveal>
       </section>
 
       <section className="max-w-5xl mx-auto px-6 space-y-6">
-        <h3 className="text-2xl font-bold font-outfit mb-8 text-[var(--color-text-main)]">Open Positions</h3>
+        <Reveal delay={0.3}>
+          <h3 className="text-2xl font-bold font-outfit mb-8 text-[var(--color-text-main)]">Open Positions</h3>
+        </Reveal>
         {jobs.map((job, i) => (
-          <div key={i} className="card-premium p-8 rounded-3xl border border-[var(--color-border)] hover:border-[var(--color-electric)]/30 transition-all flex flex-col md:flex-row justify-between items-center gap-6 group bg-[var(--color-card)]">
-             <div className="space-y-2">
-                <h4 className="text-2xl font-bold font-outfit group-hover:text-[var(--color-electric)] transition-colors text-[var(--color-text-main)]">{job.title}</h4>
-                <div className="flex flex-wrap gap-4 text-sm text-[var(--color-text-main)] opacity-60 font-medium">
-                   <div className="flex items-center gap-1"><MapPin size={14} /> {job.location}</div>
-                   <div className="flex items-center gap-1"><Clock size={14} /> {job.type}</div>
-                   <div className="flex items-center gap-1"><Briefcase size={14} /> {job.salary}</div>
-                </div>
-             </div>
-             <Link to="/contact" className="px-8 py-3 bg-[var(--color-electric)]/10 hover:bg-[var(--color-electric)] text-[var(--color-electric)] hover:text-white font-bold rounded-xl transition-all flex items-center gap-2 border border-[var(--color-electric)]/20 shadow-sm">
-                Apply Now <ArrowRight size={18} />
-             </Link>
-          </div>
+          <Reveal key={i} delay={0.4 + i * 0.1}>
+            <div className="card-premium p-8 rounded-3xl border border-[var(--color-border)] hover:border-[var(--color-electric)]/30 transition-all flex flex-col md:flex-row justify-between items-center gap-6 group bg-[var(--color-card)]">
+               <div className="space-y-2 text-center md:text-left">
+                  <h4 className="text-2xl font-bold font-outfit group-hover:text-[var(--color-electric)] transition-colors text-[var(--color-text-main)]">{job.title}</h4>
+                  <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-[var(--color-text-main)] opacity-60 font-medium">
+                     <div className="flex items-center gap-1"><MapPin size={14} /> {job.location}</div>
+                     <div className="flex items-center gap-1"><Clock size={14} /> {job.type}</div>
+                     <div className="flex items-center gap-1"><Briefcase size={14} /> {job.salary}</div>
+                  </div>
+               </div>
+               <MagneticButton strength={0.2}>
+                 <Link to="/contact" className="px-8 py-3 bg-[var(--color-electric)]/10 hover:bg-[var(--color-electric)] text-[var(--color-electric)] hover:text-white font-bold rounded-xl transition-all flex items-center gap-2 border border-[var(--color-electric)]/20 shadow-sm whitespace-nowrap">
+                    Apply Now <ArrowRight size={18} />
+                 </Link>
+               </MagneticButton>
+            </div>
+          </Reveal>
         ))}
       </section>
 
       <section className="max-w-5xl mx-auto px-6 py-20">
-          <div className="bg-gradient-premium rounded-[3rem] p-12 md:p-16 text-white space-y-8 shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-[100px] -mr-32 -mt-32" />
-            <div className="relative z-10 space-y-6">
-              <h3 className="text-3xl lg:text-4xl font-bold font-outfit">Looking for an IT Company in Rajkot for Internship?</h3>
-              <p className="text-lg opacity-90 max-w-2xl leading-relaxed">
-                At Uma Techno, we believe in nurturing the next generation of tech talent. If you are a student looking for a premium <span className="font-bold">IT internship in Rajkot</span>, we offer hands-on training in Web Development, App Development, and Digital Marketing.
-              </p>
-              <Link 
-                to="/contact" 
-                className="inline-flex items-center gap-2 bg-white text-[var(--color-electric)] px-8 py-4 rounded-xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-xl"
-              >
-                Apply for Internship <ArrowRight size={18} />
-              </Link>
+          <Reveal width="100%">
+            <div className="bg-gradient-premium rounded-[3rem] p-12 md:p-16 text-white space-y-8 shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-[100px] -mr-32 -mt-32" />
+              <div className="relative z-10 space-y-6">
+                <h3 className="text-3xl lg:text-4xl font-bold font-outfit">Looking for an IT Company in Rajkot for Internship?</h3>
+                <p className="text-lg opacity-90 max-w-2xl leading-relaxed">
+                  At Uma Techno, we believe in nurturing the next generation of tech talent. If you are a student looking for a premium <span className="font-bold">IT internship in Rajkot</span>, we offer hands-on training in Web Development, App Development, and Digital Marketing.
+                </p>
+                <MagneticButton strength={0.2}>
+                  <Link 
+                    to="/contact" 
+                    className="inline-flex items-center gap-2 bg-white text-[var(--color-electric)] px-8 py-4 rounded-xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-xl"
+                  >
+                    Apply for Internship <ArrowRight size={18} />
+                  </Link>
+                </MagneticButton>
+              </div>
             </div>
-          </div>
+          </Reveal>
       </section>
 
       <section className="max-w-7xl mx-auto px-6 py-20 text-center">
-          <div className="card-premium p-12 rounded-[3rem] border border-[var(--color-border)] space-y-8 bg-[var(--color-card)]">
-            <h3 className="text-3xl font-bold font-outfit text-[var(--color-text-main)]">Why Work at Uma Techno?</h3>
-            <div className="grid md:grid-cols-3 gap-8">
-               {[
-                 { t: "Modern Tech Stack", d: "Master the latest industry-leading technologies." },
-                 { t: "Growth Opportunity", d: "Constant learning and career advancement." },
-                 { t: "Premium Culture", d: "Collaborative and supportive environment." }
-               ].map(item => (
-                 <div key={item.t} className="space-y-2">
-                    <h5 className="font-bold text-[var(--color-electric)] text-lg">{item.t}</h5>
-                    <p className="text-sm text-[var(--color-text-main)] opacity-60 leading-relaxed">{item.d}</p>
-                 </div>
-               ))}
-            </div>
-         </div>
+          <Reveal width="100%">
+            <div className="card-premium p-12 rounded-[3rem] border border-[var(--color-border)] space-y-8 bg-[var(--color-card)]">
+              <h3 className="text-3xl font-bold font-outfit text-[var(--color-text-main)]">Why Work at Uma Techno?</h3>
+              <div className="grid md:grid-cols-3 gap-8">
+                 {[
+                   { t: "Modern Tech Stack", d: "Master the latest industry-leading technologies." },
+                   { t: "Growth Opportunity", d: "Constant learning and career advancement." },
+                   { t: "Premium Culture", d: "Collaborative and supportive environment." }
+                 ].map((item, idx) => (
+                   <Reveal key={item.t} delay={idx * 0.1}>
+                     <div className="space-y-2">
+                        <h5 className="font-bold text-[var(--color-electric)] text-lg">{item.t}</h5>
+                        <p className="text-sm text-[var(--color-text-main)] opacity-60 leading-relaxed">{item.d}</p>
+                     </div>
+                   </Reveal>
+                 ))}
+              </div>
+           </div>
+         </Reveal>
       </section>
     </div>
   );

@@ -1,6 +1,8 @@
 import React from "react";
 import { ArrowRight, CheckCircle, Zap } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
+import { Reveal } from "@/components/ui/Reveal";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 const fallbackProjects: Record<string, any> = {
   "docrx": {
@@ -64,37 +66,47 @@ export default function ProjectPage() {
         {/* Header Section */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-end mb-20">
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
-              Case Study: {project.category}
-            </div>
-            <h1 className="text-4xl lg:text-6xl font-bold font-outfit text-[var(--color-text-main)]">
-              {project.title}
-            </h1>
-            <p className="text-xl text-[var(--color-text-main)] opacity-70 leading-relaxed">
-              {project.challenge}
-            </p>
+            <Reveal direction="down">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
+                Case Study: {project.category}
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h1 className="text-4xl lg:text-6xl font-bold font-outfit text-[var(--color-text-main)]">
+                {project.title}
+              </h1>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="text-xl text-[var(--color-text-main)] opacity-70 leading-relaxed">
+                {project.challenge}
+              </p>
+            </Reveal>
           </div>
-          <div className="grid grid-cols-2 gap-8 border-l border-[var(--color-border)] pl-12 py-4">
-            <div>
-              <div className="text-[10px] uppercase font-black text-[var(--color-electric)] tracking-widest mb-1">Industry</div>
-              <div className="text-lg font-bold text-[var(--color-text-main)]">{project.industry}</div>
+          <Reveal delay={0.3}>
+            <div className="grid grid-cols-2 gap-8 border-l border-[var(--color-border)] pl-12 py-4">
+              <div>
+                <div className="text-[10px] uppercase font-black text-[var(--color-electric)] tracking-widest mb-1">Industry</div>
+                <div className="text-lg font-bold text-[var(--color-text-main)]">{project.industry}</div>
+              </div>
+              <div>
+                <div className="text-[10px] uppercase font-black text-[var(--color-electric)] tracking-widest mb-1">Impact</div>
+                <div className="text-lg font-bold text-[var(--color-text-main)]">{project.result}</div>
+              </div>
             </div>
-            <div>
-              <div className="text-[10px] uppercase font-black text-[var(--color-electric)] tracking-widest mb-1">Impact</div>
-              <div className="text-lg font-bold text-[var(--color-text-main)]">{project.result}</div>
-            </div>
-          </div>
+          </Reveal>
         </div>
 
         {/* Featured Image */}
-        <div className="aspect-video rounded-[3rem] overflow-hidden border border-[var(--color-border)] shadow-2xl mb-20 relative group">
-           <img 
-            src={project.featuredImage} 
-            alt={project.title} 
-            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
-           />
-           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
-        </div>
+        <Reveal delay={0.4} width="100%">
+          <div className="aspect-video rounded-[3rem] overflow-hidden border border-[var(--color-border)] shadow-2xl mb-20 relative group">
+             <img 
+              src={project.featuredImage} 
+              alt={project.title} 
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
+             />
+             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+          </div>
+        </Reveal>
 
         {/* Content Section */}
         <div className="grid lg:grid-cols-3 gap-16">
@@ -155,13 +167,15 @@ export default function ProjectPage() {
 
         {/* Footer Navigation */}
         <div className="mt-32 pt-16 border-t border-[var(--color-border)] flex justify-between items-center">
-          <Link to="/portfolio" className="text-[var(--color-text-main)] opacity-50 hover:opacity-100 font-bold flex items-center gap-2 transition-all">
+          <Link to="/portfolio" className="text-[var(--color-text-main)] opacity-50 hover:opacity-100 hover:text-[var(--color-electric)] font-bold flex items-center gap-2 transition-all">
             &larr; Back to Portfolio
           </Link>
           <div className="flex gap-4">
-             <Link to="/contact" className="text-[var(--color-electric)] font-bold uppercase tracking-widest text-xs hover:underline">
-               Discuss Your Project
-             </Link>
+             <MagneticButton strength={0.2}>
+               <Link to="/contact" className="px-6 py-3 bg-[var(--color-electric)] text-white rounded-xl font-bold uppercase tracking-widest text-xs hover:brightness-110 shadow-lg shadow-blue-500/25 transition-all">
+                 Discuss Your Project
+               </Link>
+             </MagneticButton>
           </div>
         </div>
       </div>

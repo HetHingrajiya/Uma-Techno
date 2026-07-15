@@ -2,11 +2,66 @@ import { useState, useEffect } from "react";
 import { ArrowRight, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Reveal } from "@/components/ui/Reveal";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 export default function PortfolioPage() {
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState("All");
+
+  const fallbackProjects = [
+    { 
+      title: "DocRx Health Platform", 
+      category: "HealthTech", 
+      description: "Secure, HIPAA-compliant digital prescription and patient record management system.", 
+      featuredImage: "/images/health-booking.png", 
+      slug: "docrx",
+      tech: ["Flutter", "ASP.Net", "MSSQL"]
+    },
+    { 
+      title: "Premium Jewelry E-commerce", 
+      category: "E-commerce", 
+      description: "Luxury digital presence for a high-end jewelry showroom.", 
+      featuredImage: "/images/jewelry-ecommerce.png", 
+      slug: "jewelry-ecommerce" 
+    },
+    { 
+      title: "Healthcare Booking System", 
+      category: "Web App", 
+      description: "Automated real-time slot management for multi-location clinics.", 
+      featuredImage: "/images/health-booking.png", 
+      slug: "booking-platform" 
+    },
+    { 
+      title: "Fintech Growth Dashboard", 
+      category: "SaaS", 
+      description: "Secure data visualization for enterprise financial tracking.", 
+      featuredImage: "/images/fintech-dashboard.png", 
+      slug: "fintech-saas" 
+    },
+    { 
+      title: "E-commerce Templates", 
+      category: "UI Kit", 
+      description: "Interactive property listing platform with map-based search.", 
+      featuredImage: "/images/jewelry-ecommerce.png", 
+      slug: "ui-templates" 
+    },
+    { 
+      title: "Premium Real Estate", 
+      category: "Web Design", 
+      description: "Video-based learning management system with course progress tracking.", 
+      featuredImage: "/images/project-1-v2.png", 
+      slug: "educational-lms" 
+    },
+    { 
+      title: "Industrial CRM System", 
+      category: "Software", 
+      description: "Custom internal tool for managing manufacturing workflows.", 
+      featuredImage: "/images/project-2-v2.png", 
+      slug: "industrial-crm" 
+    }
+  ];
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -16,75 +71,20 @@ export default function PortfolioPage() {
 
         if (res.ok) {
           const data = await res.json();
-          const docRx = { 
-            title: "DocRx Health Platform", 
-            category: "HealthTech", 
-            description: "Secure, HIPAA-compliant digital prescription and patient record management system.", 
-            featuredImage: "/images/health-booking.png", 
-            slug: "docrx",
-            tech: ["Flutter", "ASP.Net", "MSSQL"]
-          };
+          const docRx = fallbackProjects[0];
           const mergedData = [docRx, ...(data.filter((p: any) => p.slug !== 'docrx'))];
           
           if (data.length > 0) {
             setProjects(mergedData);
           } else {
-            setProjects([
-              { 
-                title: "DocRx Health Platform", 
-                category: "HealthTech", 
-                description: "Secure, HIPAA-compliant digital prescription and patient record management system.", 
-                featuredImage: "/images/health-booking.png", 
-                slug: "docrx",
-                tech: ["Flutter", "ASP.Net", "MSSQL"]
-              },
-              { 
-                title: "Premium Jewelry E-commerce", 
-                category: "E-commerce", 
-                description: "Luxury digital presence for a high-end jewelry showroom.", 
-                featuredImage: "/images/jewelry-ecommerce.png", 
-                slug: "jewelry-ecommerce" 
-              },
-              { 
-                title: "Healthcare Booking System", 
-                category: "Web App", 
-                description: "Automated real-time slot management for multi-location clinics.", 
-                featuredImage: "/images/health-booking.png", 
-                slug: "booking-platform" 
-              },
-              { 
-                title: "Fintech Growth Dashboard", 
-                category: "SaaS", 
-                description: "Secure data visualization for enterprise financial tracking.", 
-                featuredImage: "/images/fintech-dashboard.png", 
-                slug: "fintech-saas" 
-              },
-              { 
-                title: "E-commerce Templates", 
-                category: "UI Kit", 
-                description: "Interactive property listing platform with map-based search.", 
-                featuredImage: "/images/jewelry-ecommerce.png", 
-                slug: "ui-templates" 
-              },
-              { 
-                title: "Premium Real Estate", 
-                category: "Web Design", 
-                description: "Video-based learning management system with course progress tracking.", 
-                featuredImage: "/images/project-1-v2.png", 
-                slug: "educational-lms" 
-              },
-              { 
-                title: "Industrial CRM System", 
-                category: "Software", 
-                description: "Custom internal tool for managing manufacturing workflows.", 
-                featuredImage: "/images/project-2-v2.png", 
-                slug: "industrial-crm" 
-              }
-            ]);
+            setProjects(fallbackProjects);
           }
+        } else {
+          setProjects(fallbackProjects);
         }
       } catch (err) {
-        console.error(err);
+        console.error("Failed to fetch projects, using fallback data:", err);
+        setProjects(fallbackProjects);
       } finally {
         setLoading(false);
       }
@@ -102,31 +102,40 @@ export default function PortfolioPage() {
     <div className="pt-32 pb-20 lg:pt-40 lg:pb-32 bg-[var(--color-background)] min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center space-y-6 mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
-            Our Portfolio
-          </div>
-          <h1 className="text-4xl lg:text-6xl font-bold font-outfit text-[var(--color-text-main)]">
-            Work That <span className="text-gradient">Inspires</span>
-          </h1>
-          <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto text-lg">
-            Explore our curated selection of recent projects, showcasing our expertise in delivering high-end digital solutions that drive business growth.
-          </p>
+          <Reveal direction="down">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
+              Our Portfolio
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h1 className="text-4xl lg:text-6xl font-bold font-outfit text-[var(--color-text-main)]">
+              Work That <span className="text-gradient">Inspires</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto text-lg">
+              Explore our curated selection of recent projects, showcasing our expertise in delivering high-end digital solutions that drive business growth.
+            </p>
+          </Reveal>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-16">
-          {categories.map((cat, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveCategory(cat as string)}
-              className={`px-6 py-2 rounded-full font-bold text-sm transition-all border ${activeCategory === cat
-                  ? "bg-[var(--color-electric)] border-[var(--color-electric)] text-white shadow-lg shadow-blue-500/25"
-                  : "bg-[var(--color-card)] border-[var(--color-border)] text-[var(--color-text-main)] hover:border-[var(--color-electric)]"
-                }`}
-            >
-              {cat as string}
-            </button>
-          ))}
-        </div>
+        <Reveal delay={0.3}>
+          <div className="flex flex-wrap justify-center gap-4 mb-16">
+            {categories.map((cat, i) => (
+              <MagneticButton 
+                key={i} 
+                intensity={0.2}
+                onClick={() => setActiveCategory(cat as string)}
+                className={`!px-6 !py-2 !rounded-full !font-bold !text-sm !transition-all !border ${activeCategory === cat
+                    ? "!bg-[var(--color-electric)] !border-[var(--color-electric)] !text-white shadow-lg shadow-blue-500/25"
+                    : "!bg-[var(--color-card)] !border-[var(--color-border)] !text-[var(--color-text-main)] hover:!border-[var(--color-electric)]"
+                  }`}
+              >
+                {cat as string}
+              </MagneticButton>
+            ))}
+          </div>
+        </Reveal>
 
         {loading ? (
           <div className="text-center text-[var(--color-text-main)] opacity-50 py-20">Loading projects...</div>

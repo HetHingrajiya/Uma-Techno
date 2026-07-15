@@ -1,6 +1,7 @@
 import React from "react";
 import { Globe, Smartphone, BarChart, Palette, Code, Megaphone, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Reveal } from "@/components/ui/Reveal";
 
 const services = [
   {
@@ -52,41 +53,47 @@ export default function ServicesPage() {
   return (
     <div className="pt-32 pb-20 lg:pt-48 space-y-32 min-h-screen">
       <section className="max-w-7xl mx-auto px-6 text-center space-y-6">
-        <h1 className="text-5xl lg:text-7xl font-bold font-outfit">
-          Empowering Your Business With <br />
-          <span className="text-gradient">Premium Digital Solutions</span>
-        </h1>
-        <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-          We combine creativity and technology to deliver exceptional results 
-          that help your business thrive in an ever-evolving digital landscape.
-        </p>
+        <Reveal direction="down" delay={0.1}>
+          <h1 className="text-5xl lg:text-7xl font-bold font-outfit text-[var(--color-text-main)]">
+            Empowering Your Business With <br />
+            <span className="text-gradient">Premium Digital Solutions</span>
+          </h1>
+        </Reveal>
+        <Reveal delay={0.2}>
+          <p className="text-xl text-[var(--color-text-main)] opacity-70 max-w-3xl mx-auto">
+            We combine creativity and technology to deliver exceptional results 
+            that help your business thrive in an ever-evolving digital landscape.
+          </p>
+        </Reveal>
       </section>
 
       <section className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {services.map((service) => (
-          <div key={service.slug} className="glass-card p-10 rounded-[3rem] border-white/5 hover:border-electric/30 transition-all flex flex-col group">
-            <div className="w-16 h-16 bg-electric/10 rounded-2xl flex items-center justify-center text-electric mb-8 group-hover:bg-electric group-hover:text-white transition-all">
-              <service.icon size={32} />
-            </div>
-            <h2 className="text-3xl font-bold font-outfit mb-4">{service.title}</h2>
-            <p className="text-gray-400 mb-8 flex-grow">{service.description}</p>
-            
-            <ul className="space-y-3 mb-10">
-              {service.features.map((feature) => (
-                <li key={feature} className="flex items-center gap-2 text-sm text-gray-300">
-                  <CheckCircle size={16} className="text-electric" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
+        {services.map((service, idx) => (
+          <Reveal key={service.slug} delay={0.1 * idx} width="100%">
+            <div className="glass-card p-10 h-full rounded-[3rem] border-white/5 hover:border-electric/30 transition-all flex flex-col group">
+              <div className="w-16 h-16 bg-[var(--color-electric)]/10 rounded-2xl flex items-center justify-center text-[var(--color-electric)] mb-8 group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all">
+                <service.icon size={32} />
+              </div>
+              <h2 className="text-3xl font-bold font-outfit mb-4 text-[var(--color-text-main)]">{service.title}</h2>
+              <p className="text-[var(--color-text-main)] opacity-70 mb-8 flex-grow">{service.description}</p>
+              
+              <ul className="space-y-3 mb-10">
+                {service.features.map((feature) => (
+                  <li key={feature} className="flex items-center gap-2 text-sm text-[var(--color-text-main)] opacity-80">
+                    <CheckCircle size={16} className="text-[var(--color-electric)]" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
 
-            <Link 
-              to={`/services/${service.slug}`}
-              className="w-full py-4 bg-white/5 hover:bg-electric text-white text-center rounded-2xl font-bold transition-all"
-            >
-              Learn More
-            </Link>
-          </div>
+              <Link 
+                to={`/services/${service.slug}`}
+                className="w-full py-4 bg-white/5 hover:bg-[var(--color-electric)] text-[var(--color-text-main)] hover:text-white text-center rounded-2xl font-bold transition-all"
+              >
+                Learn More
+              </Link>
+            </div>
+          </Reveal>
         ))}
       </section>
     </div>

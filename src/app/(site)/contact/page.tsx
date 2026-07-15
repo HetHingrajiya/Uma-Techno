@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { Reveal } from "@/components/ui/Reveal";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 /**
  * ContactPage: 
@@ -67,15 +69,21 @@ export default function ContactPage() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header Section */}
         <div className="text-center space-y-6 mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
-            Let's Talk
-          </div>
-          <h1 className="text-4xl lg:text-6xl font-bold font-outfit text-[var(--color-text-main)]">
-            Ready to <span className="text-gradient">Transform</span> Your Business?
-          </h1>
-          <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto text-lg">
-            Whether you need a complete enterprise solution or a premium marketing website, our engineers are ready to build it.
-          </p>
+          <Reveal direction="down">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider">
+              Let's Talk
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h1 className="text-4xl lg:text-6xl font-bold font-outfit text-[var(--color-text-main)]">
+              Ready to <span className="text-gradient">Transform</span> Your Business?
+            </h1>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto text-lg">
+              Whether you need a complete enterprise solution or a premium marketing website, our engineers are ready to build it.
+            </p>
+          </Reveal>
         </div>
 
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-8 items-start">
@@ -140,7 +148,8 @@ export default function ContactPage() {
               Message Form Area:
               Handles the inquiry submission with success/error states.
           */}
-          <div className="lg:col-span-3 bg-[var(--color-card)] border border-[var(--color-border)] p-8 lg:p-12 rounded-3xl shadow-xl">
+          <Reveal delay={0.3} width="100%" className="lg:col-span-3">
+            <div className="bg-[var(--color-card)] border border-[var(--color-border)] p-8 lg:p-12 rounded-3xl shadow-xl h-full">
             {status === "success" ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -235,16 +244,19 @@ export default function ContactPage() {
                   </div>
                 )}
 
-                <button
-                  disabled={status === "loading"}
-                  type="submit"
-                  className="w-full bg-[var(--color-electric)] hover:bg-[var(--color-electric)]/90 text-white rounded-xl py-4 font-bold tracking-widest uppercase flex items-center justify-center gap-2 transition-all hover:-translate-y-1 shadow-lg disabled:opacity-70 disabled:hover:translate-y-0"
-                >
-                  {status === "loading" ? "Sending..." : "Send Request"} <Send size={20} />
-                </button>
+                <MagneticButton strength={0.15}>
+                  <button
+                    disabled={status === "loading"}
+                    type="submit"
+                    className="w-full bg-[var(--color-electric)] hover:bg-[var(--color-electric)]/90 text-white rounded-xl py-4 font-bold tracking-widest uppercase flex items-center justify-center gap-2 transition-all hover:-translate-y-1 shadow-[0_0_20px_var(--color-electric)] disabled:opacity-70 disabled:hover:translate-y-0 disabled:shadow-none"
+                  >
+                    {status === "loading" ? "Sending..." : "Send Request"} <Send size={20} />
+                  </button>
+                </MagneticButton>
               </form>
             )}
-          </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </div>

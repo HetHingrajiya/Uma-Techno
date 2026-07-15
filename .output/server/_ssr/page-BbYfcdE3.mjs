@@ -1,0 +1,117 @@
+import { n as require_jsx_runtime } from "../_libs/react+tanstack__react-query.mjs";
+import { l as useParams, n as Link } from "../_libs/react-router.mjs";
+import { nt as CircleCheckBig } from "../_libs/lucide-react.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/page-BbYfcdE3.js
+var import_jsx_runtime = require_jsx_runtime();
+function SEOLandingPage() {
+	const { slug } = useParams();
+	const paramsSlug = slug || "";
+	paramsSlug.includes("-rajkot") || paramsSlug.includes("-gujarat");
+	const serviceName = paramsSlug.replace(/-rajkot|-gujarat/g, "").replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "flex flex-col gap-16 lg:gap-32 pb-20 lg:pb-32 bg-[var(--color-background)] min-h-screen pt-32",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+			className: "max-w-7xl mx-auto px-6 w-full text-center space-y-6",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border",
+					style: {
+						backgroundColor: "var(--color-blue-glow, rgba(6, 182, 212, 0.15))",
+						borderColor: "var(--color-blue-glow, rgba(6, 182, 212, 0.2))",
+						color: "var(--color-electric)"
+					},
+					children: "Premium IT Solutions"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
+					className: "text-4xl lg:text-6xl 2xl:text-7xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]",
+					children: [
+						"Best ",
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "text-gradient",
+							children: serviceName
+						}),
+						" ",
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+						"for Growing Brands"
+					]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+					className: "text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto 2xl:text-lg",
+					children: [
+						"We deliver high-end, scalable, and performance-driven ",
+						serviceName.toLowerCase(),
+						" solutions designed to dominate your market and maximize ROI."
+					]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "pt-8",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+						to: "/contact",
+						className: "px-8 py-4 text-white rounded-xl font-bold text-base transition-all hover:scale-105 shadow-xl btn-premium inline-block",
+						style: { backgroundColor: "var(--color-electric)" },
+						children: "Get a Free Quote"
+					})
+				})
+			]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+			className: "max-w-5xl mx-auto px-6 w-full",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "bg-[var(--color-card)] border border-[var(--color-border)] rounded-[3rem] p-8 lg:p-16 shadow-xl",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "grid md:grid-cols-2 gap-12",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "space-y-6",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+								className: "text-3xl font-bold font-outfit text-[var(--color-text-main)]",
+								children: "Why Choose Uma Techno?"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-[var(--color-text-main)] opacity-70 leading-relaxed",
+								children: "As a leading agency, we don't just write code. We engineer complete business systems optimized for speed, security, and search engines."
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+								className: "space-y-4 pt-4",
+								children: [
+									"100% Custom Architecture",
+									"Built-in Technical SEO",
+									"Lightning Fast Performance",
+									"Dedicated Post-Launch Support"
+								].map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
+									className: "flex items-center gap-3 text-[var(--color-text-main)] font-medium",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheckBig, {
+										className: "text-[var(--color-electric)]",
+										size: 20
+									}), item]
+								}, item))
+							})
+						]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "bg-[var(--color-navy-light)] border border-[var(--color-border)] rounded-2xl p-8 flex flex-col justify-center text-center space-y-4",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "text-[var(--color-electric)] font-bold tracking-widest text-sm uppercase",
+								children: "Limited Availability"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+								className: "text-2xl font-bold text-[var(--color-text-main)]",
+								children: "Ready to scale your digital presence?"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-[var(--color-text-main)] opacity-70 text-sm",
+								children: "Our engineering calendar fills up quickly. Contact us today to secure your project slot."
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+								to: "/contact",
+								className: "mt-4 text-[var(--color-electric)] font-bold uppercase tracking-wider hover:underline",
+								children: "Schedule Consultation →"
+							})
+						]
+					})]
+				})
+			})
+		})]
+	});
+}
+//#endregion
+export { SEOLandingPage as default };

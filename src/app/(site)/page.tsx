@@ -1,6 +1,7 @@
 import Hero from "@/components/ui/Hero";
 import ProjectEstimator from "@/components/ui/ProjectEstimator";
 import ProcessTimeline from "@/components/ui/ProcessTimeline";
+import TechMarquee from "@/components/ui/TechMarquee";
 import FAQ from "@/components/ui/FAQ";
 import {
   Code, Globe, Smartphone, BarChart, Palette, Megaphone,
@@ -371,6 +372,9 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      {/* Tech Stack Marquee */}
+      <TechMarquee />
 
       {/* 
           Portfolio Showcase:

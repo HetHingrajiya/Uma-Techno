@@ -1,5 +1,5 @@
 import { Scale, FileCheck, AlertCircle, Gavel } from "lucide-react";
-// // 
+import { Reveal } from "@/components/ui/Reveal";
 export default function TermsPage() {
   const sections = [
     {
@@ -28,33 +28,43 @@ export default function TermsPage() {
     <div className="pt-32 pb-20 px-6 bg-[var(--color-background)] min-h-screen">
       <div className="max-w-4xl mx-auto space-y-16">
         <div className="text-center space-y-4">
-          <h1 className="text-4xl lg:text-6xl font-bold font-outfit text-[var(--color-text-main)]">Terms & <span className="text-gradient">Conditions</span></h1>
-          <p className="text-[var(--color-text-main)] opacity-60">Last Updated: May 7, 2026</p>
+          <Reveal direction="down">
+            <h1 className="text-4xl lg:text-6xl font-bold font-outfit text-[var(--color-text-main)]">Terms & <span className="text-gradient">Conditions</span></h1>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="text-[var(--color-text-main)] opacity-60">Last Updated: May 7, 2026</p>
+          </Reveal>
         </div>
 
         <div className="prose prose-invert max-w-none text-[var(--color-text-main)] opacity-80 leading-relaxed space-y-8">
-          <p>
-            Welcome to Uma Techno. By accessing our website or using our services, you agree to comply with and be bound by the following terms and conditions of use.
-          </p>
+          <Reveal delay={0.2}>
+            <p>
+              Welcome to Uma Techno. By accessing our website or using our services, you agree to comply with and be bound by the following terms and conditions of use.
+            </p>
+          </Reveal>
 
           <div className="grid gap-8 pt-8">
             {sections.map((section, i) => (
-              <div key={i} className="glass-card p-8 rounded-3xl border border-[var(--color-border)] space-y-4">
-                <div className="w-12 h-12 bg-[var(--color-electric)]/10 text-[var(--color-electric)] rounded-xl flex items-center justify-center">
-                  <section.icon size={24} />
+              <Reveal key={i} delay={0.3 + i * 0.1}>
+                <div className="glass-card p-8 rounded-3xl border border-[var(--color-border)] space-y-4 hover:border-[var(--color-electric)]/30 transition-all">
+                  <div className="w-12 h-12 bg-[var(--color-electric)]/10 text-[var(--color-electric)] rounded-xl flex items-center justify-center">
+                    <section.icon size={24} />
+                  </div>
+                  <h2 className="text-2xl font-bold font-outfit text-[var(--color-text-main)]">{section.title}</h2>
+                  <p className="text-[var(--color-text-main)] opacity-80">{section.content}</p>
                 </div>
-                <h2 className="text-2xl font-bold font-outfit text-[var(--color-text-main)]">{section.title}</h2>
-                <p>{section.content}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
 
-          <div className="space-y-6 pt-8">
-            <h2 className="text-2xl font-bold font-outfit text-[var(--color-text-main)]">Legal Jurisdiction</h2>
-            <p>
-              These terms are governed by and construed in accordance with the laws of India. Any disputes relating to these terms will be subject to the exclusive jurisdiction of the courts in Rajkot, Gujarat.
-            </p>
-          </div>
+          <Reveal delay={0.7}>
+            <div className="space-y-6 pt-8">
+              <h2 className="text-2xl font-bold font-outfit text-[var(--color-text-main)]">Legal Jurisdiction</h2>
+              <p className="text-[var(--color-text-main)] opacity-80">
+                These terms are governed by and construed in accordance with the laws of India. Any disputes relating to these terms will be subject to the exclusive jurisdiction of the courts in Rajkot, Gujarat.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </div>
     </div>
