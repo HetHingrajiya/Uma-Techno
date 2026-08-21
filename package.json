@@ -1,6 +1,10 @@
 {
   "name": "uma-techno-v2",
   "version": "1.0.0",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
     "dev:frontend": "cd frontend && npm run dev",
     "dev:backend": "cd backend && npm run dev",
