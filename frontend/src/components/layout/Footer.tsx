@@ -17,24 +17,23 @@ const Linkedin = (props: any) => (
 
 export default function Footer() {
   return (
-    <footer className="relative pt-24 pb-24 lg:pb-12 overflow-hidden border-t border-white/5" style={{ backgroundColor: 'var(--color-footer)' }}>
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-[var(--color-footer-text)]">
-        {/* Company Info */}
-        <div className="space-y-6">
-          <Link to="/" className="flex flex-col mb-2">
-            <span className="text-2xl font-black font-outfit tracking-tighter uppercase leading-none">
-              <span className="text-[var(--color-electric)]">UMA</span> <span className="text-white">TECHNO</span>
-            </span>
-            <span className="text-[8px] font-bold tracking-[0.2em] uppercase mt-1.5 leading-none">
-              <span className="text-white/60">INNOVATE. CREATE. </span>
-              <span className="text-[var(--color-electric)]">ELEVATE.</span>
+    <footer className="relative pt-24 pb-12 overflow-hidden bg-[var(--background)] border-t border-[var(--color-border)]/50 mt-20">
+      {/* Subtle Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[300px] bg-gradient-to-b from-[var(--color-electric)]/5 to-transparent blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 text-[var(--color-text-main)] relative z-10">
+        
+        {/* Column 1: Brand Info */}
+        <div className="lg:col-span-4 space-y-6">
+          <Link to="/" className="flex flex-col mb-4 group inline-block">
+            <span className="text-3xl font-black font-outfit tracking-tighter uppercase leading-none text-white transition-colors group-hover:text-[var(--color-electric)]">
+              UMA TECHNO
             </span>
           </Link>
-          <p className="text-[var(--color-footer-text)] opacity-60 text-sm leading-relaxed">
-            A premium digital agency dedicated to engineering high-performance websites, 
-            mobile applications, and custom business software that drive real growth.
+          <p className="text-[var(--color-text-main)] opacity-60 text-sm leading-relaxed max-w-sm font-medium">
+            Digital products and business software built for growth. We engineer high-performance platforms that move businesses forward.
           </p>
-          <div className="flex gap-4">
+          <div className="flex gap-3 pt-4">
             {[
               { Icon: Facebook, href: "#" },
               { Icon: Twitter, href: "#" },
@@ -46,26 +45,28 @@ export default function Footer() {
                 href={href}
                 target={href !== "#" ? "_blank" : undefined}
                 rel={href !== "#" ? "noopener noreferrer" : undefined}
-                className="w-10 h-10 rounded-full bg-[var(--color-footer-text)]/5 flex items-center justify-center text-[var(--color-footer-text)] opacity-40 hover:bg-[var(--color-electric)] hover:text-white transition-all shadow-sm hover:shadow-[var(--color-electric)]/20"
+                className="w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:bg-[var(--color-electric)]/20 hover:text-[var(--color-electric)] hover:border-[var(--color-electric)]/50 transition-all shadow-sm"
               >
-                <Icon size={18} />
+                <Icon size={16} />
               </a>
             ))}
           </div>
         </div>
 
-        {/* Quick Links */}
-        <div>
-          <h4 className="text-[var(--color-footer-text)] font-bold mb-6 text-lg">Quick Links</h4>
-          <ul className="space-y-4">
+        {/* Column 2: Company */}
+        <div className="lg:col-span-2 lg:col-start-6">
+          <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest font-outfit">Company</h4>
+          <ul className="space-y-3">
             {[
-              { name: "About Us", href: "/about" },
-              { name: "Our Services", href: "/services" },
-              { name: "Portfolio", href: "/portfolio" },
-              { name: "Contact Us", href: "/contact" }
+              { name: "About", href: "/about" },
+              { name: "Work", href: "/portfolio" },
+              { name: "Products", href: "/products" },
+              { name: "Careers", href: "/careers" },
+              { name: "Contact", href: "/contact" }
             ].map((item) => (
               <li key={item.name}>
-                <Link to={item.href} className="text-[var(--color-footer-text)] opacity-60 hover:text-[var(--color-electric)] transition-colors">
+                <Link to={item.href} className="text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:text-[var(--color-electric)] text-sm transition-all flex items-center gap-2 group">
+                  <span className="w-0 h-px bg-[var(--color-electric)] group-hover:w-3 transition-all" />
                   {item.name}
                 </Link>
               </li>
@@ -73,19 +74,21 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Services */}
-        <div>
-          <h4 className="text-[var(--color-footer-text)] font-bold mb-6 text-lg">Services</h4>
-          <ul className="space-y-4">
+        {/* Column 3: Services */}
+        <div className="lg:col-span-3">
+          <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest font-outfit">Services</h4>
+          <ul className="space-y-3">
             {[
-              { name: "Web Development", href: "/web-development" },
-              { name: "SEO Services", href: "/seo-services" },
-              { name: "Digital Marketing", href: "/digital-marketing" },
-              { name: "App Development", href: "/services/app-development" },
-              { name: "UI/UX Design", href: "/services/ui-ux" },
+              { name: "Web Development", href: "/services/web-development" },
+              { name: "Mobile App Development", href: "/services/mobile-app-development" },
+              { name: "ERP Development", href: "/services/erp-development" },
+              { name: "SaaS Development", href: "/services/saas-development" },
+              { name: "E-Commerce", href: "/services/ecommerce-development" },
+              { name: "Custom Software", href: "/services/custom-software" },
             ].map((item) => (
               <li key={item.name}>
-                <Link to={item.href} className="text-[var(--color-footer-text)] opacity-60 hover:text-[var(--color-electric)] transition-colors">
+                <Link to={item.href} className="text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:text-[var(--color-electric)] text-sm transition-all flex items-center gap-2 group">
+                  <span className="w-0 h-px bg-[var(--color-electric)] group-hover:w-3 transition-all" />
                   {item.name}
                 </Link>
               </li>
@@ -93,36 +96,48 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Contact Info */}
-        <div>
-          <h4 className="text-[var(--color-footer-text)] font-bold mb-6 text-lg">Contact Us</h4>
-          <ul className="space-y-4">
-            <li className="flex gap-3 text-[var(--color-footer-text)] opacity-60">
-              <MapPin className="text-[var(--color-electric)] shrink-0" size={20} />
-              <span>Rajkot, Gujarat, India</span>
-            </li>
-            <li className="flex gap-3 text-[var(--color-footer-text)] opacity-60">
-              <Phone className="text-[var(--color-electric)] shrink-0" size={20} />
-              <span>+91 92743 50728</span>
-            </li>
-            <li className="flex gap-3 text-[var(--color-footer-text)] opacity-60">
-              <Mail className="text-[var(--color-electric)] shrink-0" size={20} />
-              <span>uma.techno585@gmail.com</span>
-            </li>
+        {/* Column 4: Resources */}
+        <div className="lg:col-span-3">
+          <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest font-outfit">Resources</h4>
+          <ul className="space-y-3">
+            {[
+              { name: "Blog", href: "/blog" },
+              { name: "Case Studies", href: "/case-studies" },
+              { name: "FAQs", href: "/faq" },
+            ].map((item) => (
+              <li key={item.name}>
+                <Link to={item.href} className="text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:text-[var(--color-electric)] text-sm transition-all flex items-center gap-2 group">
+                  <span className="w-0 h-px bg-[var(--color-electric)] group-hover:w-3 transition-all" />
+                  {item.name}
+                </Link>
+              </li>
+            ))}
           </ul>
+          
+          <div className="mt-8 space-y-3">
+             <a href="mailto:uma.techno585@gmail.com" className="flex gap-3 text-sm text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:text-[var(--color-electric)] transition-colors">
+               <Mail className="shrink-0" size={18} />
+               <span>uma.techno585@gmail.com</span>
+             </a>
+             <a href="tel:+919274350728" className="flex gap-3 text-sm text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:text-[var(--color-electric)] transition-colors">
+               <Phone className="shrink-0" size={18} />
+               <span>+91 92743 50728</span>
+             </a>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="text-[var(--color-footer-text)] opacity-40 text-sm">
-          © {new Date().getFullYear()} Uma Techno. All rights reserved.
+      {/* Bottom Bar */}
+      <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-[var(--color-border)] flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
+        <p className="text-[var(--color-text-main)] opacity-40 text-xs font-bold tracking-widest uppercase">
+          © {new Date().getFullYear()} UMA Techno. All rights reserved.
         </p>
-        <div className="flex gap-8 text-sm">
-          <Link to="/privacy-policy" className="text-[var(--color-footer-text)] opacity-40 hover:text-[var(--color-electric)] transition-colors">
+        <div className="flex gap-8 text-xs font-bold tracking-widest uppercase">
+          <Link to="/privacy-policy" className="text-[var(--color-text-main)] opacity-40 hover:opacity-100 hover:text-[var(--color-electric)] transition-colors">
             Privacy Policy
           </Link>
-          <Link to="/terms" className="text-[var(--color-footer-text)] opacity-40 hover:text-[var(--color-electric)] transition-colors">
-            Terms of Service
+          <Link to="/terms" className="text-[var(--color-text-main)] opacity-40 hover:opacity-100 hover:text-[var(--color-electric)] transition-colors">
+            Terms
           </Link>
         </div>
       </div>

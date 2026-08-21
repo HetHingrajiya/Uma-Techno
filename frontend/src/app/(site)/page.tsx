@@ -215,33 +215,37 @@ export default function Home() {
   if (loading) return null;
 
   return (
-    <div className="flex flex-col gap-12 lg:gap-16 pb-20 lg:pb-32 bg-[var(--background)]">
-      {/* 
-          Hero Section:
-          The main splash area with primary CTA.
-      */}
+    <div className="flex flex-col gap-12 lg:gap-16 pb-20 lg:pb-32 bg-transparent">
+      {/* Hero Section */}
       {isEnabled('hero') && <Hero />}
 
       {/* Interactive Project Estimator Widget */}
       <ProjectEstimator />
 
-      {/* 
-          Trust & Stats Section:
-          Displays quantitative metrics and client industries to build authority.
-      */}
+      {/* Trust & Stats Section */}
       {isEnabled('stats') && (
-        <section className="max-w-7xl mx-auto px-6 w-full relative z-20 py-12 lg:py-20">
+        <motion.section 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="max-w-7xl mx-auto px-6 w-full relative z-20 py-12 lg:py-20"
+        >
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
             {stats.map((stat, i) => (
-              <div key={i} className="glass-card p-6 lg:p-8 text-center flex flex-col items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-[var(--color-electric)]/10 text-[var(--color-electric)] flex items-center justify-center ring-1 ring-[var(--color-electric)]/20 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+              <motion.div 
+                key={i} 
+                whileHover={{ y: -5 }}
+                className="glass-card p-6 lg:p-8 text-center flex flex-col items-center gap-4 group"
+              >
+                <div className="w-12 h-12 rounded-2xl bg-[var(--color-electric)]/10 text-[var(--color-electric)] flex items-center justify-center ring-1 ring-[var(--color-electric)]/20 group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all neo-glow">
                   <stat.icon size={24} />
                 </div>
                 <div>
                   <div className="text-4xl lg:text-5xl font-black font-outfit text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-electric)] to-[var(--color-accent)] tracking-tight">{stat.value}</div>
                   <div className="text-xs lg:text-sm font-bold text-[var(--color-text-main)] opacity-70 uppercase tracking-widest mt-2">{stat.label}</div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
           
@@ -262,79 +266,99 @@ export default function Home() {
                ))}
              </div>
           </div>
-        </section>
+        </motion.section>
       )}
 
-      {/* 
-          Services Grid:
-          Detailed breakdown of what Uma Techno offers with deep links to service pages.
-      */}
+      {/* Services Grid */}
       {isEnabled('services') && (
-        <section className="max-w-7xl mx-auto px-6 w-full py-20 lg:py-32">
-          <div className="text-center space-y-4 mb-20">
-            <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[var(--color-electric)]/40 bg-[var(--color-electric)]/10 text-[var(--color-electric)] text-sm font-black uppercase tracking-[0.15em] backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+        <motion.section 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="max-w-7xl mx-auto px-6 w-full py-20 lg:py-32 relative"
+        >
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[500px] bg-gradient-glow pointer-events-none" />
+          
+          <div className="text-center space-y-6 mb-20 relative z-10">
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-6 py-2 rounded-full border border-[var(--color-electric)]/40 bg-[var(--color-electric)]/10 text-[var(--color-electric)] text-xs font-black uppercase tracking-[0.2em] backdrop-blur-md neo-glow"
+            >
               PREMIUM SOLUTIONS
-            </div>
-            <h2 className="text-3xl lg:text-5xl 2xl:text-6xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Leading Web, App & <br /> <span className="text-gradient">SEO Services</span></h2>
+            </motion.div>
+            <h2 className="text-4xl lg:text-5xl 2xl:text-6xl font-black font-outfit tracking-tight text-[var(--color-text-main)]">Leading Web, App & <br /> <span className="text-gradient">SEO Services</span></h2>
             <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto 2xl:text-lg">
               We engineer high-performance digital systems that capture leads, automate operations, and scale revenue for businesses in Rajkot and across Gujarat.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 relative z-10">
             {services.map((service, index) => {
               const isLarge = index === 0 || index === 3;
               return (
-                <Link
+                <motion.div
                   key={service.slug}
-                  to={service.slug.startsWith('/') ? service.slug : `/${service.slug}`}
-                  className={cn(
-                    "bg-[var(--color-card)] border border-[var(--color-border)] group p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] flex flex-col justify-between relative overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-500",
-                    isLarge ? "lg:col-span-2 min-h-[350px] md:min-h-[400px]" : "min-h-[350px] md:min-h-[400px]"
-                  )}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.6 }}
+                  className={cn(isLarge ? "lg:col-span-2" : "")}
                 >
-                  <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[var(--color-electric)]/10 to-transparent blur-3xl -mr-32 -mt-32 transition-transform duration-1000 ease-out" />
-                  <div className="space-y-6 relative z-10">
-                    <div className="w-14 h-14 bg-[var(--background)] border border-[var(--color-border)] rounded-2xl flex items-center justify-center text-[var(--color-electric)] shadow-sm group-hover:-translate-y-1 transition-transform duration-300">
-                      {getIcon(service.icon || 'Globe')}
+                  <Link
+                    to={service.slug.startsWith('/') ? service.slug : `/${service.slug}`}
+                    className={cn(
+                      "glass-card group p-8 md:p-10 flex flex-col justify-between h-full min-h-[350px] md:min-h-[400px]"
+                    )}
+                  >
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[var(--color-electric)]/20 to-transparent blur-3xl -mr-32 -mt-32 transition-transform duration-1000 ease-out group-hover:scale-150" />
+                    <div className="space-y-6 relative z-10">
+                      <div className="w-14 h-14 bg-black/40 border border-[var(--color-border)] rounded-2xl flex items-center justify-center text-[var(--color-electric)] shadow-lg group-hover:-translate-y-2 transition-transform duration-500 neo-glow">
+                        {getIcon(service.icon || 'Globe')}
+                      </div>
+                      <h4 className="text-2xl lg:text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] tracking-tighter group-hover:text-[var(--color-electric)] transition-colors">
+                        {service.title}
+                      </h4>
+                      <p className="text-[var(--color-text-main)] opacity-60 leading-relaxed max-w-sm text-sm">
+                        {service.description}
+                      </p>
                     </div>
-                    <h4 className="text-2xl lg:text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] tracking-tighter">
-                      {service.title}
-                    </h4>
-                    <p className="text-[var(--color-text-main)] opacity-60 leading-relaxed max-w-sm text-sm">
-                      {service.description}
-                    </p>
-                  </div>
-                  <div className="mt-8 flex items-center gap-4 text-xs font-bold tracking-widest text-[var(--color-text-main)] opacity-50 uppercase group-hover:opacity-100 group-hover:text-[var(--color-electric)] transition-all relative z-10">
-                    EXPLORE SOLUTIONS <ArrowRight size={16} />
-                  </div>
-                </Link>
+                    <div className="mt-8 flex items-center gap-4 text-xs font-bold tracking-widest text-[var(--color-text-main)] opacity-50 uppercase group-hover:opacity-100 group-hover:text-[var(--color-electric)] transition-all relative z-10">
+                      EXPLORE SOLUTIONS <ArrowRight size={16} />
+                    </div>
+                  </Link>
+                </motion.div>
               );
             })}
           </div>
-        </section>
+        </motion.section>
       )}
 
-      {/* 
-          Differentiators Section (Why Choose Us):
-          Highlights the unique value proposition (Business-first engineering).
-      */}
+      {/* Differentiators Section */}
       {isEnabled('why-choose-us') && (
-        <section className="max-w-7xl mx-auto px-6 w-full">
+        <motion.section 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="max-w-7xl mx-auto px-6 w-full py-20"
+        >
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="relative group order-2 lg:order-1">
               <div className="absolute -inset-10 bg-gradient-glow opacity-30 blur-[120px] group-hover:opacity-50 transition-all duration-700" />
-              <div className="relative aspect-video bg-[var(--color-card)] border border-[var(--color-border)] rounded-[2.5rem] overflow-hidden shadow-xl">
+              <div className="relative aspect-video glass-card overflow-hidden">
                 <img
                   src="/images/about-agency.png"
                   alt="About Us"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000 opacity-80 mix-blend-luminosity hover:mix-blend-normal"
                 />
               </div>
               <motion.div
                 animate={{ y: [0, -15, 0] }}
                 transition={{ duration: 6, repeat: Infinity }}
-                className="absolute -top-6 -right-6 lg:-top-8 lg:-right-8 bg-[var(--color-card)] border border-[var(--color-border)] p-4 lg:p-6 rounded-xl lg:rounded-2xl shadow-2xl backdrop-blur-xl"
+                className="absolute -top-6 -right-6 lg:-top-8 lg:-right-8 glass-card p-4 lg:p-6 !border-[var(--color-electric)]/50 neo-glow"
               >
                 <div className="text-[var(--color-electric)] font-black text-lg lg:text-xl tracking-tighter">Business First</div>
                 <div className="text-[10px] text-[var(--color-text-main)] opacity-60 font-bold uppercase tracking-widest mt-1">Our Core Mindset</div>
@@ -356,77 +380,84 @@ export default function Home() {
                   { title: "Technical SEO Core", desc: "Built-in optimization for organic growth." },
                   { title: "Agile Rapid Delivery", desc: "Efficient workflows to market faster." },
                 ].map((benefit, i) => (
-                  <div key={i} className="flex gap-3 lg:gap-4 group">
-                    <div className="w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-[var(--color-electric)]/20 flex items-center justify-center text-[var(--color-electric)] group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all mt-1 shrink-0">
+                  <motion.div 
+                    key={i} 
+                    whileHover={{ x: 5 }}
+                    className="flex gap-3 lg:gap-4 group p-4 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/10"
+                  >
+                    <div className="w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-[var(--color-electric)]/20 flex items-center justify-center text-[var(--color-electric)] group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all mt-1 shrink-0 neo-glow">
                       <CheckCircle size={12} />
                     </div>
                     <div>
                       <h4 className="text-base font-bold text-[var(--color-text-main)]">{benefit.title}</h4>
                       <p className="text-[var(--color-text-main)] opacity-60 text-xs mt-1">{benefit.desc}</p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
       )}
 
-      {/* 
-          Portfolio Showcase:
-          Selected high-impact case studies from the portfolio module.
-      */}
+      {/* Portfolio Showcase */}
       {isEnabled('portfolio') && (
-        <section className="max-w-7xl mx-auto px-6 w-full">
+        <motion.section 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="max-w-7xl mx-auto px-6 w-full py-20"
+        >
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[var(--color-electric)]/40 bg-[var(--color-electric)]/10 text-[var(--color-electric)] text-sm font-black uppercase tracking-[0.15em] backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.15)] mb-6">
+              <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 text-[var(--color-accent)] text-xs font-black uppercase tracking-[0.2em] backdrop-blur-md mb-6 neo-glow">
                 SELECTED WORK
               </div>
-              <h2 className="text-3xl lg:text-5xl font-bold font-outfit tracking-tight text-[var(--color-text-main)]">Our <span className="text-gradient">Portfolio</span></h2>
+              <h2 className="text-3xl lg:text-5xl font-black font-outfit tracking-tight text-[var(--color-text-main)]">Our <span className="text-gradient">Portfolio</span></h2>
               <p className="text-[var(--color-text-main)] opacity-70 max-w-xl">
                 Showcasing our best work in branding, development, and strategic digital solutions.
               </p>
             </div>
             <Link
               to="/portfolio"
-              className="group flex items-center gap-3 text-[var(--color-text-main)] font-bold tracking-widest text-sm hover:text-[var(--color-electric)] transition-colors"
+              className="btn-premium px-6 py-3 rounded-xl flex items-center gap-3 text-[var(--color-text-main)] font-bold tracking-widest text-xs uppercase"
             >
-              VIEW ALL PROJECTS <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+              VIEW ALL PROJECTS <ArrowRight size={16} />
             </Link>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.slice(0, 3).map((project, i) => (
-              <div key={i} className="glass-card group overflow-hidden flex flex-col h-full rounded-2xl">
+              <motion.div 
+                key={i} 
+                whileHover={{ y: -10 }}
+                transition={{ duration: 0.4 }}
+                className="glass-card group overflow-hidden flex flex-col h-full"
+              >
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)] to-transparent z-10 opacity-60 group-hover:opacity-20 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)] to-transparent z-10 opacity-80 group-hover:opacity-40 transition-opacity duration-500" />
                   <img
                     src={project.featuredImage || (i === 0 ? "/images/jewelry-ecommerce.png" : i === 1 ? "/images/health-booking.png" : "/images/fintech-dashboard.png")}
                     alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 mix-blend-luminosity group-hover:mix-blend-normal"
                   />
                   <div className="absolute top-6 left-6 flex flex-col gap-2 z-20">
-                    <span className="px-4 py-2 bg-[var(--color-card)]/80 backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-electric)]/20 text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
+                    <span className="px-4 py-2 bg-black/60 backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-electric)]/30 text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
                       {project.category}
                     </span>
-                    {project.industry && (
-                      <span className="px-4 py-2 bg-[var(--color-card)]/80 backdrop-blur-md text-[var(--color-text-main)] border border-[var(--color-text-main)]/20 text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
-                        {project.industry}
-                      </span>
-                    )}
                   </div>
                 </div>
 
-                <div className="p-8 lg:p-10 space-y-6 flex-1 flex flex-col justify-between relative z-20">
+                <div className="p-8 lg:p-10 space-y-6 flex-1 flex flex-col justify-between relative z-20 bg-gradient-to-t from-black/50 to-transparent">
                   <div className="space-y-4">
-                    <h4 className="text-2xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors break-words">{project.title}</h4>
+                    <h4 className="text-2xl font-black font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors break-words">{project.title}</h4>
                     <p className="text-[var(--color-text-main)] opacity-60 text-sm leading-relaxed line-clamp-3">
                       {project.challenge || project.description}
                     </p>
                     
                     {project.result && (
-                      <div className="pt-4 border-t border-[var(--color-border)]">
+                      <div className="pt-4 border-t border-white/10">
                         <div className="text-[10px] uppercase font-bold text-[var(--color-electric)] tracking-tighter mb-1">Result</div>
                         <div className="text-lg font-black text-[var(--color-text-main)]">{project.result}</div>
                       </div>
@@ -435,56 +466,53 @@ export default function Home() {
 
                   <Link
                     to={`/portfolio/${project.slug || project.title.toLowerCase().replace(/ /g, '-')}`}
-                    className="flex items-center gap-2 text-[var(--color-text-main)] opacity-60 group-hover:opacity-100 group-hover:text-[var(--color-electric)] font-bold text-sm tracking-widest uppercase mt-6 group/link transition-all"
+                    className="flex items-center gap-2 text-[var(--color-text-main)] opacity-60 group-hover:opacity-100 group-hover:text-[var(--color-electric)] font-bold text-sm tracking-widest uppercase mt-6 transition-all"
                   >
-                    View Case Study <ArrowRight size={16} className="group-hover/link:translate-x-2 transition-transform" />
+                    View Case Study <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
                   </Link>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
       )}
 
-      {/* 
-          Social Proof (Testimonials):
-          Feedback from actual clients, either from the DB or using high-end placeholders.
-      */}
+      {/* Social Proof (Testimonials) */}
       {isEnabled('testimonials') && (
-        <section className="max-w-7xl mx-auto px-6 w-full py-24 relative">
-          <div className="py-12 md:p-20 relative z-10">
+        <motion.section 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="max-w-7xl mx-auto px-6 w-full py-24 relative"
+        >
+          <div className="py-12 md:p-20 relative z-10 glass-card !border-white/5 !bg-black/20">
             <div className="text-center space-y-4 mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold font-outfit text-[var(--color-text-main)]">What Our Clients <span className="text-gradient">Say</span></h2>
+              <h2 className="text-3xl lg:text-4xl font-black font-outfit text-[var(--color-text-main)]">What Our Clients <span className="text-gradient">Say</span></h2>
               <p className="text-[var(--color-text-main)] opacity-60 max-w-xl mx-auto">See why businesses trust Uma Techno for their digital growth.</p>
-              <div className="pt-4">
-                 <button className="px-6 py-2 border border-[var(--color-electric)] text-[var(--color-electric)] rounded-full text-xs font-bold uppercase tracking-widest hover:bg-[var(--color-electric)] hover:text-white transition-all">
-                   Share Your Experience
-                 </button>
-              </div>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.length > 0 ? (
               testimonials.map((t, i) => (
-                <div key={i} className="glass-card p-8 rounded-[var(--radius)] hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all group relative overflow-hidden">
+                <motion.div key={i} whileHover={{ y: -5 }} className="glass-card p-8 group relative overflow-hidden">
                   <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity text-[var(--color-electric)] pointer-events-none">
                     <span className="text-8xl font-serif">"</span>
                   </div>
-                  <div className="flex gap-1 text-[#F59E0B] mb-6 relative z-10">
+                  <div className="flex gap-1 text-[var(--color-electric)] mb-6 relative z-10">
                     {Array.from({ length: t.rating || 5 }).map((_, star) => (
-                      <Star key={star} size={16} fill="currentColor" />
+                      <Star key={star} size={16} fill="currentColor" className="neo-glow" />
                     ))}
                   </div>
-                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic relative z-10">"{t.content}"</p>
+                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic relative z-10 font-medium leading-relaxed">"{t.content}"</p>
                   <div className="flex items-center gap-4 relative z-10">
-                    <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] border border-[var(--color-border)] overflow-hidden">
-                      <img src={t.image || `https://i.pravatar.cc/100?u=${t.id}`} alt={t.name} className="w-full h-full object-cover" />
+                    <div className="w-12 h-12 rounded-full bg-black border border-white/20 overflow-hidden">
+                      <img src={t.image || `https://i.pravatar.cc/100?u=${t.id}`} alt={t.name} className="w-full h-full object-cover mix-blend-luminosity group-hover:mix-blend-normal transition-all" />
                     </div>
                     <div>
                       <h4 className="font-bold text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">{t.name}</h4>
-                      <p className="text-xs text-[var(--color-text-main)] opacity-50">{t.role}{t.company ? `, ${t.company}` : ''}</p>
+                      <p className="text-[10px] uppercase tracking-widest text-[var(--color-text-main)] opacity-50 font-bold">{t.role}{t.company ? `, ${t.company}` : ''}</p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))
             ) : (
               [
@@ -507,35 +535,32 @@ export default function Home() {
                   image: "/images/client-3-v2.png"
                 }
               ].map((t, i) => (
-                <div key={i} className="glass-card p-8 rounded-[var(--radius)] hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all group relative overflow-hidden">
+                <motion.div key={i} whileHover={{ y: -5 }} className="glass-card p-8 group relative overflow-hidden">
                   <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity text-[var(--color-electric)] pointer-events-none">
                     <span className="text-8xl font-serif">"</span>
                   </div>
-                  <div className="flex gap-1 text-[#F59E0B] mb-6 relative z-10">
-                    {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" />)}
+                  <div className="flex gap-1 text-[var(--color-electric)] mb-6 relative z-10">
+                    {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" className="neo-glow" />)}
                   </div>
-                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic relative z-10">"{t.content}"</p>
+                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic relative z-10 font-medium leading-relaxed">"{t.content}"</p>
                   <div className="flex items-center gap-4 relative z-10">
-                    <div className="w-12 h-12 rounded-full bg-[var(--color-navy-light)] border border-[var(--color-border)] overflow-hidden">
-                      <img src={t.image} alt={t.name} className="w-full h-full object-cover" />
+                    <div className="w-12 h-12 rounded-full bg-black border border-white/20 overflow-hidden">
+                      <img src={t.image} alt={t.name} className="w-full h-full object-cover mix-blend-luminosity group-hover:mix-blend-normal transition-all" />
                     </div>
                     <div>
                       <h4 className="font-bold text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">{t.name}</h4>
-                      <p className="text-xs text-[var(--color-text-main)] opacity-50">{t.role}</p>
+                      <p className="text-[10px] uppercase tracking-widest text-[var(--color-text-main)] opacity-50 font-bold">{t.role}</p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))
             )}
             </div>
           </div>
-        </section>
+        </motion.section>
       )}
 
-      {/* 
-          Our Methodology:
-          Visualizes the roadmap of working with the agency.
-      */}
+      {/* Our Methodology */}
       {isEnabled('process') && (
         <ProcessTimeline />
       )}
@@ -543,46 +568,49 @@ export default function Home() {
       {/* FAQ Section */}
       <FAQ />
 
-      {/* 
-          Final Conversion Area (CTA):
-          Primary driver for new client inquiries.
-      */}
+      {/* Final Conversion Area (CTA) */}
       {isEnabled('cta') && (
-        <section className="max-w-7xl mx-auto px-6 w-full pb-20">
-          <div className="glass-card rounded-[3rem] p-10 lg:p-24 text-center space-y-10 relative overflow-hidden group">
+        <motion.section 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-7xl mx-auto px-6 w-full pb-20"
+        >
+          <div className="glass-card !rounded-[3rem] p-10 lg:p-24 text-center space-y-10 relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--color-electric)]/20 blur-[150px] -mr-64 -mt-64 group-hover:scale-150 transition-transform duration-1000" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[var(--color-accent)]/20 blur-[150px] -ml-64 -mb-64 group-hover:scale-150 transition-transform duration-1000" />
 
             <h2 className="text-4xl lg:text-6xl font-black font-outfit max-w-3xl mx-auto leading-[1.1] text-[var(--color-text-main)] tracking-tighter relative z-10">
               Ready to Accelerate Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-electric)] to-[var(--color-accent)] animate-pulse">Business Growth</span>?
             </h2>
-            <p className="text-[var(--color-text-main)] opacity-70 max-w-xl mx-auto leading-relaxed text-lg relative z-10">
+            <p className="text-[var(--color-text-main)] opacity-70 max-w-xl mx-auto leading-relaxed text-lg relative z-10 font-medium">
               Stop settling for mediocre digital presence. Partner with Uma Techno to build a premium solution that commands authority and delivers results.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4 relative z-10">
+            <div className="flex flex-col sm:flex-row justify-center gap-6 pt-4 relative z-10">
               <Link
                 to="/contact"
-                className="px-8 py-4 text-white rounded-2xl font-bold text-lg transition-all hover:scale-105 shadow-[0_0_30px_-5px_var(--color-electric)] bg-gradient-to-r from-[var(--color-electric)] to-[var(--color-accent)] text-center hover:shadow-[0_0_50px_-5px_var(--color-electric)]"
+                className="btn-primary-animated px-8 py-4 rounded-2xl font-bold text-lg transition-all text-center flex justify-center items-center gap-2"
               >
-                Get Free Consultation
+                Get Free Consultation <ArrowRight size={20} />
               </Link>
               <Link
                 to="/portfolio"
-                className="px-8 py-4 bg-[var(--color-card)]/50 backdrop-blur-md border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-[var(--color-navy-light)] hover:border-[var(--color-electric)]/50 rounded-2xl font-bold text-lg transition-all text-center"
+                className="btn-premium px-8 py-4 text-[var(--color-text-main)] rounded-2xl font-bold text-lg transition-all text-center"
               >
                 View Our Work
               </Link>
             </div>
           </div>
-        </section>
+        </motion.section>
       )}
 
-      {/* Sticky Bottom Mobile CTA for conversion on smaller screens - Only shown after scroll */}
+      {/* Sticky Bottom Mobile CTA */}
       <div className={cn(
-        "fixed bottom-0 left-0 w-full p-4 bg-[var(--background)]/80 backdrop-blur-2xl border-t border-[var(--color-border)]/50 z-40 lg:hidden flex justify-center shadow-[0_-10px_40px_rgba(0,0,0,0.1)] transition-all duration-500 transform",
+        "fixed bottom-0 left-0 w-full p-4 bg-black/80 backdrop-blur-2xl border-t border-white/10 z-40 lg:hidden flex justify-center shadow-[0_-10px_40px_rgba(0,0,0,0.5)] transition-all duration-500 transform",
         showStickyCta ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
       )}>
-        <Link to="/contact" className="w-full max-w-md py-3.5 bg-gradient-premium text-white font-bold rounded-2xl text-center shadow-lg hover:shadow-2xl transition-all active:scale-95 text-sm uppercase tracking-wider">
+        <Link to="/contact" className="w-full max-w-md py-3.5 btn-primary-animated text-white font-bold rounded-2xl text-center shadow-lg hover:shadow-2xl transition-all active:scale-95 text-sm uppercase tracking-wider">
           Get Started Today
         </Link>
       </div>

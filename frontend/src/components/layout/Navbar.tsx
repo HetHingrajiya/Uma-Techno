@@ -58,9 +58,14 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={cn(
+      <motion.nav 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        className={cn(
         "fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-7xl z-[1000] transition-all duration-500 rounded-full",
-        "bg-[#0B1120]/95 backdrop-blur-xl py-3 shadow-2xl border border-[#1E293B]/50" 
+        "backdrop-blur-xl py-3 shadow-[0_10px_40px_-10px_var(--color-blue-glow)] border border-white/10",
+        scrolled ? "py-2 bg-[#030712]/90 shadow-[0_20px_50px_-15px_var(--color-purple-glow)]" : "bg-[#030712]/70"
       )}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
@@ -131,7 +136,7 @@ export default function Navbar() {
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Nav Overlay - Moved outside nav to prevent inheritance issues */}
       <AnimatePresence>

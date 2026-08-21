@@ -1,0 +1,152 @@
+export const services = [
+  {
+    id: "web-development",
+    slug: "web-development",
+    title: "Web Development",
+    shortDescription: "Corporate websites, web applications, portals and high-performance digital experiences.",
+    features: ["Corporate Websites", "Web Applications", "Portals", "Admin Panels", "API Integrations", "Custom Platforms"],
+    icon: "Globe"
+  },
+  {
+    id: "mobile-app-development",
+    slug: "mobile-app-development",
+    title: "Mobile App Development",
+    shortDescription: "Modern mobile applications for Android and iOS that scale.",
+    features: ["Android", "iOS", "Flutter", "Cross-platform apps", "API integration", "Push notifications"],
+    icon: "Smartphone"
+  },
+  {
+    id: "custom-software",
+    slug: "custom-software",
+    title: "Custom Software",
+    shortDescription: "Software designed precisely around your specific business workflows.",
+    features: ["Business management", "Inventory", "Billing", "HR", "CRM", "Operations"],
+    icon: "Code"
+  },
+  {
+    id: "erp-development",
+    slug: "erp-development",
+    title: "ERP Development",
+    shortDescription: "Centralize business operations into one powerful platform.",
+    features: ["Inventory", "Sales", "Purchase", "Finance", "Employees", "Reporting", "Manufacturing"],
+    icon: "Database"
+  },
+  {
+    id: "saas-development",
+    slug: "saas-development",
+    title: "SaaS Development",
+    shortDescription: "Build scalable subscription-based software products.",
+    features: ["Multi-tenant architecture", "Subscription management", "User roles", "Analytics", "APIs", "Cloud infrastructure"],
+    icon: "Cloud"
+  },
+  {
+    id: "ecommerce-development",
+    slug: "ecommerce-development",
+    title: "E-Commerce",
+    shortDescription: "Complete online commerce experiences engineered for conversion.",
+    features: ["Product management", "Cart", "Checkout", "Payments", "Orders", "Inventory", "Customer accounts"],
+    icon: "ShoppingCart"
+  },
+  {
+    id: "ui-ux",
+    slug: "ui-ux",
+    title: "UI/UX Design",
+    shortDescription: "Design experiences that are simple, intuitive and conversion-focused.",
+    features: ["Wireframing", "Prototyping", "User Research", "Design Systems", "Web Design", "App Design"],
+    icon: "Figma"
+  },
+  {
+    id: "seo-marketing",
+    slug: "seo-marketing",
+    title: "SEO & Digital Growth",
+    shortDescription: "Technical SEO, content strategy and performance optimization.",
+    features: ["Technical SEO", "Content Strategy", "Link Building", "Performance Tuning", "Local SEO", "Analytics"],
+    icon: "TrendingUp"
+  }
+];
+
+export const industries = [
+  {
+    id: "healthcare",
+    slug: "healthcare",
+    title: "Healthcare",
+    description: "Appointments, patient management, prescriptions, medical workflows."
+  },
+  {
+    id: "manufacturing",
+    slug: "manufacturing",
+    title: "Manufacturing",
+    description: "Production, inventory, purchase, sales and operational management."
+  },
+  {
+    id: "retail",
+    slug: "retail",
+    title: "Retail",
+    description: "POS, inventory, customers, orders and analytics."
+  },
+  {
+    id: "automotive",
+    slug: "automotive",
+    title: "Automotive",
+    description: "Garage management, service management, parts and customer records."
+  },
+  {
+    id: "education",
+    slug: "education",
+    title: "Education",
+    description: "Student management, courses, attendance and administration."
+  },
+  {
+    id: "professional-services",
+    slug: "professional-services",
+    title: "Professional Services",
+    description: "CRM, billing, project management and operations."
+  },
+  {
+    id: "custom",
+    slug: "custom",
+    title: "Custom Business",
+    description: "If your workflow is unique, we build precisely around it."
+  }
+];
+
+export const portfolio = [
+  {
+    id: "doctrx",
+    slug: "doctrx",
+    title: "DoctRx",
+    industry: "Healthcare",
+    categories: ["Healthcare", "SaaS", "Mobile", "Web"],
+    shortDescription: "Comprehensive healthcare management platform.",
+    challenge: "Managing patient records, appointments, and prescriptions across multiple clinics was highly fragmented and prone to errors.",
+    strategy: "Design a unified, multi-tenant SaaS architecture allowing clinics to securely manage patient data in real-time.",
+    solution: "A complete clinic management ERP featuring role-based dashboards, electronic prescriptions, and billing integration.",
+    outcome: "Reduced administrative time by 60% and improved patient processing speed for over 50+ clinics.",
+    technologies: ["Next.js", "Node.js", "PostgreSQL", "React Native"],
+    features: ["Patient management", "Appointments", "Prescription management", "Doctor workflows", "Reports", "Dashboard"],
+    images: {
+      cover: "/images/portfolio/doctrx-cover.png",
+      desktop: "/images/portfolio/doctrx-desktop.png",
+      mobile: "/images/portfolio/doctrx-mobile.png"
+    }
+  },
+  {
+    id: "manufacture-pro",
+    slug: "manufacture-pro",
+    title: "ManufacturePro ERP",
+    industry: "Manufacturing",
+    categories: ["Manufacturing", "ERP", "Web"],
+    shortDescription: "End-to-end manufacturing and inventory ERP.",
+    challenge: "A leading Rajkot manufacturer struggled with manual inventory tracking and disconnected sales and purchase orders.",
+    strategy: "Audit existing workflows and build a central digital nervous system to track materials from purchase to final product.",
+    solution: "A custom ERP system with real-time inventory tracking, automated purchase alerts, and detailed financial reporting.",
+    outcome: "Eliminated stock-outs, reduced material waste by 15%, and increased sales fulfillment speed.",
+    technologies: ["React", "Express", "MySQL", "Tailwind CSS"],
+    features: ["Inventory tracking", "Sales & Purchase", "Production lines", "Finance integration", "Reporting"],
+    images: {
+      cover: "/images/portfolio/erp-cover.png",
+      desktop: "/images/portfolio/erp-desktop.png",
+      mobile: "/images/portfolio/erp-mobile.png"
+    }
+  }
+];

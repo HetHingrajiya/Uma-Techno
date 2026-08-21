@@ -148,7 +148,7 @@ export default function ProjectEstimator() {
           </div>
 
           <div className="lg:col-span-4">
-            <div className="sticky top-32 glass-card p-8 rounded-3xl border border-[var(--color-border)] shadow-2xl">
+            <div className="glass-card p-8 rounded-3xl border border-[var(--color-border)] shadow-2xl h-fit">
               <h3 className="text-xl font-bold font-outfit text-[var(--color-text-main)] mb-6 border-b border-[var(--color-border)] pb-4">Estimated Investment</h3>
               
               <div className="space-y-4 mb-8">

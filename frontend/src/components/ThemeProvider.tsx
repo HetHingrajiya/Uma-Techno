@@ -23,13 +23,13 @@ interface ThemeSettings {
 const defaultTheme: ThemeSettings = {
   primaryColor: "#06B6D4",
   secondaryColor: "#0891B2",
-  accentColor: "#22D3EE",
-  textColor: "#0F172A",
-  backgroundColor: "#F8FAFC",
-  borderColor: "#E2E8F0",
-  cardColor: "#FFFFFF",
-  headerColor: "#FFFFFF",
-  footerColor: "#0F172A",
+  accentColor: "#8B5CF6", // Changed to purple
+  textColor: "#F8FAFC",   // Changed to light for dark mode
+  backgroundColor: "#030712", // Void black
+  borderColor: "rgba(255, 255, 255, 0.05)",
+  cardColor: "rgba(17, 24, 39, 0.6)",
+  headerColor: "rgba(3, 7, 18, 0.8)",
+  footerColor: "#000000",
   fontFamily: "Inter, Outfit, sans-serif",
   logoUrl: null,
   heroImageUrl: null,
