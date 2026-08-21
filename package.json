@@ -16,9 +16,5 @@
   },
   "dependencies": {
     "@prisma/client": "^6.2.1"
-  },
-  "workspaces": [
-    "frontend",
-    "backend"
-  ]
+  }
 }

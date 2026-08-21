@@ -1,1 +1,23 @@
-const a13_0x19adf7=a13_0x2350;(function(_0x5b72c9,_0xf57664){const _0x11eaaa=a13_0x2350,_0x4b3d2a=_0x5b72c9();while(!![]){try{const _0x3bde0d=parseInt(_0x11eaaa(0xe0))/0x1*(-parseInt(_0x11eaaa(0xd3))/0x2)+-parseInt(_0x11eaaa(0xdb))/0x3+-parseInt(_0x11eaaa(0xdc))/0x4*(parseInt(_0x11eaaa(0xda))/0x5)+-parseInt(_0x11eaaa(0xd7))/0x6*(parseInt(_0x11eaaa(0xc8))/0x7)+-parseInt(_0x11eaaa(0xcb))/0x8+parseInt(_0x11eaaa(0xc6))/0x9+parseInt(_0x11eaaa(0xd5))/0xa*(parseInt(_0x11eaaa(0xcd))/0xb);if(_0x3bde0d===_0xf57664)break;else _0x4b3d2a['push'](_0x4b3d2a['shift']());}catch(_0x3428d5){_0x4b3d2a['push'](_0x4b3d2a['shift']());}}}(a13_0x2810,0x1980c));const a13_0x1eb6c6=(function(){let _0x6bdba6=!![];return function(_0x93e3d6,_0x2840cf){const _0x45dd22=_0x6bdba6?function(){const _0x395326=a13_0x2350;if(_0x2840cf){const _0x2160a4=_0x2840cf[_0x395326(0xc9)](_0x93e3d6,arguments);return _0x2840cf=null,_0x2160a4;}}:function(){};return _0x6bdba6=![],_0x45dd22;};}()),a13_0x3e09b3=a13_0x1eb6c6(this,function(){const _0x1138fa=a13_0x2350;return a13_0x3e09b3[_0x1138fa(0xdf)]()[_0x1138fa(0xde)]('(((.+)+)+)+$')[_0x1138fa(0xdf)]()[_0x1138fa(0xdd)](a13_0x3e09b3)[_0x1138fa(0xde)](_0x1138fa(0xcf));});a13_0x3e09b3();'use strict';var __importDefault=this&&this['__importDefault']||function(_0xe8115e){const _0x36c96e=a13_0x2350;return _0xe8115e&&_0xe8115e[_0x36c96e(0xd9)]?_0xe8115e:{'default':_0xe8115e};};function a13_0x2350(_0x16ecbf,_0x4a9820){_0x16ecbf=_0x16ecbf-0xc6;const _0x114a87=a13_0x2810();let _0x3e09b3=_0x114a87[_0x16ecbf];return _0x3e09b3;}Object['defineProperty'](exports,a13_0x19adf7(0xd9),{'value':!![]}),exports['authMiddleware']=void 0x0;function a13_0x2810(){const _0x4b5fab=['179358TyQotv','8yDkrew','constructor','search','toString','208271ZyJMGO','1391463yBxpxl','headers','21OFDqgA','apply','user','142896huLuZx','authorization','103147oEFRfo','status','(((.+)+)+)+$','authMiddleware','Token\x20is\x20not\x20valid','fallback_secret','2lRTmBW','split','320OCZYgA','default','103596qXONNe','json','__esModule','31235NRMZXu'];a13_0x2810=function(){return _0x4b5fab;};return a13_0x2810();}const jsonwebtoken_1=__importDefault(require('jsonwebtoken')),JWT_SECRET=process.env.JWT_SECRET||a13_0x19adf7(0xd2),authMiddleware=(_0x23f4a5,_0x3dce33,_0x438e87)=>{const _0xa6c609=a13_0x19adf7,_0x2e409a=_0x23f4a5[_0xa6c609(0xc7)][_0xa6c609(0xcc)]?.[_0xa6c609(0xd4)]('\x20')[0x1];if(!_0x2e409a)return _0x3dce33[_0xa6c609(0xce)](0x191)[_0xa6c609(0xd8)]({'success':![],'message':'No\x20token,\x20authorization\x20denied'});try{const _0x507558=jsonwebtoken_1[_0xa6c609(0xd6)]['verify'](_0x2e409a,JWT_SECRET);_0x23f4a5[_0xa6c609(0xca)]=_0x507558,_0x438e87();}catch(_0x46f34d){return _0x3dce33[_0xa6c609(0xce)](0x191)['json']({'success':![],'message':_0xa6c609(0xd1)});}};exports[a13_0x19adf7(0xd0)]=authMiddleware;
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.authMiddleware = void 0;
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
+const authMiddleware = (req, res, next) => {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) {
+        return res.status(401).json({ success: false, message: "No token, authorization denied" });
+    }
+    try {
+        const decoded = jsonwebtoken_1.default.verify(token, JWT_SECRET);
+        req.user = decoded;
+        next();
+    }
+    catch (error) {
+        return res.status(401).json({ success: false, message: "Token is not valid" });
+    }
+};
+exports.authMiddleware = authMiddleware;

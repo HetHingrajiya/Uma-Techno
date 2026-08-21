@@ -1,1 +1,19 @@
-function a26_0x5814(){const _0x392c62=['48036dcfyVr','429GGAcbX','511GfZgHw','apply','4322982YqsKcb','1487522eGwZYb','log','default','171KXzpRk','56720uCtyKj','104968UKasWv','__esModule','🚀\x20Server\x20running\x20on\x20http://localhost:','error','search','349390xQvBoR','1OlvDuD','❌\x20Error\x20starting\x20server:','1250500ANrlHW','exit','defineProperty','21jbsjML','(((.+)+)+)+$','constructor'];a26_0x5814=function(){return _0x392c62;};return a26_0x5814();}const a26_0x3c30d2=a26_0x1105;(function(_0x4ae8ea,_0x4373b1){const _0xfe1aab=a26_0x1105,_0x39f0b1=_0x4ae8ea();while(!![]){try{const _0x51121e=parseInt(_0xfe1aab(0x108))/0x1*(-parseInt(_0xfe1aab(0x115))/0x2)+parseInt(_0xfe1aab(0x10d))/0x3*(parseInt(_0xfe1aab(0x102))/0x4)+parseInt(_0xfe1aab(0x10a))/0x5+parseInt(_0xfe1aab(0x114))/0x6+parseInt(_0xfe1aab(0x112))/0x7*(parseInt(_0xfe1aab(0x101))/0x8)+-parseInt(_0xfe1aab(0x100))/0x9*(parseInt(_0xfe1aab(0x107))/0xa)+-parseInt(_0xfe1aab(0x111))/0xb*(-parseInt(_0xfe1aab(0x110))/0xc);if(_0x51121e===_0x4373b1)break;else _0x39f0b1['push'](_0x39f0b1['shift']());}catch(_0x1d4c94){_0x39f0b1['push'](_0x39f0b1['shift']());}}}(a26_0x5814,0x66a18));const a26_0xa771a1=(function(){let _0x56215b=!![];return function(_0x5619a3,_0x27876e){const _0x559271=_0x56215b?function(){const _0x1537ac=a26_0x1105;if(_0x27876e){const _0x1e0dc5=_0x27876e[_0x1537ac(0x113)](_0x5619a3,arguments);return _0x27876e=null,_0x1e0dc5;}}:function(){};return _0x56215b=![],_0x559271;};}()),a26_0x3bbc31=a26_0xa771a1(this,function(){const _0x3aee2e=a26_0x1105;return a26_0x3bbc31['toString']()[_0x3aee2e(0x106)](_0x3aee2e(0x10e))['toString']()[_0x3aee2e(0x10f)](a26_0x3bbc31)[_0x3aee2e(0x106)](_0x3aee2e(0x10e));});a26_0x3bbc31();function a26_0x1105(_0x2157e6,_0x50a51d){_0x2157e6=_0x2157e6-0xff;const _0x579790=a26_0x5814();let _0x3bbc31=_0x579790[_0x2157e6];return _0x3bbc31;}'use strict';var __importDefault=this&&this['__importDefault']||function(_0x22cdc2){const _0x2ed99c=a26_0x1105;return _0x22cdc2&&_0x22cdc2[_0x2ed99c(0x103)]?_0x22cdc2:{'default':_0x22cdc2};};Object[a26_0x3c30d2(0x10c)](exports,a26_0x3c30d2(0x103),{'value':!![]});const app_1=__importDefault(require('./app')),PORT=process.env.PORT||0x1388,startServer=async()=>{const _0x4bfd11=a26_0x3c30d2;try{app_1[_0x4bfd11(0xff)]['listen'](PORT,()=>{const _0x4c5fcb=_0x4bfd11;console[_0x4c5fcb(0x116)](_0x4c5fcb(0x104)+PORT);});}catch(_0x55a328){console[_0x4bfd11(0x105)](_0x4bfd11(0x109),_0x55a328),process[_0x4bfd11(0x10b)](0x1);}};startServer();
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const app_1 = __importDefault(require("./app"));
+const PORT = process.env.PORT || 5000;
+const startServer = async () => {
+    try {
+        app_1.default.listen(PORT, () => {
+            console.log(`🚀 Server running on http://localhost:${PORT}`);
+        });
+    }
+    catch (error) {
+        console.error('❌ Error starting server:', error);
+        process.exit(1);
+    }
+};
+startServer();

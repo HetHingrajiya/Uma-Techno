@@ -1,1 +1,88 @@
-function a7_0x47d8(){const _0x57d241=['32956728MZbwFQ','getServices','(((.+)+)+)+$','desc','Not\x20found','update','min','json','create','628851mqjOEB','default','findUnique','object','findMany','deleteService','Slug\x20already\x20exists','createService','service','Service\x20deleted','boolean','4466604kIbhpQ','Failed\x20to\x20fetch\x20services','PrismaClient','8812434mdlfvc','apply','array','ZodError','updateService','parse','4720UWzjqz','optional','3635iaUDfV','zod','1936666YnhJbH','toString','issues','delete','body','search','getServiceBySlug','9GWEoBD','__esModule','@prisma/client','params','slug','defineProperty','6539526mrxnld','string','status'];a7_0x47d8=function(){return _0x57d241;};return a7_0x47d8();}const a7_0x106fb1=a7_0x396a;(function(_0x34a48e,_0x1491a5){const _0x1e23a3=a7_0x396a,_0x2befcc=_0x34a48e();while(!![]){try{const _0x35e5d2=parseInt(_0x1e23a3(0x1fd))/0x1+-parseInt(_0x1e23a3(0x215))/0x2+-parseInt(_0x1e23a3(0x208))/0x3+-parseInt(_0x1e23a3(0x211))/0x4*(-parseInt(_0x1e23a3(0x213))/0x5)+-parseInt(_0x1e23a3(0x20b))/0x6+-parseInt(_0x1e23a3(0x1f1))/0x7+parseInt(_0x1e23a3(0x1f4))/0x8*(parseInt(_0x1e23a3(0x1eb))/0x9);if(_0x35e5d2===_0x1491a5)break;else _0x2befcc['push'](_0x2befcc['shift']());}catch(_0x49c5ee){_0x2befcc['push'](_0x2befcc['shift']());}}}(a7_0x47d8,0xb62a0));const a7_0xfa96d0=(function(){let _0x3c9d1e=!![];return function(_0x4a00af,_0x4f96ff){const _0x24ac84=_0x3c9d1e?function(){const _0x5deeb1=a7_0x396a;if(_0x4f96ff){const _0x44e77d=_0x4f96ff[_0x5deeb1(0x20c)](_0x4a00af,arguments);return _0x4f96ff=null,_0x44e77d;}}:function(){};return _0x3c9d1e=![],_0x24ac84;};}()),a7_0xad372c=a7_0xfa96d0(this,function(){const _0x356837=a7_0x396a;return a7_0xad372c[_0x356837(0x216)]()[_0x356837(0x1e9)](_0x356837(0x1f6))[_0x356837(0x216)]()['constructor'](a7_0xad372c)[_0x356837(0x1e9)](_0x356837(0x1f6));});a7_0xad372c();'use strict';Object[a7_0x106fb1(0x1f0)](exports,a7_0x106fb1(0x1ec),{'value':!![]}),exports[a7_0x106fb1(0x202)]=exports['updateService']=exports['createService']=exports[a7_0x106fb1(0x1ea)]=exports[a7_0x106fb1(0x1f5)]=void 0x0;const client_1=require(a7_0x106fb1(0x1ed)),zod_1=require(a7_0x106fb1(0x214)),prisma=new client_1[(a7_0x106fb1(0x20a))](),ServiceSchema=zod_1['z'][a7_0x106fb1(0x200)]({'title':zod_1['z'][a7_0x106fb1(0x1f2)]()[a7_0x106fb1(0x1fa)](0x1),'slug':zod_1['z']['string']()['min'](0x1),'description':zod_1['z'][a7_0x106fb1(0x1f2)]()[a7_0x106fb1(0x1fa)](0x1),'content':zod_1['z']['string'](),'icon':zod_1['z'][a7_0x106fb1(0x1f2)]()[a7_0x106fb1(0x212)](),'features':zod_1['z'][a7_0x106fb1(0x20d)](zod_1['z'][a7_0x106fb1(0x1f2)]())['default']([]),'benefits':zod_1['z']['array'](zod_1['z'][a7_0x106fb1(0x1f2)]())[a7_0x106fb1(0x1fe)]([]),'published':zod_1['z'][a7_0x106fb1(0x207)]()[a7_0x106fb1(0x1fe)](!![])}),getServices=async(_0x15a508,_0x51283e)=>{const _0x1be093=a7_0x106fb1;try{const _0x54d5ec=await prisma['service'][_0x1be093(0x201)]({'orderBy':{'createdAt':_0x1be093(0x1f7)}});_0x51283e['status'](0xc8)[_0x1be093(0x1fb)](_0x54d5ec);}catch(_0x2bd8a5){_0x51283e['status'](0x1f4)[_0x1be093(0x1fb)]({'success':![],'message':_0x1be093(0x209)});}};exports[a7_0x106fb1(0x1f5)]=getServices;const getServiceBySlug=async(_0xc2f7a7,_0x207290)=>{const _0xb376ea=a7_0x106fb1;try{const _0x59667c=_0xc2f7a7['params'][_0xb376ea(0x1ef)],_0x453165=await prisma['service'][_0xb376ea(0x1ff)]({'where':{'slug':_0x59667c}});if(!_0x453165)return _0x207290[_0xb376ea(0x1f3)](0x194)[_0xb376ea(0x1fb)]({'success':![],'message':_0xb376ea(0x1f8)});_0x207290[_0xb376ea(0x1f3)](0xc8)[_0xb376ea(0x1fb)](_0x453165);}catch(_0x16872e){_0x207290[_0xb376ea(0x1f3)](0x1f4)['json']({'success':![],'message':'Failed\x20to\x20fetch\x20service'});}};function a7_0x396a(_0x3e466f,_0x4633b2){_0x3e466f=_0x3e466f-0x1e8;const _0x37aafb=a7_0x47d8();let _0xad372c=_0x37aafb[_0x3e466f];return _0xad372c;}exports[a7_0x106fb1(0x1ea)]=getServiceBySlug;const createService=async(_0x594c3d,_0x1d0643)=>{const _0xbca739=a7_0x106fb1;try{const _0x27fe7f=ServiceSchema[_0xbca739(0x210)](_0x594c3d[_0xbca739(0x1e8)]),_0x256a82=await prisma[_0xbca739(0x205)][_0xbca739(0x1ff)]({'where':{'slug':_0x27fe7f['slug']}});if(_0x256a82)return _0x1d0643['status'](0x190)['json']({'success':![],'message':_0xbca739(0x203)});const _0x673077=await prisma[_0xbca739(0x205)][_0xbca739(0x1fc)]({'data':_0x27fe7f});_0x1d0643['status'](0xc9)[_0xbca739(0x1fb)]({'success':!![],'data':_0x673077});}catch(_0x2b7c9e){if(_0x2b7c9e instanceof zod_1['z']['ZodError'])return _0x1d0643['status'](0x190)[_0xbca739(0x1fb)]({'success':![],'errors':_0x2b7c9e[_0xbca739(0x217)]});_0x1d0643['status'](0x1f4)[_0xbca739(0x1fb)]({'success':![],'message':'Failed\x20to\x20create\x20service'});}};exports[a7_0x106fb1(0x204)]=createService;const updateService=async(_0x5e3b8d,_0x26c7ed)=>{const _0x55583b=a7_0x106fb1;try{const _0x2633a0=_0x5e3b8d[_0x55583b(0x1ee)]['id'],_0x4749f7=ServiceSchema['partial']()[_0x55583b(0x210)](_0x5e3b8d[_0x55583b(0x1e8)]),_0x40e4f3=await prisma[_0x55583b(0x205)][_0x55583b(0x1f9)]({'where':{'id':_0x2633a0},'data':_0x4749f7});_0x26c7ed[_0x55583b(0x1f3)](0xc8)[_0x55583b(0x1fb)]({'success':!![],'data':_0x40e4f3});}catch(_0x29fadc){if(_0x29fadc instanceof zod_1['z'][_0x55583b(0x20e)])return _0x26c7ed['status'](0x190)['json']({'success':![],'errors':_0x29fadc['issues']});_0x26c7ed['status'](0x1f4)[_0x55583b(0x1fb)]({'success':![],'message':'Failed\x20to\x20update\x20service'});}};exports[a7_0x106fb1(0x20f)]=updateService;const deleteService=async(_0x1265e0,_0x2627b2)=>{const _0x50615f=a7_0x106fb1;try{const _0x12bb86=_0x1265e0['params']['id'];await prisma[_0x50615f(0x205)][_0x50615f(0x218)]({'where':{'id':_0x12bb86}}),_0x2627b2['status'](0xc8)['json']({'success':!![],'message':_0x50615f(0x206)});}catch(_0x17ea23){_0x2627b2[_0x50615f(0x1f3)](0x1f4)[_0x50615f(0x1fb)]({'success':![],'message':'Failed\x20to\x20delete\x20service'});}};exports[a7_0x106fb1(0x202)]=deleteService;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.deleteService = exports.updateService = exports.createService = exports.getServiceBySlug = exports.getServices = void 0;
+const client_1 = require("@prisma/client");
+const zod_1 = require("zod");
+const prisma = new client_1.PrismaClient();
+const ServiceSchema = zod_1.z.object({
+    title: zod_1.z.string().min(1),
+    slug: zod_1.z.string().min(1),
+    description: zod_1.z.string().min(1),
+    content: zod_1.z.string(),
+    icon: zod_1.z.string().optional(),
+    features: zod_1.z.array(zod_1.z.string()).default([]),
+    benefits: zod_1.z.array(zod_1.z.string()).default([]),
+    published: zod_1.z.boolean().default(true),
+});
+const getServices = async (req, res) => {
+    try {
+        const services = await prisma.service.findMany({
+            orderBy: { createdAt: 'desc' }
+        });
+        res.status(200).json(services);
+    }
+    catch (error) {
+        res.status(500).json({ success: false, message: 'Failed to fetch services' });
+    }
+};
+exports.getServices = getServices;
+const getServiceBySlug = async (req, res) => {
+    try {
+        const { slug } = req.params;
+        const service = await prisma.service.findUnique({
+            where: { slug }
+        });
+        if (!service)
+            return res.status(404).json({ success: false, message: 'Not found' });
+        res.status(200).json(service);
+    }
+    catch (error) {
+        res.status(500).json({ success: false, message: 'Failed to fetch service' });
+    }
+};
+exports.getServiceBySlug = getServiceBySlug;
+const createService = async (req, res) => {
+    try {
+        const data = ServiceSchema.parse(req.body);
+        const existing = await prisma.service.findUnique({ where: { slug: data.slug } });
+        if (existing) {
+            return res.status(400).json({ success: false, message: 'Slug already exists' });
+        }
+        const service = await prisma.service.create({ data });
+        res.status(201).json({ success: true, data: service });
+    }
+    catch (error) {
+        if (error instanceof zod_1.z.ZodError)
+            return res.status(400).json({ success: false, errors: error.errors });
+        res.status(500).json({ success: false, message: 'Failed to create service' });
+    }
+};
+exports.createService = createService;
+const updateService = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = ServiceSchema.partial().parse(req.body);
+        const service = await prisma.service.update({
+            where: { id },
+            data
+        });
+        res.status(200).json({ success: true, data: service });
+    }
+    catch (error) {
+        if (error instanceof zod_1.z.ZodError)
+            return res.status(400).json({ success: false, errors: error.errors });
+        res.status(500).json({ success: false, message: 'Failed to update service' });
+    }
+};
+exports.updateService = updateService;
+const deleteService = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await prisma.service.delete({ where: { id } });
+        res.status(200).json({ success: true, message: 'Service deleted' });
+    }
+    catch (error) {
+        res.status(500).json({ success: false, message: 'Failed to delete service' });
+    }
+};
+exports.deleteService = deleteService;

@@ -1,1 +1,46 @@
-const a3_0x3465e8=a3_0x3589;function a3_0x3589(_0x2b2f07,_0x4da3df){_0x2b2f07=_0x2b2f07-0xa0;const _0x51db1b=a3_0x1241();let _0x566e77=_0x51db1b[_0x2b2f07];return _0x566e77;}(function(_0x482db0,_0x2ea7c1){const _0x1c571d=a3_0x3589,_0x20e3a6=_0x482db0();while(!![]){try{const _0xd02080=-parseInt(_0x1c571d(0xc8))/0x1+parseInt(_0x1c571d(0xb0))/0x2+-parseInt(_0x1c571d(0xc4))/0x3+-parseInt(_0x1c571d(0xad))/0x4+-parseInt(_0x1c571d(0xbd))/0x5+-parseInt(_0x1c571d(0xaf))/0x6+parseInt(_0x1c571d(0xc5))/0x7;if(_0xd02080===_0x2ea7c1)break;else _0x20e3a6['push'](_0x20e3a6['shift']());}catch(_0xffb923){_0x20e3a6['push'](_0x20e3a6['shift']());}}}(a3_0x1241,0x9b47e));const a3_0x5b6430=(function(){let _0x13321f=!![];return function(_0x3ea6fd,_0x108669){const _0x15d75d=_0x13321f?function(){if(_0x108669){const _0x27300d=_0x108669['apply'](_0x3ea6fd,arguments);return _0x108669=null,_0x27300d;}}:function(){};return _0x13321f=![],_0x15d75d;};}()),a3_0x566e77=a3_0x5b6430(this,function(){const _0x5a9663=a3_0x3589;return a3_0x566e77['toString']()[_0x5a9663(0xa2)](_0x5a9663(0xb3))[_0x5a9663(0xb7)]()[_0x5a9663(0xa0)](a3_0x566e77)['search'](_0x5a9663(0xb3));});function a3_0x1241(){const _0xbcaa32=['submitContact','(((.+)+)+)+$','Contact\x20submission\x20error:','status','body','toString','ZodError','optional','PrismaClient','Invalid\x20email\x20address','Failed\x20to\x20send\x20lead\x20email:','3921210PtDtQz','Message\x20must\x20be\x20at\x20least\x2010\x20characters','contact','zod','email','parse','error','3524787CzhWJW','27163493qZxLkg','desc','Internal\x20server\x20error','718620wuhuUk','../services/emailService','constructor','Your\x20message\x20has\x20been\x20received.\x20We\x20will\x20get\x20back\x20to\x20you\x20soon!','search','string','__esModule','findMany','Name\x20is\x20too\x20short','create','defineProperty','json','getContacts','catch','min','3147712IanWea','subject','3885816DqRbqx','1735772EZIxMm','@prisma/client'];a3_0x1241=function(){return _0xbcaa32;};return a3_0x1241();}a3_0x566e77();'use strict';Object[a3_0x3465e8(0xa8)](exports,a3_0x3465e8(0xa4),{'value':!![]}),exports['getContacts']=exports[a3_0x3465e8(0xb2)]=void 0x0;const client_1=require(a3_0x3465e8(0xb1)),zod_1=require(a3_0x3465e8(0xc0)),emailService_1=require(a3_0x3465e8(0xc9)),prisma=new client_1[(a3_0x3465e8(0xba))](),ContactSchema=zod_1['z']['object']({'name':zod_1['z']['string']()[a3_0x3465e8(0xac)](0x2,a3_0x3465e8(0xa6)),'email':zod_1['z'][a3_0x3465e8(0xa3)]()['email'](a3_0x3465e8(0xbb)),'phone':zod_1['z'][a3_0x3465e8(0xa3)]()[a3_0x3465e8(0xb9)](),'subject':zod_1['z'][a3_0x3465e8(0xa3)]()[a3_0x3465e8(0xb9)](),'message':zod_1['z'][a3_0x3465e8(0xa3)]()[a3_0x3465e8(0xac)](0xa,a3_0x3465e8(0xbe))}),submitContact=async(_0x1a3d97,_0x517ac8)=>{const _0x272094=a3_0x3465e8;try{const _0x37cf2c=ContactSchema[_0x272094(0xc2)](_0x1a3d97[_0x272094(0xb6)]),_0x124f6d=await prisma[_0x272094(0xbf)][_0x272094(0xa7)]({'data':_0x37cf2c});return(0x0,emailService_1['sendContactEmail'])({'name':_0x37cf2c['name'],'email':_0x37cf2c[_0x272094(0xc1)],'phone':_0x37cf2c['phone'],'subject':_0x37cf2c[_0x272094(0xae)],'message':_0x37cf2c['message']})[_0x272094(0xab)](_0x3c7fcc=>console['error'](_0x272094(0xbc),_0x3c7fcc)),_0x517ac8['status'](0xc9)[_0x272094(0xa9)]({'success':!![],'message':_0x272094(0xa1),'data':_0x124f6d});}catch(_0x57035d){if(_0x57035d instanceof zod_1['z'][_0x272094(0xb8)])return _0x517ac8['status'](0x190)[_0x272094(0xa9)]({'success':![],'errors':_0x57035d['issues']});return console[_0x272094(0xc3)](_0x272094(0xb4),_0x57035d),_0x517ac8[_0x272094(0xb5)](0x1f4)[_0x272094(0xa9)]({'success':![],'message':_0x272094(0xc7)});}};exports['submitContact']=submitContact;const getContacts=async(_0x1b2451,_0x26feb6)=>{const _0x420a2c=a3_0x3465e8;try{const _0x3e35a9=await prisma[_0x420a2c(0xbf)][_0x420a2c(0xa5)]({'orderBy':{'createdAt':_0x420a2c(0xc6)}});return _0x26feb6[_0x420a2c(0xb5)](0xc8)[_0x420a2c(0xa9)]({'success':!![],'data':_0x3e35a9});}catch(_0x231754){return _0x26feb6[_0x420a2c(0xb5)](0x1f4)[_0x420a2c(0xa9)]({'success':![],'message':_0x420a2c(0xc7)});}};exports[a3_0x3465e8(0xaa)]=getContacts;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getContacts = exports.submitContact = void 0;
+const client_1 = require("@prisma/client");
+const zod_1 = require("zod");
+const prisma = new client_1.PrismaClient();
+const ContactSchema = zod_1.z.object({
+    name: zod_1.z.string().min(2, "Name is too short"),
+    email: zod_1.z.string().email("Invalid email address"),
+    phone: zod_1.z.string().optional(),
+    subject: zod_1.z.string().optional(),
+    message: zod_1.z.string().min(10, "Message must be at least 10 characters"),
+});
+const submitContact = async (req, res) => {
+    try {
+        const validatedData = ContactSchema.parse(req.body);
+        const contact = await prisma.contact.create({
+            data: validatedData,
+        });
+        return res.status(201).json({
+            success: true,
+            message: "Your message has been received. We will get back to you soon!",
+            data: contact
+        });
+    }
+    catch (error) {
+        if (error instanceof zod_1.z.ZodError) {
+            return res.status(400).json({ success: false, errors: error.errors });
+        }
+        console.error("Contact submission error:", error);
+        return res.status(500).json({ success: false, message: "Internal server error" });
+    }
+};
+exports.submitContact = submitContact;
+const getContacts = async (req, res) => {
+    try {
+        const contacts = await prisma.contact.findMany({
+            orderBy: { createdAt: 'desc' },
+        });
+        return res.status(200).json({ success: true, data: contacts });
+    }
+    catch (error) {
+        return res.status(500).json({ success: false, message: "Internal server error" });
+    }
+};
+exports.getContacts = getContacts;
