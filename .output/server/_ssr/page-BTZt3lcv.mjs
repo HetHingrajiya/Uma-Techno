@@ -1,0 +1,214 @@
+import { a as __toESM } from "../_runtime.mjs";
+import { r as motion } from "../_libs/framer-motion.mjs";
+import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
+import { n as Link } from "../_libs/react-router.mjs";
+import { pt as ArrowRight } from "../_libs/lucide-react.mjs";
+import { t as Reveal } from "./Reveal-DsZZztjS.mjs";
+import { t as MagneticButton } from "./MagneticButton-CBupM21V.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/page-BTZt3lcv.js
+var import_react = /* @__PURE__ */ __toESM(require_react());
+var import_jsx_runtime = require_jsx_runtime();
+function PortfolioPage() {
+	const [projects, setProjects] = (0, import_react.useState)([]);
+	const [loading, setLoading] = (0, import_react.useState)(true);
+	const [activeCategory, setActiveCategory] = (0, import_react.useState)("All");
+	(0, import_react.useEffect)(() => {
+		const fetchProjects = async () => {
+			try {
+				const res = await fetch(`https://uma-techno-phrb.vercel.app/api/v1/projects`);
+				if (res.ok) {
+					const data = await res.json();
+					const mergedData = [{
+						title: "DocRx Health Platform",
+						category: "HealthTech",
+						description: "Secure, HIPAA-compliant digital prescription and patient record management system.",
+						featuredImage: "/images/health-booking.png",
+						slug: "docrx",
+						tech: [
+							"Flutter",
+							"ASP.Net",
+							"MSSQL"
+						]
+					}, ...data.filter((p) => p.slug !== "docrx")];
+					if (data.length > 0) setProjects(mergedData);
+					else setProjects([
+						{
+							title: "DocRx Health Platform",
+							category: "HealthTech",
+							description: "Secure, HIPAA-compliant digital prescription and patient record management system.",
+							featuredImage: "/images/health-booking.png",
+							slug: "docrx",
+							tech: [
+								"Flutter",
+								"ASP.Net",
+								"MSSQL"
+							]
+						},
+						{
+							title: "Premium Jewelry E-commerce",
+							category: "E-commerce",
+							description: "Luxury digital presence for a high-end jewelry showroom.",
+							featuredImage: "/images/jewelry-ecommerce.png",
+							slug: "jewelry-ecommerce"
+						},
+						{
+							title: "Healthcare Booking System",
+							category: "Web App",
+							description: "Automated real-time slot management for multi-location clinics.",
+							featuredImage: "/images/health-booking.png",
+							slug: "booking-platform"
+						},
+						{
+							title: "Fintech Growth Dashboard",
+							category: "SaaS",
+							description: "Secure data visualization for enterprise financial tracking.",
+							featuredImage: "/images/fintech-dashboard.png",
+							slug: "fintech-saas"
+						},
+						{
+							title: "E-commerce Templates",
+							category: "UI Kit",
+							description: "Interactive property listing platform with map-based search.",
+							featuredImage: "/images/jewelry-ecommerce.png",
+							slug: "ui-templates"
+						},
+						{
+							title: "Premium Real Estate",
+							category: "Web Design",
+							description: "Video-based learning management system with course progress tracking.",
+							featuredImage: "/images/project-1-v2.png",
+							slug: "educational-lms"
+						},
+						{
+							title: "Industrial CRM System",
+							category: "Software",
+							description: "Custom internal tool for managing manufacturing workflows.",
+							featuredImage: "/images/project-2-v2.png",
+							slug: "industrial-crm"
+						}
+					]);
+				}
+			} catch (err) {
+				console.error(err);
+			} finally {
+				setLoading(false);
+			}
+		};
+		fetchProjects();
+	}, []);
+	const categories = ["All", ...Array.from(new Set(projects.map((p) => p.category)))];
+	const filteredProjects = activeCategory === "All" ? projects : projects.filter((p) => p.category === activeCategory);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "pt-32 pb-20 lg:pt-40 lg:pb-32 bg-[var(--color-background)] min-h-screen",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "max-w-7xl mx-auto px-6",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "text-center space-y-6 mb-16",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+							direction: "down",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/20 text-[var(--color-electric)] text-xs font-bold uppercase tracking-wider",
+								children: "Our Portfolio"
+							})
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+							delay: .1,
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
+								className: "text-4xl lg:text-6xl font-bold font-outfit text-[var(--color-text-main)]",
+								children: ["Work That ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "text-gradient",
+									children: "Inspires"
+								})]
+							})
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+							delay: .2,
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto text-lg",
+								children: "Explore our curated selection of recent projects, showcasing our expertise in delivering high-end digital solutions that drive business growth."
+							})
+						})
+					]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+					delay: .3,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "flex flex-wrap justify-center gap-4 mb-16",
+						children: categories.map((cat, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MagneticButton, {
+							strength: .2,
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								onClick: () => setActiveCategory(cat),
+								className: `px-6 py-2 rounded-full font-bold text-sm transition-all border ${activeCategory === cat ? "bg-[var(--color-electric)] border-[var(--color-electric)] text-white shadow-lg shadow-blue-500/25" : "bg-[var(--color-card)] border-[var(--color-border)] text-[var(--color-text-main)] hover:border-[var(--color-electric)]"}`,
+								children: cat
+							})
+						}, i))
+					})
+				}),
+				loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "text-center text-[var(--color-text-main)] opacity-50 py-20",
+					children: "Loading projects..."
+				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+					layout: true,
+					className: "grid md:grid-cols-2 gap-8 lg:gap-12",
+					children: filteredProjects.map((project, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
+						layout: true,
+						initial: {
+							opacity: 0,
+							y: 20
+						},
+						animate: {
+							opacity: 1,
+							y: 0
+						},
+						transition: {
+							duration: .5,
+							delay: i * .1
+						},
+						className: "card-premium group overflow-hidden flex flex-col",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "relative aspect-[4/3] overflow-hidden",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: project.featuredImage || "/images/jewelry-ecommerce.png",
+								alt: project.title,
+								className: "w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "absolute top-8 left-8",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "px-4 py-2 bg-transparent backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-electric)]/20 text-xs font-black uppercase tracking-widest rounded-full shadow-xl",
+									children: project.category
+								})
+							})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "p-8 lg:p-12 space-y-4 flex-1 flex flex-col justify-between",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-4",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
+									className: "text-3xl font-bold font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors break-words",
+									children: project.title
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-[var(--color-text-main)] opacity-70 text-base leading-relaxed",
+									children: project.description
+								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+								to: `/portfolio/${project.slug || project.title.toLowerCase().replace(/ /g, "-")}`,
+								className: "flex items-center gap-2 text-[var(--color-electric)] font-bold text-sm tracking-widest uppercase mt-8 group/link",
+								children: ["View Case Study ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {
+									size: 20,
+									className: "group-hover/link:translate-x-2 transition-transform"
+								})]
+							})]
+						})]
+					}, project.slug || i))
+				}),
+				!loading && filteredProjects.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "text-center text-[var(--color-text-main)] opacity-50 py-20",
+					children: "No projects found in this category."
+				})
+			]
+		})
+	});
+}
+//#endregion
+export { PortfolioPage as default };
