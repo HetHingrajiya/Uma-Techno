@@ -358,10 +358,12 @@ export default function Home() {
               <motion.div
                 animate={{ y: [0, -15, 0] }}
                 transition={{ duration: 6, repeat: Infinity }}
-                className="absolute -top-6 -right-6 lg:-top-8 lg:-right-8 glass-card p-4 lg:p-6 !border-[var(--color-electric)]/50 neo-glow"
+                className="absolute -top-6 -right-6 lg:-top-8 lg:-right-8 z-20"
               >
-                <div className="text-[var(--color-electric)] font-black text-lg lg:text-xl tracking-tighter">Business First</div>
-                <div className="text-[10px] text-[var(--color-text-main)] opacity-60 font-bold uppercase tracking-widest mt-1">Our Core Mindset</div>
+                <div className="glass-card p-4 lg:p-6 !border-[var(--color-electric)]/50 neo-glow">
+                  <div className="text-[var(--color-electric)] font-black text-lg lg:text-xl tracking-tighter">Business First</div>
+                  <div className="text-[10px] text-[var(--color-text-main)] opacity-60 font-bold uppercase tracking-widest mt-1">Our Core Mindset</div>
+                </div>
               </motion.div>
             </div>
 
