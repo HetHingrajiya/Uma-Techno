@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "vite",
+    "prebuild": "npm run clean",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint",
-    "clean": "rimraf dist node_modules/.cache",
-    "clear-cache": "rimraf .next/cache"
+    "clean": "rimraf dist node_modules/.cache"
   },
   "dependencies": {
     "clsx": "^2.1.1",
