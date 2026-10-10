@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import Logo from "@/components/ui/Logo";
 
 const companyLinks = [
@@ -31,8 +31,8 @@ export default function Footer() {
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-7 text-white/55">Digital products, thoughtful design and growth-focused marketing for businesses ready for their next chapter.</p>
             <div className="mt-6 flex gap-3">
-              <a href="https://www.instagram.com/uma.techno/" target="_blank" rel="noopener noreferrer" aria-label="UMA TECHNO on Instagram" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/65 transition-colors hover:border-[var(--color-electric)]/50 hover:text-[var(--color-electric)]"><Instagram size={17} /></a>
-              <a href="https://www.linkedin.com/company/uma-techno" target="_blank" rel="noopener noreferrer" aria-label="UMA TECHNO on LinkedIn" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/65 transition-colors hover:border-[var(--color-electric)]/50 hover:text-[var(--color-electric)]"><Linkedin size={17} /></a>
+              <a href="https://www.instagram.com/uma.techno/" target="_blank" rel="noopener noreferrer" aria-label="UMA TECHNO on Instagram" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-xs font-black tracking-tight text-white/70 transition-colors hover:border-[var(--color-electric)]/50 hover:text-[var(--color-electric)]">IG</a>
+              <a href="https://www.linkedin.com/company/uma-techno" target="_blank" rel="noopener noreferrer" aria-label="UMA TECHNO on LinkedIn" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-xs font-black tracking-tight text-white/70 transition-colors hover:border-[var(--color-electric)]/50 hover:text-[var(--color-electric)]">in</a>
             </div>
           </div>
 
