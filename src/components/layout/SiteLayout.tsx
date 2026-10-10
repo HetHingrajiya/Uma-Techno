@@ -9,21 +9,19 @@ export default function SiteLayout() {
   const location = useLocation();
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--background)] relative">
-      {/* Background Aurora Effect */}
-      <div className="fixed inset-0 z-0 pointer-events-none bg-aurora mix-blend-screen" />
-      
-      <div className="relative z-10 flex flex-col min-h-screen">
+    <div className="relative flex min-h-screen flex-col bg-[var(--background)]">
+      <div className="pointer-events-none fixed inset-0 z-0 bg-aurora" />
+      <div className="relative z-10 flex min-h-screen flex-col">
         <VisitTracker />
         <Navbar />
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
           <motion.main
             key={location.pathname}
-            initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="flex-grow flex flex-col w-full"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+            className="flex w-full flex-1 flex-col"
           >
             <Outlet />
           </motion.main>

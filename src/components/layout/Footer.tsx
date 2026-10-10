@@ -1,147 +1,68 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin } from "lucide-react";
-import Logo from "../ui/Logo";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import Logo from "@/components/ui/Logo";
 
-const Facebook = (props: any) => (
-  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-);
-const Twitter = (props: any) => (
-  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-);
-const Instagram = (props: any) => (
-  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-);
-const Linkedin = (props: any) => (
-  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-);
+const companyLinks = [
+  { label: "About UMA TECHNO", href: "/about" },
+  { label: "Our work", href: "/portfolio" },
+  { label: "Insights", href: "/blog" },
+  { label: "Careers", href: "/careers" },
+  { label: "Contact", href: "/contact" }
+];
+
+const serviceLinks = [
+  { label: "Web development", href: "/web-development" },
+  { label: "Mobile applications", href: "/services" },
+  { label: "SEO services", href: "/seo-services" },
+  { label: "Digital marketing", href: "/digital-marketing" },
+  { label: "All services", href: "/services" }
+];
 
 export default function Footer() {
   return (
-    <footer className="relative pt-24 pb-12 overflow-hidden bg-[var(--background)] border-t border-[var(--color-border)]/50 mt-20">
-      {/* Subtle Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[300px] bg-gradient-to-b from-[var(--color-electric)]/5 to-transparent blur-3xl pointer-events-none" />
+    <footer className="relative overflow-hidden border-t border-white/10 bg-[#080807] pt-16 sm:pt-20 pb-8">
+      <div className="pointer-events-none absolute -top-40 left-1/3 h-72 w-72 rounded-full bg-[var(--color-electric)]/[.07] blur-[100px]" />
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <div className="grid gap-12 border-b border-white/10 pb-12 md:grid-cols-2 xl:grid-cols-[1.4fr_.7fr_.8fr_1fr]">
+          <div>
+            <Link to="/" className="inline-flex items-center gap-3" aria-label="UMA TECHNO home">
+              <Logo className="h-11 w-11" />
+              <span className="text-2xl font-black tracking-[-.05em] text-white">UMA <span className="text-[var(--color-electric)]">TECHNO</span></span>
+            </Link>
+            <p className="mt-5 max-w-sm text-sm leading-7 text-white/55">Digital products, thoughtful design and growth-focused marketing for businesses ready for their next chapter.</p>
+            <div className="mt-6 flex gap-3">
+              <a href="https://www.instagram.com/uma.techno/" target="_blank" rel="noopener noreferrer" aria-label="UMA TECHNO on Instagram" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-xs font-black tracking-tight text-white/70 transition-colors hover:border-[var(--color-electric)]/50 hover:text-[var(--color-electric)]">IG</a>
+              <a href="https://www.linkedin.com/company/uma-techno" target="_blank" rel="noopener noreferrer" aria-label="UMA TECHNO on LinkedIn" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-xs font-black tracking-tight text-white/70 transition-colors hover:border-[var(--color-electric)]/50 hover:text-[var(--color-electric)]">in</a>
+            </div>
+          </div>
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 text-[var(--color-text-main)] relative z-10">
-        
-        {/* Column 1: Brand Info */}
-        <div className="lg:col-span-4 space-y-6">
-          <Link to="/" className="flex flex-col mb-4 group inline-block">
-            <span className="text-3xl font-black font-outfit tracking-tighter uppercase leading-none text-white transition-colors group-hover:text-[var(--color-electric)]">
-              UMA TECHNO
-            </span>
-          </Link>
-          <p className="text-[var(--color-text-main)] opacity-60 text-sm leading-relaxed max-w-sm font-medium">
-            Digital products and business software built for growth. We engineer high-performance platforms that move businesses forward.
-          </p>
-          <div className="flex gap-3 pt-4">
-            {[
-              { Icon: Facebook, href: "#" },
-              { Icon: Twitter, href: "#" },
-              { Icon: Instagram, href: "https://www.instagram.com/uma.techno/" },
-              { Icon: Linkedin, href: "https://www.linkedin.com/company/uma-techno" }
-            ].map(({ Icon, href }, i) => (
-              <a
-                key={i}
-                href={href}
-                target={href !== "#" ? "_blank" : undefined}
-                rel={href !== "#" ? "noopener noreferrer" : undefined}
-                className="w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:bg-[var(--color-electric)]/20 hover:text-[var(--color-electric)] hover:border-[var(--color-electric)]/50 transition-all shadow-sm"
-              >
-                <Icon size={16} />
-              </a>
-            ))}
+          <div>
+            <h2 className="text-xs font-extrabold uppercase tracking-[.2em] text-white">Explore</h2>
+            <ul className="mt-5 space-y-3">{companyLinks.map((item) => <li key={item.href}><Link to={item.href} className="text-sm text-white/55 transition-colors hover:text-[var(--color-electric)]">{item.label}</Link></li>)}</ul>
+          </div>
+
+          <div>
+            <h2 className="text-xs font-extrabold uppercase tracking-[.2em] text-white">Services</h2>
+            <ul className="mt-5 space-y-3">{serviceLinks.map((item) => <li key={item.label}><Link to={item.href} className="text-sm text-white/55 transition-colors hover:text-[var(--color-electric)]">{item.label}</Link></li>)}</ul>
+          </div>
+
+          <div>
+            <h2 className="text-xs font-extrabold uppercase tracking-[.2em] text-white">Let’s connect</h2>
+            <p className="mt-5 text-sm leading-6 text-white/50">Have a project, a question or an idea? Tell us what you want to build.</p>
+            <div className="mt-5 space-y-4">
+              <a href="mailto:uma.techno585@gmail.com" className="flex items-center gap-3 text-sm text-white/65 transition-colors hover:text-[var(--color-electric)]"><Mail size={17} className="shrink-0 text-[var(--color-electric)]" /><span className="break-all">uma.techno585@gmail.com</span></a>
+              <a href="tel:+919274350728" className="flex items-center gap-3 text-sm text-white/65 transition-colors hover:text-[var(--color-electric)]"><Phone size={17} className="shrink-0 text-[var(--color-electric)]" /><span>+91 92743 50728</span></a>
+              <p className="flex items-center gap-3 text-sm text-white/45"><MapPin size={17} className="shrink-0 text-[var(--color-electric)]" />Rajkot, Gujarat, India</p>
+            </div>
+            <Link to="/contact" className="mt-6 inline-flex items-center gap-2 text-sm font-extrabold text-[var(--color-electric)] hover:gap-3 transition-all">Start a conversation <ArrowUpRight size={16} /></Link>
           </div>
         </div>
 
-        {/* Column 2: Company */}
-        <div className="lg:col-span-2 lg:col-start-6">
-          <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest font-outfit">Company</h4>
-          <ul className="space-y-3">
-            {[
-              { name: "About", href: "/about" },
-              { name: "Work", href: "/portfolio" },
-              { name: "Products", href: "/products" },
-              { name: "Careers", href: "/careers" },
-              { name: "Contact", href: "/contact" }
-            ].map((item) => (
-              <li key={item.name}>
-                <Link to={item.href} className="text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:text-[var(--color-electric)] text-sm transition-all flex items-center gap-2 group">
-                  <span className="w-0 h-px bg-[var(--color-electric)] group-hover:w-3 transition-all" />
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Column 3: Services */}
-        <div className="lg:col-span-3">
-          <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest font-outfit">Services</h4>
-          <ul className="space-y-3">
-            {[
-              { name: "Web Development", href: "/services/web-development" },
-              { name: "Mobile App Development", href: "/services/mobile-app-development" },
-              { name: "ERP Development", href: "/services/erp-development" },
-              { name: "SaaS Development", href: "/services/saas-development" },
-              { name: "E-Commerce", href: "/services/ecommerce-development" },
-              { name: "Custom Software", href: "/services/custom-software" },
-            ].map((item) => (
-              <li key={item.name}>
-                <Link to={item.href} className="text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:text-[var(--color-electric)] text-sm transition-all flex items-center gap-2 group">
-                  <span className="w-0 h-px bg-[var(--color-electric)] group-hover:w-3 transition-all" />
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Column 4: Resources */}
-        <div className="lg:col-span-3">
-          <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest font-outfit">Resources</h4>
-          <ul className="space-y-3">
-            {[
-              { name: "Blog", href: "/blog" },
-              { name: "Case Studies", href: "/case-studies" },
-              { name: "FAQs", href: "/faq" },
-            ].map((item) => (
-              <li key={item.name}>
-                <Link to={item.href} className="text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:text-[var(--color-electric)] text-sm transition-all flex items-center gap-2 group">
-                  <span className="w-0 h-px bg-[var(--color-electric)] group-hover:w-3 transition-all" />
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          
-          <div className="mt-8 space-y-3">
-             <a href="mailto:uma.techno585@gmail.com" className="flex gap-3 text-sm text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:text-[var(--color-electric)] transition-colors">
-               <Mail className="shrink-0" size={18} />
-               <span>uma.techno585@gmail.com</span>
-             </a>
-             <a href="tel:+919274350728" className="flex gap-3 text-sm text-[var(--color-text-main)] opacity-60 hover:opacity-100 hover:text-[var(--color-electric)] transition-colors">
-               <Phone className="shrink-0" size={18} />
-               <span>+91 92743 50728</span>
-             </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Bar */}
-      <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-[var(--color-border)] flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
-        <p className="text-[var(--color-text-main)] opacity-40 text-xs font-bold tracking-widest uppercase">
-          © {new Date().getFullYear()} UMA Techno. All rights reserved.
-        </p>
-        <div className="flex gap-8 text-xs font-bold tracking-widest uppercase">
-          <Link to="/privacy-policy" className="text-[var(--color-text-main)] opacity-40 hover:opacity-100 hover:text-[var(--color-electric)] transition-colors">
-            Privacy Policy
-          </Link>
-          <Link to="/terms" className="text-[var(--color-text-main)] opacity-40 hover:opacity-100 hover:text-[var(--color-electric)] transition-colors">
-            Terms
-          </Link>
+        <div className="flex flex-col gap-4 pt-6 text-xs text-white/35 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} UMA TECHNO. All rights reserved.</p>
+          <div className="flex gap-6"><Link to="/privacy" className="transition-colors hover:text-white/70">Privacy policy</Link><Link to="/terms" className="transition-colors hover:text-white/70">Terms of use</Link></div>
         </div>
       </div>
     </footer>
   );
 }
-

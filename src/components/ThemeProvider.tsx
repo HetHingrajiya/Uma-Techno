@@ -1,9 +1,5 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext } from "react";
 
-/**
- * ThemeSettings Interface:
- * Defines the structure of the static theme data.
- */
 interface ThemeSettings {
   primaryColor: string;
   secondaryColor: string;
@@ -21,15 +17,15 @@ interface ThemeSettings {
 }
 
 const defaultTheme: ThemeSettings = {
-  primaryColor: "#06B6D4",
-  secondaryColor: "#0891B2",
-  accentColor: "#8B5CF6", // Changed to purple
-  textColor: "#F8FAFC",   // Changed to light for dark mode
-  backgroundColor: "#030712", // Void black
-  borderColor: "rgba(255, 255, 255, 0.05)",
-  cardColor: "rgba(17, 24, 39, 0.6)",
-  headerColor: "rgba(3, 7, 18, 0.8)",
-  footerColor: "#000000",
+  primaryColor: "#D4AF37",
+  secondaryColor: "#B08D27",
+  accentColor: "#F2D887",
+  textColor: "#F8F7F2",
+  backgroundColor: "#080807",
+  borderColor: "rgba(255, 255, 255, 0.09)",
+  cardColor: "rgba(20, 20, 16, 0.78)",
+  headerColor: "rgba(9, 9, 8, 0.96)",
+  footerColor: "#060605",
   fontFamily: "Inter, Outfit, sans-serif",
   logoUrl: null,
   heroImageUrl: null,
@@ -38,54 +34,22 @@ const defaultTheme: ThemeSettings = {
 
 const ThemeContext = createContext<{ theme: ThemeSettings } | undefined>(undefined);
 
-/**
- * ThemeProvider:
- * The root-level context provider that handles static CSS variable injection.
- */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const theme = defaultTheme;
 
   return (
     <ThemeContext.Provider value={{ theme }}>
-      {/* 
-          Static Style Injection:
-          This block converts the theme state into global CSS variables.
-      */}
       <style dangerouslySetInnerHTML={{
         __html: `
           :root {
             ${(() => {
               const hexToRgb = (hex: string) => {
-                try {
-                  const h = hex.startsWith('#') ? hex : '#FFFFFF';
-                  const r = parseInt(h.slice(1, 3), 16);
-                  const g = parseInt(h.slice(3, 5), 16);
-                  const b = parseInt(h.slice(5, 7), 16);
-                  return `${r}, ${g}, ${b}`;
-                } catch (e) { return "255, 255, 255"; }
+                const value = hex.startsWith("#") ? hex : "#FFFFFF";
+                const r = parseInt(value.slice(1, 3), 16);
+                const g = parseInt(value.slice(3, 5), 16);
+                const b = parseInt(value.slice(5, 7), 16);
+                return `${r}, ${g}, ${b}`;
               };
-
-              const getLuminance = (hex: string) => {
-                try {
-                  const h = hex.startsWith('#') ? hex : '#FFFFFF';
-                  const r = parseInt(h.slice(1, 3), 16);
-                  const g = parseInt(h.slice(3, 5), 16);
-                  const b = parseInt(h.slice(5, 7), 16);
-                  return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-                } catch (e) { return 1; }
-              };
-
-              const bg = theme.backgroundColor || "#FFFFFF";
-              const isMainDark = getLuminance(bg) < 0.5;
-
-              // INVERSION LOGIC: 
-              // If main site is DARK, Navbar/Footer should be LIGHT.
-              // If main site is LIGHT, Navbar/Footer should be DARK.
-              const navBg = isMainDark ? "#FFFFFF" : "#0F172A";
-              const footerBg = isMainDark ? "#F8FAFC" : "#0F172A";
-              
-              const navText = isMainDark ? "#0F172A" : "#FFFFFF";
-              const footerText = isMainDark ? "#0F172A" : "#FFFFFF";
 
               return `
                 --color-electric: ${theme.primaryColor};
@@ -97,15 +61,18 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
                 --foreground: ${theme.textColor};
                 --color-border: ${theme.borderColor};
                 --color-card: ${theme.cardColor};
+                --color-glass: ${theme.cardColor};
+                --color-blue-glow: rgba(212, 175, 55, 0.2);
+                --color-purple-glow: rgba(212, 175, 55, 0.12);
+                --glass-border: ${theme.borderColor};
+                --color-header: ${theme.headerColor};
+                --color-footer: ${theme.footerColor};
+                --color-nav-text: ${theme.textColor};
+                --color-footer-text: ${theme.textColor};
+                --color-header-rgb: ${hexToRgb("#090908")};
+                --color-footer-rgb: ${hexToRgb("#060605")};
                 --font-sans: ${theme.fontFamily || "'Inter', 'Outfit', sans-serif"};
                 --font-outfit: ${theme.fontFamily || "'Outfit', sans-serif"};
-                
-                --color-header: ${navBg};
-                --color-footer: ${footerBg};
-                --color-nav-text: ${navText};
-                --color-footer-text: ${footerText};
-                --color-header-rgb: ${hexToRgb(navBg)};
-                --color-footer-rgb: ${hexToRgb(footerBg)};
               `;
             })()}
           }
@@ -116,10 +83,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-/**
- * useTheme Hook:
- * Safe access to the current theme tokens from any component.
- */
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (context === undefined) {

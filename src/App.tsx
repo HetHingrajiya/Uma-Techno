@@ -1,11 +1,9 @@
 import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import SiteLayout from './components/layout/SiteLayout';
-import AdminLayout from './components/layout/AdminLayout';
 import { ThemeProvider } from './components/ThemeProvider';
-import ProtectedRoute from './components/auth/ProtectedRoute';
 
-// Lazy load components
+// Public marketing pages only
 const HomePage = lazy(() => import('./app/(site)/page'));
 const PortfolioPage = lazy(() => import('./app/(site)/portfolio/page'));
 const BlogPage = lazy(() => import('./app/(site)/blog/page'));
@@ -16,22 +14,12 @@ const CareersPage = lazy(() => import('./app/(site)/careers/page'));
 const PrivacyPage = lazy(() => import('./app/(site)/privacy/page'));
 const TermsPage = lazy(() => import('./app/(site)/terms/page'));
 
-// Specific SEO / Service Pages
+// SEO and service landing pages
 const WebDevelopmentPage = lazy(() => import('./app/(site)/web-development/page'));
 const DigitalMarketingPage = lazy(() => import('./app/(site)/digital-marketing/page'));
 const SEOServicesPage = lazy(() => import('./app/(site)/seo-services/page'));
 
-// Admin Pages (Directly imported for stability)
-import AdminLoginPage from './app/admin/login/page';
-import AdminDashboard from './app/admin/dashboard/page';
-import AdminLeads from './app/admin/leads/page';
-import AdminServices from './app/admin/cms/services/page';
-import AdminPortfolio from './app/admin/cms/portfolio/page';
-import AdminTestimonials from './app/admin/cms/testimonials/page';
-import AdminSEO from './app/admin/seo/page';
-import AdminWidgets from './app/admin/widgets/page';
-
-// Dynamic Routes
+// Dynamic public routes
 const PortfolioDetail = lazy(() => import('./app/(site)/portfolio/[slug]/page'));
 const ServiceDetail = lazy(() => import('./app/(site)/services/[slug]/page'));
 const BlogDetail = lazy(() => import('./app/(site)/blog/[slug]/page'));
@@ -56,7 +44,6 @@ function App() {
       <ThemeProvider>
         <Suspense fallback={<Loading />}>
           <Routes>
-            {/* Public Site Routes */}
             <Route element={<SiteLayout />}>
               <Route path="/" element={<HomePage />} />
               <Route path="/portfolio" element={<PortfolioPage />} />
@@ -70,34 +57,13 @@ function App() {
               <Route path="/careers" element={<CareersPage />} />
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/terms" element={<TermsPage />} />
-              
-              {/* Specific SEO Pages */}
               <Route path="/web-development" element={<WebDevelopmentPage />} />
               <Route path="/digital-marketing" element={<DigitalMarketingPage />} />
               <Route path="/seo-services" element={<SEOServicesPage />} />
-              
-              {/* Root-level Dynamic Slugs (SEO Landing Pages) */}
               <Route path="/:slug" element={<SEOLandingDetail />} />
             </Route>
 
-            {/* Admin Routes */}
-            <Route path="/admin/login" element={<AdminLoginPage />} />
-            <Route path="/admin" element={
-              <ProtectedRoute>
-                <AdminLayout />
-              </ProtectedRoute>
-            }>
-              <Route index element={<Navigate to="/admin/dashboard" replace />} />
-              <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="leads" element={<AdminLeads />} />
-              <Route path="cms/services" element={<AdminServices />} />
-              <Route path="cms/portfolio" element={<AdminPortfolio />} />
-              <Route path="cms/testimonials" element={<AdminTestimonials />} />
-              <Route path="seo" element={<AdminSEO />} />
-              <Route path="widgets" element={<AdminWidgets />} />
-            </Route>
-
-            {/* Catch-all - redirect to home or 404 */}
+            {/* Unknown URLs, including old admin URLs, return to the marketing homepage. */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
