@@ -1,622 +1,251 @@
-import Hero from "@/components/ui/Hero";
-import ProjectEstimator from "@/components/ui/ProjectEstimator";
-import ProcessTimeline from "@/components/ui/ProcessTimeline";
-import FAQ from "@/components/ui/FAQ";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import {
-  Code, Globe, Smartphone, BarChart, Palette, Megaphone,
-  Rocket, Shield, Zap, Users, Star, ArrowRight, CheckCircle
+  ArrowDownRight, ArrowRight, BarChart3, Check, Code2, Globe2,
+  Layers3, Megaphone, MonitorSmartphone, Palette, ShieldCheck, Sparkles,
+  Smartphone, Workflow, Zap
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import { cn } from "@/lib/utils";
 
-// Static data for trust metrics and growth indicators
-const stats = [
-  { label: "Successful Projects", value: "12+", icon: Rocket },
-  { label: "Growth Delivered", value: "3x", icon: Zap },
-  { label: "Client Satisfaction", value: "100%", icon: Users },
-  { label: "Support Coverage", value: "24/7", icon: Shield },
+type Project = {
+  _id?: string;
+  id?: string;
+  title?: string;
+  name?: string;
+  slug?: string;
+  category?: string;
+  industry?: string;
+  description?: string;
+  summary?: string;
+  featuredImage?: string;
+  image?: string;
+  tech?: string[];
+  technologies?: string[];
+};
+
+const services = [
+  {
+    number: "01",
+    title: "Web Development",
+    description: "Fast, accessible websites and web platforms built around your business goals.",
+    icon: Code2,
+    href: "/web-development",
+    tags: ["Business websites", "Web applications", "E-commerce"]
+  },
+  {
+    number: "02",
+    title: "Mobile App Development",
+    description: "Thoughtful Android, iOS and cross-platform apps that feel natural to use.",
+    icon: Smartphone,
+    href: "/services/app-development",
+    tags: ["Flutter", "Android & iOS", "API integration"]
+  },
+  {
+    number: "03",
+    title: "UI/UX & Product Design",
+    description: "Clear user journeys and polished interfaces that make complex products simpler.",
+    icon: Palette,
+    href: "/services/ui-ux",
+    tags: ["Product strategy", "Prototyping", "Design systems"]
+  },
+  {
+    number: "04",
+    title: "SEO & Digital Marketing",
+    description: "Search visibility and practical digital campaigns designed to attract the right audience.",
+    icon: BarChart3,
+    href: "/digital-marketing",
+    tags: ["Technical SEO", "Content strategy", "Campaigns"]
+  },
+  {
+    number: "05",
+    title: "Branding & Creative",
+    description: "A consistent visual identity that helps your business look credible everywhere.",
+    icon: Sparkles,
+    href: "/services/branding",
+    tags: ["Brand identity", "Creative assets", "Guidelines"]
+  },
+  {
+    number: "06",
+    title: "Custom Software",
+    description: "Purpose-built business tools, integrations and workflows to reduce manual work.",
+    icon: Layers3,
+    href: "/services/custom-software",
+    tags: ["Dashboards", "Automation", "Integrations"]
+  }
 ];
 
-// Step-by-step methodology shown in the Process section
-const processSteps = [
-  { title: "Discovery & Strategy", desc: "We deep-dive into your business model to align our solution with your revenue goals." },
-  { title: "Prototyping", desc: "Creating high-fidelity wireframes and interactive prototypes for your review." },
-  { title: "Iterative Development", desc: "Building in agile sprints with regular updates and feedback cycles." },
-  { title: "Quality Assurance", desc: "Rigorous testing across devices to ensure a flawless, bug-free launch." },
-  { title: "Launch & Support", desc: "Deployment to production followed by 24/7 monitoring and long-term scaling." },
+const process = [
+  { number: "01", title: "Understand", description: "We learn about your business, audience, goals and constraints." },
+  { number: "02", title: "Plan & design", description: "We map the experience, agree on scope and make the direction tangible." },
+  { number: "03", title: "Build & refine", description: "We develop in clear milestones and keep feedback part of the process." },
+  { number: "04", title: "Launch & improve", description: "We test, launch and help you plan the next iteration." }
 ];
 
-/**
- * Home component: The primary landing page for Uma Techno.
- * Features dynamic data fetching for CMS content and a widget-based layout control.
- */
 export default function Home() {
-  const [widgets, setWidgets] = useState<any[]>([]);
-  const [services, setServices] = useState<any[]>([]);
-  const [projects, setProjects] = useState<any[]>([]);
-  const [testimonials, setTestimonials] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [showStickyCta, setShowStickyCta] = useState(false);
+  const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Show sticky CTA after scrolling 500px
-      if (window.scrollY > 500) {
-        setShowStickyCta(true);
-      } else {
-        setShowStickyCta(false);
-      }
-    };
+    const baseUrl = import.meta.env.VITE_API_URL || "https://uma-techno-phrb.vercel.app";
+    const controller = new AbortController();
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    fetch(`${baseUrl}/api/v1/projects`, { signal: controller.signal })
+      .then((response) => response.ok ? response.json() : [])
+      .then((data) => {
+        if (Array.isArray(data)) setProjects(data.filter((project: Project) => project && (project.slug || project.id || project._id)).slice(0, 3));
+      })
+      .catch((error) => {
+        if (error.name !== "AbortError") console.error("Portfolio preview could not be loaded.");
+      });
+
+    return () => controller.abort();
   }, []);
-
-  useEffect(() => {
-    /**
-     * Primary data orchestrator: Fetches all dynamic content from the backend.
-     * Implements fallback data to ensure the site remains functional even if the API is down.
-     */
-    const fetchData = async () => {
-      // Local fallbacks used for development or if the server fails
-      const fallbackWidgets = [
-        { name: 'hero', enabled: true }, { name: 'trusted', enabled: true },
-        { name: 'services', enabled: true }, { name: 'why-choose-us', enabled: true },
-        { name: 'stats', enabled: true }, { name: 'process', enabled: true },
-        { name: 'portfolio', enabled: true }, { name: 'testimonials', enabled: true },
-        { name: 'cta', enabled: true }
-      ];
-      
-      const fallbackServices = [
-        { title: "Web Engineering", description: "Scalable, secure, and conversion-optimized web platforms for growing businesses in Rajkot.", icon: "Globe", slug: "web-development" },
-        { title: "SEO Mastery", description: "Technical SEO and digital strategy to dominate search results and drive local leads in Gujarat.", icon: "BarChart", slug: "seo-services" },
-        { title: "Digital Marketing", description: "Full-stack marketing solutions focused on ROI and lead generation for local brands.", icon: "Megaphone", slug: "digital-marketing" },
-        { title: "E-commerce Growth", description: "End-to-end online stores with advanced payment integrations and marketing focus.", icon: "Rocket", slug: "ecommerce" },
-        { title: "Mobile Innovation", description: "Native-quality iOS and Android applications that deliver exceptional user experiences.", icon: "Smartphone", slug: "app-development" },
-      ];
-
-      const fallbackProjects = [
-        { 
-          title: "DocRx Health Platform", 
-          category: "HealthTech", 
-          industry: "Medical",
-          challenge: "Doctors needed a secure, compliant way to manage digital prescriptions and patient records.",
-          solution: "Developed a comprehensive digital health platform with encrypted document storage and e-prescription capabilities.",
-          result: "10,000+ Prescriptions Processed",
-          tech: ["Flutter", "ASP.Net", "MSSQL"],
-          featuredImage: "/images/health-booking.png", 
-          slug: "docrx" 
-        },
-        { 
-          title: "Premium Jewelry E-commerce", 
-          category: "E-commerce", 
-          industry: "Fashion & Jewelry",
-          challenge: "Needed a luxury digital presence that matched their physical showroom quality in Rajkot.",
-          solution: "Built a custom Next.js storefront with high-fidelity visuals and 3D product previews.",
-          result: "+450% Conversion Increase",
-          tech: ["Next.js", "Three.js", "Prisma"],
-          featuredImage: "/images/jewelry-ecommerce.png", 
-          slug: "jewelry-ecommerce" 
-        },
-        { 
-          title: "Healthcare Booking System", 
-          category: "Web App", 
-          industry: "Medical",
-          challenge: "Manual appointment scheduling was causing 40% lead leakage for local clinics.",
-          solution: "Automated booking system with real-time slot management and SMS notifications.",
-          result: "Zero Manual Overhead",
-          tech: ["React", "Node.js", "PostgreSQL"],
-          featuredImage: "/images/health-booking.png", 
-          slug: "booking-platform" 
-        },
-        { 
-          title: "Fintech Growth Dashboard", 
-          category: "SaaS", 
-          industry: "Finance",
-          challenge: "Users found financial data overwhelming and difficult to track on mobile.",
-          solution: "Clean, minimalist dashboard with AI-driven insights and interactive charting.",
-          result: "85% User Retention",
-          tech: ["TypeScript", "D3.js", "AWS"],
-          featuredImage: "/images/fintech-dashboard.png", 
-          slug: "fintech-saas" 
-        }
-      ];
-
-      // Quick return for local development to avoid network lag
-      if (process.env.NODE_ENV === 'development') {
-        setWidgets(fallbackWidgets);
-        setServices(fallbackServices);
-        setProjects(fallbackProjects);
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const baseUrl = import.meta.env.VITE_API_URL || 'https://uma-techno-phrb.vercel.app';
-
-        // Parallel fetch for core page components
-        const [wRes, sRes, pRes] = await Promise.all([
-          fetch(`${baseUrl}/api/v1/widgets`),
-          fetch(`${baseUrl}/api/v1/services`),
-          fetch(`${baseUrl}/api/v1/projects`),
-        ]);
-
-        if (wRes.ok) {
-          const data = await wRes.json();
-          setWidgets(data.length > 0 ? data : fallbackWidgets);
-        }
-
-        if (sRes.ok) {
-          const data = await sRes.json();
-          setServices(data.length > 0 ? data : fallbackServices);
-        }
-
-        if (pRes.ok) {
-          const data = await pRes.json();
-          if (data.length > 0) {
-            const docRx = fallbackProjects.find(p => p.slug === 'docrx');
-            const merged = docRx ? [docRx, ...data.filter((p: any) => p.slug !== 'docrx')] : data;
-            setProjects(merged);
-          } else {
-            setProjects(fallbackProjects);
-          }
-        }
-
-        // Sequential fetch for non-critical assets (testimonials)
-        try {
-          const tRes = await fetch(`${baseUrl}/api/v1/testimonials`);
-          if (tRes.ok) {
-            const data = await tRes.json();
-            setTestimonials(data);
-          }
-        } catch (err) {
-          console.error("Testimonials fetch failed");
-        }
-
-      } catch (err) {
-        console.error("API fetch failed, using fallback data", err);
-        setWidgets(fallbackWidgets);
-        setServices(fallbackServices);
-        setProjects(fallbackProjects);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  /**
-   * Layout Control:
-   * Checks if a specific section (widget) is enabled in the Admin Panel.
-   */
-  const isEnabled = (name: string) => {
-    const w = widgets.find(w => w.name === name);
-    return w ? w.enabled : true;
-  };
-
-  /**
-   * Dynamic Icon Mapping:
-   * Converts string-based icon names from the database into Lucide React components.
-   */
-  const getIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'Globe': return <Globe size={32} />;
-      case 'Rocket': return <Rocket size={32} />;
-      case 'Smartphone': return <Smartphone size={32} />;
-      case 'Code': return <Code size={32} />;
-      case 'BarChart': return <BarChart size={32} />;
-      case 'Megaphone': return <Megaphone size={32} />;
-      default: return <Zap size={32} />;
-    }
-  };
-
-  if (loading) return null;
 
   return (
-    <div className="flex flex-col gap-12 lg:gap-16 pb-20 lg:pb-32 bg-transparent">
-      {/* Hero Section */}
-      {isEnabled('hero') && <Hero />}
-
-      {/* Interactive Project Estimator Widget */}
-      <ProjectEstimator />
-
-      {/* Trust & Stats Section */}
-      {isEnabled('stats') && (
-        <motion.section 
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="max-w-7xl mx-auto px-6 w-full relative z-20 py-12 lg:py-20"
-        >
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
-            {stats.map((stat, i) => (
-              <motion.div 
-                key={i} 
-                whileHover={{ y: -5 }}
-                className="glass-card p-6 lg:p-8 text-center flex flex-col items-center gap-4 group"
-              >
-                <div className="w-12 h-12 rounded-2xl bg-[var(--color-electric)]/10 text-[var(--color-electric)] flex items-center justify-center ring-1 ring-[var(--color-electric)]/20 group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all neo-glow">
-                  <stat.icon size={24} />
-                </div>
-                <div>
-                  <div className="text-4xl lg:text-5xl font-black font-outfit text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-electric)] to-[var(--color-accent)] tracking-tight">{stat.value}</div>
-                  <div className="text-xs lg:text-sm font-bold text-[var(--color-text-main)] opacity-70 uppercase tracking-widest mt-2">{stat.label}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-          
-          {/* Marquee for Trusted By */}
-          <div className="mt-20 overflow-hidden relative w-full">
-             <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[var(--background)] to-transparent z-10" />
-             <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[var(--background)] to-transparent z-10" />
-             
-             <div className="flex space-x-16 w-max animate-marquee items-center opacity-40 hover:opacity-100 transition-opacity duration-500">
-               {[...Array(2)].map((_, i) => (
-                 <div key={i} className="flex space-x-16 items-center">
-                   {["Retailers", "Real Estate", "Startups", "Enterprises", "Medical Centres", "Fintech", "Agencies"].map(brand => (
-                     <span key={brand} className="text-2xl font-black font-outfit text-[var(--color-text-main)] whitespace-nowrap px-8">
-                       {brand}
-                     </span>
-                   ))}
-                 </div>
-               ))}
-             </div>
-          </div>
-        </motion.section>
-      )}
-
-      {/* Services Grid */}
-      {isEnabled('services') && (
-        <motion.section 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="max-w-7xl mx-auto px-6 w-full py-20 lg:py-32 relative"
-        >
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[500px] bg-gradient-glow pointer-events-none" />
-          
-          <div className="text-center space-y-6 mb-20 relative z-10">
-            <motion.div 
-              initial={{ scale: 0.8, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-6 py-2 rounded-full border border-[var(--color-electric)]/40 bg-[var(--color-electric)]/10 text-[var(--color-electric)] text-xs font-black uppercase tracking-[0.2em] backdrop-blur-md neo-glow"
-            >
-              PREMIUM SOLUTIONS
-            </motion.div>
-            <h2 className="text-4xl lg:text-5xl 2xl:text-6xl font-black font-outfit tracking-tight text-[var(--color-text-main)]">Leading Web, App & <br /> <span className="text-gradient">SEO Services</span></h2>
-            <p className="text-[var(--color-text-main)] opacity-70 max-w-2xl mx-auto 2xl:text-lg">
-              We engineer high-performance digital systems that capture leads, automate operations, and scale revenue for businesses in Rajkot and across Gujarat.
+    <div className="home-redesign">
+      <section className="relative min-h-[88svh] flex items-center overflow-hidden pt-32 pb-20">
+        <div className="absolute inset-0 pointer-events-none home-hero-grid" />
+        <div className="absolute -top-40 right-[-10rem] h-[34rem] w-[34rem] rounded-full bg-[var(--color-electric)]/10 blur-[120px] pointer-events-none" />
+        <div className="max-w-7xl mx-auto w-full px-6 relative z-10 grid lg:grid-cols-[1.1fr_.9fr] gap-14 items-center">
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: "easeOut" }}>
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-electric)]/35 bg-[var(--color-electric)]/10 px-4 py-2 text-xs font-bold uppercase tracking-[.18em] text-[var(--color-electric)]">
+              <span className="h-2 w-2 rounded-full bg-[var(--color-electric)]" />
+              Digital solutions for ambitious businesses
+            </div>
+            <h1 className="mt-7 max-w-3xl text-5xl sm:text-6xl lg:text-7xl xl:text-[5.4rem] font-black tracking-[-.055em] leading-[.99] text-[var(--color-text-main)]">
+              Make your next
+              <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-electric)] via-[#F2D887] to-[var(--color-electric)]">digital move</span>
+              <span className="block mt-2">your best one.</span>
+            </h1>
+            <p className="mt-7 max-w-xl text-lg leading-8 text-[var(--color-text-main)]/70">
+              UMA TECHNO partners with growing businesses to design, build and market digital products that solve real problems—not just look good on a screen.
             </p>
-          </div>
+            <div className="mt-9 flex flex-col sm:flex-row gap-3">
+              <Link to="/contact" className="inline-flex items-center justify-center gap-3 rounded-full bg-[var(--color-electric)] px-7 py-4 text-sm font-extrabold text-[#11100B] transition-transform hover:-translate-y-0.5 hover:shadow-[0_12px_35px_var(--color-blue-glow)]">
+                Discuss your project <ArrowRight size={18} />
+              </Link>
+              <Link to="/portfolio" className="inline-flex items-center justify-center gap-3 rounded-full border border-white/15 bg-white/[.04] px-7 py-4 text-sm font-bold text-[var(--color-text-main)] transition-colors hover:border-[var(--color-electric)]/60 hover:bg-white/[.07]">
+                Explore our work <ArrowDownRight size={18} />
+              </Link>
+            </div>
+            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-[var(--color-text-main)]/60">
+              <span className="inline-flex items-center gap-2"><Check size={15} className="text-[var(--color-electric)]" /> Strategy before code</span>
+              <span className="inline-flex items-center gap-2"><Check size={15} className="text-[var(--color-electric)]" /> Clear project milestones</span>
+              <span className="inline-flex items-center gap-2"><Check size={15} className="text-[var(--color-electric)]" /> Built to scale</span>
+            </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 relative z-10">
-            {services.map((service, index) => {
-              const isLarge = index === 0 || index === 3;
-              return (
-                <motion.div
-                  key={service.slug}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.6 }}
-                  className={cn(isLarge ? "lg:col-span-2" : "")}
-                >
-                  <Link
-                    to={service.slug.startsWith('/') ? service.slug : `/${service.slug}`}
-                    className={cn(
-                      "glass-card group p-8 md:p-10 flex flex-col justify-between h-full min-h-[350px] md:min-h-[400px]"
-                    )}
-                  >
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[var(--color-electric)]/20 to-transparent blur-3xl -mr-32 -mt-32 transition-transform duration-1000 ease-out group-hover:scale-150" />
-                    <div className="space-y-6 relative z-10">
-                      <div className="w-14 h-14 bg-black/40 border border-[var(--color-border)] rounded-2xl flex items-center justify-center text-[var(--color-electric)] shadow-lg group-hover:-translate-y-2 transition-transform duration-500 neo-glow">
-                        {getIcon(service.icon || 'Globe')}
-                      </div>
-                      <h4 className="text-2xl lg:text-3xl font-black font-outfit leading-tight text-[var(--color-text-main)] tracking-tighter group-hover:text-[var(--color-electric)] transition-colors">
-                        {service.title}
-                      </h4>
-                      <p className="text-[var(--color-text-main)] opacity-60 leading-relaxed max-w-sm text-sm">
-                        {service.description}
-                      </p>
-                    </div>
-                    <div className="mt-8 flex items-center gap-4 text-xs font-bold tracking-widest text-[var(--color-text-main)] opacity-50 uppercase group-hover:opacity-100 group-hover:text-[var(--color-electric)] transition-all relative z-10">
-                      EXPLORE SOLUTIONS <ArrowRight size={16} />
-                    </div>
-                  </Link>
-                </motion.div>
-              );
+          <motion.div initial={{ opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .8, delay: .12 }} className="relative mx-auto w-full max-w-[32rem]">
+            <div className="absolute inset-8 rounded-[2.5rem] bg-[var(--color-electric)]/10 blur-3xl" />
+            <div className="relative rounded-[2rem] border border-white/10 bg-[#10100E] p-4 shadow-[0_35px_100px_rgba(0,0,0,.45)]">
+              <div className="flex items-center justify-between border-b border-white/10 px-3 pb-4 pt-2">
+                <div className="flex gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-white/20" /><span className="h-2.5 w-2.5 rounded-full bg-white/20" /><span className="h-2.5 w-2.5 rounded-full bg-white/20" /></div>
+                <span className="text-[10px] uppercase tracking-[.2em] text-white/40">Digital experience / 01</span>
+                <Globe2 size={15} className="text-[var(--color-electric)]" />
+              </div>
+              <div className="p-5 sm:p-7">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-[.2em] text-[var(--color-electric)]">Built around your vision</p>
+                    <h2 className="mt-3 text-3xl sm:text-4xl font-bold leading-tight tracking-tight text-white">Ideas into<br />impactful products.</h2>
+                  </div>
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[var(--color-electric)]/30 bg-[var(--color-electric)]/10 text-[var(--color-electric)]"><Zap size={23} /></div>
+                </div>
+                <div className="mt-8 grid grid-cols-2 gap-3">
+                  <div className="rounded-2xl border border-white/10 bg-white/[.035] p-4">
+                    <MonitorSmartphone className="text-[var(--color-electric)]" size={22} />
+                    <p className="mt-5 font-bold text-white">Digital products</p>
+                    <p className="mt-1 text-xs leading-5 text-white/50">Websites, apps & software</p>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-white/[.035] p-4">
+                    <Megaphone className="text-[var(--color-electric)]" size={22} />
+                    <p className="mt-5 font-bold text-white">Digital growth</p>
+                    <p className="mt-1 text-xs leading-5 text-white/50">SEO, brand & campaigns</p>
+                  </div>
+                </div>
+                <div className="mt-3 flex items-center justify-between rounded-2xl bg-[var(--color-electric)] p-4 text-[#11100B]">
+                  <div><p className="text-xs font-bold uppercase tracking-[.15em]">Your next chapter</p><p className="mt-1 text-sm font-extrabold">Starts with a conversation.</p></div>
+                  <ArrowRight size={22} />
+                </div>
+              </div>
+            </div>
+            <div className="absolute -bottom-6 -left-5 hidden sm:flex items-center gap-3 rounded-2xl border border-white/10 bg-[#171714] px-4 py-3 shadow-xl">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--color-electric)]/10 text-[var(--color-electric)]"><Workflow size={20} /></div>
+              <div><p className="text-sm font-bold text-white">Strategy-led delivery</p><p className="text-xs text-white/45">Plan. Build. Improve.</p></div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="border-y border-white/[.07] bg-white/[.02]">
+        <div className="max-w-7xl mx-auto px-6 py-7 grid grid-cols-2 md:grid-cols-4 gap-5">
+          {[
+            { title: "Web & platforms", detail: "Useful digital foundations" },
+            { title: "Mobile applications", detail: "Experiences on the go" },
+            { title: "Brand & experience", detail: "Clear, consistent design" },
+            { title: "Search & growth", detail: "Reach the right audience" }
+          ].map((item) => <div key={item.title} className="border-l-2 border-[var(--color-electric)]/60 pl-4"><p className="font-bold text-[var(--color-text-main)]">{item.title}</p><p className="mt-1 text-xs sm:text-sm text-[var(--color-text-main)]/50">{item.detail}</p></div>)}
+        </div>
+      </section>
+
+      <section className="py-24 lg:py-32">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-[.8fr_1.2fr] gap-10 lg:gap-20 items-end mb-12">
+            <div><p className="text-xs font-extrabold uppercase tracking-[.22em] text-[var(--color-electric)]">What we do</p><h2 className="mt-4 text-4xl sm:text-5xl font-black tracking-tight leading-tight text-[var(--color-text-main)]">Everything you need to move forward.</h2></div>
+            <p className="max-w-2xl text-base sm:text-lg leading-8 text-[var(--color-text-main)]/60">One team for the digital details that matter—from your first online presence to the tools and campaigns that help your business grow.</p>
+          </div>
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {services.map((service) => {
+              const Icon = service.icon;
+              return <Link to={service.href} key={service.number} className="group rounded-3xl border border-white/10 bg-white/[.025] p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-electric)]/45 hover:bg-white/[.045]">
+                <div className="flex items-center justify-between"><div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--color-electric)]/20 bg-[var(--color-electric)]/10 text-[var(--color-electric)]"><Icon size={23} /></div><span className="text-xs font-bold tracking-[.15em] text-white/25">{service.number}</span></div>
+                <h3 className="mt-6 text-xl font-extrabold text-white">{service.title}</h3>
+                <p className="mt-3 min-h-[4.5rem] text-sm leading-6 text-white/55">{service.description}</p>
+                <div className="mt-5 flex flex-wrap gap-2">{service.tags.map((tag) => <span key={tag} className="rounded-full border border-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wide text-white/45">{tag}</span>)}</div>
+                <div className="mt-7 flex items-center gap-2 text-sm font-bold text-[var(--color-electric)]">Explore service <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" /></div>
+              </Link>;
             })}
           </div>
-        </motion.section>
-      )}
+        </div>
+      </section>
 
-      {/* Differentiators Section */}
-      {isEnabled('why-choose-us') && (
-        <motion.section 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="max-w-7xl mx-auto px-6 w-full py-20"
-        >
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div className="relative group order-2 lg:order-1">
-              <div className="absolute -inset-10 bg-gradient-glow opacity-30 blur-[120px] group-hover:opacity-50 transition-all duration-700" />
-              <div className="relative aspect-video glass-card overflow-hidden">
-                <img
-                  src="/images/about-agency.png"
-                  alt="About Us"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000 opacity-80 mix-blend-luminosity hover:mix-blend-normal"
-                />
-              </div>
-              <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 6, repeat: Infinity }}
-                className="absolute -top-6 -right-6 lg:-top-8 lg:-right-8 z-20"
-              >
-                <div className="glass-card p-4 lg:p-6 !border-[var(--color-electric)]/50 neo-glow">
-                  <div className="text-[var(--color-electric)] font-black text-lg lg:text-xl tracking-tighter">Business First</div>
-                  <div className="text-[10px] text-[var(--color-text-main)] opacity-60 font-bold uppercase tracking-widest mt-1">Our Core Mindset</div>
-                </div>
-              </motion.div>
-            </div>
+      <section className="py-20 border-y border-white/[.06] bg-[#0D0D0B]">
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[.75fr_1.25fr] gap-12 lg:gap-24">
+          <div><p className="text-xs font-extrabold uppercase tracking-[.22em] text-[var(--color-electric)]">How we work</p><h2 className="mt-4 text-4xl sm:text-5xl font-black tracking-tight leading-tight text-white">A clear path from idea to launch.</h2><p className="mt-6 text-base leading-7 text-white/55">Good work comes from shared context, honest communication and a process you can follow.</p><Link to="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-[var(--color-electric)] hover:gap-3 transition-all">Meet UMA TECHNO <ArrowRight size={17} /></Link></div>
+          <div className="divide-y divide-white/10">
+            {process.map((step) => <div key={step.number} className="grid grid-cols-[3.5rem_1fr] sm:grid-cols-[4.5rem_1fr] gap-4 py-6 first:pt-0 last:pb-0"><span className="text-sm font-extrabold tracking-widest text-[var(--color-electric)]">{step.number}</span><div><h3 className="text-lg font-bold text-white">{step.title}</h3><p className="mt-2 max-w-xl text-sm leading-6 text-white/50">{step.description}</p></div></div>)}
+          </div>
+        </div>
+      </section>
 
-            <div className="space-y-6 lg:space-y-10 order-1 lg:order-2">
-              <div className="space-y-4 lg:space-y-6">
-                <h2 className="text-3xl lg:text-4xl 2xl:text-5xl font-bold font-outfit text-[var(--color-text-main)]">Your Partner in <br /><span className="text-gradient">Business Dominance</span></h2>
-                <p className="text-[var(--color-text-main)] opacity-70 leading-relaxed text-sm lg:text-base 2xl:text-lg">
-                  We bridge the gap between complex technology and business growth. Our solutions are engineered to be assets, not just expenses.
-                </p>
-              </div>
+      <section className="py-24 lg:py-32">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <div><p className="text-xs font-extrabold uppercase tracking-[.22em] text-[var(--color-electric)]">Selected work</p><h2 className="mt-4 text-4xl sm:text-5xl font-black tracking-tight text-[var(--color-text-main)]">Made for real-world needs.</h2><p className="mt-4 max-w-2xl text-base leading-7 text-[var(--color-text-main)]/55">Explore project details and the solutions behind them.</p></div>
+            <Link to="/portfolio" className="inline-flex items-center gap-2 text-sm font-bold text-[var(--color-electric)] hover:gap-3 transition-all">View all work <ArrowRight size={17} /></Link>
+          </div>
+          {projects.length > 0 ? <div className="grid md:grid-cols-3 gap-5">{projects.map((project, index) => {
+            const title = project.title || project.name || "Featured project";
+            const slug = project.slug || project.id || project._id || "";
+            const image = project.featuredImage || project.image;
+            return <Link key={slug || index} to={`/portfolio/${slug}`} className="group overflow-hidden rounded-3xl border border-white/10 bg-white/[.025] transition-all hover:-translate-y-1 hover:border-[var(--color-electric)]/40">
+              <div className="aspect-[4/3] overflow-hidden bg-[#151512]">{image ? <img src={image} alt={title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" /> : <div className="flex h-full items-center justify-center"><Layers3 size={48} className="text-[var(--color-electric)]/35" /></div>}</div>
+              <div className="p-6"><p className="text-xs font-bold uppercase tracking-[.15em] text-[var(--color-electric)]">{project.category || project.industry || "Digital project"}</p><h3 className="mt-3 text-xl font-extrabold text-white">{title}</h3><p className="mt-2 line-clamp-2 text-sm leading-6 text-white/50">{project.description || project.summary || "Explore the project to learn more about the approach and solution."}</p><span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-white/75">View project <ArrowRight size={15} className="text-[var(--color-electric)] transition-transform group-hover:translate-x-1" /></span></div>
+            </Link>;
+          })}</div> : <div className="rounded-3xl border border-dashed border-white/15 bg-white/[.02] p-8 sm:p-12 text-center"><div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--color-electric)]/10 text-[var(--color-electric)]"><Layers3 size={25} /></div><h3 className="mt-5 text-xl font-bold text-white">Your next project could be here.</h3><p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-white/50">We’re always building new digital experiences. Get in touch to discuss what we could create together.</p><Link to="/contact" className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--color-electric)] px-5 py-3 text-sm font-extrabold text-[#11100B]">Start a project <ArrowRight size={16} /></Link></div>}
+        </div>
+      </section>
 
-              <div className="grid sm:grid-cols-2 gap-4 lg:gap-6">
-                {[
-                  { title: "Revenue-first approach", desc: "Code designed to maximize return on investment." },
-                  { title: "Elite UI/UX Mastery", desc: "Premium design standards that command authority." },
-                  { title: "Technical SEO Core", desc: "Built-in optimization for organic growth." },
-                  { title: "Agile Rapid Delivery", desc: "Efficient workflows to market faster." },
-                ].map((benefit, i) => (
-                  <motion.div 
-                    key={i} 
-                    whileHover={{ x: 5 }}
-                    className="flex gap-3 lg:gap-4 group p-4 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/10"
-                  >
-                    <div className="w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-[var(--color-electric)]/20 flex items-center justify-center text-[var(--color-electric)] group-hover:bg-[var(--color-electric)] group-hover:text-white transition-all mt-1 shrink-0 neo-glow">
-                      <CheckCircle size={12} />
-                    </div>
-                    <div>
-                      <h4 className="text-base font-bold text-[var(--color-text-main)]">{benefit.title}</h4>
-                      <p className="text-[var(--color-text-main)] opacity-60 text-xs mt-1">{benefit.desc}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+      <section className="pb-24 lg:pb-32">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="relative overflow-hidden rounded-[2rem] border border-[var(--color-electric)]/25 bg-[#14130F] px-7 py-12 sm:px-12 sm:py-16 lg:px-16">
+            <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full bg-[var(--color-electric)]/10 blur-[100px]" />
+            <div className="relative z-10 grid lg:grid-cols-[1fr_auto] gap-8 items-center">
+              <div><p className="text-xs font-extrabold uppercase tracking-[.22em] text-[var(--color-electric)]">Have a project in mind?</p><h2 className="mt-4 max-w-3xl text-4xl sm:text-5xl font-black leading-tight tracking-tight text-white">Let’s turn your next idea into something useful.</h2><p className="mt-5 max-w-2xl text-base leading-7 text-white/55">Tell us what you’re working on. We’ll help you map the next steps.</p></div>
+              <Link to="/contact" className="inline-flex items-center justify-center gap-3 rounded-full bg-[var(--color-electric)] px-7 py-4 text-sm font-extrabold text-[#11100B] transition-transform hover:-translate-y-0.5">Let’s talk <ArrowRight size={18} /></Link>
             </div>
           </div>
-        </motion.section>
-      )}
-
-      {/* Portfolio Showcase */}
-      {isEnabled('portfolio') && (
-        <motion.section 
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="max-w-7xl mx-auto px-6 w-full py-20"
-        >
-          <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 text-[var(--color-accent)] text-xs font-black uppercase tracking-[0.2em] backdrop-blur-md mb-6 neo-glow">
-                SELECTED WORK
-              </div>
-              <h2 className="text-3xl lg:text-5xl font-black font-outfit tracking-tight text-[var(--color-text-main)]">Our <span className="text-gradient">Portfolio</span></h2>
-              <p className="text-[var(--color-text-main)] opacity-70 max-w-xl">
-                Showcasing our best work in branding, development, and strategic digital solutions.
-              </p>
-            </div>
-            <Link
-              to="/portfolio"
-              className="btn-premium px-6 py-3 rounded-xl flex items-center gap-3 text-[var(--color-text-main)] font-bold tracking-widest text-xs uppercase"
-            >
-              VIEW ALL PROJECTS <ArrowRight size={16} />
-            </Link>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.slice(0, 3).map((project, i) => (
-              <motion.div 
-                key={i} 
-                whileHover={{ y: -10 }}
-                transition={{ duration: 0.4 }}
-                className="glass-card group overflow-hidden flex flex-col h-full"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)] to-transparent z-10 opacity-80 group-hover:opacity-40 transition-opacity duration-500" />
-                  <img
-                    src={project.featuredImage || (i === 0 ? "/images/jewelry-ecommerce.png" : i === 1 ? "/images/health-booking.png" : "/images/fintech-dashboard.png")}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 mix-blend-luminosity group-hover:mix-blend-normal"
-                  />
-                  <div className="absolute top-6 left-6 flex flex-col gap-2 z-20">
-                    <span className="px-4 py-2 bg-black/60 backdrop-blur-md text-[var(--color-electric)] border border-[var(--color-electric)]/30 text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
-                      {project.category}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-8 lg:p-10 space-y-6 flex-1 flex flex-col justify-between relative z-20 bg-gradient-to-t from-black/50 to-transparent">
-                  <div className="space-y-4">
-                    <h4 className="text-2xl font-black font-outfit text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors break-words">{project.title}</h4>
-                    <p className="text-[var(--color-text-main)] opacity-60 text-sm leading-relaxed line-clamp-3">
-                      {project.challenge || project.description}
-                    </p>
-                    
-                    {project.result && (
-                      <div className="pt-4 border-t border-white/10">
-                        <div className="text-[10px] uppercase font-bold text-[var(--color-electric)] tracking-tighter mb-1">Result</div>
-                        <div className="text-lg font-black text-[var(--color-text-main)]">{project.result}</div>
-                      </div>
-                    )}
-                  </div>
-
-                  <Link
-                    to={`/portfolio/${project.slug || project.title.toLowerCase().replace(/ /g, '-')}`}
-                    className="flex items-center gap-2 text-[var(--color-text-main)] opacity-60 group-hover:opacity-100 group-hover:text-[var(--color-electric)] font-bold text-sm tracking-widest uppercase mt-6 transition-all"
-                  >
-                    View Case Study <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
-                  </Link>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-      )}
-
-      {/* Social Proof (Testimonials) */}
-      {isEnabled('testimonials') && (
-        <motion.section 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="max-w-7xl mx-auto px-6 w-full py-24 relative"
-        >
-          <div className="py-12 md:p-20 relative z-10 glass-card !border-white/5 !bg-black/20">
-            <div className="text-center space-y-4 mb-16">
-              <h2 className="text-3xl lg:text-4xl font-black font-outfit text-[var(--color-text-main)]">What Our Clients <span className="text-gradient">Say</span></h2>
-              <p className="text-[var(--color-text-main)] opacity-60 max-w-xl mx-auto">See why businesses trust Uma Techno for their digital growth.</p>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.length > 0 ? (
-              testimonials.map((t, i) => (
-                <motion.div key={i} whileHover={{ y: -5 }} className="glass-card p-8 group relative overflow-hidden">
-                  <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity text-[var(--color-electric)] pointer-events-none">
-                    <span className="text-8xl font-serif">"</span>
-                  </div>
-                  <div className="flex gap-1 text-[var(--color-electric)] mb-6 relative z-10">
-                    {Array.from({ length: t.rating || 5 }).map((_, star) => (
-                      <Star key={star} size={16} fill="currentColor" className="neo-glow" />
-                    ))}
-                  </div>
-                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic relative z-10 font-medium leading-relaxed">"{t.content}"</p>
-                  <div className="flex items-center gap-4 relative z-10">
-                    <div className="w-12 h-12 rounded-full bg-black border border-white/20 overflow-hidden">
-                      <img src={t.image || `https://i.pravatar.cc/100?u=${t.id}`} alt={t.name} className="w-full h-full object-cover mix-blend-luminosity group-hover:mix-blend-normal transition-all" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">{t.name}</h4>
-                      <p className="text-[10px] uppercase tracking-widest text-[var(--color-text-main)] opacity-50 font-bold">{t.role}{t.company ? `, ${t.company}` : ''}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))
-            ) : (
-              [
-                {
-                  name: "Rajesh Patel",
-                  role: "Founder, Heritage Jewellers",
-                  content: "Uma Techno transformed our physical jewelry business into a premium digital storefront. The seamless checkout experience helped us capture a younger demographic and doubled our online sales.",
-                  image: "/images/client-1-v2.png"
-                },
-                {
-                  name: "Priya Sharma",
-                  role: "Marketing Director, NextGen Health",
-                  content: "Their SEO mastery and beautifully designed appointment system were game-changers for our clinics. We saw a 300% increase in organic leads and our patients love how easy it is to book online.",
-                  image: "/images/client-2-v2.png"
-                },
-                {
-                  name: "Amit Desai",
-                  role: "CTO, FinServe Solutions",
-                  content: "The engineering team at Uma Techno delivered a robust, scalable SaaS dashboard ahead of schedule. The code quality, attention to UX, and clear communication made them the perfect technology partner.",
-                  image: "/images/client-3-v2.png"
-                }
-              ].map((t, i) => (
-                <motion.div key={i} whileHover={{ y: -5 }} className="glass-card p-8 group relative overflow-hidden">
-                  <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity text-[var(--color-electric)] pointer-events-none">
-                    <span className="text-8xl font-serif">"</span>
-                  </div>
-                  <div className="flex gap-1 text-[var(--color-electric)] mb-6 relative z-10">
-                    {[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor" className="neo-glow" />)}
-                  </div>
-                  <p className="text-[var(--color-text-main)] opacity-70 mb-8 italic relative z-10 font-medium leading-relaxed">"{t.content}"</p>
-                  <div className="flex items-center gap-4 relative z-10">
-                    <div className="w-12 h-12 rounded-full bg-black border border-white/20 overflow-hidden">
-                      <img src={t.image} alt={t.name} className="w-full h-full object-cover mix-blend-luminosity group-hover:mix-blend-normal transition-all" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-[var(--color-text-main)] group-hover:text-[var(--color-electric)] transition-colors">{t.name}</h4>
-                      <p className="text-[10px] uppercase tracking-widest text-[var(--color-text-main)] opacity-50 font-bold">{t.role}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))
-            )}
-            </div>
-          </div>
-        </motion.section>
-      )}
-
-      {/* Our Methodology */}
-      {isEnabled('process') && (
-        <ProcessTimeline />
-      )}
-
-      {/* FAQ Section */}
-      <FAQ />
-
-      {/* Final Conversion Area (CTA) */}
-      {isEnabled('cta') && (
-        <motion.section 
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-7xl mx-auto px-6 w-full pb-20"
-        >
-          <div className="glass-card !rounded-[3rem] p-10 lg:p-24 text-center space-y-10 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--color-electric)]/20 blur-[150px] -mr-64 -mt-64 group-hover:scale-150 transition-transform duration-1000" />
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[var(--color-accent)]/20 blur-[150px] -ml-64 -mb-64 group-hover:scale-150 transition-transform duration-1000" />
-
-            <h2 className="text-4xl lg:text-6xl font-black font-outfit max-w-3xl mx-auto leading-[1.1] text-[var(--color-text-main)] tracking-tighter relative z-10">
-              Ready to Accelerate Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-electric)] to-[var(--color-accent)] animate-pulse">Business Growth</span>?
-            </h2>
-            <p className="text-[var(--color-text-main)] opacity-70 max-w-xl mx-auto leading-relaxed text-lg relative z-10 font-medium">
-              Stop settling for mediocre digital presence. Partner with Uma Techno to build a premium solution that commands authority and delivers results.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-6 pt-4 relative z-10">
-              <Link
-                to="/contact"
-                className="btn-primary-animated px-8 py-4 rounded-2xl font-bold text-lg transition-all text-center flex justify-center items-center gap-2"
-              >
-                Get Free Consultation <ArrowRight size={20} />
-              </Link>
-              <Link
-                to="/portfolio"
-                className="btn-premium px-8 py-4 text-[var(--color-text-main)] rounded-2xl font-bold text-lg transition-all text-center"
-              >
-                View Our Work
-              </Link>
-            </div>
-          </div>
-        </motion.section>
-      )}
-
-      {/* Sticky Bottom Mobile CTA */}
-      <div className={cn(
-        "fixed bottom-0 left-0 w-full p-4 bg-black/80 backdrop-blur-2xl border-t border-white/10 z-40 lg:hidden flex justify-center shadow-[0_-10px_40px_rgba(0,0,0,0.5)] transition-all duration-500 transform",
-        showStickyCta ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
-      )}>
-        <Link to="/contact" className="w-full max-w-md py-3.5 btn-primary-animated text-white font-bold rounded-2xl text-center shadow-lg hover:shadow-2xl transition-all active:scale-95 text-sm uppercase tracking-wider">
-          Get Started Today
-        </Link>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }
-
